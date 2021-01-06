@@ -1,0 +1,27 @@
+---
+title: "Bug Reporting"
+author: "Hamada S. Badr <badr@jhu.edu>"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    keep_md: true
+vignette: >
+  %\VignetteIndexEntry{Bug Reporting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+### Description
+Provide a clear and concise description of the problem including warning and error messages.
+
+### Reproduction
+Provide a clean R script demonstrating the issue with the necessary data files.
+
+### Environment
+Provide the following information:
+ - **OS Type:** [Linux, Mac, Windows]
+ - **OS Version:** [e.g., macOS 10.15.7, Windows 10, or Ubuntu 20.04]
+ - **R Version:** [e.g., 4.0.3]
+ - **Version:** [e.g. 0.0.1 or development]
+ - **Source:** [binary or source code]
+ - **Repository:** [CRAN, Bioconductor, GitHub, or Other]

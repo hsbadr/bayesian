@@ -1,0 +1,46 @@
+Package: bayesian
+Type: Package
+Version: 0.0.1
+Title: Bindings for Bayesian TidyModels
+Authors@R:
+    c(person(given = "Hamada S.",
+             family = "Badr",
+             role = c("aut", "cre"),
+             email = "badr@jhu.edu",
+             comment = c(ORCID = "0000-0002-9808-2344")))
+Description: Bindings for Bayesian TidyModels via BRMS (Bayesian Regression Models using 'Stan').
+License: MIT + file LICENSE
+URL: https://hsbadr.github.io/bayesian/,
+     https://github.com/hsbadr/bayesian
+BugReports: https://github.com/hsbadr/bayesian/issues
+Depends:
+    brms (>= 2.14.4),
+    parsnip (>= 0.1.4),
+    R (>= 2.10)
+Imports:
+    dplyr,
+    purrr,
+    rlang,
+    stats,
+    tibble,
+    utils
+Suggests:
+    covr,
+    devtools,
+    knitr,
+    rmarkdown,
+    roxygen2,
+    spelling,
+    testthat
+VignetteBuilder: knitr
+Encoding: UTF-8
+RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)
+Collate:
+    'bayesian_init.R'
+    'bayesian_load.R'
+    'bayesian_make.R'
+    'bayesian.R'
+LazyData: yes
+LazyLoad: yes
+Language: en-US

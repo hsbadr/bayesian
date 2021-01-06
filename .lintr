@@ -1,0 +1,7 @@
+linters: with_defaults(
+    object_name_linter = NULL,
+    line_length_linter = line_length_linter(120)
+  )
+exclusions: list(
+  )
+
