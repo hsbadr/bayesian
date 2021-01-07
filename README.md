@@ -21,6 +21,7 @@ Downloads](http://cranlogs.r-pkg.org/badges/grand-total/bayesian)](https://cran.
 MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 [![Codecov Test
 Coverage](https://codecov.io/gh/hsbadr/bayesian/branch/main/graph/badge.svg)](https://codecov.io/gh/hsbadr/bayesian?branch=main)
+[![DOI](https://zenodo.org/badge/327419436.svg)](https://zenodo.org/badge/latestdoi/327419436)
 <!-- badges: end -->
 
 [**`bayesian`**](https://hsbadr.github.io/bayesian/) supports Bayesian
