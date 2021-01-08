@@ -4,6 +4,8 @@
 \alias{bayesian}
 \alias{update.bayesian}
 \alias{bayesian_predict}
+\alias{bayesian_read}
+\alias{bayesian_write}
 \title{General Interface for Bayesian TidyModels}
 \usage{
 bayesian(
@@ -64,6 +66,10 @@ bayesian_predict(
   probs = c(0.025, 0.975),
   ...
 )
+
+bayesian_read(file)
+
+bayesian_write(x, file)
 }
 \arguments{
 \item{mode}{A single character string for the type of model.
@@ -218,9 +224,20 @@ Only used if \code{summary} is \code{TRUE}.}
 
 \item{probs}{The percentiles to be computed by the \code{quantile} 
 function. Only used if \code{summary} is \code{TRUE}.}
+
+\item{file}{A character string of the file path to \code{brmsfit} object
+saved via \code{\link{saveRDS}}.}
+
+\item{x}{An object of class \code{brmsfit}, which contains the posterior
+samples along with many other useful information about the model. Use
+\code{methods(class = "brmsfit")} for an overview on available methods.}
 }
 \value{
 An updated model specification.
+
+An object of class \code{brmsfit}, which contains the posterior
+samples along with many other useful information about the model. Use
+\code{methods(class = "brmsfit")} for an overview on available methods.
 }
 \description{
 \code{bayesian()} is a way to generate a \emph{specification} of a model

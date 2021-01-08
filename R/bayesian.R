@@ -387,3 +387,29 @@ check_args.bayesian <- function(object) {
 #' @rdname bayesian
 #' @export
 bayesian_predict <- utils::getFromNamespace("predict.brmsfit", "brms")
+
+# -------------------------------------------------------------------------
+
+#' read a brmsfit object from a file
+
+#' @param file A character string of the file path to \code{brmsfit} object
+#'   saved via \code{\link{saveRDS}}.
+#' @return An object of class \code{brmsfit}, which contains the posterior
+#'   samples along with many other useful information about the model. Use
+#'   \code{methods(class = "brmsfit")} for an overview on available methods.
+#' @rdname bayesian
+#' @export
+bayesian_read <- utils::getFromNamespace("read_brmsfit", "brms")
+
+# -------------------------------------------------------------------------
+
+# write a brmsfit object to a file
+#' @param x An object of class \code{brmsfit}, which contains the posterior
+#'   samples along with many other useful information about the model. Use
+#'   \code{methods(class = "brmsfit")} for an overview on available methods.
+#' @param file A character string of the file path to \code{brmsfit} object
+#'   saved via \code{\link{saveRDS}}.
+#' @return NULL
+#' @rdname bayesian
+#' @export
+bayesian_write <- utils::getFromNamespace("write_brmsfit", "brms")
