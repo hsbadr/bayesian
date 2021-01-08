@@ -8,7 +8,7 @@ Authors@R:
              role = c("aut", "cre"),
              email = "badr@jhu.edu",
              comment = c(ORCID = "0000-0002-9808-2344")))
-Description: Bindings for Bayesian TidyModels via BRMS (Bayesian Regression Models using 'Stan').
+Description: Bayesian modeling using brms/Stan with parsnip/tidymodels.
 License: MIT + file LICENSE
 URL: https://hsbadr.github.io/bayesian/,
      https://github.com/hsbadr/bayesian
