@@ -76,9 +76,6 @@
 #'   sampling progress is still printed. Set \code{refresh = 0} to turn this off
 #'   as well. If using \code{backend = "rstan"} you can also set
 #'   \code{open_progress = FALSE} to prevent opening additional progress bars.
-#'   \item \code{verbose} Logical; \code{TRUE} or \code{FALSE} (the default),
-#'   flag indicating whether to print intermediate output from \pkg{Stan}, which
-#'   might be helpful for model debugging.
 #' }
 #' These arguments are converted to their specific names at the
 #'  time that the model is fit. Other options and argument can be
@@ -157,9 +154,6 @@
 #'   sampling progress is still printed. Set \code{refresh = 0} to turn this off
 #'   as well. If using \code{backend = "rstan"} you can also set
 #'   \code{open_progress = FALSE} to prevent opening additional progress bars.
-#' @param verbose Logical; \code{TRUE} or \code{FALSE} (the default),
-#'   flag indicating whether to print intermediate output from \pkg{Stan}, which
-#'   might be helpful for model debugging.
 #' @details
 #' The data given to the function are not saved and are only used
 #'  to determine the _mode_ of the model. For `bayesian()`, the
@@ -216,8 +210,7 @@ bayesian <-
            future = NULL,
            seed = NULL,
            refresh = NULL,
-           silent = NULL,
-           verbose = NULL) {
+           silent = NULL) {
     args <- list(
       prior = rlang::enquo(prior),
       inits = rlang::enquo(inits),
@@ -232,8 +225,7 @@ bayesian <-
       future = rlang::enquo(future),
       seed = rlang::enquo(seed),
       refresh = rlang::enquo(refresh),
-      silent = rlang::enquo(silent),
-      verbose = rlang::enquo(verbose)
+      silent = rlang::enquo(silent)
     )
 
     parsnip::new_model_spec(
@@ -308,7 +300,6 @@ update.bayesian <-
            seed = NULL,
            refresh = NULL,
            silent = NULL,
-           verbose = NULL,
            fresh = FALSE,
            ...) {
     parsnip::update_dot_check(...)
@@ -331,8 +322,7 @@ update.bayesian <-
       future = rlang::enquo(future),
       seed = rlang::enquo(seed),
       refresh = rlang::enquo(refresh),
-      silent = rlang::enquo(silent),
-      verbose = rlang::enquo(verbose)
+      silent = rlang::enquo(silent)
     )
 
     args <- parsnip::update_main_parameters(args, parameters)

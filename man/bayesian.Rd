@@ -23,8 +23,7 @@ bayesian(
   future = NULL,
   seed = NULL,
   refresh = NULL,
-  silent = NULL,
-  verbose = NULL
+  silent = NULL
 )
 
 \method{update}{bayesian}(
@@ -44,7 +43,6 @@ bayesian(
   seed = NULL,
   refresh = NULL,
   silent = NULL,
-  verbose = NULL,
   fresh = FALSE,
   ...
 )
@@ -157,10 +155,6 @@ informational messages of compiler and sampler are suppressed. The actual
 sampling progress is still printed. Set \code{refresh = 0} to turn this off
 as well. If using \code{backend = "rstan"} you can also set
 \code{open_progress = FALSE} to prevent opening additional progress bars.}
-
-\item{verbose}{Logical; \code{TRUE} or \code{FALSE} (the default),
-flag indicating whether to print intermediate output from \pkg{Stan}, which
-might be helpful for model debugging.}
 
 \item{object}{A Bayesian model specification.}
 
@@ -316,9 +310,6 @@ informational messages of compiler and sampler are suppressed. The actual
 sampling progress is still printed. Set \code{refresh = 0} to turn this off
 as well. If using \code{backend = "rstan"} you can also set
 \code{open_progress = FALSE} to prevent opening additional progress bars.
-\item \code{verbose} Logical; \code{TRUE} or \code{FALSE} (the default),
-flag indicating whether to print intermediate output from \pkg{Stan}, which
-might be helpful for model debugging.
 }
 These arguments are converted to their specific names at the
 time that the model is fit. Other options and argument can be
