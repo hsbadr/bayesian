@@ -9,6 +9,11 @@ Authors@R:
              email = "badr@jhu.edu",
              comment = c(ORCID = "0000-0002-9808-2344")))
 Description: Bayesian modeling using brms/Stan with parsnip/tidymodels.
+    Tidymodels is a collection of packages for machine learning, developed
+    by Wickham (2020) <https://www.tidymodels.org>).
+    The technical details of brms and Stan are described in Bürkner (2017)
+    <doi:10.18637/jss.v080.i01>, Bürkner (2018) <doi:10.32614/RJ-2018-017>,
+    and Carpenter et al. (2017) <doi:10.18637/jss.v076.i01>.
 License: MIT + file LICENSE
 URL: https://hsbadr.github.io/bayesian/,
      https://github.com/hsbadr/bayesian
