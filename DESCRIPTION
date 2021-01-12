@@ -1,6 +1,6 @@
 Package: bayesian
 Type: Package
-Version: 0.0.2
+Version: 0.0.3
 Title: Bindings for Bayesian TidyModels
 Authors@R:
     c(person(given = "Hamada S.",
