@@ -1,3 +1,7 @@
+# bayesian 0.0.3
+
+- Updated manual, WORDLIST, and NEWS
+
 # bayesian 0.0.2
 
 - Added `bayesian_read` and `bayesian_write` functions

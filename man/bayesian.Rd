@@ -80,9 +80,9 @@ Possible values for this model are "unknown", "regression", or
 See also \code{\link[brms]{get_prior}} for more help.}
 
 \item{inits}{Either \code{"random"} or \code{"0"}. If inits is
-\code{"random"} (the default), Stan will randomly generate initial values
-for parameters. If it is \code{"0"}, all parameters are initialized to
-zero. This option is sometimes useful for certain families, as it happens
+\code{"random"} (the default), \pkg{Stan} will randomly generate initial
+values for parameters. If it is \code{"0"}, all parameters are initialized
+to zero. This option is sometimes useful for certain families, as it happens
 that default (\code{"random"}) inits cause samples to be essentially
 constant. Generally, setting \code{inits = "0"} is worth a try, if chains
 do not behave well. Alternatively, \code{inits} can be a list of lists
@@ -90,7 +90,7 @@ containing the initial values, or a function (or function name) generating
 initial values. The latter options are mainly implemented for internal
 testing but are available to users if necessary. If specifying initial
 values using a list or a function then currently the parameter names must
-correspond to the names used in the generated Stan code (not the names
+correspond to the names used in the generated \pkg{Stan} code (not the names
 used in \R). For more details on specifying initial values you can consult
 the documentation of the selected \code{backend}.}
 
@@ -123,7 +123,7 @@ values. Can be set globally for the current \R session via the
 \code{"brms.algorithm"} option (see \code{\link{options}}).}
 
 \item{backend}{Character string naming the package to use as the backend for
-fitting the Stan model. Options are \code{"rstan"} (the default) or
+fitting the \pkg{Stan} model. Options are \code{"rstan"} (the default) or
 \code{"cmdstanr"}. Can be set globally for the current \R session via the
 \code{"brms.backend"} option (see \code{\link{options}}). Details on the
 \pkg{rstan} and \pkg{cmdstanr} packages are available at
@@ -166,7 +166,7 @@ engine arguments in this object will result in an error.}
 \item{fresh}{A logical for whether the arguments should be
 modified in-place of or replaced wholesale.}
 
-\item{...}{Not used for \code{update()}.}
+\item{...}{Other arguments passed to internal functions.}
 
 \item{newdata}{An optional data.frame for which to evaluate predictions. If
 \code{NULL} (default), the original data of the model is used.
@@ -244,9 +244,9 @@ arguments for the model are:
 the \code{c} method or the \code{+} operator. See also
 \code{\link[brms]{get_prior}} for more help.
 \item \code{inits} Either \code{"random"} or \code{"0"}. If inits is
-\code{"random"} (the default), Stan will randomly generate initial values
-for parameters. If it is \code{"0"}, all parameters are initialized to
-zero. This option is sometimes useful for certain families, as it happens
+\code{"random"} (the default), \pkg{Stan} will randomly generate initial
+values for parameters. If it is \code{"0"}, all parameters are initialized
+to zero. This option is sometimes useful for certain families, as it happens
 that default (\code{"random"}) inits cause samples to be essentially
 constant. Generally, setting \code{inits = "0"} is worth a try, if chains
 do not behave well. Alternatively, \code{inits} can be a list of lists
@@ -254,7 +254,7 @@ containing the initial values, or a function (or function name) generating
 initial values. The latter options are mainly implemented for internal
 testing but are available to users if necessary. If specifying initial
 values using a list or a function then currently the parameter names must
-correspond to the names used in the generated Stan code (not the names
+correspond to the names used in the generated \pkg{Stan} code (not the names
 used in \R). For more details on specifying initial values you can consult
 the documentation of the selected \code{backend}.
 \item \code{chains} Number of Markov chains (defaults to 4).
@@ -281,7 +281,7 @@ a multivariate normal distribution, or \code{"fixed_param"} for sampling
 from fixed parameter values. Can be set globally for the current \R session
 via the \code{"brms.algorithm"} option (see \code{\link{options}}).
 \item \code{backend} Character string naming the package to use as the
-backend for fitting the Stan model. Options are \code{"rstan"} (the
+backend for fitting the \pkg{Stan} model. Options are \code{"rstan"} (the
 default) or \code{"cmdstanr"}. Can be set globally for the current \R
 session via the \code{"brms.backend"} option (see \code{\link{options}}).
 Details on the \pkg{rstan} and \pkg{cmdstanr} packages are available at
@@ -323,7 +323,7 @@ The data given to the function are not saved and are only used
 to determine the \emph{mode} of the model. For \code{bayesian()}, the
 possible modes are "regression" and "classification".
 
-The model can be created using the \code{fit()} function using the
+The model can be created by the \code{fit()} function using the
 following \emph{engines}:
 \itemize{
 \item \pkg{brms}:  \code{"stan"}
@@ -344,6 +344,7 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 }
 
 \examples{
+
 bayesian()
 
 show_model_info("bayesian")

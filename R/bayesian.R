@@ -10,9 +10,9 @@
 #'   the \code{c} method or the \code{+} operator. See also
 #'   \code{\link[brms]{get_prior}} for more help.
 #'   \item \code{inits} Either \code{"random"} or \code{"0"}. If inits is
-#'   \code{"random"} (the default), Stan will randomly generate initial values
-#'   for parameters. If it is \code{"0"}, all parameters are initialized to
-#'   zero. This option is sometimes useful for certain families, as it happens
+#'   \code{"random"} (the default), \pkg{Stan} will randomly generate initial
+#'   values for parameters. If it is \code{"0"}, all parameters are initialized
+#'   to zero. This option is sometimes useful for certain families, as it happens
 #'   that default (\code{"random"}) inits cause samples to be essentially
 #'   constant. Generally, setting \code{inits = "0"} is worth a try, if chains
 #'   do not behave well. Alternatively, \code{inits} can be a list of lists
@@ -20,7 +20,7 @@
 #'   initial values. The latter options are mainly implemented for internal
 #'   testing but are available to users if necessary. If specifying initial
 #'   values using a list or a function then currently the parameter names must
-#'   correspond to the names used in the generated Stan code (not the names
+#'   correspond to the names used in the generated \pkg{Stan} code (not the names
 #'   used in \R). For more details on specifying initial values you can consult
 #'   the documentation of the selected \code{backend}.
 #'   \item \code{chains} Number of Markov chains (defaults to 4).
@@ -47,7 +47,7 @@
 #'   from fixed parameter values. Can be set globally for the current \R session
 #'   via the \code{"brms.algorithm"} option (see \code{\link{options}}).
 #'   \item \code{backend} Character string naming the package to use as the
-#'   backend for fitting the Stan model. Options are \code{"rstan"} (the
+#'   backend for fitting the \pkg{Stan} model. Options are \code{"rstan"} (the
 #'   default) or \code{"cmdstanr"}. Can be set globally for the current \R
 #'   session via the \code{"brms.backend"} option (see \code{\link{options}}).
 #'   Details on the \pkg{rstan} and \pkg{cmdstanr} packages are available at
@@ -83,6 +83,7 @@
 #'  here (`NULL`), the values are taken from the underlying model
 #'  functions. If parameters need to be modified, `update()` can be used
 #'  in lieu of recreating the object from scratch.
+#'
 #' @param mode A single character string for the type of model.
 #'  Possible values for this model are "unknown", "regression", or
 #'  "classification".
@@ -91,9 +92,9 @@
 #'   \code{c} method or the \code{+} operator.
 #'   See also \code{\link[brms]{get_prior}} for more help.
 #' @param inits Either \code{"random"} or \code{"0"}. If inits is
-#'   \code{"random"} (the default), Stan will randomly generate initial values
-#'   for parameters. If it is \code{"0"}, all parameters are initialized to
-#'   zero. This option is sometimes useful for certain families, as it happens
+#'   \code{"random"} (the default), \pkg{Stan} will randomly generate initial
+#'   values for parameters. If it is \code{"0"}, all parameters are initialized
+#'   to zero. This option is sometimes useful for certain families, as it happens
 #'   that default (\code{"random"}) inits cause samples to be essentially
 #'   constant. Generally, setting \code{inits = "0"} is worth a try, if chains
 #'   do not behave well. Alternatively, \code{inits} can be a list of lists
@@ -101,7 +102,7 @@
 #'   initial values. The latter options are mainly implemented for internal
 #'   testing but are available to users if necessary. If specifying initial
 #'   values using a list or a function then currently the parameter names must
-#'   correspond to the names used in the generated Stan code (not the names
+#'   correspond to the names used in the generated \pkg{Stan} code (not the names
 #'   used in \R). For more details on specifying initial values you can consult
 #'   the documentation of the selected \code{backend}.
 #' @param chains Number of Markov chains (defaults to 4).
@@ -127,7 +128,7 @@
 #'   values. Can be set globally for the current \R session via the
 #'   \code{"brms.algorithm"} option (see \code{\link{options}}).
 #' @param backend Character string naming the package to use as the backend for
-#'   fitting the Stan model. Options are \code{"rstan"} (the default) or
+#'   fitting the \pkg{Stan} model. Options are \code{"rstan"} (the default) or
 #'   \code{"cmdstanr"}. Can be set globally for the current \R session via the
 #'   \code{"brms.backend"} option (see \code{\link{options}}). Details on the
 #'   \pkg{rstan} and \pkg{cmdstanr} packages are available at
@@ -154,12 +155,13 @@
 #'   sampling progress is still printed. Set \code{refresh = 0} to turn this off
 #'   as well. If using \code{backend = "rstan"} you can also set
 #'   \code{open_progress = FALSE} to prevent opening additional progress bars.
+#'
 #' @details
 #' The data given to the function are not saved and are only used
 #'  to determine the _mode_ of the model. For `bayesian()`, the
 #'  possible modes are "regression" and "classification".
 #'
-#' The model can be created using the `fit()` function using the
+#' The model can be created by the `fit()` function using the
 #'  following _engines_:
 #' \itemize{
 #' \item \pkg{brms}:  `"stan"`
@@ -175,6 +177,7 @@
 #'  appropriate) is returned.
 #'
 #' @examples
+#'
 #' bayesian()
 #'
 #' show_model_info("bayesian")
@@ -271,10 +274,12 @@ translate.bayesian <- function(x, engine = x$engine, ...) {
 #'  parameters to update. If the individual arguments are used,
 #'  these will supersede the values in `parameters`. Also, using
 #'  engine arguments in this object will result in an error.
-#' @param ... Not used for `update()`.
+#' @param ... Other arguments passed to internal functions.
 #' @param fresh A logical for whether the arguments should be
 #'  modified in-place of or replaced wholesale.
+#'
 #' @return An updated model specification.
+#'
 #' @examples
 #' model <- bayesian(inits = "random")
 #' model
