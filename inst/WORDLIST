@@ -1,6 +1,8 @@
 al
 bayesian
 brms
+brmsfit
+Buerkner
 Bürkner
 burnin
 CMD
@@ -8,11 +10,13 @@ Codecov
 doi
 DOI
 dplyr
+dirichlet
 et
 inits
 jss
 Lifecycle
 macOS
+parallelization
 parsnip
 pre
 PSOCK
