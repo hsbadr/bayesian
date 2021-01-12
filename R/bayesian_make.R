@@ -26,7 +26,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       value = list(
         interface = "formula",
         protect = c("formula", "data"),
-        func = c(pkg = "brms", fun = "brm"),
+        func = c(pkg = "bayesian", fun = "bayesian_fit"),
         defaults = list(
           family = if (mode == "classification") {
             rlang::expr(brms::brmsfamily("binomial"))
@@ -70,7 +70,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
             ) {
               results <- object$lvl[apply(results, 1, which.max)]
             } else {
-              stop("Unexpected model predictions!")
+              rlang::abort("Unexpected model predictions!")
             }
             unname(results)
           },
@@ -104,7 +104,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
             ) {
               colnames(results) <- object$lvl
             } else {
-              stop("Unexpected model predictions!")
+              rlang::abort("Unexpected model predictions!")
             }
             results
           },

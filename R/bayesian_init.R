@@ -2,7 +2,7 @@
 #' @import parsnip
 #' @importFrom dplyr bind_cols
 #' @importFrom purrr map_lgl
-#' @importFrom rlang enquo expr
+#' @importFrom rlang abort enquo expr
 #' @importFrom stats sd
 #' @importFrom tibble as_tibble tibble
 #' @importFrom utils globalVariables getFromNamespace

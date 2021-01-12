@@ -1,5 +1,6 @@
 # bayesian 0.0.3
 
+- Added fit wrapper and other helper functions
 - Updated manual, WORDLIST, and NEWS
 
 # bayesian 0.0.2

@@ -378,33 +378,202 @@ check_args.bayesian <- function(object) {
 
 # -------------------------------------------------------------------------
 
-#' @inherit brms:::predict.brmsfit
+#' Fit Bayesian models
+#' @inheritParams brms::brm
+#  @param formula.override Overrides the formula; for details see
+#    \code{\link[brms]{brmsformula}}.
+#  @param fit An instance of S3 class \code{brmsfit}; If \code{fit} is
+#     of class \code{brmsfit}, the fitted model will be updated using
+#     \code{\link[brms]{update.brmsfit}}.
+#  @param formula. Optional formula giving a template which specifies
+#    how to update the formula. See \code{\link{update.formula}} and
+#    \code{\link[brms]{brmsformula}} for more details.
+#  @param newdata Optional \code{data.frame} to update the model with
+#    new data. Data-dependent priors will not be updated automatically.
+#  @param recompile Logical, indicating whether the \pkg{Stan} model
+#    should be recompiled from the stored or updated \code{C++} code.
+#    If \code{NULL} (the default), \code{\link[brms]{update.brmsfit}}
+#    will try to figure out internally, if recompilation is necessary.
+#    Setting it to \code{FALSE} will cause all \pkg{Stan} code changing
+#    arguments to be ignored.
+#  @param ... Other arguments passed to \code{\link[brms]{brm}}.
+#'
+#  @return An object of class \code{brmsfit}, which contains the posterior
+#    samples along with many other useful information about the model. Use
+#    \code{methods(class = "brmsfit")} for an overview on available methods.
+#'
+#' @seealso \code{\link[brms]{brm}},
+#'   \code{\link[brms]{brmsfit}},
+#'   \code{\link[brms]{update.brmsfit}},
+#'   \code{\link[brms]{predict.brmsfit}},
+#'   \code{\link[brms]{posterior_epred.brmsfit}},
+#'   \code{\link[brms]{posterior_predict.brmsfit}},
+#'   \code{\link[brms]{brmsformula}},
+#'   \code{\link[brms]{brmsformula-helpers}},
+#'   \code{\link[brms]{brmsterms}},
+#'   \code{\link[brms]{brmsfamily}},
+#'   \code{\link[brms]{customfamily}},
+#'   \code{\link[stats]{family}},
+#'   \code{\link[stats]{formula}},
+#'   \code{\link[stats]{update.formula}}.
+#'
 #' @rdname bayesian
 #' @export
-bayesian_predict <- utils::getFromNamespace("predict.brmsfit", "brms")
+bayesian_fit <- function(formula, data, ...) {
+  dots <- list(...)
+
+  if (inherits(
+    dots$formula.override,
+    c("brmsformula", "formula")
+  )) {
+    dots$formula <- dots$formula.override
+  } else if (inherits(
+    formula,
+    c("brmsformula", "formula")
+  )) {
+    dots$formula <- formula
+  } else {
+    rlang::abort("Unsupported or invalid formula!")
+  }
+  dots$formula.override <- NULL
+
+  if (brms::is.brmsfit(dots$fit)) {
+    dots$object <- dots$fit
+    dots$fit <- NULL
+    update.brmsfit <- utils::getFromNamespace("update.brmsfit", "brms")
+    brms::do_call(update.brmsfit, dots)
+  } else {
+    dots$data <- data
+    dots$formula. <- NULL
+    dots$newdata <- NULL
+    dots$recompile <- NULL
+    brms::do_call(brms::brm, dots)
+  }
+}
 
 # -------------------------------------------------------------------------
 
-#' read a brmsfit object from a file
-
-#' @param file A character string of the file path to \code{brmsfit} object
-#'   saved via \code{\link{saveRDS}}.
-#' @return An object of class \code{brmsfit}, which contains the posterior
-#'   samples along with many other useful information about the model. Use
-#'   \code{methods(class = "brmsfit")} for an overview on available methods.
+#' Setup a formula for Bayesian models
+#' @inheritParams brms::brmsformula
+#  @param ... Other arguments passed to \code{\link[brms]{brmsformula}}.
+#'
+#  @return An object of class \code{brmsformula}, which
+#    is essentially a \code{list} containing all model
+#    formulas as well as some additional information.
+#'
 #' @rdname bayesian
 #' @export
-bayesian_read <- utils::getFromNamespace("read_brmsfit", "brms")
+bayesian_formula <- function(formula, ...) {
+  formula <- brms::brmsformula(formula, ...)
+  class(formula) <- union(class(formula), "formula")
+  return(formula)
+}
 
 # -------------------------------------------------------------------------
 
-# write a brmsfit object to a file
-#' @param x An object of class \code{brmsfit}, which contains the posterior
-#'   samples along with many other useful information about the model. Use
-#'   \code{methods(class = "brmsfit")} for an overview on available methods.
-#' @param file A character string of the file path to \code{brmsfit} object
-#'   saved via \code{\link{saveRDS}}.
-#' @return NULL
+#' Parse a formula for Bayesian models
+#' @inheritParams brms::brmsterms
+#  @param ... Other arguments passed to \code{\link[brms]{brmsterms}}.
+#'
+#  @return An object of class \code{brmsterms} or \code{mvbrmsterms}
+#    (for multivariate models), which is a \code{list} containing all
+#    required information initially stored in \code{formula}
+#    in an easier to use format, basically a list of formulas
+#    (not an abstract syntax tree).
+#'
 #' @rdname bayesian
 #' @export
-bayesian_write <- utils::getFromNamespace("write_brmsfit", "brms")
+bayesian_terms <- function(formula, ...) {
+  brms::brmsterms(formula, ...)
+}
+
+# -------------------------------------------------------------------------
+
+#' Special distribution families for \pkg{brms} models
+#' @inheritParams brms::brmsfamily
+#  @param ... Other arguments passed to \code{\link[brms]{brmsfamily}}.
+#'
+#  @return An \code{brmsfamily} object, which inherits from \code{family}.
+#'
+#' @rdname bayesian
+#' @export
+bayesian_family <- function(family, ...) {
+  brms::brmsfamily(family, ...)
+}
+
+# -------------------------------------------------------------------------
+
+#' Samples from the posterior predictive distribution
+#' @inheritParams brms:::predict.brmsfit
+#  @param object An instance of S3 class \code{brmsfit}; If \code{fit} is
+#     of class \code{brmsfit}, the fitted model will be updated using
+#     \code{\link[brms]{update.brmsfit}}.
+#  @param ... Other arguments passed to \code{\link[brms]{predict.brmsfit}}.
+#'
+#  @return An \code{array} of predicted response values.
+#    If \code{summary = FALSE} the output resembles those of
+#    \code{\link{posterior_predict.brmsfit}}.
+#    If \code{summary = TRUE} the output depends on the family: For categorical
+#    and ordinal families, the output is an N x C matrix, where N is the number
+#    of observations, C is the number of categories, and the values are
+#    predicted category probabilities. For all other families, the output is a N
+#    x E matrix where E = \code{2 + length(probs)} is the number of summary
+#    statistics: The \code{Estimate} column contains point estimates (either
+#    mean or median depending on argument \code{robust}), while the
+#    \code{Est.Error} column contains uncertainty estimates (either standard
+#    deviation or median absolute deviation depending on argument
+#    \code{robust}). The remaining columns starting with \code{Q} contain
+#    quantile estimates as specified via argument \code{probs}.
+#'
+#' @rdname bayesian
+#' @export
+bayesian_predict <- function(object, ...) {
+  predict.brmsfit <- utils::getFromNamespace("predict.brmsfit", "brms")
+
+  if (brms::is.brmsfit(object)) {
+    predict.brmsfit(object, ...)
+  } else if (brms::is.brmsfit(object$fit)) {
+    predict.brmsfit(object$fit, ...)
+  } else if (brms::is.brmsfit(object$fit$fit)) {
+    predict.brmsfit(object$fit$fit, ...)
+  } else if (brms::is.brmsfit(object$fit$fit$fit)) {
+    predict.brmsfit(object$fit$fit$fit, ...)
+  } else {
+    rlang::abort("Unsupported or invalid model fit!")
+  }
+}
+
+# -------------------------------------------------------------------------
+
+#' Write an \code{brmsfit} object to a file
+#  @param object An object of class \code{brmsfit}, which contains the posterior
+#    samples along with many other useful information about the model. Use
+#    \code{methods(class = "brmsfit")} for an overview on available methods.
+#' @param file A character string of the file path to \code{brmsfit} object
+#'   saved via \code{\link{saveRDS}}.
+#'
+#  @return NULL
+#'
+#' @rdname bayesian
+#' @export
+bayesian_write <- function(object, file) {
+  write_brmsfit <- utils::getFromNamespace("read_brmsfit", "brms")
+  write_brmsfit(object, file)
+}
+
+# -------------------------------------------------------------------------
+
+#' Read an \code{brmsfit} object from a file
+#' @param file A character string of the file path to \code{brmsfit} object
+#'   saved via \code{\link{saveRDS}}.
+#'
+#  @return An object of class \code{brmsfit}, which contains the posterior
+#    samples along with many other useful information about the model. Use
+#    \code{methods(class = "brmsfit")} for an overview on available methods.
+#'
+#' @rdname bayesian
+#' @export
+bayesian_read <- function(file) {
+  read_brmsfit <- utils::getFromNamespace("read_brmsfit", "brms")
+  read_brmsfit(file)
+}

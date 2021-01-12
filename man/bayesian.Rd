@@ -3,9 +3,13 @@
 \name{bayesian}
 \alias{bayesian}
 \alias{update.bayesian}
+\alias{bayesian_fit}
+\alias{bayesian_formula}
+\alias{bayesian_terms}
+\alias{bayesian_family}
 \alias{bayesian_predict}
-\alias{bayesian_read}
 \alias{bayesian_write}
+\alias{bayesian_read}
 \title{General Interface for Bayesian TidyModels}
 \usage{
 bayesian(
@@ -47,27 +51,19 @@ bayesian(
   ...
 )
 
-bayesian_predict(
-  object,
-  newdata = NULL,
-  re_formula = NULL,
-  transform = NULL,
-  resp = NULL,
-  negative_rt = FALSE,
-  nsamples = NULL,
-  subset = NULL,
-  sort = FALSE,
-  ntrys = 5,
-  cores = getOption("mc.cores", 1),
-  summary = TRUE,
-  robust = FALSE,
-  probs = c(0.025, 0.975),
-  ...
-)
+bayesian_fit(formula, data, ...)
+
+bayesian_formula(formula, ...)
+
+bayesian_terms(formula, ...)
+
+bayesian_family(family, ...)
+
+bayesian_predict(object, ...)
+
+bayesian_write(object, file)
 
 bayesian_read(file)
-
-bayesian_write(x, file)
 }
 \arguments{
 \item{mode}{A single character string for the type of model.
@@ -168,70 +164,29 @@ modified in-place of or replaced wholesale.}
 
 \item{...}{Other arguments passed to internal functions.}
 
-\item{newdata}{An optional data.frame for which to evaluate predictions. If
-\code{NULL} (default), the original data of the model is used.
-\code{NA} values within factors are interpreted as if all dummy
-variables of this factor are zero. This allows, for instance, to make
-predictions of the grand mean when using sum coding.}
+\item{formula}{An object of class \code{\link[stats:formula]{formula}},
+\code{\link[brms]{brmsformula}}, or \code{\link[brms]{mvbrmsformula}} (or one that can
+be coerced to that classes): A symbolic description of the model to be
+fitted. The details of model specification are explained in
+\code{\link[brms]{brmsformula}}.}
 
-\item{re_formula}{formula containing group-level effects to be considered in
-the prediction. If \code{NULL} (default), include all group-level effects;
-if \code{NA}, include no group-level effects.}
+\item{data}{An object of class \code{data.frame} (or one that can be coerced
+to that class) containing data of all variables used in the model.}
 
-\item{transform}{(Deprecated) A function or a character string naming 
-a function to be applied on the predicted responses
-before summary statistics are computed.}
-
-\item{resp}{Optional names of response variables. If specified, predictions
-are performed only for the specified response variables.}
-
-\item{negative_rt}{Only relevant for Wiener diffusion models. 
-A flag indicating whether response times of responses
-on the lower boundary should be returned as negative values.
-This allows to distinguish responses on the upper and
-lower boundary. Defaults to \code{FALSE}.}
-
-\item{nsamples}{Positive integer indicating how many posterior samples should
-be used. If \code{NULL} (the default) all samples are used. Ignored if
-\code{subset} is not \code{NULL}.}
-
-\item{subset}{A numeric vector specifying the posterior samples to be used.
-If \code{NULL} (the default), all samples are used.}
-
-\item{sort}{Logical. Only relevant for time series models. 
-Indicating whether to return predicted values in the original 
-order (\code{FALSE}; default) or in the order of the 
-time series (\code{TRUE}).}
-
-\item{ntrys}{Parameter used in rejection sampling 
-for truncated discrete models only 
-(defaults to \code{5}). See Details for more information.}
-
-\item{summary}{Should summary statistics be returned
-instead of the raw values? Default is \code{TRUE}.}
-
-\item{robust}{If \code{FALSE} (the default) the mean is used as 
-the measure of central tendency and the standard deviation as 
-the measure of variability. If \code{TRUE}, the median and the 
-median absolute deviation (MAD) are applied instead.
-Only used if \code{summary} is \code{TRUE}.}
-
-\item{probs}{The percentiles to be computed by the \code{quantile} 
-function. Only used if \code{summary} is \code{TRUE}.}
+\item{family}{A description of the response distribution and link function to
+be used in the model. This can be a family function, a call to a family
+function or a character string naming the family. Every family function has
+a \code{link} argument allowing to specify the link function to be applied
+on the response variable. If not specified, default links are used. For
+details of supported families see \code{\link[brms]{brmsfamily}}. By default, a
+linear \code{gaussian} model is applied. In multivariate models,
+\code{family} might also be a list of families.}
 
 \item{file}{A character string of the file path to \code{brmsfit} object
 saved via \code{\link{saveRDS}}.}
-
-\item{x}{An object of class \code{brmsfit}, which contains the posterior
-samples along with many other useful information about the model. Use
-\code{methods(class = "brmsfit")} for an overview on available methods.}
 }
 \value{
 An updated model specification.
-
-An object of class \code{brmsfit}, which contains the posterior
-samples along with many other useful information about the model. Use
-\code{methods(class = "brmsfit")} for an overview on available methods.
 }
 \description{
 \code{bayesian()} is a way to generate a \emph{specification} of a model
@@ -339,7 +294,8 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 ## Computational engine: stan 
 ## 
 ## Model fit template:
-## brms::brm(formula = missing_arg(), data = missing_arg(), family = brms::brmsfamily("gaussian"))
+## bayesian::bayesian_fit(formula = missing_arg(), data = missing_arg(), 
+##     family = brms::brmsfamily("gaussian"))
 }
 }
 
@@ -370,5 +326,18 @@ update(model, inits = "0")
 update(model, inits = "0", fresh = TRUE)
 }
 \seealso{
-\code{\link[brms]{posterior_predict.brmsfit}}
+\code{\link[brms]{brm}},
+\code{\link[brms]{brmsfit}},
+\code{\link[brms]{update.brmsfit}},
+\code{\link[brms]{predict.brmsfit}},
+\code{\link[brms]{posterior_epred.brmsfit}},
+\code{\link[brms]{posterior_predict.brmsfit}},
+\code{\link[brms]{brmsformula}},
+\code{\link[brms]{brmsformula-helpers}},
+\code{\link[brms]{brmsterms}},
+\code{\link[brms]{brmsfamily}},
+\code{\link[brms]{customfamily}},
+\code{\link[stats]{family}},
+\code{\link[stats]{formula}},
+\code{\link[stats]{update.formula}}.
 }
