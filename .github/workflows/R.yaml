@@ -38,15 +38,15 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@main
 
-      - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
 
-      - uses: r-lib/actions/setup-pandoc@v1
-      - uses: r-lib/actions/setup-tinytex@v1
+      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-tinytex@master
 
       - name: Query dependencies
         run: |
@@ -57,7 +57,7 @@ jobs:
 
       - name: Cache R packages
         if: runner.os != 'Windows'
-        uses: actions/cache@v2
+        uses: actions/cache@main
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
@@ -191,7 +191,7 @@ jobs:
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@main
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
@@ -206,7 +206,7 @@ jobs:
 
       - name: Upload packages
         if: success()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@main
         with:
           name: pkg-${{ matrix.config.os }}-${{ matrix.config.r }}
           path: build
@@ -223,7 +223,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@main
 
       - name: Extract version
         run: |
@@ -232,7 +232,7 @@ jobs:
           echo "PACKAGE_SHA=$(git rev-parse --short HEAD | sed 's/.*: *//')" >> $GITHUB_ENV
         shell: bash
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@main
         with:
           path: pkg
 
@@ -244,7 +244,7 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v2
+        uses: actions/create-release@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -254,7 +254,7 @@ jobs:
           prerelease: false
 
       - name: Upload source
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -264,7 +264,7 @@ jobs:
           asset_content_type: application/gzip
 
       - name: Upload macOS binary (devel)
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -274,7 +274,7 @@ jobs:
           asset_content_type: application/gzip
 
       - name: Upload macOS binary (release)
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -284,7 +284,7 @@ jobs:
           asset_content_type: application/gzip
 
       - name: Upload macOS binary (oldrel)
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -294,7 +294,7 @@ jobs:
           asset_content_type: application/gzip
 
       - name: Upload Windows binary (devel)
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -304,7 +304,7 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload Windows binary (release)
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -314,7 +314,7 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload Windows binary (oldrel)
-        uses: actions/upload-release-asset@v2
+        uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
