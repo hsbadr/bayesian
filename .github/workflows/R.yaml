@@ -130,18 +130,20 @@ jobs:
       - name: Render documents
         if: runner.os == 'Linux'
         run: |
-          if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
-          roxygen2::roxygenize()
+          if (grepl("devel", tolower(R.version$version.string)) && file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
+          if (grepl("devel", tolower(R.version$version.string))) roxygen2::roxygenize()
         shell: Rscript {0}
 
       - name: Style and Format
         if: runner.os == 'Linux'
         run: |
           set -x
-          Rscript -e 'styler::style_pkg()'
-          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec clang-format -style=Google --verbose -i {} \; || true
+          if [[ $(Rscript -e 'cat(grepl("devel", tolower(R.version$version.string)))') == TRUE ]]; then
+            Rscript -e 'styler::style_pkg()'
+            find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
+            find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
+            find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec clang-format -style=Google --verbose -i {} \; || true
+          fi
         shell: bash
 
       - name: Commit changes
@@ -150,23 +152,27 @@ jobs:
           set -x
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add README.md NAMESPACE man/\* || true
-          git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
-          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
-          git commit -m 'Formatting R code using styler' || echo 'No changes to commit'
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
-          git commit -m 'Formatting C/C++ code using clang-format' || echo 'No changes to commit'
-          git push origin || echo "No changes to commit"
+          if [[ $(Rscript -e 'cat(grepl("devel", tolower(R.version$version.string)))') == TRUE ]]; then
+            git add README.md NAMESPACE man/\* || true
+            git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
+            find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
+            git commit -m 'Formatting R code using styler' || echo 'No changes to commit'
+            find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
+            git commit -m 'Formatting C/C++ code using clang-format' || echo 'No changes to commit'
+            git push origin || echo "No changes to commit"
+          fi
         shell: bash
 
       - name: Code analysis
         if: runner.os == 'Linux'
-        run: lintr::lint_package()
+        run: |
+          if (grepl("devel", tolower(R.version$version.string))) lintr::lint_package()
         shell: Rscript {0}
 
       - name: Test coverage
         if: runner.os == 'Linux'
-        run: covr::codecov()
+        run: |
+          if (grepl("devel", tolower(R.version$version.string))) covr::codecov()
         shell: Rscript {0}
 
       - name: Deploy website
@@ -175,7 +181,7 @@ jobs:
           set -x
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+          Rscript -e 'if (grepl("devel", tolower(R.version$version.string))) pkgdown::deploy_to_branch(new_process = FALSE)'
         shell: bash
 
       - name: Check
