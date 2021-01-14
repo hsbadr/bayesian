@@ -68,11 +68,12 @@ jobs:
         run: |
           set -x
           brew install curl || true
-          brew install libgit2 || true
           brew install harfbuzz fribidi || true
+          brew install libgit2 || true
           brew install libtiff || true
           brew install netcdf || true
           brew install open-mpi || true
+          command -v gfortran >&/dev/null 2>&1 || ln -sv /usr/local/bin/gfortran-8 /usr/local/bin/gfortran ; ln -sv /usr/local/lib/gcc/8/* /usr/local/lib/ || true
         shell: bash
 
       - name: Setup system environment dor Windows
@@ -91,10 +92,6 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           set -x
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
           sudo apt install clang-format || true
           sudo apt install libcurl4-openssl-dev || true
           sudo apt install libgit2-dev || true
@@ -102,6 +99,10 @@ jobs:
           sudo apt install libnetcdf-dev libnetcdff-dev || true
           sudo apt install libtiff-dev || true
           sudo apt install openmpi-bin openmpi-common libopenmpi-dev || true
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
         shell: bash
 
       - name: Install dependencies
