@@ -137,6 +137,7 @@ jobs:
       - name: Style and Format
         if: runner.os == 'Linux'
         run: |
+          set -x
           Rscript -e 'styler::style_pkg()'
           find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
           find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
@@ -146,6 +147,7 @@ jobs:
       - name: Commit changes
         if: runner.os == 'Linux'
         run: |
+          set -x
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add README.md NAMESPACE man/\* || true
@@ -170,6 +172,7 @@ jobs:
       - name: Deploy website
         if: runner.os == 'Linux'
         run: |
+          set -x
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
@@ -186,7 +189,9 @@ jobs:
 
       - name: Show testthat output
         if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        run: |
+          set -x
+          find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
       - name: Upload check results
@@ -227,6 +232,7 @@ jobs:
 
       - name: Extract version
         run: |
+          set -x
           echo "PACKAGE_VERSION=$(grep '^Version' DESCRIPTION  | sed 's/.*: *//')" >> $GITHUB_ENV
           echo "PACKAGE_NAME=$(grep '^Package' DESCRIPTION  | sed 's/.*: *//')" >> $GITHUB_ENV
           echo "PACKAGE_SHA=$(git rev-parse --short HEAD | sed 's/.*: *//')" >> $GITHUB_ENV
@@ -238,6 +244,7 @@ jobs:
 
       - name: List files
         run: |
+          set -x
           echo ${{ env.PACKAGE_NAME }} ${{ env.PACKAGE_VERSION }}-${{ env.PACKAGE_SHA }}
           ls -R pkg
         shell: bash
