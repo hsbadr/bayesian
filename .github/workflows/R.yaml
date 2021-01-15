@@ -1,3 +1,5 @@
+name: R
+
 on:
   push:
     branches:
@@ -15,8 +17,6 @@ on:
         description: 'Create a new release?'
         required: false
         default: 'false'
-
-name: R-CMD-check
 
 jobs:
   R-CMD-check:
