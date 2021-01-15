@@ -6,6 +6,7 @@ library(rlang)
 
 test_that("bayesian execution", {
   skip_on_cran()
+  skip_on_os("mac")
   skip_on_os("windows")
 
   brms_cl <- call2("brm",
