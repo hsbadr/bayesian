@@ -12,6 +12,7 @@ DOI
 dplyr
 dirichlet
 et
+Hamada
 inits
 jss
 Lifecycle
@@ -35,3 +36,4 @@ variational
 warmup
 Wickham
 WORDLIST
+zenodo

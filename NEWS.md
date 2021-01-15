@@ -1,5 +1,6 @@
 # bayesian 0.0.3
 
+- Added CITATION and updated package DESCRIPTION
 - Added fit wrapper and other helper functions
 - Updated manual, WORDLIST, and NEWS
 

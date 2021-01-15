@@ -66,6 +66,19 @@ bayesian_mod <-
 summary(bayesian_mod$fit)
 ```
 
+Citation
+--------
+
+To cite `bayesian` in publications, please use:
+
+```r
+citation("bayesian")
+```
+
+> Hamada S. Badr (2021): bayesian: Bindings for Bayesian TidyModels,
+[_Comprehensive R Archive Network (CRAN)_](https://cran.r-project.org/package=bayesian),
+DOI: [10.5281/zenodo.4430991](https://doi.org/10.5281/zenodo.4430991).
+
 Contributing
 ------------
 

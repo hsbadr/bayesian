@@ -1,0 +1,23 @@
+citHeader("To cite bayesian in publications, please use:")
+
+citEntry(entry = "Manual",
+  title        = "bayesian: Bindings for Bayesian TidyModels",
+  author       = c(
+                 person(given = "Hamada S.",
+                        family = "Badr",
+                        email = "badr@jhu.edu",
+                        role = c("aut", "cre"),
+                        comment = c(ORCID = "0000-0002-9808-2344"))),
+  year         = "2021",
+  journal      = "Comprehensive R Archive Network (CRAN)",
+  url          = "https://cran.r-project.org/package=bayesian",
+  doi          = "10.5281/zenodo.4430991",
+  language     = "English",
+  key          = "bayesian-manual",
+
+  textVersion  =
+  paste("Hamada S. Badr (2021):",
+        "bayesian: Bindings for Bayesian TidyModels,",
+        "_Comprehensive R Archive Network (CRAN)_.",
+        "DOI: 10.5281/zenodo.4430991")
+)
