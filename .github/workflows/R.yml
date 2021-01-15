@@ -1,14 +1,19 @@
+---
+# Github Actions workflow to check and release R packages
+# -*- compile-command: "yamllint -f parsable .github/workflows/R.yml" -*-
+# yamllint disable rule:line-length
+
 name: R
 
-on:
+'on':
   push:
     branches:
-      - develop
-      - main
-      - master
+      - '*'
+    tags:
+      - '*'
   pull_request:
     branches:
-      - "*"
+      - '*'
   schedule:
     - cron: '0 0 * * 0'
   workflow_dispatch:
@@ -16,33 +21,25 @@ on:
       release:
         description: 'Create a new release?'
         required: false
-        default: 'false'
+        default: false
 
 jobs:
   Check:
     if: "! contains(github.event.head_commit.message, '[ci skip]')"
     timeout-minutes: 60
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ${{ matrix.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.os }} (r-${{ matrix.r }})
 
     strategy:
       fail-fast: true
       matrix:
-        config:
-          - {os: macOS-latest,   r: 'devel'}
-          - {os: macOS-latest,   r: 'release'}
-          - {os: macOS-latest,   r: 'oldrel'}
-          - {os: windows-latest, r: 'devel'}
-          - {os: windows-latest, r: 'release'}
-          - {os: windows-latest, r: 'oldrel'}
-          - {os: ubuntu-20.04,   r: 'devel'}
-          - {os: ubuntu-20.04,   r: 'release'}
-          - {os: ubuntu-20.04,   r: 'oldrel'}
+        os: [ubuntu-20.04, macos-latest, windows-latest]
+        r: [devel, release, oldrel]
+
     env:
       NOT_CRAN: true
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -50,8 +47,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r@master
         with:
-          r-version: ${{ matrix.config.r }}
-          http-user-agent: ${{ matrix.config.http-user-agent }}
+          r-version: ${{ matrix.r }}
 
       - uses: r-lib/actions/setup-pandoc@master
       - uses: r-lib/actions/setup-tinytex@master
@@ -129,6 +125,7 @@ jobs:
           remotes::install_cran("covr")
           remotes::install_cran("curl")
           remotes::install_cran("devtools")
+          remotes::install_cran("htmltools")
           remotes::install_cran("lintr")
           remotes::install_cran("pkgdown")
           remotes::install_cran("rcmdcheck")
@@ -147,60 +144,56 @@ jobs:
         shell: Rscript {0}
 
       - name: Render documents
-        if: runner.os == 'Linux'
+        if: matrix.os == 'ubuntu-20.04' && matrix.r == 'devel'
         run: |
-          if (grepl("devel", tolower(R.version$version.string)) && file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
-          if (grepl("devel", tolower(R.version$version.string))) roxygen2::roxygenize()
+          if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
+          roxygen2::roxygenize()
         shell: Rscript {0}
 
       - name: Style and Format
-        if: runner.os == 'Linux'
+        if: matrix.os == 'ubuntu-20.04' && matrix.r == 'devel'
         run: |
           set -x
-          if [[ $(Rscript -e 'cat(grepl("devel", tolower(R.version$version.string)))') == TRUE ]]; then
-            Rscript -e 'styler::style_pkg()'
-            find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
-            find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
-            find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec clang-format -style=Google --verbose -i {} \; || true
-          fi
+          Rscript -e 'styler::style_pkg()'
+          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec clang-format -style=Google --verbose -i {} \; || true
         shell: bash
 
       - name: Commit changes
-        if: runner.os == 'Linux'
+        if: matrix.os == 'ubuntu-20.04' && matrix.r == 'devel'
         run: |
           set -x
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          if [[ $(Rscript -e 'cat(grepl("devel", tolower(R.version$version.string)))') == TRUE ]]; then
-            git add README.md NAMESPACE man/\* || true
-            git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
-            find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
-            git commit -m 'Formatting R code using styler' || echo 'No changes to commit'
-            find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
-            git commit -m 'Formatting C/C++ code using clang-format' || echo 'No changes to commit'
-            git push origin || echo "No changes to commit"
-          fi
+          git add README.md NAMESPACE man/\* || true
+          git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
+          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
+          git commit -m 'Formatting R code using styler' || echo 'No changes to commit'
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
+          git commit -m 'Formatting C/C++ code using clang-format' || echo 'No changes to commit'
+          git push origin || echo "No changes to commit"
         shell: bash
 
       - name: Code analysis
-        if: runner.os == 'Linux'
+        if: matrix.os == 'ubuntu-20.04' && matrix.r == 'devel'
         run: |
-          if (grepl("devel", tolower(R.version$version.string))) lintr::lint_package()
+          lintr::lint_package()
         shell: Rscript {0}
 
       - name: Test coverage
-        if: runner.os == 'Linux'
+        if: matrix.os == 'ubuntu-20.04' && matrix.r == 'devel'
         run: |
-          if (grepl("devel", tolower(R.version$version.string))) covr::codecov(type = "all", line_exclusions = NULL, function_exclusions = NULL)
+          covr::codecov(type = "all", line_exclusions = NULL, function_exclusions = NULL)
         shell: Rscript {0}
 
       - name: Deploy website
-        if: runner.os == 'Linux'
+        if: matrix.os == 'ubuntu-20.04' && matrix.r == 'devel'
         run: |
           set -x
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          Rscript -e 'if (grepl("devel", tolower(R.version$version.string))) pkgdown::deploy_to_branch(new_process = FALSE)'
+          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
         shell: bash
 
       - name: R CMD check
@@ -223,7 +216,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@main
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          name: ${{ runner.os }}-r${{ matrix.r }}-results
           path: check
 
       - name: Build packages
@@ -238,7 +231,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@main
         with:
-          name: pkg-${{ matrix.config.os }}-${{ matrix.config.r }}
+          name: pkg-${{ matrix.os }}-${{ matrix.r }}
           path: build
 
 
@@ -295,37 +288,37 @@ jobs:
           asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tar.gz
           asset_content_type: application/gzip
 
-      - name: Upload macOS binary (devel)
+      - name: Upload macOS binary (r-devel)
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: pkg/pkg-macOS-devel-release/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
+          asset_path: pkg/pkg-macos-devel-release/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
           asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_devel.tgz
           asset_content_type: application/gzip
 
-      - name: Upload macOS binary (release)
+      - name: Upload macOS binary (r-release)
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: pkg/pkg-macOS-latest-release/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
+          asset_path: pkg/pkg-macos-latest-release/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
           asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
           asset_content_type: application/gzip
 
-      - name: Upload macOS binary (oldrel)
+      - name: Upload macOS binary (r-oldrel)
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: pkg/pkg-macOS-latest-oldrel/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
+          asset_path: pkg/pkg-macos-latest-oldrel/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
           asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_oldrel.tgz
           asset_content_type: application/gzip
 
-      - name: Upload Windows binary (devel)
+      - name: Upload Windows binary (r-devel)
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -335,7 +328,7 @@ jobs:
           asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_devel.zip
           asset_content_type: application/zip
 
-      - name: Upload Windows binary (release)
+      - name: Upload Windows binary (r-release)
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -345,7 +338,7 @@ jobs:
           asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.zip
           asset_content_type: application/zip
 
-      - name: Upload Windows binary (oldrel)
+      - name: Upload Windows binary (r-oldrel)
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
