@@ -1,0 +1,322 @@
+on:
+  push:
+    branches:
+      - develop
+      - main
+      - master
+  pull_request:
+    branches:
+      - "*"
+
+name: R-CMD-check
+
+jobs:
+  R-CMD-check:
+    if: "! contains(github.event.head_commit.message, '[ci skip]')"
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: true
+      matrix:
+        config:
+          - {os: macOS-latest,   r: 'devel'}
+          - {os: macOS-latest,   r: 'release'}
+          - {os: macOS-latest,   r: 'oldrel'}
+          - {os: windows-latest, r: 'devel'}
+          - {os: windows-latest, r: 'release'}
+          - {os: windows-latest, r: 'oldrel'}
+          - {os: ubuntu-20.04,   r: 'devel'}
+          - {os: ubuntu-20.04,   r: 'release'}
+          - {os: ubuntu-20.04,   r: 'oldrel'}
+    env:
+      NOT_CRAN: true
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - uses: r-lib/actions/setup-pandoc@v1
+      - uses: r-lib/actions/setup-tinytex@v1
+
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+      - name: Setup system environment for macOS
+        if: runner.os == 'macOS'
+        run: |
+          set -x
+          brew install curl || true
+          brew install libgit2 || true
+          brew install harfbuzz fribidi || true
+          brew install libtiff || true
+          brew install netcdf || true
+          brew install open-mpi || true
+        shell: bash
+
+      - name: Setup system environment dor Windows
+        if: runner.os == 'Windows'
+        run: |
+          $ErrorActionPreference = 'SilentlyContinue'
+          echo "C:/rtools40/usr/bin;C:/rtools40/mingw64/bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
+          pacman -Syu mingw-w64-x86_64-make --noconfirm
+          g++ --version
+          Get-Command g++ | Select-Object -ExpandProperty Definition
+          mingw32-make --version
+          Get-Command mingw32-make | Select-Object -ExpandProperty Definition
+        shell: powershell
+
+      - name: Setup system environment for Linux
+        if: runner.os == 'Linux'
+        run: |
+          set -x
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          sudo apt install clang-format || true
+          sudo apt install libcurl4-openssl-dev || true
+          sudo apt install libgit2-dev || true
+          sudo apt install libharfbuzz-dev libfribidi-dev
+          sudo apt install libnetcdf-dev libnetcdff-dev || true
+          sudo apt install libtiff-dev || true
+          sudo apt install openmpi-bin openmpi-common libopenmpi-dev || true
+        shell: bash
+
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("covr")
+          remotes::install_cran("curl")
+          remotes::install_cran("devtools")
+          remotes::install_cran("lintr")
+          remotes::install_cran("pkgdown")
+          remotes::install_cran("rcmdcheck")
+          remotes::install_cran("rmarkdown")
+          remotes::install_cran("roxygen2")
+          remotes::install_cran("sessioninfo")
+          remotes::install_cran("styler")
+          remotes::install_local(".")
+        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      - name: Render documents
+        if: runner.os == 'Linux'
+        run: |
+          if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
+          roxygen2::roxygenize()
+        shell: Rscript {0}
+
+      - name: Style and Format
+        if: runner.os == 'Linux'
+        run: |
+          Rscript -e 'styler::style_pkg()'
+          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec clang-format -style=Google --verbose -i {} \; || true
+        shell: bash
+
+      - name: Commit changes
+        if: runner.os == 'Linux'
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add README.md NAMESPACE man/\* || true
+          git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
+          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
+          git commit -m 'Formatting R code using styler' || echo 'No changes to commit'
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
+          git commit -m 'Formatting C/C++ code using clang-format' || echo 'No changes to commit'
+          git push origin || echo "No changes to commit"
+        shell: bash
+
+      - name: Code analysis
+        if: runner.os == 'Linux'
+        run: lintr::lint_package()
+        shell: Rscript {0}
+
+      - name: Test coverage
+        if: runner.os == 'Linux'
+        run: covr::codecov()
+        shell: Rscript {0}
+
+      - name: Deploy website
+        if: runner.os == 'Linux'
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+        shell: bash
+
+      - name: Check
+        env:
+          _R_CHECK_CRAN_INCOMING_: false
+          _R_CHECK_CRAN_INCOMING_REMOTE_: false
+          _R_CHECK_DONTTEST_EXAMPLES_: false
+        run: |
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
+
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check
+
+      - name: Build packages
+        run: |
+          src <- pkgbuild::build(".", dest_path = tempdir(), vignettes = FALSE, manual = FALSE, binary = FALSE)
+          bin <- pkgbuild::build(".", dest_path = tempdir(), vignettes = FALSE, manual = FALSE, binary = TRUE)
+          dir.create("build")
+          file.copy(c(src, bin), "build")
+        shell: Rscript {0}
+
+      - name: Upload packages
+        if: success()
+        uses: actions/upload-artifact@v2
+        with:
+          name: pkg-${{ matrix.config.os }}-${{ matrix.config.r }}
+          path: build
+
+
+  Release:
+    if: startsWith(github.event.head_commit.message, '[release]')
+    runs-on: macos-latest
+
+    needs: [R-CMD-check]
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Extract version
+        run: |
+          echo "PACKAGE_VERSION=$(grep '^Version' DESCRIPTION  | sed 's/.*: *//')" >> $GITHUB_ENV
+          echo "PACKAGE_NAME=$(grep '^Package' DESCRIPTION  | sed 's/.*: *//')" >> $GITHUB_ENV
+          echo "PACKAGE_SHA=$(git rev-parse --short HEAD | sed 's/.*: *//')" >> $GITHUB_ENV
+        shell: bash
+
+      - uses: actions/download-artifact@v2
+        with:
+          path: pkg
+
+      - name: List files
+        run: |
+          echo ${{ env.PACKAGE_NAME }} ${{ env.PACKAGE_VERSION }}-${{ env.PACKAGE_SHA }}
+          ls -R pkg
+        shell: bash
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.PACKAGE_VERSION }}-${{ env.PACKAGE_SHA }}
+          release_name: ${{ env.PACKAGE_NAME }} ${{ env.PACKAGE_VERSION }}-${{ env.PACKAGE_SHA }}
+          draft: false
+          prerelease: false
+
+      - name: Upload source
+        uses: actions/upload-release-asset@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: pkg/pkg-ubuntu-20.04-devel/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tar.gz
+          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tar.gz
+          asset_content_type: application/gzip
+
+      - name: Upload macOS binary (devel)
+        uses: actions/upload-release-asset@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: pkg/pkg-macOS-devel-release/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
+          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_devel.tgz
+          asset_content_type: application/gzip
+
+      - name: Upload macOS binary (release)
+        uses: actions/upload-release-asset@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: pkg/pkg-macOS-latest-release/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
+          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
+          asset_content_type: application/gzip
+
+      - name: Upload macOS binary (oldrel)
+        uses: actions/upload-release-asset@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: pkg/pkg-macOS-latest-oldrel/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
+          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_oldrel.tgz
+          asset_content_type: application/gzip
+
+      - name: Upload Windows binary (devel)
+        uses: actions/upload-release-asset@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: pkg/pkg-windows-latest-devel/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.zip
+          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_devel.zip
+          asset_content_type: application/zip
+
+      - name: Upload Windows binary (release)
+        uses: actions/upload-release-asset@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: pkg/pkg-windows-latest-release/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.zip
+          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.zip
+          asset_content_type: application/zip
+
+      - name: Upload Windows binary (oldrel)
+        uses: actions/upload-release-asset@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: pkg/pkg-windows-latest-oldrel/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.zip
+          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_oldrel.zip
+          asset_content_type: application/zip
