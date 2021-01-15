@@ -92,17 +92,18 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           set -x
-          sudo apt install clang-format || true
-          sudo apt install libcurl4-openssl-dev || true
-          sudo apt install libgit2-dev || true
-          sudo apt install libharfbuzz-dev libfribidi-dev
-          sudo apt install libnetcdf-dev libnetcdff-dev || true
-          sudo apt install libtiff-dev || true
-          sudo apt install openmpi-bin openmpi-common libopenmpi-dev || true
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          sudo apt-get install -y clang-format || true
+          sudo apt-get install -y git || true
+          sudo apt-get install -y libcurl4-openssl-dev || true
+          sudo apt-get install -y libgit2-dev || true
+          sudo apt-get install -y libharfbuzz-dev libfribidi-dev || true
+          sudo apt-get install -y libicu-dev || true
+          sudo apt-get install -y libnetcdf-dev libnetcdff-dev || true
+          sudo apt-get install -y libtiff-dev || true
+          sudo apt-get install -y libxml2-dev || true
+          sudo apt-get install -y make || true
+          sudo apt-get install -y openmpi-bin openmpi-common libopenmpi-dev || true
+          sudo apt-get install -y pandoc || true
         shell: bash
 
       - name: Install dependencies
