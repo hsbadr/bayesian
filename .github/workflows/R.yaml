@@ -7,6 +7,14 @@ on:
   pull_request:
     branches:
       - "*"
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'Create a new release?'
+        required: false
+        default: 'false'
 
 name: R-CMD-check
 
@@ -227,7 +235,7 @@ jobs:
 
   Release:
     timeout-minutes: 60
-    if: startsWith(github.event.head_commit.message, '[release]')
+    if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
     runs-on: ubuntu-20.04
 
     needs: [R-CMD-check]
