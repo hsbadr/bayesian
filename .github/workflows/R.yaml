@@ -77,10 +77,17 @@ jobs:
           set -x
           brew install curl || true
           brew install harfbuzz fribidi || true
+          brew install git || true
+          brew install glpk || true
+          brew install icu4c || true
           brew install libgit2 || true
+          brew install libpng || true
           brew install libtiff || true
+          brew install libxml2 || true
+          brew install make || true
           brew install netcdf || true
           brew install open-mpi || true
+          brew install pandoc || true
           command -v gfortran >&/dev/null 2>&1 || ln -sv /usr/local/bin/gfortran-8 /usr/local/bin/gfortran ; ln -sv /usr/local/lib/gcc/8/* /usr/local/lib/ || true
         shell: bash
 
@@ -104,9 +111,11 @@ jobs:
           sudo apt-get install -y git || true
           sudo apt-get install -y libcurl4-openssl-dev || true
           sudo apt-get install -y libgit2-dev || true
+          sudo apt-get install -y libglpk-dev || true
           sudo apt-get install -y libharfbuzz-dev libfribidi-dev || true
           sudo apt-get install -y libicu-dev || true
           sudo apt-get install -y libnetcdf-dev libnetcdff-dev || true
+          sudo apt-get install -y libpng-dev || true
           sudo apt-get install -y libtiff-dev || true
           sudo apt-get install -y libxml2-dev || true
           sudo apt-get install -y make || true
