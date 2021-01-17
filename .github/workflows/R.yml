@@ -1,5 +1,5 @@
 ---
-# title: 'Github Actions workflow to check and release R packages'
+# title: 'Github Actions workflow to check, build, and release R packages'
 # author:
 #   - Hamada S. Badr:
 #     email: badr@jhu.edu
@@ -30,12 +30,48 @@ name: R
         default: false
 
 jobs:
-  Check:
+  initiate:
+    name: Initiate R workflow
     if: "! contains(github.event.head_commit.message, '[ci skip]')"
+    runs-on: Ubuntu-20.04
     timeout-minutes: 60
-    runs-on: ${{ matrix.os }}
+    outputs:
+      pkg_name: ${{ steps.pkg_info.outputs.pkg_name }}
+      pkg_version: ${{ steps.pkg_info.outputs.pkg_version }}
+      pkg_sha: ${{ steps.pkg_info.outputs.pkg_sha }}
 
+    strategy:
+      fail-fast: true
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Get package information
+        id: pkg_info
+        run: |
+          set -x
+          export PKG_NAME="$(grep '^Package' DESCRIPTION | sed 's/^[^:]*://g' | xargs)"
+          export PKG_VERSION="$(grep '^Version' DESCRIPTION | sed 's/^[^:]*://g' | xargs)"
+          export PKG_SHA="$(git rev-parse --short HEAD | sed 's/^[^:]*://g' | xargs)"
+          echo "::set-output name=pkg_name::$PKG_NAME"
+          echo "::set-output name=pkg_version::$PKG_VERSION"
+          echo "::set-output name=pkg_sha::$PKG_SHA"
+        shell: bash
+
+  check:
     name: R-${{ matrix.r }} on ${{ matrix.os }}
+    if: "! contains(github.event.head_commit.message, '[ci skip]')"
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+
+    needs: [initiate]
 
     strategy:
       fail-fast: true
@@ -51,6 +87,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          submodules: true
 
       - name: Set up R environment
         uses: r-lib/actions/setup-r@master
@@ -77,15 +116,6 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
-
-      - name: Set up GitHub environment
-        run: |
-          set -x
-          echo "R_VERSION=$(cat .github/R-version)" >> $GITHUB_ENV
-          echo "PACKAGE_VERSION=$(grep '^Version' DESCRIPTION  | sed 's/.*: *//')" >> $GITHUB_ENV
-          echo "PACKAGE_NAME=$(grep '^Package' DESCRIPTION  | sed 's/.*: *//')" >> $GITHUB_ENV
-          echo "PACKAGE_SHA=$(git rev-parse --short HEAD | sed 's/.*: *//')" >> $GITHUB_ENV
-        shell: bash
 
       - name: Set up system environment for macOS
         if: runner.os == 'macOS'
@@ -259,64 +289,133 @@ jobs:
         if: matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
         uses: actions/upload-artifact@main
         with:
-          name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tar.gz
-          path: build/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tar.gz
+          name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
+          path: build/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
 
       - name: Upload macOS binary package
         if: runner.os == 'macOS'
         uses: actions/upload-artifact@main
         with:
-          name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_${{ env.R_VERSION }}.tgz
-          path: build/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
+          name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.tgz
+          path: build/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tgz
 
       - name: Upload Windows binary package
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@main
         with:
-          name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_${{ env.R_VERSION }}.zip
-          path: build/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.zip
+          name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.zip
+          path: build/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.zip
 
+  release:
+    name: Create release
+    if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
+    runs-on: Ubuntu-20.04
+    timeout-minutes: 60
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+
+    needs: [initiate, check]
+
+    strategy:
+      fail-fast: true
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
       - name: Create release
-        if: success() && (startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true')
+        if: success()
         id: create_release
         uses: actions/create-release@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.PACKAGE_VERSION }}
-          release_name: ${{ env.PACKAGE_NAME }} ${{ env.PACKAGE_VERSION }}
+          tag_name: ${{ needs.initiate.outputs.pkg_version }}
+          release_name: ${{ needs.initiate.outputs.pkg_name }} ${{ needs.initiate.outputs.pkg_version }}
+          body: |
+            Check changes in [NEWS.md](NEWS.md).
           draft: false
           prerelease: false
 
+  upload-src:
+    name: Upload source package
+    if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
+    runs-on: Ubuntu-20.04
+    timeout-minutes: 60
+
+    needs: [initiate, check, release]
+
+    strategy:
+      fail-fast: true
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Download source package (artifacts)
+        uses: actions/download-artifact@main
+        with:
+          name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
+          path: artifacts
+
+      - name: List downloaded artifacts
+        run: |
+          ls -R artifacts
+        shell: bash
+
       - name: Upload release asset for source package
-        if: success() && (startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true')
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tar.gz
-          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tar.gz
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: artifacts/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
+          asset_name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
           asset_content_type: application/gzip
 
+  upload-bin:
+    name: Upload R-${{ matrix.r }} binaries
+    if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
+    runs-on: Ubuntu-20.04
+    timeout-minutes: 60
+
+    needs: [initiate, check, release]
+
+    strategy:
+      fail-fast: true
+      matrix:
+        r: ['devel', 'release', 'oldrel']
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Download all packages (artifacts)
+        uses: actions/download-artifact@main
+        with:
+          path: artifacts
+
+      - name: List downloaded artifacts
+        run: |
+          ls -R artifacts
+        shell: bash
+
       - name: Upload release asset for macOS binary package
-        if: success() && runner.os == 'macOS' && (startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true')
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.tgz
-          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_${{ env.R_VERSION }}.tgz
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: artifacts/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.tgz/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tgz
+          asset_name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.tgz
           asset_content_type: application/gzip
 
       - name: Upload release asset for Windows binary package
-        if: success() && runner.os == 'Windows' && (startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true')
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.zip
-          asset_name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}_${{ env.R_VERSION }}.zip
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: artifacts/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.zip/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.zip
+          asset_name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.zip
           asset_content_type: application/zip
