@@ -190,6 +190,12 @@ jobs:
           git push origin || echo "No changes to commit"
         shell: bash
 
+      - name: Push changes to pull request
+        if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel' && github.event.issue.pull_request
+        uses: r-lib/actions/pr-push@master
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Code analysis
         if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
         run: |
