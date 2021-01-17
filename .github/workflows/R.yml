@@ -49,16 +49,21 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@main
+      - name: Check out repository
+        uses: actions/checkout@main
 
-      - uses: r-lib/actions/setup-r@master
+      - name: Set up R environment
+        uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.r }}
 
-      - uses: r-lib/actions/setup-pandoc@master
-      - uses: r-lib/actions/setup-tinytex@master
+      - name: Set up Pandoc
+        uses: r-lib/actions/setup-pandoc@master
 
-      - name: Query dependencies
+      - name: Set up TinyTeX
+        uses: r-lib/actions/setup-tinytex@master
+
+      - name: Query R package dependencies
         run: |
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
@@ -134,7 +139,7 @@ jobs:
           sudo apt-get install -y pandoc || true
         shell: bash
 
-      - name: Install dependencies
+      - name: Install R package dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("covr")
@@ -151,14 +156,14 @@ jobs:
           remotes::install_local(".")
         shell: Rscript {0}
 
-      - name: Session info
+      - name: Print R session information
         run: |
           options(width = 100)
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
-      - name: Style and Format
+      - name: Style and format R/C/C++ code
         if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
         run: |
           set -x
@@ -196,13 +201,13 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Code analysis
+      - name: Analyze R code
         if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
         run: |
           lintr::lint_package()
         shell: Rscript {0}
 
-      - name: Test coverage
+      - name: Run test coverage
         if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
         run: |
           covr::codecov(type = "all", line_exclusions = NULL, function_exclusions = NULL)
