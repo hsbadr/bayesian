@@ -34,11 +34,17 @@ jobs:
     name: Initiate R workflow
     if: "! contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: Ubuntu-20.04
-    timeout-minutes: 60
+    timeout-minutes: 360
     outputs:
       pkg_name: ${{ steps.pkg_info.outputs.pkg_name }}
       pkg_version: ${{ steps.pkg_info.outputs.pkg_version }}
       pkg_sha: ${{ steps.pkg_info.outputs.pkg_sha }}
+      r_devel: ${{ steps.r_info.outputs.r_devel }}
+      r_release: ${{ steps.r_info.outputs.r_release }}
+      r_oldrel: ${{ steps.r_info.outputs.r_oldrel }}
+      os_linux: ${{ steps.mat_info.outputs.os_linux }}
+      os_macos: ${{ steps.mat_info.outputs.os_macos }}
+      os_windows: ${{ steps.mat_info.outputs.os_windows }}
 
     strategy:
       fail-fast: true
@@ -53,7 +59,7 @@ jobs:
           fetch-depth: 1
           submodules: true
 
-      - name: Get package information
+      - name: Set up package information
         id: pkg_info
         run: |
           set -x
@@ -65,19 +71,43 @@ jobs:
           echo "::set-output name=pkg_sha::$PKG_SHA"
         shell: bash
 
+      - name: Set up R information
+        id: r_info
+        run: |
+          set -x
+          echo "::set-output name=r_devel::devel"
+          echo "::set-output name=r_release::release"
+          echo "::set-output name=r_oldrel::oldrel"
+        shell: bash
+
+      - name: Set up OS information
+        id: mat_info
+        run: |
+          set -x
+          echo "::set-output name=os_linux::Ubuntu-20.04"
+          echo "::set-output name=os_macos::macOS-10.15"
+          echo "::set-output name=os_windows::Windows-2019"
+        shell: bash
+
   check:
-    name: R-${{ matrix.r }} on ${{ matrix.os }}
+    name: Check R-${{ matrix.r }} | ${{ matrix.os }}
     if: "! contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 60
+    timeout-minutes: 360
 
     needs: [initiate]
 
     strategy:
       fail-fast: true
       matrix:
-        r: ['devel', 'release', 'oldrel']
-        os: ['Ubuntu-20.04', 'macOS-10.15', 'Windows-2019']
+        r:
+          - ${{ needs.initiate.outputs.r_devel }}
+          - ${{ needs.initiate.outputs.r_release }}
+          - ${{ needs.initiate.outputs.r_oldrel }}
+        os:
+          - ${{ needs.initiate.outputs.os_linux }}
+          - ${{ needs.initiate.outputs.os_macos }}
+          - ${{ needs.initiate.outputs.os_windows }}
 
     env:
       NOT_CRAN: true
@@ -112,10 +142,16 @@ jobs:
       - name: Cache R packages
         if: runner.os != 'Windows'
         uses: actions/cache@main
+        env:
+          cache-name: cache-r-packages
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          key: |
+            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: |
+            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-${{ hashFiles('.github/R-version') }}-1-
+            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-
+            R-${{ matrix.r }}_${{ matrix.os }}-
 
       - name: Set up system environment for macOS
         if: runner.os == 'macOS'
@@ -171,6 +207,24 @@ jobs:
 
       - name: Install R package dependencies
         run: |
+          options(
+            repos = c(CRAN = "https://cran.rstudio.com"),
+            keep.source = TRUE,
+            keep.source.pkgs = TRUE,
+            browserNLdisabled = TRUE,
+            devtools.name = "Hamada S. Badr",
+            devtools.desc.name = "Hamada S. Badr",
+            devtools.desc.author = utils::person(
+              given = "Hamada S.",
+              family = "Badr",
+              email = "badr@jhu.edu",
+              role = c("aut", "cre"),
+              comment = c(ORCID = "0000-0002-9808-2344")
+            ),
+            dplyr.width = Inf,
+            lifecycle_verbosity = "warning",
+            tidymodels.dark = TRUE
+          )
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("covr")
           remotes::install_cran("curl")
@@ -193,72 +247,26 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
-      - name: Style and format R/C/C++ code
-        if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
-        run: |
-          set -x
-          Rscript -e 'styler::style_pkg()'
-          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec clang-format -style=Google --verbose -i {} \; || true
-        shell: bash
-
-      - name: Render documents
-        if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
-        run: |
-          if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
-          roxygen2::roxygenize()
-        shell: Rscript {0}
-
-      - name: Commit changes
-        if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
-        run: |
-          set -x
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
-          git commit -m 'Formatting R code using styler' || echo 'No changes to commit'
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
-          git commit -m 'Formatting C/C++ code using clang-format' || echo 'No changes to commit'
-          git add README.md NAMESPACE man/\* || true
-          git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
-          git push origin || echo "No changes to commit"
-        shell: bash
-
-      - name: Push changes to pull request
-        if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel' && github.event.issue.pull_request
-        uses: r-lib/actions/pr-push@master
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Analyze R code
-        if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
-        run: |
-          lintr::lint_package()
-        shell: Rscript {0}
-
-      - name: Run test coverage
-        if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
-        run: |
-          covr::codecov(type = "all", line_exclusions = NULL, function_exclusions = NULL)
-        shell: Rscript {0}
-
-      - name: Deploy website
-        if: success() && matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
-        run: |
-          set -x
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
-        shell: bash
-
       - name: R CMD check
         if: success()
         env:
           _R_CHECK_CRAN_INCOMING_: false
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
           _R_CHECK_DONTTEST_EXAMPLES_: false
+          _R_CHECK_FORCE_SUGGESTS_: false
         run: |
+          if (nzchar(Sys.getenv("MAKEVARS_UPDATE"))) {
+            dotR <- file.path(Sys.getenv("HOME"), ".R")
+            if (!file.exists(dotR)) dir.create(dotR)
+            path_makevars <- file.path(dotR, ifelse(.Platform$OS.type == "windows", "Makevars.win", "Makevars"))
+            if (!file.exists(path_makevars)) file.create(path_makevars)
+            cat("",
+                "CXX_STD     = CXX14",
+                "CXX14STD    = -std=c++1y",
+                "CXX14FLAGS += -Wno-ignored-attributes",
+                "CXX11FLAGS += -Wno-ignored-attributes",
+                file = path_makevars, sep = "\n", append = TRUE)
+          }
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
@@ -266,7 +274,7 @@ jobs:
         if: always()
         run: |
           set -x
-          find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+          find . -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
       - name: Upload check results
@@ -285,32 +293,76 @@ jobs:
           file.copy(c(src, bin), "build")
         shell: Rscript {0}
 
-      - name: Upload source package
-        if: matrix.os == 'Ubuntu-20.04' && matrix.r == 'devel'
+      - name: Upload packages
         uses: actions/upload-artifact@main
         with:
-          name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
-          path: build/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
+          name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_R-${{ matrix.r }}_${{ matrix.os }}
+          path: build
 
-      - name: Upload macOS binary package
-        if: runner.os == 'macOS'
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.tgz
-          path: build/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tgz
+      - name: Style and format R/C/C++ code
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
+        run: |
+          set -x
+          Rscript -e 'styler::style_pkg()'
+          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec clang-format -style=Google --verbose -i {} \; || true
+        shell: bash
 
-      - name: Upload Windows binary package
-        if: runner.os == 'Windows'
-        uses: actions/upload-artifact@main
+      - name: Render documents
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
+        run: |
+          if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
+          roxygen2::roxygenize()
+        shell: Rscript {0}
+
+      - name: Commit changes
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
+        run: |
+          set -x
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
+          git commit -m 'Formatting R code using styler' || echo 'No changes to commit'
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
+          git commit -m 'Formatting C/C++ code using clang-format' || echo 'No changes to commit'
+          git add README.md NAMESPACE man/\* || true
+          git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
+          git push origin || echo "No changes to commit"
+        shell: bash
+
+      - name: Push changes to pull request
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && github.event.issue.pull_request
+        uses: r-lib/actions/pr-push@master
         with:
-          name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.zip
-          path: build/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.zip
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Analyze R code
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
+        run: |
+          lintr::lint_package()
+        shell: Rscript {0}
+
+      - name: Analyze unit test coverage
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
+        run: |
+          covr::codecov(type = "all", line_exclusions = NULL, function_exclusions = NULL)
+        shell: Rscript {0}
+
+      - name: Deploy package website
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
+        run: |
+          set -x
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+        shell: bash
 
   release:
     name: Create release
     if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
-    runs-on: Ubuntu-20.04
-    timeout-minutes: 60
+    runs-on: ${{ needs.initiate.outputs.os_linux }}
+    timeout-minutes: 360
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
 
@@ -340,8 +392,8 @@ jobs:
   upload-src:
     name: Upload source package
     if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
-    runs-on: Ubuntu-20.04
-    timeout-minutes: 60
+    runs-on: ${{ needs.initiate.outputs.os_linux }}
+    timeout-minutes: 360
 
     needs: [initiate, check, release]
 
@@ -352,70 +404,73 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Download source package (artifacts)
+      - name: Download artifacts
         uses: actions/download-artifact@main
         with:
-          name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
-          path: artifacts
+          path: ./
 
-      - name: List downloaded artifacts
+      - name: Set up system environment
+        id: artifacts
         run: |
-          ls -R artifacts
+          ls -R
+          export ARTIFACT_PATH="${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_R-${{ needs.initiate.outputs.r_devel }}_${{ needs.initiate.outputs.os_linux }}"
+          echo "::set-output name=artifact_path::$ARTIFACT_PATH"
         shell: bash
 
-      - name: Upload release asset for source package
+      - name: Upload source package
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: artifacts/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
+          asset_path: ${{ steps.artifacts.outputs.artifact_path }}/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
           asset_name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tar.gz
           asset_content_type: application/gzip
 
   upload-bin:
-    name: Upload R-${{ matrix.r }} binaries
+    name: Upload R-${{ matrix.r }} | ${{ matrix.os }}
     if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
-    runs-on: Ubuntu-20.04
-    timeout-minutes: 60
+    runs-on: ${{ needs.initiate.outputs.os_linux }}
+    timeout-minutes: 360
 
-    needs: [initiate, check, release]
+    needs: [initiate, check, release, upload-src]
 
     strategy:
       fail-fast: true
       matrix:
-        r: ['devel', 'release', 'oldrel']
+        r:
+          - ${{ needs.initiate.outputs.r_devel }}
+          - ${{ needs.initiate.outputs.r_release }}
+          - ${{ needs.initiate.outputs.r_oldrel }}
+        os:
+          - ${{ needs.initiate.outputs.os_linux }}
+          - ${{ needs.initiate.outputs.os_macos }}
+          - ${{ needs.initiate.outputs.os_windows }}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Download all packages (artifacts)
+      - name: Download artifacts
         uses: actions/download-artifact@main
         with:
-          path: artifacts
+          path: ./
 
-      - name: List downloaded artifacts
+      - name: Set up system environment
+        id: artifacts
         run: |
-          ls -R artifacts
+          ls -R
+          export ARTIFACT_PATH="${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_R-${{ matrix.r }}_${{ matrix.os }}"
+          zip -rj $ARTIFACT_PATH.zip $ARTIFACT_PATH/*
+          echo "::set-output name=artifact_path::$ARTIFACT_PATH"
         shell: bash
 
-      - name: Upload release asset for macOS binary package
+      - name: Upload release assets
         uses: actions/upload-release-asset@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: artifacts/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.tgz/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.tgz
-          asset_name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.tgz
-          asset_content_type: application/gzip
-
-      - name: Upload release asset for Windows binary package
-        uses: actions/upload-release-asset@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: artifacts/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.zip/${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}.zip
-          asset_name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_${{ matrix.r }}.zip
+          asset_path: ${{ steps.artifacts.outputs.artifact_path }}.zip
+          asset_name: ${{ steps.artifacts.outputs.artifact_path }}.zip
           asset_content_type: application/zip
