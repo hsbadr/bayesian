@@ -8,6 +8,7 @@ test_that("bayesian execution", {
   skip_on_cran()
   skip_on_os("mac")
   skip_on_os("windows")
+  skip("Update tests to improve unit test coverage!")
 
   brms_cl <- call2("brm",
     .ns = "brms",
