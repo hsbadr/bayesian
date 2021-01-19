@@ -7,7 +7,11 @@ Authors@R:
              family = "Badr",
              role = c("aut", "cre"),
              email = "badr@jhu.edu",
-             comment = c(ORCID = "0000-0002-9808-2344")))
+             comment = c(ORCID = "0000-0002-9808-2344")),
+      person(given = "Paul C.",
+             family = "Bürkner",
+             email = "paul.buerkner@gmail.com",
+             role = c("aut")))
 Description: Fit Bayesian models using 'brms'/'Stan' with 'parsnip'/'tidymodels'
     via 'bayesian' <doi:10.5281/zenodo.4430991>. 'tidymodels' is a collection of
     packages for machine learning; see Wickham (2020) <https://www.tidymodels.org>).
