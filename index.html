@@ -110,7 +110,7 @@
 <span id="cb3-2"><a href="#cb3-2"></a></span>
 <span id="cb3-3"><a href="#cb3-3"></a>bayesian_mod &lt;-</span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">bayesian</span>() <span class="op">%&gt;%</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">"stan"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">"brms"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="st">  </span><span class="kw">fit</span>(</span>
 <span id="cb3-7"><a href="#cb3-7"></a>    rating <span class="op">~</span><span class="st"> </span>treat <span class="op">+</span><span class="st"> </span>period <span class="op">+</span><span class="st"> </span>carry <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>subject),</span>
 <span id="cb3-8"><a href="#cb3-8"></a>    <span class="dt">data =</span> inhaler</span>
@@ -124,7 +124,7 @@
 <p>To cite <code>bayesian</code> in publications, please use:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">citation</span>(<span class="st">"bayesian"</span>)</span></code></pre></div>
 <blockquote>
-<p>Hamada S. Badr (2021): bayesian: Bindings for Bayesian TidyModels, <a href="https://cran.r-project.org/package=bayesian"><em>Comprehensive R Archive Network (CRAN)</em></a>, DOI: <a href="https://doi.org/10.5281/zenodo.4430991">10.5281/zenodo.4430991</a>.</p>
+<p>Hamada S. Badr and Paul C. Bürkner (2021): bayesian: Bindings for Bayesian TidyModels, <a href="https://cran.r-project.org/package=bayesian"><em>Comprehensive R Archive Network (CRAN)</em></a>, DOI: <a href="https://doi.org/10.5281/zenodo.4430991">10.5281/zenodo.4430991</a>.</p>
 </blockquote>
 </div>
 <div id="contributing" class="section level2">
@@ -177,6 +177,7 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Hamada S. Badr <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9808-2344" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Paul C. Bürkner <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
@@ -195,7 +196,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Hamada S. Badr.</p>
+  <p>Developed by Hamada S. Badr, Paul C. Bürkner.</p>
 </div>
 
 <div class="pkgdown">
