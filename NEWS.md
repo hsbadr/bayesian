@@ -2,7 +2,8 @@
 
 - Added CITATION and updated package DESCRIPTION
 - Added fit wrapper and other helper functions
-- Updated manual, WORDLIST, and NEWS
+- Renamed the current engine from `stan` to `brms`
+- Updated manual, logo, WORDLIST, and NEWS
 
 # bayesian 0.0.2
 
