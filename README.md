@@ -53,7 +53,7 @@ Example
 
     bayesian_mod <-
       bayesian() %>%
-      set_engine("stan") %>%
+      set_engine("brms") %>%
       fit(
         rating ~ treat + period + carry + (1 | subject),
         data = inhaler
@@ -68,9 +68,8 @@ To cite `bayesian` in publications, please use:
 
     citation("bayesian")
 
-> Hamada S. Badr and Paul C. Bürkner (2021): bayesian: Bindings
-> for Bayesian TidyModels, [*Comprehensive R Archive Network
-> [*Comprehensive R Archive Network
+> Hamada S. Badr and Paul C. Bürkner (2021): bayesian: Bindings for
+> Bayesian TidyModels, [*Comprehensive R Archive Network
 > (CRAN)*](https://cran.r-project.org/package=bayesian), DOI:
 > [10.5281/zenodo.4430991](https://doi.org/10.5281/zenodo.4430991).
 

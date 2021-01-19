@@ -281,17 +281,17 @@ possible modes are "regression" and "classification".
 The model can be created by the \code{fit()} function using the
 following \emph{engines}:
 \itemize{
-\item \pkg{brms}:  \code{"stan"}
+\item \pkg{brms}:  \code{"brms"}
 }
 }
 \section{Engine Details}{
 Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{bayesian() \%>\% 
-  set_engine("stan") \%>\% 
+call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{bayesian() \%>\%
+  set_engine("brms") \%>\%
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Bayesian Model Specification (regression)
+}\if{html}{\out{</div>}}\preformatted{## Model Specification (regression)
 ## 
-## Computational engine: stan 
+## Computational engine: brms 
 ## 
 ## Model fit template:
 ## bayesian::bayesian_fit(formula = missing_arg(), data = missing_arg(), 
@@ -310,7 +310,7 @@ bayesian(mode = "regression")
 \dontrun{
 bayesian_mod <-
   bayesian() \%>\%
-  set_engine("stan") \%>\%
+  set_engine("brms") \%>\%
   fit(
     rating ~ treat + period + carry + (1 | subject),
     data = inhaler

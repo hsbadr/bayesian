@@ -57,7 +57,7 @@ library(bayesian)
 
 bayesian_mod <-
   bayesian() %>%
-  set_engine("stan") %>%
+  set_engine("brms") %>%
   fit(
     rating ~ treat + period + carry + (1 | subject),
     data = inhaler

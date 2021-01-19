@@ -164,12 +164,12 @@
 #' The model can be created by the `fit()` function using the
 #'  following _engines_:
 #' \itemize{
-#' \item \pkg{brms}:  `"stan"`
+#' \item \pkg{brms}:  `"brms"`
 #' }
 #'
 #' @includeRmd man/rmd/bayesian-engine.Rmd details
 #'
-#' For prediction, the `stan` engine can compute posterior
+#' For prediction, the `brms` engine can compute posterior
 #'  intervals analogous to confidence and prediction intervals. In
 #'  these instances, the units are the original outcome and when
 #'  `std_error = TRUE`, the standard deviation of the posterior
@@ -187,7 +187,7 @@
 #' \dontrun{
 #' bayesian_mod <-
 #'   bayesian() %>%
-#'   set_engine("stan") %>%
+#'   set_engine("brms") %>%
 #'   fit(
 #'     rating ~ treat + period + carry + (1 | subject),
 #'     data = inhaler
@@ -258,8 +258,8 @@ print.bayesian <- function(x, ...) {
 #' @export
 translate.bayesian <- function(x, engine = x$engine, ...) {
   if (is.null(engine)) {
-    message("Used `engine = 'stan'` for translation.")
-    engine <- "stan"
+    message("Used `engine = 'brms'` for translation.")
+    engine <- "brms"
   }
 
   x <- parsnip::translate.default(x, engine, ...)

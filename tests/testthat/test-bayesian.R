@@ -26,7 +26,7 @@ test_that("bayesian execution", {
       expect_error(
         bayesian_mod <-
           bayesian() %>%
-          set_engine("stan", iter = 500, seed = 2020, refresh = 0) %>%
+          set_engine("brms", iter = 500, seed = 2020, refresh = 0) %>%
           fit(
             rating ~ treat + period + carry + (1 | subject),
             data = inhaler
