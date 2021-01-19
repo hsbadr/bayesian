@@ -11,7 +11,7 @@ citEntry(entry = "Manual",
                  person(given = "Paul C.",
                         family = "Bürkner",
                         email = "paul.buerkner@gmail.com",
-                        role = c("aut")))
+                        role = c("aut"))),
   year         = "2021",
   journal      = "Comprehensive R Archive Network (CRAN)",
   url          = "https://cran.r-project.org/package=bayesian",
