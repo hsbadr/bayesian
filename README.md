@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-bayesian: Bindings for Bayesian TidyModels [<img src="man/figures/bayesian.png" align="right" width="150" alt="bayesian logo" />](https://hsbadr.github.io/bayesian/)
+bayesian: Bindings for Bayesian TidyModels [<img src="man/figures/bayesian.png" align="right" width="160" alt="bayesian logo" />](https://hsbadr.github.io/bayesian/)
 =====================================================================================================================================================================
 
 <!-- badges: start -->
