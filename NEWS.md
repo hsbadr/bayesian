@@ -4,6 +4,8 @@
 - Added fit wrapper and other helper functions
 - Renamed the current engine from `stan` to `brms`
 - Updated manual, logo, WORDLIST, and NEWS
+- Fixed a CRAN NOTE regarding LazyData
+- Updated lifecycle URL in the README
 
 # bayesian 0.0.2
 
