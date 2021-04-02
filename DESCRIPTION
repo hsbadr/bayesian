@@ -36,9 +36,11 @@ Imports:
 Suggests:
     covr,
     devtools,
+    future,
     knitr,
     rmarkdown,
     roxygen2,
+    rstan,
     spelling,
     testthat
 VignetteBuilder: knitr
