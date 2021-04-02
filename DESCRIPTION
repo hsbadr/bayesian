@@ -50,6 +50,5 @@ Collate:
     'bayesian_load.R'
     'bayesian_make.R'
     'bayesian.R'
-LazyData: yes
 LazyLoad: yes
 Language: en-US
