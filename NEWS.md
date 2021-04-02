@@ -1,3 +1,8 @@
+# bayesian 0.0.4
+
+- Added rstan & future to suggested packages
+- Fixed NOTE: Undeclared packages ‘rstan’, ‘future’ in Rd xrefs
+
 # bayesian 0.0.3
 
 - Added CITATION and updated package DESCRIPTION
