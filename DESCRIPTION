@@ -5,8 +5,8 @@ Title: Bindings for Bayesian TidyModels
 Authors@R:
     c(person(given = "Hamada S.",
              family = "Badr",
-             role = c("aut", "cre"),
              email = "badr@jhu.edu",
+             role = c("aut", "cre"),
              comment = c(ORCID = "0000-0002-9808-2344")),
       person(given = "Paul C.",
              family = "Bürkner",
