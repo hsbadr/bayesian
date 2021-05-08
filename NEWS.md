@@ -3,6 +3,8 @@
 - Added `rstan` & `future` to suggested packages
 - Fixed NOTE: Undeclared packages `rstan`, `future` in Rd xrefs
 - Replaced \pkg{Stan} with \proglang{Stan}
+- Updated WORDLIST
+- Minor code cleanup
 
 # bayesian 0.0.3
 
