@@ -75,12 +75,11 @@ bayesian_make <- function(modes = c("classification", "regression")) {
             unname(results)
           },
           func = c(pkg = "bayesian", fun = "bayesian_predict"),
-          args =
-            list(
-              object = rlang::expr(object$fit),
-              newdata = rlang::expr(new_data),
-              summary = TRUE
-            )
+          args = list(
+            object = rlang::expr(object$fit),
+            newdata = rlang::expr(new_data),
+            summary = TRUE
+          )
         )
       )
 
@@ -109,12 +108,11 @@ bayesian_make <- function(modes = c("classification", "regression")) {
             results
           },
           func = c(pkg = "bayesian", fun = "bayesian_predict"),
-          args =
-            list(
-              object = rlang::expr(object$fit),
-              newdata = rlang::expr(new_data),
-              summary = TRUE
-            )
+          args = list(
+            object = rlang::expr(object$fit),
+            newdata = rlang::expr(new_data),
+            summary = TRUE
+          )
         )
       )
     } else {
@@ -149,17 +147,15 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           if (mode == "classification") {
             res_2 <-
               tibble::tibble(
-                lo =
-                  parsnip::convert_stan_interval(
-                    results,
-                    level = object$spec$method$pred$conf_int$extras$level
-                  ),
-                hi =
-                  parsnip::convert_stan_interval(
-                    results,
-                    level = object$spec$method$pred$conf_int$extras$level,
-                    lower = FALSE
-                  ),
+                lo = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$conf_int$extras$level
+                ),
+                hi = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$conf_int$extras$level,
+                  lower = FALSE
+                ),
               )
             res_1 <- res_2
             res_1$lo <- 1 - res_2$hi
@@ -171,17 +167,15 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           } else {
             res <-
               tibble::tibble(
-                .pred_lower =
-                  parsnip::convert_stan_interval(
-                    results,
-                    level = object$spec$method$pred$conf_int$extras$level
-                  ),
-                .pred_upper =
-                  parsnip::convert_stan_interval(
-                    results,
-                    level = object$spec$method$pred$conf_int$extras$level,
-                    lower = FALSE
-                  ),
+                .pred_lower = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$conf_int$extras$level
+                ),
+                .pred_upper = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$conf_int$extras$level,
+                  lower = FALSE
+                ),
               )
           }
           if (object$spec$method$pred$conf_int$extras$std_error) {
@@ -190,12 +184,11 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           res
         },
         func = c(pkg = "bayesian", fun = "bayesian_predict"),
-        args =
-          list(
-            object = rlang::expr(object$fit),
-            newdata = rlang::expr(new_data),
-            summary = FALSE
-          )
+        args = list(
+          object = rlang::expr(object$fit),
+          newdata = rlang::expr(new_data),
+          summary = FALSE
+        )
       )
     )
 
@@ -210,17 +203,15 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           if (mode == "classification") {
             res_2 <-
               tibble::tibble(
-                lo =
-                  parsnip::convert_stan_interval(
-                    results,
-                    level = object$spec$method$pred$pred_int$extras$level
-                  ),
-                hi =
-                  parsnip::convert_stan_interval(
-                    results,
-                    level = object$spec$method$pred$pred_int$extras$level,
-                    lower = FALSE
-                  ),
+                lo = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$pred_int$extras$level
+                ),
+                hi = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$pred_int$extras$level,
+                  lower = FALSE
+                ),
               )
             res_1 <- res_2
             res_1$lo <- 1 - res_2$hi
@@ -232,17 +223,15 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           } else {
             res <-
               tibble::tibble(
-                .pred_lower =
-                  parsnip::convert_stan_interval(
-                    results,
-                    level = object$spec$method$pred$pred_int$extras$level
-                  ),
-                .pred_upper =
-                  parsnip::convert_stan_interval(
-                    results,
-                    level = object$spec$method$pred$pred_int$extras$level,
-                    lower = FALSE
-                  ),
+                .pred_lower = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$pred_int$extras$level
+                ),
+                .pred_upper = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$pred_int$extras$level,
+                  lower = FALSE
+                ),
               )
           }
           if (object$spec$method$pred$pred_int$extras$std_error) {
@@ -251,12 +240,11 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           res
         },
         func = c(pkg = "bayesian", fun = "bayesian_predict"),
-        args =
-          list(
-            object = rlang::expr(object$fit),
-            newdata = rlang::expr(new_data),
-            summary = FALSE
-          )
+        args = list(
+          object = rlang::expr(object$fit),
+          newdata = rlang::expr(new_data),
+          summary = FALSE
+        )
       )
     )
 
@@ -269,12 +257,11 @@ bayesian_make <- function(modes = c("classification", "regression")) {
         pre = NULL,
         post = NULL,
         func = c(pkg = "bayesian", fun = "bayesian_predict"),
-        args =
-          list(
-            object = rlang::expr(object$fit),
-            newdata = rlang::expr(new_data),
-            summary = FALSE
-          )
+        args = list(
+          object = rlang::expr(object$fit),
+          newdata = rlang::expr(new_data),
+          summary = FALSE
+        )
       )
     )
 
@@ -289,12 +276,11 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           tibble::as_tibble(results)
         },
         func = c(pkg = "bayesian", fun = "bayesian_predict"),
-        args =
-          list(
-            object = rlang::expr(object$fit),
-            newdata = rlang::expr(new_data),
-            summary = TRUE
-          )
+        args = list(
+          object = rlang::expr(object$fit),
+          newdata = rlang::expr(new_data),
+          summary = TRUE
+        )
       )
     )
   }
