@@ -2,7 +2,7 @@
 #'
 #' `bayesian()` is a way to generate a _specification_ of a model
 #'  before fitting and allows the model to be created using
-#'  \pkg{Stan} via \pkg{brms} package in R. The main
+#'  \proglang{Stan} via \pkg{brms} package in R. The main
 #'  arguments for the model are:
 #' \itemize{
 #'   \item \code{prior} One or more \code{brmsprior} objects created by
@@ -10,7 +10,7 @@
 #'   the \code{c} method or the \code{+} operator. See also
 #'   \code{\link[brms]{get_prior}} for more help.
 #'   \item \code{inits} Either \code{"random"} or \code{"0"}. If inits is
-#'   \code{"random"} (the default), \pkg{Stan} will randomly generate initial
+#'   \code{"random"} (the default), \proglang{Stan} will randomly generate initial
 #'   values for parameters. If it is \code{"0"}, all parameters are initialized
 #'   to zero. This option is sometimes useful for certain families, as it happens
 #'   that default (\code{"random"}) inits cause samples to be essentially
@@ -20,7 +20,7 @@
 #'   initial values. The latter options are mainly implemented for internal
 #'   testing but are available to users if necessary. If specifying initial
 #'   values using a list or a function then currently the parameter names must
-#'   correspond to the names used in the generated \pkg{Stan} code (not the names
+#'   correspond to the names used in the generated \proglang{Stan} code (not the names
 #'   used in \R). For more details on specifying initial values you can consult
 #'   the documentation of the selected \code{backend}.
 #'   \item \code{chains} Number of Markov chains (defaults to 4).
@@ -47,7 +47,7 @@
 #'   from fixed parameter values. Can be set globally for the current \R session
 #'   via the \code{"brms.algorithm"} option (see \code{\link{options}}).
 #'   \item \code{backend} Character string naming the package to use as the
-#'   backend for fitting the \pkg{Stan} model. Options are \code{"rstan"} (the
+#'   backend for fitting the \proglang{Stan} model. Options are \code{"rstan"} (the
 #'   default) or \code{"cmdstanr"}. Can be set globally for the current \R
 #'   session via the \code{"brms.backend"} option (see \code{\link{options}}).
 #'   Details on the \pkg{rstan} and \pkg{cmdstanr} packages are available at
@@ -66,7 +66,7 @@
 #'   The execution type is controlled via \code{\link[future]{plan}}
 #'   (see the examples section below).
 #'   \item \code{seed} The seed for random number generation to make results
-#'   reproducible. If \code{NA} (the default), \pkg{Stan} will set the seed
+#'   reproducible. If \code{NA} (the default), \proglang{Stan} will set the seed
 #'   randomly.
 #'   \item \code{refresh} (non-negative integer) The number of iterations
 #'   between printed screen updates. If `refresh = 0`, only error messages
@@ -92,7 +92,7 @@
 #'   \code{c} method or the \code{+} operator.
 #'   See also \code{\link[brms]{get_prior}} for more help.
 #' @param inits Either \code{"random"} or \code{"0"}. If inits is
-#'   \code{"random"} (the default), \pkg{Stan} will randomly generate initial
+#'   \code{"random"} (the default), \proglang{Stan} will randomly generate initial
 #'   values for parameters. If it is \code{"0"}, all parameters are initialized
 #'   to zero. This option is sometimes useful for certain families, as it happens
 #'   that default (\code{"random"}) inits cause samples to be essentially
@@ -102,7 +102,7 @@
 #'   initial values. The latter options are mainly implemented for internal
 #'   testing but are available to users if necessary. If specifying initial
 #'   values using a list or a function then currently the parameter names must
-#'   correspond to the names used in the generated \pkg{Stan} code (not the names
+#'   correspond to the names used in the generated \proglang{Stan} code (not the names
 #'   used in \R). For more details on specifying initial values you can consult
 #'   the documentation of the selected \code{backend}.
 #' @param chains Number of Markov chains (defaults to 4).
@@ -128,7 +128,7 @@
 #'   values. Can be set globally for the current \R session via the
 #'   \code{"brms.algorithm"} option (see \code{\link{options}}).
 #' @param backend Character string naming the package to use as the backend for
-#'   fitting the \pkg{Stan} model. Options are \code{"rstan"} (the default) or
+#'   fitting the \proglang{Stan} model. Options are \code{"rstan"} (the default) or
 #'   \code{"cmdstanr"}. Can be set globally for the current \R session via the
 #'   \code{"brms.backend"} option (see \code{\link{options}}). Details on the
 #'   \pkg{rstan} and \pkg{cmdstanr} packages are available at
@@ -145,7 +145,7 @@
 #'   session via the \code{future} option. The execution type is controlled via
 #'   \code{\link[future]{plan}} (see the examples section below).
 #' @param seed The seed for random number generation to make results
-#'   reproducible. If \code{NA} (the default), \pkg{Stan} will set the seed
+#'   reproducible. If \code{NA} (the default), \proglang{Stan} will set the seed
 #'   randomly.
 #' @param refresh (non-negative integer) The number of iterations between
 #'   printed screen updates. If `refresh = 0`, only error messages will be
@@ -390,11 +390,11 @@ check_args.bayesian <- function(object) {
 #    \code{\link[brms]{brmsformula}} for more details.
 #  @param newdata Optional \code{data.frame} to update the model with
 #    new data. Data-dependent priors will not be updated automatically.
-#  @param recompile Logical, indicating whether the \pkg{Stan} model
+#  @param recompile Logical, indicating whether the \proglang{Stan} model
 #    should be recompiled from the stored or updated \code{C++} code.
 #    If \code{NULL} (the default), \code{\link[brms]{update.brmsfit}}
 #    will try to figure out internally, if recompilation is necessary.
-#    Setting it to \code{FALSE} will cause all \pkg{Stan} code changing
+#    Setting it to \code{FALSE} will cause all \proglang{Stan} code changing
 #    arguments to be ignored.
 #  @param ... Other arguments passed to \code{\link[brms]{brm}}.
 #'
