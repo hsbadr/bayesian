@@ -6,6 +6,7 @@
 - Added `threads` argument to model specification
 - Fixed NOTE: Undeclared packages `rstan`, `future` in Rd xrefs
 - Replaced \pkg{Stan} with \proglang{Stan}
+- Support updating more `brms::brm` arguments in model specification
 - Updated documentation
 - Updated WORDLIST
 - Minor code cleanup
