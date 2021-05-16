@@ -16,12 +16,17 @@ Provide a clear and concise description of the problem including warning and err
 
 ### Reproduction
 Provide a clean R script demonstrating the issue with the necessary data files.
+Please include a minimal reproducible example (AKA a reprex). If you've never
+heard of a [reprex](http://reprex.tidyverse.org/) before,
+start by reading <https://www.tidyverse.org/help/#reprex>.
 
 ### Environment
 Provide the following information:
- - **OS Type:** [Linux, Mac, Windows]
- - **OS Version:** [e.g., macOS 10.15.7, Windows 10, or Ubuntu 20.04]
- - **R Version:** [e.g., 4.0.3]
- - **Version:** [e.g. 0.0.1 or development]
- - **Source:** [binary or source code]
- - **Repository:** [CRAN, Bioconductor, GitHub, or Other]
+
+ - **OS Type:** [e.g., Linux, macOS, Windows]
+ - **OS Version:** [e.g., macOS 11.3, Windows 10, or Ubuntu 20.04]
+ - **R Version:** [e.g., 4.0, 4.1, or 4.2]
+ - **Stan Backend:** [e.g., `rstan` or `cmdstanr`]
+ - **Version:** [e.g., 0.0.3 or development]
+ - **Source:** [e.g., binary or source code]
+ - **Repository:** [e.g., CRAN, Bioconductor, GitHub, or Other]

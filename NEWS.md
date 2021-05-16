@@ -10,7 +10,7 @@
 - Switched to engine-specific defaults
 - Fixed NOTE: Undeclared packages `rstan`, `future` in Rd xrefs
 - Support updating more `brms::brm` arguments in model specification
-- Updated documentation
+- Updated documentation and vignettes
 - Updated WORDLIST
 - Minor code cleanup
 
