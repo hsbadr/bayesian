@@ -1,8 +1,12 @@
 # bayesian 0.0.4
 
 - Added `rstan` & `future` to suggested packages
+- Added `formula.override` argument to model specification
+- Added `family` argument to model specification
+- Added `threads` argument to model specification
 - Fixed NOTE: Undeclared packages `rstan`, `future` in Rd xrefs
 - Replaced \pkg{Stan} with \proglang{Stan}
+- Updated documentation
 - Updated WORDLIST
 - Minor code cleanup
 
