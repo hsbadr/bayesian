@@ -4,6 +4,7 @@
 - Added `formula.override` argument to model specification
 - Added `family` argument to model specification
 - Added `threads` argument to model specification
+- Switched to engine-specific defaults
 - Fixed NOTE: Undeclared packages `rstan`, `future` in Rd xrefs
 - Replaced \pkg{Stan} with \proglang{Stan}
 - Support updating more `brms::brm` arguments in model specification
