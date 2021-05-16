@@ -45,10 +45,9 @@ normalized the `Age` and `Base` predictors to facilitate model fitting later
 on. In the next step, we use `bayesian` to set up a basic model structure.
 
 ```{r}
-epi_model <- bayesian() %>%
+epi_model <- bayesian(family = poisson()) %>%
   set_engine("brms") %>%
-  set_mode("regression") %>%
-  update(family = poisson())
+  set_mode("regression")
 ```
 
 ```{r}
@@ -57,9 +56,17 @@ print(epi_model)
 
 The `bayesian` function is the main function of the package to initialize a
 Bayesian model. We can set up a lot of the information directly within the
-function or update the information later on, as done here. Next, we
-define a workflow via the `workflows` package, by combining the above defined
-data processing recipe and the model plus the actual model formula to be
+function or update the information later on, via the `update` method. For
+example, if we didn't specify the family initially or set it to something else
+that we now wanted to change, we could write:
+
+````{r}
+epi_model <- epi_model %>%
+  update(family = poisson())
+```
+
+Next, we define a workflow via the `workflows` package, by combining the above
+defined data processing recipe and the model plus the actual model formula to be
 passed to the `brms` engine.
 
 ```{r}
