@@ -42,85 +42,7 @@
 <meta property="og:title" content="General Interface for Bayesian TidyModels — bayesian" />
 <meta property="og:description" content="bayesian() is a way to generate a specification of a model
 before fitting and allows the model to be created using
-Stan via brms package in R. The main
-arguments for the model are:
-prior One or more brmsprior objects created by
-set_prior or related functions and combined using
-the c method or the + operator. See also
-get_prior for more help.
-inits Either &quot;random&quot; or &quot;0&quot;. If inits is
-&quot;random&quot; (the default), Stan will randomly generate initial
-values for parameters. If it is &quot;0&quot;, all parameters are initialized
-to zero. This option is sometimes useful for certain families, as it happens
-that default (&quot;random&quot;) inits cause samples to be essentially
-constant. Generally, setting inits = &quot;0&quot; is worth a try, if chains
-do not behave well. Alternatively, inits can be a list of lists
-containing the initial values, or a function (or function name) generating
-initial values. The latter options are mainly implemented for internal
-testing but are available to users if necessary. If specifying initial
-values using a list or a function then currently the parameter names must
-correspond to the names used in the generated Stan code (not the names
-used in R). For more details on specifying initial values you can consult
-the documentation of the selected backend.
-chains Number of Markov chains (defaults to 4).
-iter Number of total iterations per chain (including warmup;
-defaults to 2000).
-warmup A positive integer specifying number of warmup
-(aka burnin) iterations. This also specifies the number of iterations
-used for stepsize adaptation, so warmup samples should not be used for
-inference. The number of warmup should not be larger than iter
-and the default is iter/2.
-thin Thinning rate. Must be a positive integer. Set
-thin &amp;gt; 1 to save memory and computation time if iter is
-large.
-cores Number of cores to use when executing the chains in
-parallel, which defaults to 1 but we recommend setting the mc.cores
-option to be as many processors as the hardware and RAM allow (up to the
-number of chains). For non-Windows OS in non-interactive R sessions,
-forking is used instead of PSOCK clusters.
-algorithm Character string naming the estimation approach
-to use. Options are &quot;sampling&quot; for MCMC (the default),
-&quot;meanfield&quot; for variational inference with independent normal
-distributions, &quot;fullrank&quot; for variational inference with
-a multivariate normal distribution, or &quot;fixed_param&quot; for sampling
-from fixed parameter values. Can be set globally for the current R session
-via the &quot;brms.algorithm&quot; option (see options).
-backend Character string naming the package to use as the
-backend for fitting the Stan model. Options are &quot;rstan&quot; (the
-default) or &quot;cmdstanr&quot;. Can be set globally for the current R
-session via the &quot;brms.backend&quot; option (see options).
-Details on the rstan and cmdstanr packages are available at
-https://mc-stan.org/rstan/ and https://mc-stan.org/cmdstanr/,
-respectively.
-control A named list of parameters to control the
-sampler's behavior. It defaults to NULL so all the default values
-are used.
-The most important control parameters are discussed in the 'Details'
-section below. For a comprehensive overview see
-stan.
-future Logical; If TRUE, the
-future package is used for parallel execution of
-the chains and argument cores will be ignored. Can be set
-globally for the current R session via the future option.
-The execution type is controlled via plan
-(see the examples section below).
-seed The seed for random number generation to make results
-reproducible. If NA (the default), Stan will set the seed
-randomly.
-refresh (non-negative integer) The number of iterations
-between printed screen updates. If refresh = 0, only error messages
-will be printed.
-silent Logical; If TRUE (the default), most of the
-informational messages of compiler and sampler are suppressed. The actual
-sampling progress is still printed. Set refresh = 0 to turn this off
-as well. If using backend = &quot;rstan&quot; you can also set
-open_progress = FALSE to prevent opening additional progress bars.
-These arguments are converted to their specific names at the
-time that the model is fit. Other options and argument can be
-set using set_engine(). If left to their defaults
-here (NULL), the values are taken from the underlying model
-functions. If parameters need to be modified, update() can be used
-in lieu of recreating the object from scratch." />
+Stan via brms package in R." />
 
 
 
@@ -211,89 +133,13 @@ in lieu of recreating the object from scratch." />
     <div class="ref-description">
     <p><code>bayesian()</code> is a way to generate a <em>specification</em> of a model
 before fitting and allows the model to be created using
-<span class="pkg">Stan</span> via <span class="pkg">brms</span> package in R. The main
-arguments for the model are:</p><ul>
-<li><p><code>prior</code> One or more <code>brmsprior</code> objects created by
-<code><a href='https://rdrr.io/pkg/brms/man/set_prior.html'>set_prior</a></code> or related functions and combined using
-the <code>c</code> method or the <code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code> operator. See also
-<code><a href='https://rdrr.io/pkg/brms/man/get_prior.html'>get_prior</a></code> for more help.</p></li>
-<li><p><code>inits</code> Either <code>"random"</code> or <code>"0"</code>. If inits is
-<code>"random"</code> (the default), <span class="pkg">Stan</span> will randomly generate initial
-values for parameters. If it is <code>"0"</code>, all parameters are initialized
-to zero. This option is sometimes useful for certain families, as it happens
-that default (<code>"random"</code>) inits cause samples to be essentially
-constant. Generally, setting <code>inits = "0"</code> is worth a try, if chains
-do not behave well. Alternatively, <code>inits</code> can be a list of lists
-containing the initial values, or a function (or function name) generating
-initial values. The latter options are mainly implemented for internal
-testing but are available to users if necessary. If specifying initial
-values using a list or a function then currently the parameter names must
-correspond to the names used in the generated <span class="pkg">Stan</span> code (not the names
-used in <span style="R">R</span>). For more details on specifying initial values you can consult
-the documentation of the selected <code>backend</code>.</p></li>
-<li><p><code>chains</code> Number of Markov chains (defaults to 4).</p></li>
-<li><p><code>iter</code> Number of total iterations per chain (including warmup;
-defaults to 2000).</p></li>
-<li><p><code>warmup</code> A positive integer specifying number of warmup
-(aka burnin) iterations. This also specifies the number of iterations
-used for stepsize adaptation, so warmup samples should not be used for
-inference. The number of warmup should not be larger than <code>iter</code>
-and the default is <code>iter/2</code>.</p></li>
-<li><p><code>thin</code> Thinning rate. Must be a positive integer. Set
-<code>thin &gt; 1</code> to save memory and computation time if <code>iter</code> is
-large.</p></li>
-<li><p><code>cores</code> Number of cores to use when executing the chains in
-parallel, which defaults to 1 but we recommend setting the <code>mc.cores</code>
-option to be as many processors as the hardware and RAM allow (up to the
-number of chains). For non-Windows OS in non-interactive <span style="R">R</span> sessions,
-forking is used instead of PSOCK clusters.</p></li>
-<li><p><code>algorithm</code> Character string naming the estimation approach
-to use. Options are <code>"sampling"</code> for MCMC (the default),
-<code>"meanfield"</code> for variational inference with independent normal
-distributions, <code>"fullrank"</code> for variational inference with
-a multivariate normal distribution, or <code>"fixed_param"</code> for sampling
-from fixed parameter values. Can be set globally for the current <span style="R">R</span> session
-via the <code>"brms.algorithm"</code> option (see <code><a href='https://rdrr.io/r/base/options.html'>options</a></code>).</p></li>
-<li><p><code>backend</code> Character string naming the package to use as the
-backend for fitting the <span class="pkg">Stan</span> model. Options are <code>"rstan"</code> (the
-default) or <code>"cmdstanr"</code>. Can be set globally for the current <span style="R">R</span>
-session via the <code>"brms.backend"</code> option (see <code><a href='https://rdrr.io/r/base/options.html'>options</a></code>).
-Details on the <span class="pkg">rstan</span> and <span class="pkg">cmdstanr</span> packages are available at
-<a href='https://mc-stan.org/rstan/'>https://mc-stan.org/rstan/</a> and <a href='https://mc-stan.org/cmdstanr/'>https://mc-stan.org/cmdstanr/</a>,
-respectively.</p></li>
-<li><p><code>control</code> A named <code>list</code> of parameters to control the
-sampler's behavior. It defaults to <code>NULL</code> so all the default values
-are used.
-The most important control parameters are discussed in the 'Details'
-section below. For a comprehensive overview see
-<code><a href='https://mc-stan.org/rstan/reference/stan.html'>stan</a></code>.</p></li>
-<li><p><code>future</code> Logical; If <code>TRUE</code>, the
-<span class="pkg"><a href='https://rdrr.io/pkg/future/man/future.html'>future</a></span> package is used for parallel execution of
-the chains and argument <code>cores</code> will be ignored. Can be set
-globally for the current <span style="R">R</span> session via the <code>future</code> option.
-The execution type is controlled via <code><a href='https://rdrr.io/pkg/future/man/plan.html'>plan</a></code>
-(see the examples section below).</p></li>
-<li><p><code>seed</code> The seed for random number generation to make results
-reproducible. If <code>NA</code> (the default), <span class="pkg">Stan</span> will set the seed
-randomly.</p></li>
-<li><p><code>refresh</code> (non-negative integer) The number of iterations
-between printed screen updates. If <code>refresh = 0</code>, only error messages
-will be printed.</p></li>
-<li><p><code>silent</code> Logical; If <code>TRUE</code> (the default), most of the
-informational messages of compiler and sampler are suppressed. The actual
-sampling progress is still printed. Set <code>refresh = 0</code> to turn this off
-as well. If using <code>backend = "rstan"</code> you can also set
-<code>open_progress = FALSE</code> to prevent opening additional progress bars.</p></li>
-</ul><p>These arguments are converted to their specific names at the
-time that the model is fit. Other options and argument can be
-set using <code>set_engine()</code>. If left to their defaults
-here (<code>NULL</code>), the values are taken from the underlying model
-functions. If parameters need to be modified, <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code> can be used
-in lieu of recreating the object from scratch.</p>
+Stan via <span class="pkg">brms</span> package in R.</p>
     </div>
 
     <pre class="usage"><span class='fu'>bayesian</span><span class='op'>(</span>
   mode <span class='op'>=</span> <span class='st'>"regression"</span>,
+  formula.override <span class='op'>=</span> <span class='cn'>NULL</span>,
+  family <span class='op'>=</span> <span class='cn'>NULL</span>,
   prior <span class='op'>=</span> <span class='cn'>NULL</span>,
   inits <span class='op'>=</span> <span class='cn'>NULL</span>,
   chains <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -301,12 +147,12 @@ in lieu of recreating the object from scratch.</p>
   warmup <span class='op'>=</span> <span class='cn'>NULL</span>,
   thin <span class='op'>=</span> <span class='cn'>NULL</span>,
   cores <span class='op'>=</span> <span class='cn'>NULL</span>,
+  threads <span class='op'>=</span> <span class='cn'>NULL</span>,
   algorithm <span class='op'>=</span> <span class='cn'>NULL</span>,
   backend <span class='op'>=</span> <span class='cn'>NULL</span>,
   control <span class='op'>=</span> <span class='cn'>NULL</span>,
   future <span class='op'>=</span> <span class='cn'>NULL</span>,
   seed <span class='op'>=</span> <span class='cn'>NULL</span>,
-  refresh <span class='op'>=</span> <span class='cn'>NULL</span>,
   silent <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span>
 
@@ -314,6 +160,8 @@ in lieu of recreating the object from scratch.</p>
 <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span>
   <span class='va'>object</span>,
   parameters <span class='op'>=</span> <span class='cn'>NULL</span>,
+  formula.override <span class='op'>=</span> <span class='cn'>NULL</span>,
+  family <span class='op'>=</span> <span class='cn'>NULL</span>,
   prior <span class='op'>=</span> <span class='cn'>NULL</span>,
   inits <span class='op'>=</span> <span class='cn'>NULL</span>,
   chains <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -321,12 +169,12 @@ in lieu of recreating the object from scratch.</p>
   warmup <span class='op'>=</span> <span class='cn'>NULL</span>,
   thin <span class='op'>=</span> <span class='cn'>NULL</span>,
   cores <span class='op'>=</span> <span class='cn'>NULL</span>,
+  threads <span class='op'>=</span> <span class='cn'>NULL</span>,
   algorithm <span class='op'>=</span> <span class='cn'>NULL</span>,
   backend <span class='op'>=</span> <span class='cn'>NULL</span>,
   control <span class='op'>=</span> <span class='cn'>NULL</span>,
   future <span class='op'>=</span> <span class='cn'>NULL</span>,
   seed <span class='op'>=</span> <span class='cn'>NULL</span>,
-  refresh <span class='op'>=</span> <span class='cn'>NULL</span>,
   silent <span class='op'>=</span> <span class='cn'>NULL</span>,
   fresh <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
@@ -356,27 +204,43 @@ Possible values for this model are "unknown", "regression", or
 "classification".</p></td>
     </tr>
     <tr>
+      <th>formula.override</th>
+      <td><p>Overrides the formula; for details see
+<code><a href='https://rdrr.io/pkg/brms/man/brmsformula.html'>brmsformula</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>family</th>
+      <td><p>A description of the response distribution and link function to
+be used in the model. This can be a family function, a call to a family
+function or a character string naming the family. Every family function has
+a <code>link</code> argument allowing to specify the link function to be applied
+on the response variable. If not specified, default links are used. For
+details of supported families see <code><a href='https://rdrr.io/pkg/brms/man/brmsfamily.html'>brmsfamily</a></code>. By default, a
+linear <code>gaussian</code> model is applied. In multivariate models,
+<code>family</code> might also be a list of families.</p></td>
+    </tr>
+    <tr>
       <th>prior</th>
       <td><p>One or more <code>brmsprior</code> objects created by
 <code><a href='https://rdrr.io/pkg/brms/man/set_prior.html'>set_prior</a></code> or related functions and combined using the
-<code>c</code> method or the <code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code> operator.
-See also <code><a href='https://rdrr.io/pkg/brms/man/get_prior.html'>get_prior</a></code> for more help.</p></td>
+<code>c</code> method or the <code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code> operator. See also  <code><a href='https://rdrr.io/pkg/brms/man/get_prior.html'>get_prior</a></code>
+for more help.</p></td>
     </tr>
     <tr>
       <th>inits</th>
       <td><p>Either <code>"random"</code> or <code>"0"</code>. If inits is
-<code>"random"</code> (the default), <span class="pkg">Stan</span> will randomly generate initial
-values for parameters. If it is <code>"0"</code>, all parameters are initialized
-to zero. This option is sometimes useful for certain families, as it happens
+<code>"random"</code> (the default), Stan will randomly generate initial values
+for parameters. If it is <code>"0"</code>, all parameters are initialized to
+zero. This option is sometimes useful for certain families, as it happens
 that default (<code>"random"</code>) inits cause samples to be essentially
 constant. Generally, setting <code>inits = "0"</code> is worth a try, if chains
 do not behave well. Alternatively, <code>inits</code> can be a list of lists
 containing the initial values, or a function (or function name) generating
 initial values. The latter options are mainly implemented for internal
-testing but are available to users if necessary. If specifying initial
+testing but are available to users if necessary. If specifying initial 
 values using a list or a function then currently the parameter names must
-correspond to the names used in the generated <span class="pkg">Stan</span> code (not the names
-used in <span style="R">R</span>). For more details on specifying initial values you can consult
+correspond to the names used in the generated Stan code (not the names
+used in <span style="R">R</span>). For more details on specifying initial values you can consult 
 the documentation of the selected <code>backend</code>.</p></td>
     </tr>
     <tr>
@@ -410,10 +274,19 @@ chains). For non-Windows OS in non-interactive <span style="R">R</span> sessions
 instead of PSOCK clusters.</p></td>
     </tr>
     <tr>
+      <th>threads</th>
+      <td><p>Number of threads to use in within-chain parallelization. For
+more control over the threading process, <code>threads</code> may also be a
+<code>brmsthreads</code> object created by <code><a href='https://rdrr.io/pkg/brms/man/threading.html'>threading</a></code>. Within-chain
+parallelization is experimental! We recommend its use only if you are
+experienced with Stan's <code>reduce_sum</code> function and have a slow running
+model that cannot be sped up by any other means.</p></td>
+    </tr>
+    <tr>
       <th>algorithm</th>
       <td><p>Character string naming the estimation approach to use.
-Options are <code>"sampling"</code> for MCMC (the default), <code>"meanfield"</code>
-for variational inference with independent normal distributions,
+Options are <code>"sampling"</code> for MCMC (the default), <code>"meanfield"</code> for
+variational inference with independent normal distributions,
 <code>"fullrank"</code> for variational inference with a multivariate normal
 distribution, or <code>"fixed_param"</code> for sampling from fixed parameter
 values. Can be set globally for the current <span style="R">R</span> session via the
@@ -422,7 +295,7 @@ values. Can be set globally for the current <span style="R">R</span> session via
     <tr>
       <th>backend</th>
       <td><p>Character string naming the package to use as the backend for
-fitting the <span class="pkg">Stan</span> model. Options are <code>"rstan"</code> (the default) or
+fitting the Stan model. Options are <code>"rstan"</code> (the default) or
 <code>"cmdstanr"</code>. Can be set globally for the current <span style="R">R</span> session via the
 <code>"brms.backend"</code> option (see <code><a href='https://rdrr.io/r/base/options.html'>options</a></code>). Details on the
 <span class="pkg">rstan</span> and <span class="pkg">cmdstanr</span> packages are available at
@@ -452,15 +325,11 @@ reproducible. If <code>NA</code> (the default), <span class="pkg">Stan</span> wi
 randomly.</p></td>
     </tr>
     <tr>
-      <th>refresh</th>
-      <td><p>(non-negative integer) The number of iterations between
-printed screen updates. If <code>refresh = 0</code>, only error messages will be
-printed.</p></td>
-    </tr>
-    <tr>
       <th>silent</th>
-      <td><p>Logical; If <code>TRUE</code> (the default), most of the
-informational messages of compiler and sampler are suppressed. The actual
+      <td><p>Verbosity level between <code>0</code> and <code>2</code>.
+If <code>1</code> (the default), most of the
+informational messages of compiler and sampler are suppressed.
+If <code>2</code>, even more messages are suppressed. The actual
 sampling progress is still printed. Set <code>refresh = 0</code> to turn this off
 as well. If using <code>backend = "rstan"</code> you can also set
 <code>open_progress = FALSE</code> to prevent opening additional progress bars.</p></td>
@@ -499,17 +368,6 @@ fitted. The details of model specification are explained in
 to that class) containing data of all variables used in the model.</p></td>
     </tr>
     <tr>
-      <th>family</th>
-      <td><p>A description of the response distribution and link function to
-be used in the model. This can be a family function, a call to a family
-function or a character string naming the family. Every family function has
-a <code>link</code> argument allowing to specify the link function to be applied
-on the response variable. If not specified, default links are used. For
-details of supported families see <code><a href='https://rdrr.io/pkg/brms/man/brmsfamily.html'>brmsfamily</a></code>. By default, a
-linear <code>gaussian</code> model is applied. In multivariate models,
-<code>family</code> might also be a list of families.</p></td>
-    </tr>
-    <tr>
       <th>file</th>
       <td><p>A character string of the file path to <code>brmsfit</code> object
 saved via <code><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS</a></code>.</p></td>
@@ -521,7 +379,13 @@ saved via <code><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS</a></code>
     <p>An updated model specification.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The data given to the function are not saved and are only used
+    <p>The arguments are converted to their specific names at the
+time that the model is fit. Other options and argument can be
+set using <code>set_engine()</code>. If left to their defaults
+here (<code>NULL</code>), the values are taken from the underlying model
+functions. If parameters need to be modified, <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code> can be
+used in lieu of recreating the object from scratch.</p>
+<p>The data given to the function are not saved and are only used
 to determine the <em>mode</em> of the model. For <code>bayesian()</code>, the
 possible modes are "regression" and "classification".</p>
 <p>The model can be created by the <code>fit()</code> function using the
