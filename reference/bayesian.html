@@ -154,6 +154,7 @@ Stan via <span class="pkg">brms</span> package in R.</p>
   threads <span class='op'>=</span> <span class='cn'>NULL</span>,
   algorithm <span class='op'>=</span> <span class='cn'>NULL</span>,
   backend <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stan_args <span class='op'>=</span> <span class='cn'>NULL</span>,
   control <span class='op'>=</span> <span class='cn'>NULL</span>,
   save_pars <span class='op'>=</span> <span class='cn'>NULL</span>,
   save_model <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -185,6 +186,7 @@ Stan via <span class="pkg">brms</span> package in R.</p>
   threads <span class='op'>=</span> <span class='cn'>NULL</span>,
   algorithm <span class='op'>=</span> <span class='cn'>NULL</span>,
   backend <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stan_args <span class='op'>=</span> <span class='cn'>NULL</span>,
   control <span class='op'>=</span> <span class='cn'>NULL</span>,
   save_pars <span class='op'>=</span> <span class='cn'>NULL</span>,
   save_model <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -356,6 +358,10 @@ fitting the Stan model. Options are <code>"rstan"</code> (the default) or
 <span class="pkg">rstan</span> and <span class="pkg">cmdstanr</span> packages are available at
 <a href='https://mc-stan.org/rstan/'>https://mc-stan.org/rstan/</a> and <a href='https://mc-stan.org/cmdstanr/'>https://mc-stan.org/cmdstanr/</a>,
 respectively.</p></td>
+    </tr>
+    <tr>
+      <th>stan_args</th>
+      <td><p>A list of extra arguments to Stan.</p></td>
     </tr>
     <tr>
       <th>control</th>
