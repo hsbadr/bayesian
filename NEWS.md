@@ -1,5 +1,6 @@
 # bayesian 0.0.4
 
+- Added GettingStarted vignette
 - Added `rstan` & `future` to suggested packages
 - Added `formula.override` argument to model specification
 - Added `family` argument to model specification
