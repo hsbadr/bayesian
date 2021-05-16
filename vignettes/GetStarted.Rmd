@@ -32,6 +32,7 @@ epi_recipe <- epilepsy %>%
   recipe() %>%
   update_role(count, new_role = "outcome") %>%
   update_role(Trt, Age, Base, patient, new_role = "predictor") %>%
+  add_role(patient, new_role = "group") %>%
   step_normalize(Age, Base)
 ```
 
