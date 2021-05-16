@@ -30,6 +30,7 @@ bayesian(
   threads = NULL,
   algorithm = NULL,
   backend = NULL,
+  stan_args = NULL,
   control = NULL,
   save_pars = NULL,
   save_model = NULL,
@@ -60,6 +61,7 @@ bayesian(
   threads = NULL,
   algorithm = NULL,
   backend = NULL,
+  stan_args = NULL,
   control = NULL,
   save_pars = NULL,
   save_model = NULL,
@@ -195,6 +197,8 @@ fitting the Stan model. Options are \code{"rstan"} (the default) or
 \pkg{rstan} and \pkg{cmdstanr} packages are available at
 \url{https://mc-stan.org/rstan/} and \url{https://mc-stan.org/cmdstanr/},
 respectively.}
+
+\item{stan_args}{A list of extra arguments to \proglang{Stan}.}
 
 \item{control}{A named \code{list} of parameters to control the sampler's
 behavior. It defaults to \code{NULL} so all the default values are used.

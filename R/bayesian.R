@@ -20,6 +20,8 @@
 #'
 #' @inheritParams brms::brm
 #'
+#' @param stan_args A list of extra arguments to \proglang{Stan}.
+#'
 #' @details
 #' The data given to the function are not saved and are only used
 #'  to determine the _mode_ of the model. For `bayesian()`, the
@@ -80,6 +82,7 @@ bayesian <-
            threads = NULL,
            algorithm = NULL,
            backend = NULL,
+           stan_args = NULL,
            control = NULL,
            save_pars = NULL,
            save_model = NULL,
@@ -106,6 +109,7 @@ bayesian <-
       threads = rlang::enquo(threads),
       algorithm = rlang::enquo(algorithm),
       backend = rlang::enquo(backend),
+      stan_args = rlang::enquo(stan_args),
       control = rlang::enquo(control),
       save_pars = rlang::enquo(save_pars),
       save_model = rlang::enquo(save_model),
@@ -193,6 +197,7 @@ update.bayesian <-
            threads = NULL,
            algorithm = NULL,
            backend = NULL,
+           stan_args = NULL,
            control = NULL,
            save_pars = NULL,
            save_model = NULL,
@@ -227,6 +232,7 @@ update.bayesian <-
       threads = rlang::enquo(threads),
       algorithm = rlang::enquo(algorithm),
       backend = rlang::enquo(backend),
+      stan_args = rlang::enquo(stan_args),
       control = rlang::enquo(control),
       save_pars = rlang::enquo(save_pars),
       save_model = rlang::enquo(save_model),
@@ -328,6 +334,7 @@ check_args.bayesian <- function(object) {
 bayesian_fit <- function(formula, data, ...) {
   dots <- list(...)
 
+  # Override the formula, if needed
   if (inherits(
     dots$formula.override,
     c("brmsformula", "formula")
@@ -343,6 +350,11 @@ bayesian_fit <- function(formula, data, ...) {
   }
   dots$formula.override <- NULL
 
+  # Pass extra arguments to Stan
+  dots <- append(dots, dots$stan_args)
+  dots$stan_args <- NULL
+
+  # Fit or update the model
   if (brms::is.brmsfit(dots$fit)) {
     dots$object <- dots$fit
     dots$fit <- NULL
