@@ -141,6 +141,10 @@ Stan via <span class="pkg">brms</span> package in R.</p>
   formula.override <span class='op'>=</span> <span class='cn'>NULL</span>,
   family <span class='op'>=</span> <span class='cn'>NULL</span>,
   prior <span class='op'>=</span> <span class='cn'>NULL</span>,
+  sample_prior <span class='op'>=</span> <span class='cn'>NULL</span>,
+  knots <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stanvars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fit <span class='op'>=</span> <span class='cn'>NULL</span>,
   inits <span class='op'>=</span> <span class='cn'>NULL</span>,
   chains <span class='op'>=</span> <span class='cn'>NULL</span>,
   iter <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -151,6 +155,11 @@ Stan via <span class="pkg">brms</span> package in R.</p>
   algorithm <span class='op'>=</span> <span class='cn'>NULL</span>,
   backend <span class='op'>=</span> <span class='cn'>NULL</span>,
   control <span class='op'>=</span> <span class='cn'>NULL</span>,
+  save_pars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  save_model <span class='op'>=</span> <span class='cn'>NULL</span>,
+  file <span class='op'>=</span> <span class='cn'>NULL</span>,
+  file_refit <span class='op'>=</span> <span class='cn'>NULL</span>,
+  normalize <span class='op'>=</span> <span class='cn'>NULL</span>,
   future <span class='op'>=</span> <span class='cn'>NULL</span>,
   seed <span class='op'>=</span> <span class='cn'>NULL</span>,
   silent <span class='op'>=</span> <span class='cn'>NULL</span>
@@ -163,6 +172,10 @@ Stan via <span class="pkg">brms</span> package in R.</p>
   formula.override <span class='op'>=</span> <span class='cn'>NULL</span>,
   family <span class='op'>=</span> <span class='cn'>NULL</span>,
   prior <span class='op'>=</span> <span class='cn'>NULL</span>,
+  sample_prior <span class='op'>=</span> <span class='cn'>NULL</span>,
+  knots <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stanvars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fit <span class='op'>=</span> <span class='cn'>NULL</span>,
   inits <span class='op'>=</span> <span class='cn'>NULL</span>,
   chains <span class='op'>=</span> <span class='cn'>NULL</span>,
   iter <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -173,6 +186,11 @@ Stan via <span class="pkg">brms</span> package in R.</p>
   algorithm <span class='op'>=</span> <span class='cn'>NULL</span>,
   backend <span class='op'>=</span> <span class='cn'>NULL</span>,
   control <span class='op'>=</span> <span class='cn'>NULL</span>,
+  save_pars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  save_model <span class='op'>=</span> <span class='cn'>NULL</span>,
+  file <span class='op'>=</span> <span class='cn'>NULL</span>,
+  file_refit <span class='op'>=</span> <span class='cn'>NULL</span>,
+  normalize <span class='op'>=</span> <span class='cn'>NULL</span>,
   future <span class='op'>=</span> <span class='cn'>NULL</span>,
   seed <span class='op'>=</span> <span class='cn'>NULL</span>,
   silent <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -225,6 +243,43 @@ linear <code>gaussian</code> model is applied. In multivariate models,
 <code><a href='https://rdrr.io/pkg/brms/man/set_prior.html'>set_prior</a></code> or related functions and combined using the
 <code>c</code> method or the <code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code> operator. See also  <code><a href='https://rdrr.io/pkg/brms/man/get_prior.html'>get_prior</a></code>
 for more help.</p></td>
+    </tr>
+    <tr>
+      <th>sample_prior</th>
+      <td><p>Indicate if samples from priors should be drawn
+additionally to the posterior samples. Options are <code>"no"</code> (the
+default), <code>"yes"</code>, and <code>"only"</code>. Among others, these samples can
+be used to calculate Bayes factors for point hypotheses via
+<code><a href='https://rdrr.io/pkg/brms/man/hypothesis.brmsfit.html'>hypothesis</a></code>. Please note that improper priors are not sampled,
+including the default improper priors used by <code>brm</code>. See
+<code><a href='https://rdrr.io/pkg/brms/man/set_prior.html'>set_prior</a></code> on how to set (proper) priors. Please also note
+that prior samples for the overall intercept are not obtained by default
+for technical reasons. See <code><a href='https://rdrr.io/pkg/brms/man/brmsformula.html'>brmsformula</a></code> how to obtain prior
+samples for the intercept. If <code>sample_prior</code> is set to <code>"only"</code>,
+samples are drawn solely from the priors ignoring the likelihood, which
+allows among others to generate samples from the prior predictive
+distribution. In this case, all parameters must have proper priors.</p></td>
+    </tr>
+    <tr>
+      <th>knots</th>
+      <td><p>Optional list containing user specified knot values to be used
+for basis construction of smoothing terms. See
+<code><a href='https://rdrr.io/pkg/mgcv/man/gamm.html'>gamm</a></code> for more details.</p></td>
+    </tr>
+    <tr>
+      <th>stanvars</th>
+      <td><p>An optional <code>stanvars</code> object generated by function
+<code><a href='https://rdrr.io/pkg/brms/man/stanvar.html'>stanvar</a></code> to define additional variables for use in
+<span class="pkg">Stan</span>'s program blocks.</p></td>
+    </tr>
+    <tr>
+      <th>fit</th>
+      <td><p>An instance of S3 class <code>brmsfit</code> derived from a previous
+fit; defaults to <code>NA</code>. If <code>fit</code> is of class <code>brmsfit</code>, the
+compiled model associated with the fitted result is re-used and all
+arguments modifying the model code or data are ignored. It is not
+recommended to use this argument directly, but to call the
+<code><a href='https://rdrr.io/pkg/brms/man/update.brmsfit.html'>update</a></code> method, instead.</p></td>
     </tr>
     <tr>
       <th>inits</th>
@@ -311,6 +366,48 @@ section below. For a comprehensive overview see
 <code><a href='https://mc-stan.org/rstan/reference/stan.html'>stan</a></code>.</p></td>
     </tr>
     <tr>
+      <th>save_pars</th>
+      <td><p>An object generated by <code><a href='https://rdrr.io/pkg/brms/man/save_pars.html'>save_pars</a></code> controlling
+which parameters should be saved in the model. The argument has no
+impact on the model fitting itself.</p></td>
+    </tr>
+    <tr>
+      <th>save_model</th>
+      <td><p>Either <code>NULL</code> or a character string. In the latter
+case, the model's Stan code is saved via <code><a href='https://rdrr.io/r/base/cat.html'>cat</a></code> in a text file
+named after the string supplied in <code>save_model</code>.</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>A character string of the file path to <code>brmsfit</code> object
+saved via <code><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>file_refit</th>
+      <td><p>Modifies when the fit stored via the <code>file</code> parameter
+is re-used. For <code>"never"</code> (default) the fit is always loaded if it
+exists and fitting is skipped. If set to <code>"on_change"</code>, brms will
+refit the model if model, data or algorithm as passed to Stan differ from
+what is stored in the file. This also covers changes in priors,
+<code>sample_prior</code>, <code>stanvars</code>, covariance structure, etc. If you
+believe there was a false positive, you can use
+<code><a href='https://rdrr.io/pkg/brms/man/brmsfit_needs_refit.html'>brmsfit_needs_refit</a></code> to see why refit is deemed necessary.
+Refit will not be triggered for changes in additional parameters of the fit
+(e.g., initial values, number of iterations, control arguments, ...). A
+known limitation is that a refit will be triggered if within-chain
+parallelization is switched on/off.</p></td>
+    </tr>
+    <tr>
+      <th>normalize</th>
+      <td><p>Logical. Indicates whether normalization constants should
+be included in the Stan code (defaults to <code>TRUE</code>). Setting it
+to <code>FALSE</code> requires Stan version &gt;= 2.25 to work. If <code>FALSE</code>,
+sampling efficiency may be increased but some post processing functions
+such as <code><a href='https://rdrr.io/pkg/brms/man/bridge_sampler.brmsfit.html'>bridge_sampler</a></code> will not be available. Can be 
+controlled globally for the current <span style="R">R</span> session via the `brms.normalize`
+option.</p></td>
+    </tr>
+    <tr>
       <th>future</th>
       <td><p>Logical; If <code>TRUE</code>, the <span class="pkg"><a href='https://rdrr.io/pkg/future/man/future.html'>future</a></span>
 package is used for parallel execution of the chains and argument
@@ -366,11 +463,6 @@ fitted. The details of model specification are explained in
       <th>data</th>
       <td><p>An object of class <code>data.frame</code> (or one that can be coerced
 to that class) containing data of all variables used in the model.</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p>A character string of the file path to <code>brmsfit</code> object
-saved via <code><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS</a></code>.</p></td>
     </tr>
     </table>
 
