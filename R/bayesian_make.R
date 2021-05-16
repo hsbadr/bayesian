@@ -27,13 +27,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
         interface = "formula",
         protect = c("formula", "data"),
         func = c(pkg = "bayesian", fun = "bayesian_fit"),
-        defaults = list(
-          family = if (mode == "classification") {
-            rlang::expr(brms::brmsfamily("binomial"))
-          } else {
-            rlang::expr(brms::brmsfamily("gaussian"))
-          }
-        )
+        defaults = list()
       )
     )
 

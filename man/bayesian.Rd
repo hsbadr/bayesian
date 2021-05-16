@@ -309,8 +309,7 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 ## Computational engine: brms 
 ## 
 ## Model fit template:
-## bayesian::bayesian_fit(formula = missing_arg(), data = missing_arg(), 
-##     family = brms::brmsfamily("gaussian"))
+## bayesian::bayesian_fit(formula = missing_arg(), data = missing_arg())
 }
 }
 
