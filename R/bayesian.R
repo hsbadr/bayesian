@@ -15,6 +15,9 @@
 #'  Possible values for this model are "unknown", "regression", or
 #'  "classification".
 #'
+#' @param formula.override Overrides the formula; for details see
+#'  \code{\link[brms]{brmsformula}}.
+#'
 #' @inheritParams brms::brm
 #'
 #' @details
@@ -61,6 +64,7 @@
 #' @export
 bayesian <-
   function(mode = "regression",
+           formula.override = NULL,
            family = NULL,
            prior = NULL,
            inits = NULL,
@@ -77,6 +81,7 @@ bayesian <-
            refresh = NULL,
            silent = NULL) {
     args <- list(
+      formula.override = rlang::enquo(formula.override),
       family = rlang::enquo(family),
       prior = rlang::enquo(prior),
       inits = rlang::enquo(inits),
@@ -154,6 +159,7 @@ translate.bayesian <- function(x, engine = x$engine, ...) {
 update.bayesian <-
   function(object,
            parameters = NULL,
+           formula.override = NULL,
            family = NULL,
            prior = NULL,
            inits = NULL,
@@ -178,6 +184,7 @@ update.bayesian <-
     }
 
     args <- list(
+      formula.override = rlang::enquo(formula.override),
       family = rlang::enquo(family),
       prior = rlang::enquo(prior),
       inits = rlang::enquo(inits),
@@ -245,8 +252,6 @@ check_args.bayesian <- function(object) {
 
 #' Fit Bayesian models
 #' @inheritParams brms::brm
-#  @param formula.override Overrides the formula; for details see
-#    \code{\link[brms]{brmsformula}}.
 #  @param fit An instance of S3 class \code{brmsfit}; If \code{fit} is
 #     of class \code{brmsfit}, the fitted model will be updated using
 #     \code{\link[brms]{update.brmsfit}}.

@@ -14,6 +14,7 @@
 \usage{
 bayesian(
   mode = "regression",
+  formula.override = NULL,
   family = NULL,
   prior = NULL,
   inits = NULL,
@@ -34,6 +35,7 @@ bayesian(
 \method{update}{bayesian}(
   object,
   parameters = NULL,
+  formula.override = NULL,
   family = NULL,
   prior = NULL,
   inits = NULL,
@@ -71,6 +73,9 @@ bayesian_read(file)
 \item{mode}{A single character string for the type of model.
 Possible values for this model are "unknown", "regression", or
 "classification".}
+
+\item{formula.override}{Overrides the formula; for details see
+\code{\link[brms]{brmsformula}}.}
 
 \item{family}{A description of the response distribution and link function to
 be used in the model. This can be a family function, a call to a family
