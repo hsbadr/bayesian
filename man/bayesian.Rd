@@ -72,22 +72,22 @@ Possible values for this model are "unknown", "regression", or
 
 \item{prior}{One or more \code{brmsprior} objects created by
 \code{\link[brms]{set_prior}} or related functions and combined using the
-\code{c} method or the \code{+} operator.
-See also \code{\link[brms]{get_prior}} for more help.}
+\code{c} method or the \code{+} operator. See also  \code{\link[brms]{get_prior}}
+for more help.}
 
 \item{inits}{Either \code{"random"} or \code{"0"}. If inits is
-\code{"random"} (the default), \proglang{Stan} will randomly generate initial
-values for parameters. If it is \code{"0"}, all parameters are initialized
-to zero. This option is sometimes useful for certain families, as it happens
+\code{"random"} (the default), Stan will randomly generate initial values
+for parameters. If it is \code{"0"}, all parameters are initialized to
+zero. This option is sometimes useful for certain families, as it happens
 that default (\code{"random"}) inits cause samples to be essentially
 constant. Generally, setting \code{inits = "0"} is worth a try, if chains
 do not behave well. Alternatively, \code{inits} can be a list of lists
 containing the initial values, or a function (or function name) generating
 initial values. The latter options are mainly implemented for internal
-testing but are available to users if necessary. If specifying initial
+testing but are available to users if necessary. If specifying initial 
 values using a list or a function then currently the parameter names must
-correspond to the names used in the generated \proglang{Stan} code (not the names
-used in \R). For more details on specifying initial values you can consult
+correspond to the names used in the generated Stan code (not the names
+used in \R). For more details on specifying initial values you can consult 
 the documentation of the selected \code{backend}.}
 
 \item{chains}{Number of Markov chains (defaults to 4).}
@@ -111,15 +111,15 @@ chains). For non-Windows OS in non-interactive \R sessions, forking is used
 instead of PSOCK clusters.}
 
 \item{algorithm}{Character string naming the estimation approach to use.
-Options are \code{"sampling"} for MCMC (the default), \code{"meanfield"}
-for variational inference with independent normal distributions,
+Options are \code{"sampling"} for MCMC (the default), \code{"meanfield"} for
+variational inference with independent normal distributions,
 \code{"fullrank"} for variational inference with a multivariate normal
 distribution, or \code{"fixed_param"} for sampling from fixed parameter
 values. Can be set globally for the current \R session via the
 \code{"brms.algorithm"} option (see \code{\link{options}}).}
 
 \item{backend}{Character string naming the package to use as the backend for
-fitting the \proglang{Stan} model. Options are \code{"rstan"} (the default) or
+fitting the Stan model. Options are \code{"rstan"} (the default) or
 \code{"cmdstanr"}. Can be set globally for the current \R session via the
 \code{"brms.backend"} option (see \code{\link{options}}). Details on the
 \pkg{rstan} and \pkg{cmdstanr} packages are available at
@@ -130,24 +130,22 @@ respectively.}
 behavior. It defaults to \code{NULL} so all the default values are used.
 The most important control parameters are discussed in the 'Details'
 section below. For a comprehensive overview see
-\code{\link[rstan]{stan}}.}
+\code{\link[rstan:stan]{stan}}.}
 
-\item{future}{Logical; If \code{TRUE}, the \pkg{\link[future]{future}}
+\item{future}{Logical; If \code{TRUE}, the \pkg{\link[future:future]{future}}
 package is used for parallel execution of the chains and argument
 \code{cores} will be ignored. Can be set globally for the current \R
 session via the \code{future} option. The execution type is controlled via
-\code{\link[future]{plan}} (see the examples section below).}
+\code{\link[future:plan]{plan}} (see the examples section below).}
 
 \item{seed}{The seed for random number generation to make results
-reproducible. If \code{NA} (the default), \proglang{Stan} will set the seed
+reproducible. If \code{NA} (the default), \pkg{Stan} will set the seed
 randomly.}
 
-\item{refresh}{(non-negative integer) The number of iterations between
-printed screen updates. If \code{refresh = 0}, only error messages will be
-printed.}
-
-\item{silent}{Logical; If \code{TRUE} (the default), most of the
-informational messages of compiler and sampler are suppressed. The actual
+\item{silent}{Verbosity level between \code{0} and \code{2}.
+If \code{1} (the default), most of the
+informational messages of compiler and sampler are suppressed.
+If \code{2}, even more messages are suppressed. The actual
 sampling progress is still printed. Set \code{refresh = 0} to turn this off
 as well. If using \code{backend = "rstan"} you can also set
 \code{open_progress = FALSE} to prevent opening additional progress bars.}
@@ -191,89 +189,16 @@ An updated model specification.
 \description{
 \code{bayesian()} is a way to generate a \emph{specification} of a model
 before fitting and allows the model to be created using
-\proglang{Stan} via \pkg{brms} package in R. The main
-arguments for the model are:
-\itemize{
-\item \code{prior} One or more \code{brmsprior} objects created by
-\code{\link[brms]{set_prior}} or related functions and combined using
-the \code{c} method or the \code{+} operator. See also
-\code{\link[brms]{get_prior}} for more help.
-\item \code{inits} Either \code{"random"} or \code{"0"}. If inits is
-\code{"random"} (the default), \proglang{Stan} will randomly generate initial
-values for parameters. If it is \code{"0"}, all parameters are initialized
-to zero. This option is sometimes useful for certain families, as it happens
-that default (\code{"random"}) inits cause samples to be essentially
-constant. Generally, setting \code{inits = "0"} is worth a try, if chains
-do not behave well. Alternatively, \code{inits} can be a list of lists
-containing the initial values, or a function (or function name) generating
-initial values. The latter options are mainly implemented for internal
-testing but are available to users if necessary. If specifying initial
-values using a list or a function then currently the parameter names must
-correspond to the names used in the generated \proglang{Stan} code (not the names
-used in \R). For more details on specifying initial values you can consult
-the documentation of the selected \code{backend}.
-\item \code{chains} Number of Markov chains (defaults to 4).
-\item \code{iter} Number of total iterations per chain (including warmup;
-defaults to 2000).
-\item \code{warmup} A positive integer specifying number of warmup
-(aka burnin) iterations. This also specifies the number of iterations
-used for stepsize adaptation, so warmup samples should not be used for
-inference. The number of warmup should not be larger than \code{iter}
-and the default is \code{iter/2}.
-\item \code{thin} Thinning rate. Must be a positive integer. Set
-\code{thin > 1} to save memory and computation time if \code{iter} is
-large.
-\item \code{cores} Number of cores to use when executing the chains in
-parallel, which defaults to 1 but we recommend setting the \code{mc.cores}
-option to be as many processors as the hardware and RAM allow (up to the
-number of chains). For non-Windows OS in non-interactive \R sessions,
-forking is used instead of PSOCK clusters.
-\item \code{algorithm} Character string naming the estimation approach
-to use. Options are \code{"sampling"} for MCMC (the default),
-\code{"meanfield"} for variational inference with independent normal
-distributions, \code{"fullrank"} for variational inference with
-a multivariate normal distribution, or \code{"fixed_param"} for sampling
-from fixed parameter values. Can be set globally for the current \R session
-via the \code{"brms.algorithm"} option (see \code{\link{options}}).
-\item \code{backend} Character string naming the package to use as the
-backend for fitting the \proglang{Stan} model. Options are \code{"rstan"} (the
-default) or \code{"cmdstanr"}. Can be set globally for the current \R
-session via the \code{"brms.backend"} option (see \code{\link{options}}).
-Details on the \pkg{rstan} and \pkg{cmdstanr} packages are available at
-\url{https://mc-stan.org/rstan/} and \url{https://mc-stan.org/cmdstanr/},
-respectively.
-\item \code{control} A named \code{list} of parameters to control the
-sampler's behavior. It defaults to \code{NULL} so all the default values
-are used.
-The most important control parameters are discussed in the 'Details'
-section below. For a comprehensive overview see
-\code{\link[rstan]{stan}}.
-\item \code{future} Logical; If \code{TRUE}, the
-\pkg{\link[future]{future}} package is used for parallel execution of
-the chains and argument \code{cores} will be ignored. Can be set
-globally for the current \R session via the \code{future} option.
-The execution type is controlled via \code{\link[future]{plan}}
-(see the examples section below).
-\item \code{seed} The seed for random number generation to make results
-reproducible. If \code{NA} (the default), \proglang{Stan} will set the seed
-randomly.
-\item \code{refresh} (non-negative integer) The number of iterations
-between printed screen updates. If \code{refresh = 0}, only error messages
-will be printed.
-\item \code{silent} Logical; If \code{TRUE} (the default), most of the
-informational messages of compiler and sampler are suppressed. The actual
-sampling progress is still printed. Set \code{refresh = 0} to turn this off
-as well. If using \code{backend = "rstan"} you can also set
-\code{open_progress = FALSE} to prevent opening additional progress bars.
+\proglang{Stan} via \pkg{brms} package in R.
 }
-These arguments are converted to their specific names at the
+\details{
+The arguments are converted to their specific names at the
 time that the model is fit. Other options and argument can be
 set using \code{set_engine()}. If left to their defaults
 here (\code{NULL}), the values are taken from the underlying model
-functions. If parameters need to be modified, \code{update()} can be used
-in lieu of recreating the object from scratch.
-}
-\details{
+functions. If parameters need to be modified, \code{update()} can be
+used in lieu of recreating the object from scratch.
+
 The data given to the function are not saved and are only used
 to determine the \emph{mode} of the model. For \code{bayesian()}, the
 possible modes are "regression" and "classification".
