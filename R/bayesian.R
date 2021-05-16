@@ -79,7 +79,6 @@ bayesian <-
            control = NULL,
            future = NULL,
            seed = NULL,
-           refresh = NULL,
            silent = NULL) {
     args <- list(
       formula.override = rlang::enquo(formula.override),
@@ -97,7 +96,6 @@ bayesian <-
       control = rlang::enquo(control),
       future = rlang::enquo(future),
       seed = rlang::enquo(seed),
-      refresh = rlang::enquo(refresh),
       silent = rlang::enquo(silent)
     )
 
@@ -176,7 +174,6 @@ update.bayesian <-
            control = NULL,
            future = NULL,
            seed = NULL,
-           refresh = NULL,
            silent = NULL,
            fresh = FALSE,
            ...) {
@@ -202,7 +199,6 @@ update.bayesian <-
       control = rlang::enquo(control),
       future = rlang::enquo(future),
       seed = rlang::enquo(seed),
-      refresh = rlang::enquo(refresh),
       silent = rlang::enquo(silent)
     )
 

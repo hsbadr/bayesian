@@ -29,7 +29,6 @@ bayesian(
   control = NULL,
   future = NULL,
   seed = NULL,
-  refresh = NULL,
   silent = NULL
 )
 
@@ -51,7 +50,6 @@ bayesian(
   control = NULL,
   future = NULL,
   seed = NULL,
-  refresh = NULL,
   silent = NULL,
   fresh = FALSE,
   ...
