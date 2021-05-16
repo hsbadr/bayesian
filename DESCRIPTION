@@ -8,7 +8,7 @@ Authors@R:
              email = "badr@jhu.edu",
              role = c("aut", "cre"),
              comment = c(ORCID = "0000-0002-9808-2344")),
-      person(given = "Paul C.",
+      person(given = "Paul-Christian",
              family = "Bürkner",
              email = "paul.buerkner@gmail.com",
              role = c("aut")))
@@ -38,11 +38,13 @@ Suggests:
     devtools,
     future,
     knitr,
+    recipes,
     rmarkdown,
     roxygen2,
     rstan,
     spelling,
-    testthat
+    testthat,
+    workflows
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1

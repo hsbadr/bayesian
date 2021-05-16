@@ -266,7 +266,11 @@ jobs:
                 "CXX11FLAGS += -Wno-ignored-attributes",
                 file = path_makevars, sep = "\n", append = TRUE)
           }
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+          if (grepl("linux", R.Version()$os, ignore.case = TRUE)) {
+            rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+          } else {
+            rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--ignore-vignettes"), build_args = c("--no-build-vignettes"), error_on = "warning", check_dir = "check")
+          }
         shell: Rscript {0}
 
       - name: Show testthat output

@@ -1,0 +1,109 @@
+---
+title: "Get started with the bayesian package"
+author: "Paul-Christian Bürkner & Hamada S. Badr"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    keep_md: true
+vignette: >
+  %\VignetteIndexEntry{Getting Started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+params:
+  EVAL: !r grepl("linux", R.Version()$os, ignore.case = TRUE)
+---
+
+```{r}
+library(recipes)
+library(workflows)
+library(bayesian)
+```
+
+As a simple example, we will model the seizure counts in epileptic patients to
+investigate whether the treatment (represented by variable `Trt`) can reduce the
+seizure counts and whether the effect of the treatment varies with the baseline
+number of seizures a person had before treatment (variable `Base`) and with the
+age of the person (variable `Age)`. As we have multiple observations per `person`,
+a group-level intercept is incorporated to account for the resulting dependency
+in the data. In a first step, we use the `recipes` package to prepare (a recipe
+for) the `epilepsy` data. This data set is shipped with the `brms` package,
+which is automatically loaded by `bayesian`.
+
+```{r}
+epi_recipe <- epilepsy %>% 
+  recipe() %>%
+  update_role(count, new_role = "outcome") %>%
+  update_role(Trt, Age, Base, patient, new_role = "predictor") %>%
+  add_role(patient, new_role = "group") %>%
+  step_normalize(Age, Base)
+```
+
+```{r}
+print(epi_recipe)
+```
+
+Above, we not only define the roles of the relevant variables but also 
+normalized the `Age` and `Base` predictors to facilitate model fitting later
+on. In the next step, we use `bayesian` to set up a basic model structure.
+
+```{r}
+epi_model <- bayesian(family = poisson()) %>%
+  set_engine("brms") %>%
+  set_mode("regression")
+```
+
+```{r}
+print(epi_model)
+```
+
+The `bayesian` function is the main function of the package to initialize a
+Bayesian model. We can set up a lot of the information directly within the
+function or update the information later on, via the `update` method. For
+example, if we didn't specify the family initially or set it to something else
+that we now wanted to change, we could write:
+
+````{r}
+epi_model <- epi_model %>%
+  update(family = poisson())
+```
+
+Next, we define a workflow via the `workflows` package, by combining the above
+defined data processing recipe and the model plus the actual model formula to be
+passed to the `brms` engine.
+
+```{r}
+epi_workflow <- workflow() %>%
+  add_recipe(epi_recipe) %>%
+  add_model(
+    spec = epi_model,
+    formula = count ~ Trt + Base + Age + (1 | patient)
+  )
+```
+
+```{r}
+print(epi_workflow)
+```
+
+We are now ready to fit the model by calling the `fit` method 
+with the data set we want to train the model on.
+
+```{r, results='hide'}
+epi_workflow_fit <- epi_workflow %>%
+  fit(data = epilepsy)
+```
+
+```{r}
+print(epi_workflow_fit)
+```
+
+We can use the workflow including the fitted model, for example, for
+convenient predictions with new data without having to worry about all
+the data reprocessing.
+
+```{r}
+newdata <- epilepsy[1:5, ]
+```
+
+```{r}
+epi_workflow_fit %>% predict(new_data = newdata, type = "conf_int")
+```
