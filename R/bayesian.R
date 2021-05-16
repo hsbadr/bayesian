@@ -61,6 +61,7 @@
 #' @export
 bayesian <-
   function(mode = "regression",
+           family = NULL,
            prior = NULL,
            inits = NULL,
            chains = NULL,
@@ -76,6 +77,7 @@ bayesian <-
            refresh = NULL,
            silent = NULL) {
     args <- list(
+      family = rlang::enquo(family),
       prior = rlang::enquo(prior),
       inits = rlang::enquo(inits),
       chains = rlang::enquo(chains),
@@ -152,6 +154,7 @@ translate.bayesian <- function(x, engine = x$engine, ...) {
 update.bayesian <-
   function(object,
            parameters = NULL,
+           family = NULL,
            prior = NULL,
            inits = NULL,
            chains = NULL,
@@ -175,6 +178,7 @@ update.bayesian <-
     }
 
     args <- list(
+      family = rlang::enquo(family),
       prior = rlang::enquo(prior),
       inits = rlang::enquo(inits),
       chains = rlang::enquo(chains),

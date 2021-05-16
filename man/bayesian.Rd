@@ -14,6 +14,7 @@
 \usage{
 bayesian(
   mode = "regression",
+  family = NULL,
   prior = NULL,
   inits = NULL,
   chains = NULL,
@@ -33,6 +34,7 @@ bayesian(
 \method{update}{bayesian}(
   object,
   parameters = NULL,
+  family = NULL,
   prior = NULL,
   inits = NULL,
   chains = NULL,
@@ -69,6 +71,15 @@ bayesian_read(file)
 \item{mode}{A single character string for the type of model.
 Possible values for this model are "unknown", "regression", or
 "classification".}
+
+\item{family}{A description of the response distribution and link function to
+be used in the model. This can be a family function, a call to a family
+function or a character string naming the family. Every family function has
+a \code{link} argument allowing to specify the link function to be applied
+on the response variable. If not specified, default links are used. For
+details of supported families see \code{\link[brms]{brmsfamily}}. By default, a
+linear \code{gaussian} model is applied. In multivariate models,
+\code{family} might also be a list of families.}
 
 \item{prior}{One or more \code{brmsprior} objects created by
 \code{\link[brms]{set_prior}} or related functions and combined using the
@@ -170,15 +181,6 @@ fitted. The details of model specification are explained in
 
 \item{data}{An object of class \code{data.frame} (or one that can be coerced
 to that class) containing data of all variables used in the model.}
-
-\item{family}{A description of the response distribution and link function to
-be used in the model. This can be a family function, a call to a family
-function or a character string naming the family. Every family function has
-a \code{link} argument allowing to specify the link function to be applied
-on the response variable. If not specified, default links are used. For
-details of supported families see \code{\link[brms]{brmsfamily}}. By default, a
-linear \code{gaussian} model is applied. In multivariate models,
-\code{family} might also be a list of families.}
 
 \item{file}{A character string of the file path to \code{brmsfit} object
 saved via \code{\link{saveRDS}}.}
