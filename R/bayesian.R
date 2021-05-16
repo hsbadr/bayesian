@@ -2,7 +2,7 @@
 #'
 #' `bayesian()` is a way to generate a _specification_ of a model
 #'  before fitting and allows the model to be created using
-#'  \proglang{Stan} via \pkg{brms} package in R.
+#'  \pkg{Stan} via \pkg{brms} package in R.
 #'
 #'  The arguments are converted to their specific names at the
 #'  time that the model is fit. Other options and argument can be
@@ -20,7 +20,7 @@
 #'
 #' @inheritParams brms::brm
 #'
-#' @param stan_args A list of extra arguments to \proglang{Stan}.
+#' @param stan_args A list of extra arguments to \pkg{Stan}.
 #'
 #' @details
 #' The data given to the function are not saved and are only used
@@ -302,11 +302,11 @@ check_args.bayesian <- function(object) {
 #    \code{\link[brms]{brmsformula}} for more details.
 #  @param newdata Optional \code{data.frame} to update the model with
 #    new data. Data-dependent priors will not be updated automatically.
-#  @param recompile Logical, indicating whether the \proglang{Stan} model
+#  @param recompile Logical, indicating whether the \pkg{Stan} model
 #    should be recompiled from the stored or updated \code{C++} code.
 #    If \code{NULL} (the default), \code{\link[brms]{update.brmsfit}}
 #    will try to figure out internally, if recompilation is necessary.
-#    Setting it to \code{FALSE} will cause all \proglang{Stan} code changing
+#    Setting it to \code{FALSE} will cause all \pkg{Stan} code changing
 #    arguments to be ignored.
 #  @param ... Other arguments passed to \code{\link[brms]{brm}}.
 #'

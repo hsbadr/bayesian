@@ -198,7 +198,7 @@ fitting the Stan model. Options are \code{"rstan"} (the default) or
 \url{https://mc-stan.org/rstan/} and \url{https://mc-stan.org/cmdstanr/},
 respectively.}
 
-\item{stan_args}{A list of extra arguments to \proglang{Stan}.}
+\item{stan_args}{A list of extra arguments to \pkg{Stan}.}
 
 \item{control}{A named \code{list} of parameters to control the sampler's
 behavior. It defaults to \code{NULL} so all the default values are used.
@@ -283,7 +283,7 @@ An updated model specification.
 \description{
 \code{bayesian()} is a way to generate a \emph{specification} of a model
 before fitting and allows the model to be created using
-\proglang{Stan} via \pkg{brms} package in R.
+\pkg{Stan} via \pkg{brms} package in R.
 }
 \details{
 The arguments are converted to their specific names at the
