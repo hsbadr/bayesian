@@ -35,6 +35,8 @@ Imports:
     utils
 Suggests:
     covr,
+    recipes,
+    workflows,,
     devtools,
     future,
     knitr,
