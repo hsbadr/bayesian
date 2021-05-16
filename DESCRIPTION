@@ -35,16 +35,16 @@ Imports:
     utils
 Suggests:
     covr,
-    recipes,
-    workflows,
     devtools,
     future,
     knitr,
+    recipes,
     rmarkdown,
     roxygen2,
     rstan,
     spelling,
-    testthat
+    testthat,
+    workflows
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1
