@@ -9,6 +9,8 @@ vignette: >
   %\VignetteIndexEntry{Getting Started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+params:
+  EVAL: !r identical(Sys.getenv("NOT_CRAN"), "true")
 ---
 
 ```{r}
