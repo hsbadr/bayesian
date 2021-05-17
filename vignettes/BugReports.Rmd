@@ -17,7 +17,7 @@ Provide a clear and concise description of the problem including warning and err
 ### Reproduction
 Provide a clean R script demonstrating the issue with the necessary data files.
 Please include a minimal reproducible example (AKA a reprex). If you've never
-heard of a [reprex](http://reprex.tidyverse.org/) before,
+heard of a [reprex](https://reprex.tidyverse.org/) before,
 start by reading <https://www.tidyverse.org/help/#reprex>.
 
 ### Environment

@@ -18,7 +18,7 @@ release](https://img.shields.io/github/commits-since/hsbadr/bayesian/latest.svg?
 [![CRAN
 Status](https://www.r-pkg.org/badges/version/bayesian)](https://CRAN.R-project.org/package=bayesian)
 [![CRAN
-Downloads](http://cranlogs.r-pkg.org/badges/grand-total/bayesian)](https://cran.r-project.org/package=bayesian)
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/bayesian)](https://cran.r-project.org/package=bayesian)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/hsbadr/bayesian/blob/main/LICENSE.md)
 [![DOI](https://zenodo.org/badge/327419436.svg)](https://zenodo.org/badge/latestdoi/327419436)

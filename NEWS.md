@@ -9,6 +9,7 @@
 - Implemented `parsnip::set_model_arg`
 - Switched to engine-specific defaults
 - Fixed NOTE: Undeclared packages `rstan`, `future` in Rd xrefs
+- Fixed NOTE: Found (possibly) invalid URLs
 - Support updating more `brms::brm` arguments in model specification
 - Updated documentation and vignettes
 - Updated WORDLIST
