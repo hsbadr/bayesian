@@ -146,11 +146,9 @@ jobs:
         with:
           path: ${{ env.R_LIBS_USER }}
           key: |
-            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: |
-            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-${{ hashFiles('.github/R-version') }}-1-
-            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-
-            R-${{ matrix.r }}_${{ matrix.os }}-
+            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-${{ hashFiles('.github/R-version') }}-2-
 
       - name: Set up system environment for macOS
         if: runner.os == 'macOS'
