@@ -1,3 +1,7 @@
+# bayesian 0.0.5
+
+- tests: Update Bayesian model specifciation
+
 # bayesian 0.0.4
 
 - Added GettingStarted vignette
