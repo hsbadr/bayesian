@@ -22,15 +22,6 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     parsnip::set_model_arg(
       model = "bayesian",
       eng = "brms",
-      parsnip = "mode",
-      original = "mode",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
-      has_submodel = FALSE
-    )
-
-    parsnip::set_model_arg(
-      model = "bayesian",
-      eng = "brms",
       parsnip = "formula.override",
       original = "formula.override",
       func = c(pkg = "bayesian", fun = "bayesian_fit"),
