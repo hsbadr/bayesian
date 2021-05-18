@@ -10,7 +10,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 params:
-  EVAL: !r grepl("linux", R.Version()$os, ignore.case = TRUE)
+  EVAL: !r isTRUE(.Platform$OS.type == "unix")
 ---
 
 ```{r}
