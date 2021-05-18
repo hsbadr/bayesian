@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bayesian</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
       </span>
     </div>
 
@@ -212,8 +212,8 @@
 ## • step_normalize()
 ## 
 ## ── Model ───────────────────────────────────────────────────────────────────────
-##  Family: gaussian 
-##   Links: mu = identity; sigma = identity 
+##  Family: poisson 
+##   Links: mu = log 
 ## Formula: count ~ Trt + Base + Age + (1 | patient) 
 ##    Data: .x3 (Number of observations: 236) 
 ## Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
@@ -222,18 +222,14 @@
 ## Group-Level Effects: 
 ## ~patient (Number of levels: 59) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     5.72      0.69     4.46     7.19 1.00     1180     2345
+## sd(Intercept)     0.57      0.07     0.46     0.71 1.00      840     1871
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     8.47      1.23     6.08    10.93 1.00     1396     2214
-## Trt1         -0.70      1.70    -4.02     2.59 1.00     1676     2151
-## Base          9.61      0.85     7.97    11.28 1.00     1884     2746
-## Age           1.12      0.86    -0.56     2.84 1.00     1665     2324
-## 
-## Family Specific Parameters: 
-##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     5.72      0.31     5.17     6.36 1.00     4242     3011
+## Intercept     1.76      0.12     1.53     1.99 1.00      741     1214
+## Trt1         -0.25      0.17    -0.60     0.08 1.01      632      827
+## Base          0.73      0.08     0.58     0.90 1.00      809     1598
+## Age           0.09      0.08    -0.07     0.26 1.01      685     1212
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -246,11 +242,11 @@
 <pre><code>## # A tibble: 5 x 2
 ##   .pred_lower .pred_upper
 ##         &lt;dbl&gt;       &lt;dbl&gt;
-## 1       -9.01        15.2
-## 2       -8.77        15.4
-## 3      -10.7         14.2
-## 4       -9.29        15.1
-## 5        2.77        26.8</code></pre>
+## 1           0           8
+## 2           0           8
+## 3           0           7
+## 4           0           8
+## 5           6          22</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
