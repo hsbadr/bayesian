@@ -1,6 +1,7 @@
 # bayesian 0.0.5
 
 - tests: Update Bayesian model specifciation
+- Minor code cleanup
 
 # bayesian 0.0.4
 
