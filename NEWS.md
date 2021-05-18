@@ -2,6 +2,7 @@
 
 - tests: Update Bayesian model specifciation
 - Minor code cleanup
+- Updated dependencies
 
 # bayesian 0.0.4
 

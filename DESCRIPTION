@@ -23,8 +23,8 @@ URL: https://hsbadr.github.io/bayesian/,
      https://github.com/hsbadr/bayesian
 BugReports: https://github.com/hsbadr/bayesian/issues
 Depends:
-    brms (>= 2.14.4),
-    parsnip (>= 0.1.4),
+    brms (>= 2.15.0),
+    parsnip (>= 0.1.5),
     R (>= 2.10)
 Imports:
     dplyr,
