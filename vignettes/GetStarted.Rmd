@@ -9,8 +9,6 @@ vignette: >
   %\VignetteIndexEntry{Getting Started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-params:
-  EVAL: !r isTRUE(.Platform$OS.type == "unix")
 ---
 
 ```{r}
@@ -84,15 +82,19 @@ epi_workflow <- workflow() %>%
 print(epi_workflow)
 ```
 
-We are now ready to fit the model by calling the `fit` method 
+We are now ready to fit the model by calling the `fit` method
 with the data set we want to train the model on.
 
-```{r, results='hide'}
+```{r, results='hide', echo = FALSE}
+run_on_linux <- grepl("linux", R.Version()$os, ignore.case = TRUE)
+```
+
+```{r, results='hide', eval = run_on_linux}
 epi_workflow_fit <- epi_workflow %>%
   fit(data = epilepsy)
 ```
 
-```{r}
+```{r, eval = run_on_linux}
 print(epi_workflow_fit)
 ```
 
@@ -104,6 +106,6 @@ the data reprocessing.
 newdata <- epilepsy[1:5, ]
 ```
 
-```{r}
+```{r, eval = run_on_linux}
 epi_workflow_fit %>% predict(new_data = newdata, type = "conf_int")
 ```
