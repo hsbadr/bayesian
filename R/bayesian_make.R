@@ -17,7 +17,6 @@ bayesian_make <- function(modes = c("classification", "regression")) {
 
     # -------------------------------------------------------------------------
 
-    parsnip::set_model_engine("bayesian", mode, "brms")
     parsnip::set_model_engine(model = model, mode = mode, eng = engine)
 
     # -------------------------------------------------------------------------
@@ -28,7 +27,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     # -------------------------------------------------------------------------
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "formula.override",
       original = "formula.override",
@@ -37,7 +36,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "family",
       original = "family",
@@ -46,7 +45,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "prior",
       original = "prior",
@@ -55,7 +54,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "sample_prior",
       original = "sample_prior",
@@ -64,7 +63,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "knots",
       original = "knots",
@@ -73,7 +72,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "stanvars",
       original = "stanvars",
@@ -82,7 +81,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "fit",
       original = "fit",
@@ -91,7 +90,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "inits",
       original = "inits",
@@ -100,7 +99,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "chains",
       original = "chains",
@@ -109,7 +108,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "iter",
       original = "iter",
@@ -118,7 +117,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "warmup",
       original = "warmup",
@@ -127,7 +126,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "thin",
       original = "thin",
@@ -136,7 +135,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "cores",
       original = "cores",
@@ -145,7 +144,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "threads",
       original = "threads",
@@ -154,7 +153,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "algorithm",
       original = "algorithm",
@@ -163,7 +162,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "backend",
       original = "backend",
@@ -172,7 +171,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "stan_args",
       original = "stan_args",
@@ -181,7 +180,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "control",
       original = "control",
@@ -190,7 +189,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "save_pars",
       original = "save_pars",
@@ -199,7 +198,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "save_model",
       original = "save_model",
@@ -208,7 +207,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "file",
       original = "file",
@@ -217,7 +216,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "file_refit",
       original = "file_refit",
@@ -226,7 +225,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "normalize",
       original = "normalize",
@@ -235,7 +234,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "future",
       original = "future",
@@ -244,7 +243,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "seed",
       original = "seed",
@@ -253,7 +252,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_model_arg(
-      model = "bayesian",
+      model = model,
       eng = engine,
       parsnip = "silent",
       original = "silent",
@@ -264,7 +263,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     # -------------------------------------------------------------------------
 
     parsnip::set_fit(
-      model = "bayesian",
+      model = model,
       eng = engine,
       mode = mode,
       value = list(
@@ -278,7 +277,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     # -------------------------------------------------------------------------
 
     parsnip::set_encoding(
-      model = "bayesian",
+      model = model,
       eng = engine,
       mode = mode,
       options = list(
@@ -293,7 +292,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
 
     if (mode == "classification") {
       parsnip::set_pred(
-        model = "bayesian",
+        model = model,
         eng = engine,
         mode = mode,
         type = "class",
@@ -326,7 +325,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       )
 
       parsnip::set_pred(
-        model = "bayesian",
+        model = model,
         eng = engine,
         mode = mode,
         type = "prob",
@@ -359,7 +358,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       )
     } else {
       parsnip::set_pred(
-        model = "bayesian",
+        model = model,
         eng = engine,
         mode = mode,
         type = "numeric",
@@ -379,7 +378,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     }
 
     parsnip::set_pred(
-      model = "bayesian",
+      model = model,
       eng = engine,
       mode = mode,
       type = "conf_int",
@@ -435,7 +434,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_pred(
-      model = "bayesian",
+      model = model,
       eng = engine,
       mode = mode,
       type = "pred_int",
@@ -491,7 +490,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_pred(
-      model = "bayesian",
+      model = model,
       eng = engine,
       mode = mode,
       type = "raw",
@@ -508,7 +507,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     )
 
     parsnip::set_pred(
-      model = "bayesian",
+      model = model,
       eng = engine,
       mode = mode,
       type = "quantile",
