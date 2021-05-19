@@ -13,7 +13,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
   parsnip::set_new_model(model)
 
   for (mode in modes) {
-    parsnip::set_model_mode("bayesian", mode)
+    parsnip::set_model_mode(model = model, mode = mode)
 
     # -------------------------------------------------------------------------
 
