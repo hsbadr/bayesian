@@ -283,7 +283,7 @@ An updated model specification.
 \description{
 \code{bayesian()} is a way to generate a \emph{specification} of a model
 before fitting and allows the model to be created using
-\pkg{Stan} via \pkg{brms} package in R.
+\pkg{Stan} via \pkg{brms} package in \pkg{R}.
 }
 \details{
 The arguments are converted to their specific names at the
@@ -304,8 +304,7 @@ following \emph{engines}:
 }
 }
 \section{Engine Details}{
-Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{bayesian() \%>\%
+Engines may have pre-set default arguments when executing the model fit call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="sourceCode r">}}\preformatted{bayesian() \%>\%
   set_engine("brms") \%>\%
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Bayesian Model Specification (regression)

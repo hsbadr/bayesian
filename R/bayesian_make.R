@@ -7,8 +7,8 @@
 # nocov
 
 bayesian_make <- function(modes = c("classification", "regression")) {
-  model = "bayesian"
-  engine = "brms"
+  model <- "bayesian"
+  engine <- "brms"
 
   parsnip::set_new_model(model)
 

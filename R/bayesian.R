@@ -2,7 +2,7 @@
 #'
 #' `bayesian()` is a way to generate a _specification_ of a model
 #'  before fitting and allows the model to be created using
-#'  \pkg{Stan} via \pkg{brms} package in R.
+#'  \pkg{Stan} via \pkg{brms} package in \pkg{R}.
 #'
 #'  The arguments are converted to their specific names at the
 #'  time that the model is fit. Other options and argument can be

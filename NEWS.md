@@ -1,8 +1,8 @@
 # bayesian 0.0.5
 
-- tests: Update Bayesian model specifciation
-- Minor code cleanup
-- Updated dependencies
+- tests: Update Bayesian model specification
+- Minor code cleanup and formatting
+- Updated dependencies and documentation
 
 # bayesian 0.0.4
 

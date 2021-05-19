@@ -28,7 +28,7 @@ for) the `epilepsy` data. This data set is shipped with the `brms` package,
 which is automatically loaded by `bayesian`.
 
 ```{r}
-epi_recipe <- epilepsy %>% 
+epi_recipe <- epilepsy %>%
   recipe() %>%
   update_role(count, new_role = "outcome") %>%
   update_role(Trt, Age, Base, patient, new_role = "predictor") %>%
@@ -40,7 +40,7 @@ epi_recipe <- epilepsy %>%
 print(epi_recipe)
 ```
 
-Above, we not only define the roles of the relevant variables but also 
+Above, we not only define the roles of the relevant variables but also
 normalized the `Age` and `Base` predictors to facilitate model fitting later
 on. In the next step, we use `bayesian` to set up a basic model structure.
 
