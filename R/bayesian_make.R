@@ -281,9 +281,9 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       mode = mode,
       options = list(
-        predictor_indicators = "traditional",
-        compute_intercept = TRUE,
-        remove_intercept = TRUE,
+        predictor_indicators = "none",
+        compute_intercept = FALSE,
+        remove_intercept = FALSE,
         allow_sparse_x = FALSE
       )
     )

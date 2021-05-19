@@ -1,5 +1,6 @@
 # bayesian 0.0.5
 
+- Revised engine-specific encodings
 - tests: Update Bayesian model specification
 - Minor code cleanup and formatting
 - Updated dependencies and documentation
