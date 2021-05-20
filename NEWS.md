@@ -2,7 +2,7 @@
 
 - Revised engine-specific encodings
 - tests: Update Bayesian model specification
-- Minor code cleanup and formatting
+- Reformatted code and updated documentation
 - Updated dependencies and documentation
 
 # bayesian 0.0.4

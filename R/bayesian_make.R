@@ -10,6 +10,11 @@ bayesian_make <- function(modes = c("classification", "regression")) {
   model <- "bayesian"
   engine <- "brms"
 
+  fitfunc <- c(pkg = "bayesian", fun = "bayesian_fit")
+  predfunc <- c(pkg = "bayesian", fun = "bayesian_predict")
+
+  dependpkgs <- unique(c("brms", fitfunc["pkg"], predfunc["pkg"]))
+
   parsnip::set_new_model(model)
 
   for (mode in modes) {
@@ -21,8 +26,9 @@ bayesian_make <- function(modes = c("classification", "regression")) {
 
     # -------------------------------------------------------------------------
 
-    parsnip::set_dependency(model = model, eng = engine, pkg = "brms")
-    parsnip::set_dependency(model = model, eng = engine, pkg = "bayesian")
+    for (pkg in dependpkgs) {
+      parsnip::set_dependency(model = model, eng = engine, pkg = pkg)
+    }
 
     # -------------------------------------------------------------------------
 
@@ -31,7 +37,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "formula.override",
       original = "formula.override",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -40,7 +46,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "family",
       original = "family",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -49,7 +55,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "prior",
       original = "prior",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -58,7 +64,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "sample_prior",
       original = "sample_prior",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -67,7 +73,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "knots",
       original = "knots",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -76,7 +82,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "stanvars",
       original = "stanvars",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -85,7 +91,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "fit",
       original = "fit",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -94,7 +100,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "inits",
       original = "inits",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -103,7 +109,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "chains",
       original = "chains",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -112,7 +118,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "iter",
       original = "iter",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -121,7 +127,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "warmup",
       original = "warmup",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -130,7 +136,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "thin",
       original = "thin",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -139,7 +145,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "cores",
       original = "cores",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -148,7 +154,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "threads",
       original = "threads",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -157,7 +163,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "algorithm",
       original = "algorithm",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -166,7 +172,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "backend",
       original = "backend",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -175,7 +181,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "stan_args",
       original = "stan_args",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -184,7 +190,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "control",
       original = "control",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -193,7 +199,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "save_pars",
       original = "save_pars",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -202,7 +208,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "save_model",
       original = "save_model",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -211,7 +217,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "file",
       original = "file",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -220,7 +226,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "file_refit",
       original = "file_refit",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -229,7 +235,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "normalize",
       original = "normalize",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -238,7 +244,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "future",
       original = "future",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -247,7 +253,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "seed",
       original = "seed",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -256,7 +262,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       eng = engine,
       parsnip = "silent",
       original = "silent",
-      func = c(pkg = "bayesian", fun = "bayesian_fit"),
+      func = fitfunc,
       has_submodel = FALSE
     )
 
@@ -269,7 +275,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       value = list(
         interface = "formula",
         protect = c("formula", "data"),
-        func = c(pkg = "bayesian", fun = "bayesian_fit"),
+        func = fitfunc,
         defaults = list()
       )
     )
@@ -315,7 +321,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
             }
             unname(results)
           },
-          func = c(pkg = "bayesian", fun = "bayesian_predict"),
+          func = predfunc,
           args = list(
             object = rlang::expr(object$fit),
             newdata = rlang::expr(new_data),
@@ -348,7 +354,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
             }
             results
           },
-          func = c(pkg = "bayesian", fun = "bayesian_predict"),
+          func = predfunc,
           args = list(
             object = rlang::expr(object$fit),
             newdata = rlang::expr(new_data),
@@ -367,7 +373,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           post = function(results, object) {
             tibble::tibble(.pred = results[, 1])
           },
-          func = c(pkg = "bayesian", fun = "bayesian_predict"),
+          func = predfunc,
           args = list(
             object = rlang::expr(object$fit),
             newdata = rlang::expr(new_data),
@@ -424,7 +430,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           }
           res
         },
-        func = c(pkg = "bayesian", fun = "bayesian_predict"),
+        func = predfunc,
         args = list(
           object = rlang::expr(object$fit),
           newdata = rlang::expr(new_data),
@@ -480,7 +486,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           }
           res
         },
-        func = c(pkg = "bayesian", fun = "bayesian_predict"),
+        func = predfunc,
         args = list(
           object = rlang::expr(object$fit),
           newdata = rlang::expr(new_data),
@@ -497,7 +503,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       value = list(
         pre = NULL,
         post = NULL,
-        func = c(pkg = "bayesian", fun = "bayesian_predict"),
+        func = predfunc,
         args = list(
           object = rlang::expr(object$fit),
           newdata = rlang::expr(new_data),
@@ -516,7 +522,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
         post = function(results, object) {
           tibble::as_tibble(results)
         },
-        func = c(pkg = "bayesian", fun = "bayesian_predict"),
+        func = predfunc,
         args = list(
           object = rlang::expr(object$fit),
           newdata = rlang::expr(new_data),

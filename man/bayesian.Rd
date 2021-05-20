@@ -196,7 +196,11 @@ fitting the Stan model. Options are \code{"rstan"} (the default) or
 \code{"brms.backend"} option (see \code{\link{options}}). Details on the
 \pkg{rstan} and \pkg{cmdstanr} packages are available at
 \url{https://mc-stan.org/rstan/} and \url{https://mc-stan.org/cmdstanr/},
-respectively.}
+respectively. Additionally a \code{"mock"} backend is available to make
+testing \pkg{brms} and packages that depend on it easier. 
+The \code{"mock"} backend does not actually do any fitting, it only checks
+the generated Stan code for correctness and then returns whatever is passed
+in an additional \code{mock_fit} argument as the result of the fit.}
 
 \item{stan_args}{A list of extra arguments to \pkg{Stan}.}
 
