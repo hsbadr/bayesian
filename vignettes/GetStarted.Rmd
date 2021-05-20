@@ -45,7 +45,9 @@ normalized the `Age` and `Base` predictors to facilitate model fitting later
 on. In the next step, we use `bayesian` to set up a basic model structure.
 
 ```{r}
-epi_model <- bayesian(family = poisson()) %>%
+epi_model <- bayesian(
+    family = poisson()
+  ) %>%
   set_engine("brms") %>%
   set_mode("regression")
 ```
@@ -124,5 +126,9 @@ newdata <- epilepsy[1:5, ]
 ```
 
 ```{r, eval = run_on_linux}
-epi_workflow_fit %>% predict(new_data = newdata, type = "conf_int")
+epi_workflow_fit %>%
+  predict(
+    new_data = newdata,
+    type = "conf_int"
+  )
 ```
