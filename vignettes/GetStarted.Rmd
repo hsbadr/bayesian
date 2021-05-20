@@ -98,6 +98,23 @@ epi_workflow_fit <- epi_workflow %>%
 print(epi_workflow_fit)
 ```
 
+To extract the parsnip model fit from the workflow
+
+```{r, eval = run_on_linux}
+epi_fit <- epi_workflow_fit %>%
+  pull_workflow_fit()
+```
+
+The `brmsfit` object is stored in the `fit` slot
+
+```{r, eval = run_on_linux}
+epi_brmsfit <- epi_fit$fit
+```
+
+```{r, eval = run_on_linux}
+class(epi_brmsfit)
+```
+
 We can use the workflow including the fitted model, for example, for
 convenient predictions with new data without having to worry about all
 the data reprocessing.
