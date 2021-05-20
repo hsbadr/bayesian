@@ -222,22 +222,32 @@
 ## Group-Level Effects: 
 ## ~patient (Number of levels: 59) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.57      0.07     0.45     0.72 1.01      808     1695
+## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      731     1272
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     1.77      0.11     1.55     1.99 1.00      728     1380
-## Trt1         -0.27      0.15    -0.57     0.03 1.00      754     1514
-## Base          0.73      0.08     0.56     0.89 1.00      781     1341
-## Age           0.09      0.08    -0.07     0.25 1.00      773     1279
+## Intercept     1.77      0.12     1.54     1.99 1.01      629     1350
+## Trt1         -0.27      0.17    -0.60     0.06 1.01      632      849
+## Base          0.72      0.08     0.57     0.88 1.01      885     1493
+## Age           0.08      0.08    -0.09     0.24 1.01      725     1289
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<p>We can use the workflow including the fitted model, for example, for convenient predictions with new data without having to worry about all the data reprocessing.</p>
+<p>To extract the parsnip model fit from the workflow</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">newdata</span> <span class="op">&lt;-</span> <span class="va">epilepsy</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">epi_fit</span> <span class="op">&lt;-</span> <span class="va">epi_workflow_fit</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://workflows.tidymodels.org//reference/workflow-extractors.html">pull_workflow_fit</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The <code>brmsfit</code> object is stored in the <code>fit</code> slot</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">epi_brmsfit</span> <span class="op">&lt;-</span> <span class="va">epi_fit</span><span class="op">$</span><span class="va">fit</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">epi_brmsfit</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "brmsfit"</code></pre>
+<p>We can use the workflow including the fitted model, for example, for convenient predictions with new data without having to worry about all the data reprocessing.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">newdata</span> <span class="op">&lt;-</span> <span class="va">epilepsy</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span>new_data <span class="op">=</span> <span class="va">newdata</span>, type <span class="op">=</span> <span class="st">"conf_int"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   .pred_lower .pred_upper
@@ -246,7 +256,7 @@
 ## 2           0           8
 ## 3           0           7
 ## 4           0           8
-## 5           7          22</code></pre>
+## 5           6          23</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
