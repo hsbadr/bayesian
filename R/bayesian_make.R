@@ -14,6 +14,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
   predfunc <- c(pkg = "bayesian", fun = "bayesian_predict")
 
   dependpkgs <- unique(c("brms", fitfunc["pkg"], predfunc["pkg"]))
+  dependpkgs <- dependpkgs[!is.na(dependpkgs)]
 
   parsnip::set_new_model(model)
 
