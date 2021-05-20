@@ -4,6 +4,7 @@
 - tests: Update Bayesian model specification
 - Reformatted code and updated documentation
 - Updated dependencies and documentation
+- Updated GettingStarted vignette
 
 # bayesian 0.0.4
 
