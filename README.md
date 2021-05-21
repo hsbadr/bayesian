@@ -61,6 +61,9 @@ Example
 
     summary(bayesian_mod$fit)
 
+For more details, [get started with
+`bayesian`](https://hsbadr.github.io/bayesian/articles/GetStarted.html).
+
 Citation
 --------
 
