@@ -11,10 +11,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r}
+```{r results='hide', message=FALSE, warning=FALSE}
+library(bayesian)
+```
+
+```{r results='hide', message=FALSE, warning=FALSE}
 library(recipes)
 library(workflows)
-library(bayesian)
 ```
 
 As a simple example, we will model the seizure counts in epileptic patients to
@@ -87,33 +90,33 @@ print(epi_workflow)
 We are now ready to fit the model by calling the `fit` method
 with the data set we want to train the model on.
 
-```{r, results='hide', echo = FALSE}
+```{r results='hide', echo = FALSE}
 run_on_linux <- grepl("linux", R.Version()$os, ignore.case = TRUE)
 ```
 
-```{r, results='hide', eval = run_on_linux}
+```{r results='hide', eval = run_on_linux}
 epi_workflow_fit <- epi_workflow %>%
   fit(data = epilepsy)
 ```
 
-```{r, eval = run_on_linux}
+```{r eval = run_on_linux}
 print(epi_workflow_fit)
 ```
 
 To extract the parsnip model fit from the workflow
 
-```{r, eval = run_on_linux}
+```{r eval = run_on_linux}
 epi_fit <- epi_workflow_fit %>%
   pull_workflow_fit()
 ```
 
 The `brmsfit` object is stored in the `fit` slot
 
-```{r, eval = run_on_linux}
+```{r eval = run_on_linux}
 epi_brmsfit <- epi_fit$fit
 ```
 
-```{r, eval = run_on_linux}
+```{r eval = run_on_linux}
 class(epi_brmsfit)
 ```
 
@@ -125,7 +128,7 @@ the data reprocessing.
 newdata <- epilepsy[1:5, ]
 ```
 
-```{r, eval = run_on_linux}
+```{r eval = run_on_linux}
 epi_workflow_fit %>%
   predict(
     new_data = newdata,
