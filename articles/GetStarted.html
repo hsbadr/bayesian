@@ -141,7 +141,7 @@
 ##   family = poisson()
 ## 
 ## Computational engine: brms</code></pre>
-<p>The <code>bayesian</code> function is the main function of the package to initialize a Bayesian model. We can set up a lot of the information directly within the function or update the information later on, via the <code>update</code> method. For example, if we didn’t specify the family initially or set it to something else that we now wanted to change, we could write:</p>
+<p>The <code>bayesian</code> function is the main function of the package to initialize a Bayesian model. We can set up a lot of the information directly within the function or update the information later on, via the <code>update</code> method. For example, if we didn’t specify the family initially or set it to something else that we now wanted to change, we could use the <code>update</code> method as follows</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_model</span> <span class="op">&lt;-</span> <span class="va">epi_model</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span><span class="op">(</span>family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -199,14 +199,14 @@
 ## Group-Level Effects: 
 ## ~patient (Number of levels: 59) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      797     1501
+## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      729     1295
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     1.77      0.12     1.54     2.00 1.00      677     1176
-## Trt1         -0.26      0.17    -0.59     0.05 1.00      705     1312
-## Base          0.73      0.08     0.57     0.89 1.00      876     1293
-## Age           0.09      0.09    -0.08     0.26 1.01      677     1290
+## Intercept     1.77      0.12     1.55     2.01 1.01      577     1250
+## Trt1         -0.25      0.17    -0.59     0.06 1.01      580     1145
+## Base          0.74      0.08     0.58     0.89 1.00      901     1287
+## Age           0.09      0.08    -0.08     0.25 1.00      632     1338
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -221,7 +221,7 @@
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">epi_brmsfit</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "brmsfit"</code></pre>
-<p>We can use the workflow including the fitted model, for example, for convenient predictions with new data without having to worry about all the data reprocessing.</p>
+<p>We can use the trained workflow, which includes the fitted model, to conveniently <code>predict</code> using new data without having to worry about all the data reprocessing, which is automatically applied using the workflow preprocessor (recipe).</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">newdata</span> <span class="op">&lt;-</span> <span class="va">epilepsy</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -233,11 +233,11 @@
 <pre><code>## # A tibble: 5 x 2
 ##   .pred_lower .pred_upper
 ##         &lt;dbl&gt;       &lt;dbl&gt;
-## 1           0           8
-## 2           0           8
-## 3           0           7
-## 4           0           8
-## 5           6          22</code></pre>
+## 1        0              8
+## 2        0              8
+## 3        0              7
+## 4        0              8
+## 5        6.98          22</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
