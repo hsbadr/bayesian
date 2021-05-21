@@ -205,22 +205,9 @@ jobs:
       - name: Install R package dependencies
         run: |
           options(
-            repos = c(CRAN = "https://cran.rstudio.com"),
+            repos = c(CRAN = "https://cran.wustl.edu"),
             keep.source = TRUE,
-            keep.source.pkgs = TRUE,
-            browserNLdisabled = TRUE,
-            devtools.name = "Hamada S. Badr",
-            devtools.desc.name = "Hamada S. Badr",
-            devtools.desc.author = utils::person(
-              given = "Hamada S.",
-              family = "Badr",
-              email = "badr@jhu.edu",
-              role = c("aut", "cre"),
-              comment = c(ORCID = "0000-0002-9808-2344")
-            ),
-            dplyr.width = Inf,
-            lifecycle_verbosity = "warning",
-            tidymodels.dark = TRUE
+            keep.source.pkgs = TRUE
           )
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("covr")
