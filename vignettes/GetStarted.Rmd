@@ -63,7 +63,7 @@ The `bayesian` function is the main function of the package to initialize a
 Bayesian model. We can set up a lot of the information directly within the
 function or update the information later on, via the `update` method. For
 example, if we didn't specify the family initially or set it to something else
-that we now wanted to change, we could write:
+that we now wanted to change, we could use the `update` method as follows
 
 ````{r}
 epi_model <- epi_model %>%
@@ -120,9 +120,10 @@ epi_brmsfit <- epi_fit$fit
 class(epi_brmsfit)
 ```
 
-We can use the workflow including the fitted model, for example, for
-convenient predictions with new data without having to worry about all
-the data reprocessing.
+We can use the trained workflow, which includes the fitted model, to
+conveniently `predict` using new data without having to worry about all
+the data reprocessing, which is automatically applied using the workflow
+preprocessor (recipe).
 
 ```{r}
 newdata <- epilepsy[1:5, ]
