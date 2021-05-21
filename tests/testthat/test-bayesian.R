@@ -1,9 +1,5 @@
 context("bayesian model")
 
-library(rlang)
-
-# -------------------------------------------------------------------------
-
 test_that("bayesian execution", {
   skip_on_cran()
   skip_on_os("mac")
