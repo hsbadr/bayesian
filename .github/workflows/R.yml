@@ -108,6 +108,9 @@ jobs:
           - ${{ needs.initiate.outputs.os_linux }}
           - ${{ needs.initiate.outputs.os_macos }}
           - ${{ needs.initiate.outputs.os_windows }}
+        exclude:
+          - r: ${{ needs.initiate.outputs.r_devel }}
+            os: ${{ needs.initiate.outputs.os_windows }}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
