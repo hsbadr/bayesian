@@ -205,7 +205,7 @@ jobs:
       - name: Install R package dependencies
         run: |
           options(
-            repos = c(CRAN = "https://cran.wustl.edu"),
+            repos = c(CRAN = "http://cran.wustl.edu"),
             keep.source = TRUE,
             keep.source.pkgs = TRUE
           )
