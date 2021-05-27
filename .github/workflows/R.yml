@@ -112,7 +112,6 @@ jobs:
             os: ${{ needs.initiate.outputs.os_linux }}
 
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -135,22 +134,22 @@ jobs:
 
       - name: Query R package dependencies
         run: |
-          install.packages('remotes', type = "source")
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
+          saveRDS(pak::pkg_deps("local::.", dependencies = TRUE), ".github/r-depends.rds")
         shell: Rscript {0}
 
-      - name: Cache R packages
-        if: runner.os != 'Windows'
+      - name: Restore R package cache
         uses: actions/cache@main
         env:
           cache-name: cache-r-packages
         with:
-          path: ${{ env.R_LIBS_USER }}
+          path: |
+            ${{ env.R_LIBS_USER }}/*
+            !${{ env.R_LIBS_USER }}/pak
           key: |
-            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-${{ hashFiles('.github/R-version') }}-3-${{ hashFiles('.github/depends.Rds') }}
+            R-${{ matrix.r }}_${{ matrix.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-${{ hashFiles('.github/r-depends.rds') }}
           restore-keys: |
-            R-${{ matrix.r }}_${{ matrix.os }}-${{ env.cache-name }}-${{ hashFiles('.github/R-version') }}-3-
+            R-${{ matrix.r }}_${{ matrix.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-
 
       - name: Set up system environment for macOS
         if: runner.os == 'macOS'
@@ -169,6 +168,7 @@ jobs:
           brew install netcdf || true
           brew install open-mpi || true
           brew install pandoc || true
+          brew install --cask xquartz || true
           command -v gfortran >&/dev/null 2>&1 || ln -sv /usr/local/bin/gfortran-8 /usr/local/bin/gfortran ; ln -sv /usr/local/lib/gcc/8/* /usr/local/lib/ || true
         shell: bash
 
@@ -202,28 +202,31 @@ jobs:
           sudo apt-get install -y make || true
           sudo apt-get install -y openmpi-bin openmpi-common libopenmpi-dev || true
           sudo apt-get install -y pandoc || true
+          Rscript -e 'pak::local_system_requirements(execute = TRUE)' || true
+          Rscript -e 'pak::pkg_system_requirements("pkgdown", execute = TRUE)' || true
         shell: bash
 
       - name: Install R package dependencies
         run: |
           options(
-            repos = c(CRAN = "https://cran.microsoft.com"),
+            crayon.enabled = TRUE,
             keep.source = TRUE,
-            keep.source.pkgs = TRUE
+            keep.source.pkgs = TRUE,
+            repos = c(CRAN = "https://cran.microsoft.com")
           )
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("covr")
-          remotes::install_cran("curl")
-          remotes::install_cran("devtools")
-          remotes::install_cran("htmltools")
-          remotes::install_cran("lintr")
-          remotes::install_cran("pkgdown")
-          remotes::install_cran("rcmdcheck")
-          remotes::install_cran("rmarkdown")
-          remotes::install_cran("roxygen2")
-          remotes::install_cran("sessioninfo")
-          remotes::install_cran("styler")
-          remotes::install_local(".")
+          pak::local_install_dev_deps(upgrade = TRUE)
+          pak::pkg_install("local::.", upgrade = TRUE)
+          pak::pkg_install("covr")
+          pak::pkg_install("curl")
+          pak::pkg_install("devtools")
+          pak::pkg_install("htmltools")
+          pak::pkg_install("lintr")
+          pak::pkg_install("pkgdown")
+          pak::pkg_install("rcmdcheck")
+          pak::pkg_install("rmarkdown")
+          pak::pkg_install("roxygen2")
+          pak::pkg_install("sessioninfo")
+          pak::pkg_install("styler")
         shell: Rscript {0}
 
       - name: Print R session information
@@ -241,6 +244,7 @@ jobs:
           _R_CHECK_DONTTEST_EXAMPLES_: false
           _R_CHECK_FORCE_SUGGESTS_: false
         run: |
+          options(crayon.enabled = TRUE)
           if (nzchar(Sys.getenv("MAKEVARS_UPDATE"))) {
             dotR <- file.path(Sys.getenv("HOME"), ".R")
             if (!file.exists(dotR)) dir.create(dotR)
@@ -273,6 +277,7 @@ jobs:
       - name: Build packages
         if: success()
         run: |
+          options(crayon.enabled = TRUE)
           src <- pkgbuild::build(".", dest_path = tempdir(), vignettes = FALSE, manual = FALSE, binary = FALSE)
           bin <- pkgbuild::build(".", dest_path = tempdir(), vignettes = FALSE, manual = FALSE, binary = TRUE)
           dir.create("build")
@@ -298,6 +303,7 @@ jobs:
       - name: Render documents
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
+          options(crayon.enabled = TRUE)
           if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
           roxygen2::roxygenize()
         shell: Rscript {0}
@@ -306,8 +312,8 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           set -x
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
           git commit -m 'Formatting R code using styler' || echo 'No changes to commit'
           find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
@@ -326,12 +332,14 @@ jobs:
       - name: Analyze R code
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
+          options(crayon.enabled = TRUE)
           lintr::lint_package()
         shell: Rscript {0}
 
       - name: Analyze unit test coverage
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
+          options(crayon.enabled = TRUE)
           covr::codecov(type = "all", line_exclusions = NULL, function_exclusions = NULL)
         shell: Rscript {0}
 
@@ -339,8 +347,8 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           set -x
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
         shell: bash
 
