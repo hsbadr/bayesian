@@ -1,4 +1,3 @@
-^.*\.png$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.cache$
@@ -23,6 +22,7 @@
 ^logs$
 ^README\.html$
 ^README\.Rmd$
+^README-.*\.png$
 ^src/.*\.so$
 ^src/.*\.dll$
 ^src/.*\.o$
