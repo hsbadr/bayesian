@@ -193,21 +193,21 @@
 ##  Family: poisson 
 ##   Links: mu = log 
 ## Formula: count ~ Trt + Base + Age + (1 | patient) 
-##    Data: .x3 (Number of observations: 236) 
+##    Data: structure(list(count = c(5, 3, 2, 4, 7, 5, 6, 40,  (Number of observations: 236) 
 ## Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
 ##          total post-warmup samples = 4000
 ## 
 ## Group-Level Effects: 
 ## ~patient (Number of levels: 59) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.57      0.07     0.45     0.72 1.00      790     1609
+## sd(Intercept)     0.57      0.07     0.46     0.72 1.00      743     1384
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     1.77      0.11     1.54     1.98 1.01      772     1313
-## Trt1         -0.26      0.16    -0.57     0.05 1.01      743     1224
-## Base          0.73      0.08     0.57     0.89 1.01      753     1441
-## Age           0.09      0.08    -0.08     0.25 1.00      818     1451
+## Intercept     1.77      0.12     1.53     2.00 1.01      633     1004
+## Trt1         -0.26      0.16    -0.58     0.06 1.00      777     1219
+## Base          0.73      0.08     0.57     0.89 1.00      763     1488
+## Age           0.09      0.08    -0.07     0.25 1.01      769     1214
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -238,7 +238,7 @@
 ## 2           0           8
 ## 3           0           7
 ## 4           0           8
-## 5           6          22</code></pre>
+## 5           6          23</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
