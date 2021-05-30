@@ -1,10 +1,13 @@
 # bayesian 0.0.5
 
+- Cleanly evaluating the fit call
 - Revised engine-specific encodings
 - tests: Update Bayesian model specification
 - Reformatted code and updated documentation
 - Updated dependencies and documentation
 - Updated GettingStarted vignette
+- Updated `tidymodels` citation
+- Updated the package logo
 
 # bayesian 0.0.4
 
