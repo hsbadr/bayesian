@@ -332,21 +332,18 @@ check_args.bayesian <- function(object) {
 #' @rdname bayesian
 #' @export
 bayesian_fit <- function(formula, data, ...) {
-  dots <- list(...)
+  dots <- list(formula = formula, data = rlang::enquo(data), ...)
 
   # Override the formula, if needed
-  if (inherits(
-    dots$formula.override,
-    c("brmsformula", "formula")
-  )) {
-    dots$formula <- dots$formula.override
-  } else if (inherits(
-    formula,
-    c("brmsformula", "formula")
-  )) {
-    dots$formula <- formula
-  } else {
-    rlang::abort("Unsupported or invalid formula!")
+  if (!is.null(dots$formula.override)) {
+    if (inherits(
+      dots$formula.override,
+      c("formula", "list")
+    )) {
+      dots$formula <- dots$formula.override
+    } else {
+      rlang::abort("Unsupported or invalid formula.override!")
+    }
   }
   dots$formula.override <- NULL
 
@@ -358,12 +355,12 @@ bayesian_fit <- function(formula, data, ...) {
   if (brms::is.brmsfit(dots$fit)) {
     dots$object <- dots$fit
     dots$fit <- NULL
+    dots$data <- NULL
 
     update.brmsfit <- utils::getFromNamespace("update.brmsfit", "brms")
 
     fitcall <- rlang::call2("update.brmsfit", !!!dots)
   } else {
-    dots$data <- data
     dots$formula. <- NULL
     dots$newdata <- NULL
     dots$recompile <- NULL
