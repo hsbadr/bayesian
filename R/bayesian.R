@@ -357,9 +357,7 @@ bayesian_fit <- function(formula, data, ...) {
     dots$fit <- NULL
     dots$data <- NULL
 
-    update.brmsfit <- utils::getFromNamespace("update.brmsfit", "brms")
-
-    fitcall <- rlang::call2("update.brmsfit", !!!dots)
+    fitcall <- rlang::call2("update", !!!dots, .ns = "stats")
   } else {
     dots$formula. <- NULL
     dots$newdata <- NULL
