@@ -354,19 +354,25 @@ bayesian_fit <- function(formula, data, ...) {
   dots <- append(dots, dots$stan_args)
   dots$stan_args <- NULL
 
-  # Fit or update the model
+  # Create the fit call
   if (brms::is.brmsfit(dots$fit)) {
     dots$object <- dots$fit
     dots$fit <- NULL
+
     update.brmsfit <- utils::getFromNamespace("update.brmsfit", "brms")
-    brms::do_call(update.brmsfit, dots)
+
+    fitcall <- rlang::call2("update.brmsfit", !!!dots)
   } else {
     dots$data <- data
     dots$formula. <- NULL
     dots$newdata <- NULL
     dots$recompile <- NULL
-    brms::do_call(brms::brm, dots)
+
+    fitcall <- rlang::call2("brm", !!!dots, .ns = "brms")
   }
+
+  # Evaluate the fit call
+  rlang::eval_tidy(fitcall)
 }
 
 # -------------------------------------------------------------------------
