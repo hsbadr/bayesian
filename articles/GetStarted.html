@@ -193,21 +193,21 @@
 ##  Family: poisson 
 ##   Links: mu = log 
 ## Formula: count ~ Trt + Base + Age + (1 | patient) 
-##    Data: structure(list(count = c(5, 3, 2, 4, 7, 5, 6, 40,  (Number of observations: 236) 
+##    Data: ~data (Number of observations: 236) 
 ## Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
 ##          total post-warmup samples = 4000
 ## 
 ## Group-Level Effects: 
 ## ~patient (Number of levels: 59) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.58      0.07     0.45     0.73 1.00      809     1252
+## sd(Intercept)     0.57      0.07     0.46     0.72 1.01      818     1460
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     1.77      0.12     1.53     2.00 1.01      773     1157
-## Trt1         -0.26      0.16    -0.59     0.05 1.01      697     1234
-## Base          0.73      0.08     0.56     0.89 1.00      790     1385
-## Age           0.09      0.09    -0.09     0.26 1.01      562     1022
+## Intercept     1.78      0.12     1.54     2.01 1.00      629      913
+## Trt1         -0.27      0.16    -0.59     0.06 1.00      695      965
+## Base          0.73      0.08     0.57     0.89 1.00      689     1026
+## Age           0.08      0.09    -0.09     0.25 1.00      698     1177
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -234,11 +234,11 @@
 <pre><code>## # A tibble: 5 x 2
 ##   .pred_lower .pred_upper
 ##         &lt;dbl&gt;       &lt;dbl&gt;
-## 1           0           8
-## 2           0           8
-## 3           0           7
-## 4           0           8
-## 5           6          22</code></pre>
+## 1        0              8
+## 2        0              8
+## 3        0              7
+## 4        0              8
+## 5        6.98          23</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
