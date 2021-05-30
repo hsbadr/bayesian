@@ -1,6 +1,8 @@
 # bayesian 0.0.5
 
 - Cleanly evaluating the fit call
+- Cleaned up `bayesian_fit` function
+- Directly calling the `update` method
 - Revised engine-specific encodings
 - tests: Update Bayesian model specification
 - Reformatted code and updated documentation
