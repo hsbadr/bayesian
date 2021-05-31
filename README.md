@@ -6,7 +6,7 @@ Bindings for Bayesian TidyModels [<img src="man/figures/bayesian.png" align="rig
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+Stable](https://img.shields.io/badge/Lifecycle-Stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Codecov Test
 Coverage](https://codecov.io/gh/hsbadr/bayesian/branch/main/graph/badge.svg)](https://codecov.io/gh/hsbadr/bayesian?branch=main)
 [![Last
