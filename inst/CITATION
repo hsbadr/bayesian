@@ -15,7 +15,7 @@ citEntry(entry = "Manual",
   year         = "2021",
   journal      = "Comprehensive R Archive Network (CRAN)",
   url          = "https://cran.r-project.org/package=bayesian",
-  doi          = "10.5281/zenodo.4430991",
+  doi          = "10.5281/zenodo.4882780",
   language     = "English",
   key          = "bayesian-manual",
 
@@ -23,5 +23,5 @@ citEntry(entry = "Manual",
   paste("Hamada S. Badr and Paul C. Bürkner (2021):",
         "bayesian: Bindings for Bayesian TidyModels,",
         "_Comprehensive R Archive Network (CRAN)_.",
-        "DOI: 10.5281/zenodo.4430991")
+        "DOI: 10.5281/zenodo.4882780")
 )
