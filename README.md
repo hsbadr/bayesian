@@ -73,8 +73,8 @@ To cite `bayesian` in publications, please use:
 
 > Hamada S. Badr and Paul C. Bürkner (2021): bayesian: Bindings for
 > Bayesian TidyModels, [*Comprehensive R Archive Network
-> (CRAN)*](https://cran.r-project.org/package=bayesian), DOI:
-> [10.5281/zenodo.4882780](https://doi.org/10.5281/zenodo.4882780).
+> (CRAN)*](https://cran.r-project.org/package=bayesian), URL:
+> <https://hsbadr.github.io/bayesian/>.
 
 Contributing
 ------------

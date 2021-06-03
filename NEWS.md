@@ -1,3 +1,7 @@
+# bayesian 0.0.6
+
+- Updated README and citation
+
 # bayesian 0.0.5
 
 - Cleanly evaluating the fit call
