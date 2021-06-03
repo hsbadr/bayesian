@@ -155,21 +155,21 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           set -x
-          brew install curl || true
-          brew install harfbuzz fribidi || true
-          brew install git || true
-          brew install glpk || true
-          brew install icu4c || true
-          brew install libgit2 || true
-          brew install libpng || true
-          brew install libtiff || true
-          brew install libxml2 || true
-          brew install make || true
-          brew install netcdf || true
-          brew install open-mpi || true
-          brew install pandoc || true
-          brew install --cask xquartz || true
-          command -v gfortran >&/dev/null 2>&1 || ln -sv /usr/local/bin/gfortran-8 /usr/local/bin/gfortran ; ln -sv /usr/local/lib/gcc/8/* /usr/local/lib/ || true
+          rm -f /usr/local/bin/gfortran || true
+          brew reinstall --force --verbose curl || true
+          brew reinstall --force --verbose harfbuzz fribidi || true
+          brew reinstall --force --verbose gcc@8 || true
+          brew reinstall --force --verbose git || true
+          brew reinstall --force --verbose glpk || true
+          brew reinstall --force --verbose icu4c || true
+          brew reinstall --force --verbose libgit2 || true
+          brew reinstall --force --verbose libpng || true
+          brew reinstall --force --verbose libtiff || true
+          brew reinstall --force --verbose libxml2 || true
+          brew reinstall --force --verbose make || true
+          brew reinstall --force --verbose netcdf || true
+          brew reinstall --force --verbose open-mpi || true
+          brew reinstall --force --verbose --cask xquartz || true
         shell: bash
 
       - name: Set up system environment for Windows
