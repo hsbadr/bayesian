@@ -62,7 +62,6 @@
 #' summary(bayesian_mod$fit)
 #' }
 #'
-#' # -------------------------------------------------------------------------
 #' @export
 bayesian <-
   function(mode = "regression",
@@ -171,6 +170,7 @@ translate.bayesian <- function(x, engine = x$engine, ...) {
 #' @return An updated model specification.
 #'
 #' @examples
+#'
 #' model <- bayesian(inits = "random")
 #' model
 #' update(model, inits = "0")

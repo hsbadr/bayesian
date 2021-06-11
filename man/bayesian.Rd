@@ -337,7 +337,7 @@ bayesian_mod <-
 summary(bayesian_mod$fit)
 }
 
-# -------------------------------------------------------------------------
+
 model <- bayesian(inits = "random")
 model
 update(model, inits = "0")
