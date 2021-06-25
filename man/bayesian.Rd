@@ -14,6 +14,7 @@
 \usage{
 bayesian(
   mode = "regression",
+  engine = "brms",
   formula.override = NULL,
   family = NULL,
   prior = NULL,
@@ -90,9 +91,13 @@ bayesian_write(object, file)
 bayesian_read(file)
 }
 \arguments{
-\item{mode}{A single character string for the type of model.
+\item{mode}{A single character string for the prediction outcome mode.
 Possible values for this model are "unknown", "regression", or
 "classification".}
+
+\item{engine}{A single character string specifying what computational
+engine to use for fitting. Possible engines are listed below.
+The default for this model is \code{"brms"}.}
 
 \item{formula.override}{Overrides the formula; for details see
 \code{\link[brms]{brmsformula}}.}
