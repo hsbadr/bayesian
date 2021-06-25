@@ -1,6 +1,7 @@
 # bayesian 0.0.6
 
 - Added functionality to change to declare an engine in the model specification function.
+- Updated package dependencies
 - Updated README and citation
 
 # bayesian 0.0.5
