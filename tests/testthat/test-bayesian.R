@@ -71,4 +71,7 @@ test_that("bayesian execution", {
 
   expect_equal(bayesian_pred_int$.pred_lower, brms_pi_lower, tolerance = 0.1)
   expect_equal(bayesian_pred_int$.pred_upper, brms_pi_upper, tolerance = 0.1)
+
+  # Check the default engine
+  expect_equal(bayesian()$engine, "brms")
 })
