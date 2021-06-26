@@ -137,3 +137,15 @@ epi_workflow_fit %>%
     level = 0.95
   )
 ```
+
+To add the standard errors on the scale of the linear predictors
+
+```{r eval = run_on_linux}
+epi_workflow_fit %>%
+  predict(
+    new_data = newdata,
+    type = "conf_int",
+    level = 0.95,
+    std_error = TRUE
+  )
+```
