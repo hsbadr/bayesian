@@ -363,6 +363,89 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           )
         )
       )
+
+      parsnip::set_pred(
+        model = model,
+        eng = engine,
+        mode = mode,
+        type = "conf_int",
+        value = list(
+          pre = NULL,
+          post = function(results, object) {
+            res_2 <-
+              tibble::tibble(
+                lo = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$conf_int$extras$level
+                ),
+                hi = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$conf_int$extras$level,
+                  lower = FALSE
+                ),
+              )
+            res_1 <- res_2
+            res_1$lo <- 1 - res_2$hi
+            res_1$hi <- 1 - res_2$lo
+            res <- dplyr::bind_cols(res_1, res_2)
+            lo_nms <- paste0(".pred_lower_", object$lvl)
+            hi_nms <- paste0(".pred_upper_", object$lvl)
+            colnames(res) <- c(lo_nms[1], hi_nms[1], lo_nms[2], hi_nms[2])
+            if (object$spec$method$pred$conf_int$extras$std_error) {
+              res$.std_error <- apply(results, 2, stats::sd, na.rm = TRUE)
+            }
+            res
+          },
+          func = predfunc,
+          args = list(
+            object = rlang::expr(object$fit),
+            newdata = rlang::expr(new_data),
+            summary = FALSE
+          )
+        )
+      )
+
+      parsnip::set_pred(
+        model = model,
+        eng = engine,
+        mode = mode,
+        type = "pred_int",
+        value = list(
+          pre = NULL,
+          post = function(results, object) {
+            res_2 <-
+              tibble::tibble(
+                lo = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$pred_int$extras$level
+                ),
+                hi = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$pred_int$extras$level,
+                  lower = FALSE
+                ),
+              )
+            res_1 <- res_2
+            res_1$lo <- 1 - res_2$hi
+            res_1$hi <- 1 - res_2$lo
+            res <- dplyr::bind_cols(res_1, res_2)
+            lo_nms <- paste0(".pred_lower_", object$lvl)
+            hi_nms <- paste0(".pred_upper_", object$lvl)
+            colnames(res) <- c(lo_nms[1], hi_nms[1], lo_nms[2], hi_nms[2])
+
+            if (object$spec$method$pred$pred_int$extras$std_error) {
+              res$.std_error <- apply(results, 2, stats::sd, na.rm = TRUE)
+            }
+            res
+          },
+          func = predfunc,
+          args = list(
+            object = rlang::expr(object$fit),
+            newdata = rlang::expr(new_data),
+            summary = FALSE
+          )
+        )
+      )
     } else {
       parsnip::set_pred(
         model = model,
@@ -382,119 +465,77 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           )
         )
       )
+
+      parsnip::set_pred(
+        model = model,
+        eng = engine,
+        mode = mode,
+        type = "conf_int",
+        value = list(
+          pre = NULL,
+          post = function(results, object) {
+            res <-
+              tibble::tibble(
+                .pred_lower = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$conf_int$extras$level
+                ),
+                .pred_upper = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$conf_int$extras$level,
+                  lower = FALSE
+                ),
+              )
+
+            if (object$spec$method$pred$conf_int$extras$std_error) {
+              res$.std_error <- apply(results, 2, stats::sd, na.rm = TRUE)
+            }
+            res
+          },
+          func = predfunc,
+          args = list(
+            object = rlang::expr(object$fit),
+            newdata = rlang::expr(new_data),
+            summary = FALSE
+          )
+        )
+      )
+
+      parsnip::set_pred(
+        model = model,
+        eng = engine,
+        mode = mode,
+        type = "pred_int",
+        value = list(
+          pre = NULL,
+          post = function(results, object) {
+            res <-
+              tibble::tibble(
+                .pred_lower = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$pred_int$extras$level
+                ),
+                .pred_upper = parsnip::convert_stan_interval(
+                  results,
+                  level = object$spec$method$pred$pred_int$extras$level,
+                  lower = FALSE
+                ),
+              )
+
+            if (object$spec$method$pred$pred_int$extras$std_error) {
+              res$.std_error <- apply(results, 2, stats::sd, na.rm = TRUE)
+            }
+            res
+          },
+          func = predfunc,
+          args = list(
+            object = rlang::expr(object$fit),
+            newdata = rlang::expr(new_data),
+            summary = FALSE
+          )
+        )
+      )
     }
-
-    parsnip::set_pred(
-      model = model,
-      eng = engine,
-      mode = mode,
-      type = "conf_int",
-      value = list(
-        pre = NULL,
-        post = function(results, object) {
-          if (mode == "classification") {
-            res_2 <-
-              tibble::tibble(
-                lo = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$conf_int$extras$level
-                ),
-                hi = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$conf_int$extras$level,
-                  lower = FALSE
-                ),
-              )
-            res_1 <- res_2
-            res_1$lo <- 1 - res_2$hi
-            res_1$hi <- 1 - res_2$lo
-            res <- dplyr::bind_cols(res_1, res_2)
-            lo_nms <- paste0(".pred_lower_", object$lvl)
-            hi_nms <- paste0(".pred_upper_", object$lvl)
-            colnames(res) <- c(lo_nms[1], hi_nms[1], lo_nms[2], hi_nms[2])
-          } else {
-            res <-
-              tibble::tibble(
-                .pred_lower = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$conf_int$extras$level
-                ),
-                .pred_upper = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$conf_int$extras$level,
-                  lower = FALSE
-                ),
-              )
-          }
-          if (object$spec$method$pred$conf_int$extras$std_error) {
-            res$.std_error <- apply(results, 2, stats::sd, na.rm = TRUE)
-          }
-          res
-        },
-        func = predfunc,
-        args = list(
-          object = rlang::expr(object$fit),
-          newdata = rlang::expr(new_data),
-          summary = FALSE
-        )
-      )
-    )
-
-    parsnip::set_pred(
-      model = model,
-      eng = engine,
-      mode = mode,
-      type = "pred_int",
-      value = list(
-        pre = NULL,
-        post = function(results, object) {
-          if (mode == "classification") {
-            res_2 <-
-              tibble::tibble(
-                lo = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$pred_int$extras$level
-                ),
-                hi = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$pred_int$extras$level,
-                  lower = FALSE
-                ),
-              )
-            res_1 <- res_2
-            res_1$lo <- 1 - res_2$hi
-            res_1$hi <- 1 - res_2$lo
-            res <- dplyr::bind_cols(res_1, res_2)
-            lo_nms <- paste0(".pred_lower_", object$lvl)
-            hi_nms <- paste0(".pred_upper_", object$lvl)
-            colnames(res) <- c(lo_nms[1], hi_nms[1], lo_nms[2], hi_nms[2])
-          } else {
-            res <-
-              tibble::tibble(
-                .pred_lower = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$pred_int$extras$level
-                ),
-                .pred_upper = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$pred_int$extras$level,
-                  lower = FALSE
-                ),
-              )
-          }
-          if (object$spec$method$pred$pred_int$extras$std_error) {
-            res$.std_error <- apply(results, 2, stats::sd, na.rm = TRUE)
-          }
-          res
-        },
-        func = predfunc,
-        args = list(
-          object = rlang::expr(object$fit),
-          newdata = rlang::expr(new_data),
-          summary = FALSE
-        )
-      )
-    )
 
     parsnip::set_pred(
       model = model,
