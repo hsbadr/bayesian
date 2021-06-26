@@ -89,7 +89,7 @@
 </h1>
                         <h4 class="author">Paul-Christian Bürkner &amp; Hamada S. Badr</h4>
             
-            <h4 class="date">2021-06-25</h4>
+            <h4 class="date">2021-06-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/hsbadr/bayesian/blob/master/vignettes/GetStarted.Rmd"><code>vignettes/GetStarted.Rmd</code></a></small>
       <div class="hidden name"><code>GetStarted.Rmd</code></div>
@@ -200,14 +200,14 @@
 ## Group-Level Effects: 
 ## ~patient (Number of levels: 59) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.57      0.07     0.46     0.72 1.00      917     1823
+## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      685     1440
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     1.78      0.12     1.54     2.02 1.01      595     1360
-## Trt1         -0.27      0.17    -0.61     0.05 1.01      658     1078
-## Base          0.73      0.08     0.58     0.89 1.00      745     1336
-## Age           0.08      0.08    -0.08     0.24 1.00      730     1330
+## Intercept     1.78      0.12     1.54     2.01 1.01      598     1168
+## Trt1         -0.27      0.17    -0.60     0.07 1.00      643     1175
+## Base          0.73      0.08     0.58     0.89 1.01      810     1279
+## Age           0.08      0.08    -0.08     0.25 1.00      702     1136
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -229,7 +229,8 @@
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span>
     new_data <span class="op">=</span> <span class="va">newdata</span>,
-    type <span class="op">=</span> <span class="st">"conf_int"</span>
+    type <span class="op">=</span> <span class="st">"conf_int"</span>,
+    level <span class="op">=</span> <span class="fl">0.95</span>
   <span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   .pred_lower .pred_upper
