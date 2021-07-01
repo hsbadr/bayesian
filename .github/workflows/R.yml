@@ -162,6 +162,7 @@ jobs:
           brew reinstall --force --verbose git || true
           brew reinstall --force --verbose glpk || true
           brew reinstall --force --verbose icu4c || true
+          brew reinstall --force --verbose libarchive || true
           brew reinstall --force --verbose libgit2 || true
           brew reinstall --force --verbose libpng || true
           brew reinstall --force --verbose libtiff || true
@@ -190,6 +191,7 @@ jobs:
           set -x
           sudo apt-get install -y clang-format || true
           sudo apt-get install -y git || true
+          sudo apt-get install -y libarchive-dev || true
           sudo apt-get install -y libcurl4-openssl-dev || true
           sudo apt-get install -y libgit2-dev || true
           sudo apt-get install -y libglpk-dev || true
