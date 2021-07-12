@@ -13,7 +13,7 @@ Authors@R:
              email = "paul.buerkner@gmail.com",
              role = c("aut")))
 Description: Fit Bayesian models using 'brms'/'Stan' with 'parsnip'/'tidymodels'
-    via 'bayesian' <doi:10.5281/zenodo.4882780>. 'tidymodels' is a collection of
+    via 'bayesian' <doi:10.5281/zenodo.5091194>. 'tidymodels' is a collection of
     packages for machine learning; see Kuhn and Wickham (2020) <https://www.tidymodels.org>).
     The technical details of 'brms' and 'Stan' are described in Bürkner (2017)
     <doi:10.18637/jss.v080.i01>, Bürkner (2018) <doi:10.32614/RJ-2018-017>,
