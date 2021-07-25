@@ -89,7 +89,7 @@
 </h1>
                         <h4 class="author">Paul-Christian Bürkner &amp; Hamada S. Badr</h4>
             
-            <h4 class="date">2021-07-18</h4>
+            <h4 class="date">2021-07-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/hsbadr/bayesian/blob/master/vignettes/GetStarted.Rmd"><code>vignettes/GetStarted.Rmd</code></a></small>
       <div class="hidden name"><code>GetStarted.Rmd</code></div>
@@ -200,14 +200,14 @@
 ## Group-Level Effects: 
 ## ~patient (Number of levels: 59) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      845     1676
+## sd(Intercept)     0.58      0.07     0.46     0.72 1.01      706     1582
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     1.76      0.12     1.53     1.99 1.00      698     1465
-## Trt1         -0.26      0.16    -0.58     0.06 1.00      633     1316
-## Base          0.73      0.08     0.57     0.90 1.00      607     1013
-## Age           0.09      0.09    -0.09     0.25 1.01      623     1323
+## Intercept     1.78      0.12     1.54     2.03 1.00      614     1185
+## Trt1         -0.27      0.16    -0.59     0.05 1.01      668     1115
+## Base          0.73      0.08     0.57     0.89 1.02      576      907
+## Age           0.09      0.08    -0.07     0.25 1.01      704     1393
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -234,7 +234,7 @@
     type <span class="op">=</span> <span class="st">"conf_int"</span>,
     level <span class="op">=</span> <span class="fl">0.95</span>
   <span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 2
+<pre><code>## # A tibble: 5 × 2
 ##   .pred_lower .pred_upper
 ##         &lt;dbl&gt;       &lt;dbl&gt;
 ## 1           0           8
@@ -251,14 +251,14 @@
     level <span class="op">=</span> <span class="fl">0.95</span>,
     std_error <span class="op">=</span> <span class="cn">TRUE</span>
   <span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 3
+<pre><code>## # A tibble: 5 × 3
 ##   .pred_lower .pred_upper .std_error
 ##         &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
 ## 1           0           8       2.08
-## 2           0           8       2.02
-## 3           0           7       1.78
+## 2           0           8       2.05
+## 3           0           7       1.83
 ## 4           0           8       2.03
-## 5           6          23       4.17</code></pre>
+## 5           6          22       4.14</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
