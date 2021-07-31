@@ -125,6 +125,22 @@ bayesian <-
       silent = rlang::enquo(silent)
     )
 
+    if (is.null(family)) {
+      if (mode == "classification") {
+        args$family <- rlang::expr(
+          stats::binomial(
+            link = "logit"
+          )
+        )
+      } else {
+        args$family <- rlang::expr(
+          stats::gaussian(
+            link = "identity"
+          )
+        )
+      }
+    }
+
     parsnip::new_model_spec(
       "bayesian",
       args = args,

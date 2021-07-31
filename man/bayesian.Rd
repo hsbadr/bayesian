@@ -315,10 +315,14 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Bayesian Model Specification (regression)
 ## 
+## Main Arguments:
+##   family = stats::gaussian(link = "identity")
+## 
 ## Computational engine: brms 
 ## 
 ## Model fit template:
-## bayesian::bayesian_fit(formula = missing_arg(), data = missing_arg())
+## bayesian::bayesian_fit(formula = missing_arg(), data = missing_arg(), 
+##     family = stats::gaussian(link = "identity"))
 }
 }
 
