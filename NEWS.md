@@ -1,6 +1,5 @@
 # bayesian 0.0.7
 
-- Set default family for classification and regression
 - Fixed class predictions for binary classification
 
 # bayesian 0.0.6
