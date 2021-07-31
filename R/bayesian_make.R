@@ -307,6 +307,9 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           pre = NULL,
           post = function(results, object) {
             if (length(object$lvl) == 2) {
+              if (is.array(results)) {
+                results <- as.vector(results)
+              }
               results <- ifelse(
                 results[, 1] >= 0.5,
                 object$lvl[2],
