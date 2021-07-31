@@ -1,3 +1,7 @@
+# bayesian 0.0.7
+
+- Fixed class predictions for binary classification
+
 # bayesian 0.0.6
 
 - Added functionality to change to declare an engine in the model specification function.
