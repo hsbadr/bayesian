@@ -200,14 +200,14 @@
 ## Group-Level Effects: 
 ## ~patient (Number of levels: 59) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.57      0.07     0.46     0.73 1.00      772     1308
+## sd(Intercept)     0.58      0.07     0.45     0.72 1.01      788     1297
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     1.77      0.12     1.53     2.00 1.00      595      829
-## Trt1         -0.26      0.17    -0.60     0.08 1.00      678     1123
-## Base          0.73      0.08     0.58     0.89 1.00      760     1099
-## Age           0.08      0.08    -0.08     0.24 1.00      776     1293
+## Intercept     1.77      0.12     1.54     2.00 1.00      578      914
+## Trt1         -0.27      0.17    -0.62     0.04 1.00      711     1072
+## Base          0.72      0.08     0.57     0.89 1.01      659     1100
+## Age           0.08      0.08    -0.08     0.25 1.01      614     1218
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -241,7 +241,7 @@
 ## 2           0           8
 ## 3           0           7
 ## 4           0           8
-## 5           6          23</code></pre>
+## 5           6          22</code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> <span class="op">%&gt;%</span>
@@ -254,11 +254,11 @@
 <pre><code>## # A tibble: 5 × 3
 ##   .pred_lower .pred_upper .std_error
 ##         &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-## 1           0           8       2.02
-## 2           0           8       2.06
-## 3           0           7       1.85
-## 4           0           8       1.96
-## 5           6          22       4.13</code></pre>
+## 1           0           8       2.11
+## 2           0           8       2.08
+## 3           0           7       1.81
+## 4           0           8       2.01
+## 5           6          22       4.11</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
