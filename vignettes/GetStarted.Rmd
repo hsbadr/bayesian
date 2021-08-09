@@ -107,7 +107,7 @@ To extract the parsnip model fit from the workflow
 
 ```{r eval = run_on_linux}
 epi_fit <- epi_workflow_fit %>%
-  pull_workflow_fit()
+  extract_fit_parsnip()
 ```
 
 The `brmsfit` object is stored in the `fit` slot

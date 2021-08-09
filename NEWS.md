@@ -1,6 +1,7 @@
 # bayesian 0.0.7
 
 - Fixed class predictions for binary classification
+- Replaced deprecated `pull_workflow_fit()`
 
 # bayesian 0.0.6
 
