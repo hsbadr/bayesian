@@ -279,7 +279,9 @@ jobs:
         if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
         run: |
           options(crayon.enabled = TRUE)
-          revdepcheck::revdep_check()
+          revdepcheck::revdep_reset()
+          revdepcheck::revdep_check(timeout = as.difftime(60, units = "mins"), num_workers = 1, bioc = TRUE)
+          revdepcheck::revdep_reset()
         shell: Rscript {0}
 
       - name: Remove revdep library
