@@ -23,6 +23,7 @@
 ^README\.html$
 ^README\.Rmd$
 ^README-.*\.png$
+^revdep$
 ^src/.*\.so$
 ^src/.*\.dll$
 ^src/.*\.o$
