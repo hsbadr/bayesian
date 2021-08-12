@@ -248,18 +248,6 @@ jobs:
           _R_CHECK_FORCE_SUGGESTS_: false
         run: |
           options(crayon.enabled = TRUE)
-          if (nzchar(Sys.getenv("MAKEVARS_UPDATE"))) {
-            dotR <- file.path(Sys.getenv("HOME"), ".R")
-            if (!file.exists(dotR)) dir.create(dotR)
-            path_makevars <- file.path(dotR, ifelse(.Platform$OS.type == "windows", "Makevars.win", "Makevars"))
-            if (!file.exists(path_makevars)) file.create(path_makevars)
-            cat("",
-                "CXX_STD     = CXX14",
-                "CXX14STD    = -std=c++1y",
-                "CXX14FLAGS += -Wno-ignored-attributes",
-                "CXX11FLAGS += -Wno-ignored-attributes",
-                file = path_makevars, sep = "\n", append = TRUE)
-          }
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
