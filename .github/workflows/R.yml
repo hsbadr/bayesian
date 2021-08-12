@@ -345,7 +345,7 @@ jobs:
 
   release:
     name: Create release
-    if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
+    if: contains(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
     runs-on: ${{ needs.initiate.outputs.os_linux }}
     timeout-minutes: 360
     outputs:
@@ -376,7 +376,7 @@ jobs:
 
   upload-src:
     name: Upload source package
-    if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
+    if: contains(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
     runs-on: ${{ needs.initiate.outputs.os_linux }}
     timeout-minutes: 360
 
@@ -414,7 +414,7 @@ jobs:
 
   upload-bin:
     name: Upload R-${{ matrix.r }} | ${{ matrix.os }}
-    if: startsWith(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
+    if: contains(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
     runs-on: ${{ needs.initiate.outputs.os_linux }}
     timeout-minutes: 360
 
