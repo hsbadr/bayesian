@@ -337,9 +337,9 @@ jobs:
           set -x
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          find . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
+          find -not -path "./check/*" . -type f \( -name 'DESCRIPTION' -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
           git commit -m 'Formatting R code using styler' || echo 'No changes to commit'
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
+          find -not -path "./check/*" . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
           git commit -m 'Formatting C/C++ code using clang-format' || echo 'No changes to commit'
           git add README.md NAMESPACE man/\* || true
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
