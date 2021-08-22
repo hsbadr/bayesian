@@ -116,18 +116,18 @@ linear \code{gaussian} model is applied. In multivariate models,
 \code{c} method or the \code{+} operator. See also  \code{\link[brms]{get_prior}}
 for more help.}
 
-\item{sample_prior}{Indicate if samples from priors should be drawn
-additionally to the posterior samples. Options are \code{"no"} (the
-default), \code{"yes"}, and \code{"only"}. Among others, these samples can
+\item{sample_prior}{Indicate if draws from priors should be drawn
+additionally to the posterior draws. Options are \code{"no"} (the
+default), \code{"yes"}, and \code{"only"}. Among others, these draws can
 be used to calculate Bayes factors for point hypotheses via
 \code{\link[brms]{hypothesis}}. Please note that improper priors are not sampled,
 including the default improper priors used by \code{brm}. See
 \code{\link[brms]{set_prior}} on how to set (proper) priors. Please also note
-that prior samples for the overall intercept are not obtained by default
+that prior draws for the overall intercept are not obtained by default
 for technical reasons. See \code{\link[brms]{brmsformula}} how to obtain prior
-samples for the intercept. If \code{sample_prior} is set to \code{"only"},
-samples are drawn solely from the priors ignoring the likelihood, which
-allows among others to generate samples from the prior predictive
+draws for the intercept. If \code{sample_prior} is set to \code{"only"},
+draws are drawn solely from the priors ignoring the likelihood, which
+allows among others to generate draws from the prior predictive
 distribution. In this case, all parameters must have proper priors.}
 
 \item{knots}{Optional list containing user specified knot values to be used
@@ -149,7 +149,7 @@ recommended to use this argument directly, but to call the
 \code{"random"} (the default), Stan will randomly generate initial values
 for parameters. If it is \code{"0"}, all parameters are initialized to
 zero. This option is sometimes useful for certain families, as it happens
-that default (\code{"random"}) inits cause samples to be essentially
+that default (\code{"random"}) inits cause draws to be essentially
 constant. Generally, setting \code{inits = "0"} is worth a try, if chains
 do not behave well. Alternatively, \code{inits} can be a list of lists
 containing the initial values, or a function (or function name) generating
@@ -167,7 +167,7 @@ to 2000).}
 
 \item{warmup}{A positive integer specifying number of warmup (aka burnin)
 iterations. This also specifies the number of iterations used for stepsize
-adaptation, so warmup samples should not be used for inference. The number
+adaptation, so warmup draws should not be used for inference. The number
 of warmup should not be larger than \code{iter} and the default is
 \code{iter/2}.}
 
@@ -201,7 +201,11 @@ fitting the Stan model. Options are \code{"rstan"} (the default) or
 \code{"brms.backend"} option (see \code{\link{options}}). Details on the
 \pkg{rstan} and \pkg{cmdstanr} packages are available at
 \url{https://mc-stan.org/rstan/} and \url{https://mc-stan.org/cmdstanr/},
-respectively.}
+respectively. Additionally a \code{"mock"} backend is available to make
+testing \pkg{brms} and packages that depend on it easier. 
+The \code{"mock"} backend does not actually do any fitting, it only checks
+the generated Stan code for correctness and then returns whatever is passed
+in an additional \code{mock_fit} argument as the result of the fit.}
 
 \item{stan_args}{A list of extra arguments to \pkg{Stan}.}
 
@@ -223,8 +227,11 @@ named after the string supplied in \code{save_model}.}
 saved via \code{\link{saveRDS}}.}
 
 \item{file_refit}{Modifies when the fit stored via the \code{file} parameter
-is re-used. For \code{"never"} (default) the fit is always loaded if it
-exists and fitting is skipped. If set to \code{"on_change"}, brms will
+is re-used. Can be set globally for the current \R session via the
+\code{"brms.file_refit"} option (see \code{\link{options}}). 
+For \code{"never"} (default) the fit is always loaded if it
+exists and fitting is skipped. For \code{"always"} the model is always
+refitted. If set to \code{"on_change"}, brms will
 refit the model if model, data or algorithm as passed to Stan differ from
 what is stored in the file. This also covers changes in priors,
 \code{sample_prior}, \code{stanvars}, covariance structure, etc. If you
@@ -246,7 +253,7 @@ option.}
 \item{future}{Logical; If \code{TRUE}, the \pkg{\link[future:future]{future}}
 package is used for parallel execution of the chains and argument
 \code{cores} will be ignored. Can be set globally for the current \R
-session via the \code{future} option. The execution type is controlled via
+session via the \code{"future"} option. The execution type is controlled via
 \code{\link[future:plan]{plan}} (see the examples section below).}
 
 \item{seed}{The seed for random number generation to make results
