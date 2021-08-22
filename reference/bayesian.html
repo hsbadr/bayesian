@@ -258,18 +258,18 @@ for more help.</p></td>
     </tr>
     <tr>
       <th>sample_prior</th>
-      <td><p>Indicate if samples from priors should be drawn
-additionally to the posterior samples. Options are <code>"no"</code> (the
-default), <code>"yes"</code>, and <code>"only"</code>. Among others, these samples can
+      <td><p>Indicate if draws from priors should be drawn
+additionally to the posterior draws. Options are <code>"no"</code> (the
+default), <code>"yes"</code>, and <code>"only"</code>. Among others, these draws can
 be used to calculate Bayes factors for point hypotheses via
 <code><a href='https://rdrr.io/pkg/brms/man/hypothesis.brmsfit.html'>hypothesis</a></code>. Please note that improper priors are not sampled,
 including the default improper priors used by <code>brm</code>. See
 <code><a href='https://rdrr.io/pkg/brms/man/set_prior.html'>set_prior</a></code> on how to set (proper) priors. Please also note
-that prior samples for the overall intercept are not obtained by default
+that prior draws for the overall intercept are not obtained by default
 for technical reasons. See <code><a href='https://rdrr.io/pkg/brms/man/brmsformula.html'>brmsformula</a></code> how to obtain prior
-samples for the intercept. If <code>sample_prior</code> is set to <code>"only"</code>,
-samples are drawn solely from the priors ignoring the likelihood, which
-allows among others to generate samples from the prior predictive
+draws for the intercept. If <code>sample_prior</code> is set to <code>"only"</code>,
+draws are drawn solely from the priors ignoring the likelihood, which
+allows among others to generate draws from the prior predictive
 distribution. In this case, all parameters must have proper priors.</p></td>
     </tr>
     <tr>
@@ -299,7 +299,7 @@ recommended to use this argument directly, but to call the
 <code>"random"</code> (the default), Stan will randomly generate initial values
 for parameters. If it is <code>"0"</code>, all parameters are initialized to
 zero. This option is sometimes useful for certain families, as it happens
-that default (<code>"random"</code>) inits cause samples to be essentially
+that default (<code>"random"</code>) inits cause draws to be essentially
 constant. Generally, setting <code>inits = "0"</code> is worth a try, if chains
 do not behave well. Alternatively, <code>inits</code> can be a list of lists
 containing the initial values, or a function (or function name) generating
@@ -323,7 +323,7 @@ to 2000).</p></td>
       <th>warmup</th>
       <td><p>A positive integer specifying number of warmup (aka burnin)
 iterations. This also specifies the number of iterations used for stepsize
-adaptation, so warmup samples should not be used for inference. The number
+adaptation, so warmup draws should not be used for inference. The number
 of warmup should not be larger than <code>iter</code> and the default is
 <code>iter/2</code>.</p></td>
     </tr>
@@ -367,7 +367,11 @@ fitting the Stan model. Options are <code>"rstan"</code> (the default) or
 <code>"brms.backend"</code> option (see <code><a href='https://rdrr.io/r/base/options.html'>options</a></code>). Details on the
 <span class="pkg">rstan</span> and <span class="pkg">cmdstanr</span> packages are available at
 <a href='https://mc-stan.org/rstan/'>https://mc-stan.org/rstan/</a> and <a href='https://mc-stan.org/cmdstanr/'>https://mc-stan.org/cmdstanr/</a>,
-respectively.</p></td>
+respectively. Additionally a <code>"mock"</code> backend is available to make
+testing <span class="pkg">brms</span> and packages that depend on it easier. 
+The <code>"mock"</code> backend does not actually do any fitting, it only checks
+the generated Stan code for correctness and then returns whatever is passed
+in an additional <code>mock_fit</code> argument as the result of the fit.</p></td>
     </tr>
     <tr>
       <th>stan_args</th>
@@ -401,8 +405,11 @@ saved via <code><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS</a></code>
     <tr>
       <th>file_refit</th>
       <td><p>Modifies when the fit stored via the <code>file</code> parameter
-is re-used. For <code>"never"</code> (default) the fit is always loaded if it
-exists and fitting is skipped. If set to <code>"on_change"</code>, brms will
+is re-used. Can be set globally for the current <span style="R">R</span> session via the
+<code>"brms.file_refit"</code> option (see <code><a href='https://rdrr.io/r/base/options.html'>options</a></code>). 
+For <code>"never"</code> (default) the fit is always loaded if it
+exists and fitting is skipped. For <code>"always"</code> the model is always
+refitted. If set to <code>"on_change"</code>, brms will
 refit the model if model, data or algorithm as passed to Stan differ from
 what is stored in the file. This also covers changes in priors,
 <code>sample_prior</code>, <code>stanvars</code>, covariance structure, etc. If you
@@ -428,7 +435,7 @@ option.</p></td>
       <td><p>Logical; If <code>TRUE</code>, the <span class="pkg"><a href='https://rdrr.io/pkg/future/man/future.html'>future</a></span>
 package is used for parallel execution of the chains and argument
 <code>cores</code> will be ignored. Can be set globally for the current <span style="R">R</span>
-session via the <code>future</code> option. The execution type is controlled via
+session via the <code>"future"</code> option. The execution type is controlled via
 <code><a href='https://rdrr.io/pkg/future/man/plan.html'>plan</a></code> (see the examples section below).</p></td>
     </tr>
     <tr>
