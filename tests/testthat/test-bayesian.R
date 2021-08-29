@@ -1,5 +1,3 @@
-context("bayesian model")
-
 test_that("bayesian execution", {
   skip_on_cran()
   skip_on_os("mac")
