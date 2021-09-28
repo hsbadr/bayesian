@@ -89,7 +89,7 @@
 </h1>
                         <h4 class="author">Paul-Christian Bürkner &amp; Hamada S. Badr</h4>
             
-            <h4 class="date">2021-09-26</h4>
+            <h4 class="date">2021-09-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/hsbadr/bayesian/blob/master/vignettes/GetStarted.Rmd"><code>vignettes/GetStarted.Rmd</code></a></small>
       <div class="hidden name"><code>GetStarted.Rmd</code></div>
@@ -113,7 +113,7 @@
   <span class="fu"><a href="https://recipes.tidymodels.org/reference/step_normalize.html">step_normalize</a></span><span class="op">(</span><span class="va">Age</span>, <span class="va">Base</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">epi_recipe</span><span class="op">)</span></code></pre></div>
-<pre><code>## Data Recipe
+<pre><code>## Recipe
 ## 
 ## Inputs:
 ## 
@@ -200,14 +200,14 @@
 ## Group-Level Effects: 
 ## ~patient (Number of levels: 59) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.58      0.07     0.46     0.73 1.01      685     1422
+## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      796     1520
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept     1.76      0.12     1.53     1.99 1.01      694     1348
-## Trt1         -0.26      0.17    -0.59     0.08 1.01      634     1120
-## Base          0.73      0.08     0.57     0.88 1.01      869     1529
-## Age           0.09      0.08    -0.07     0.25 1.01      750     1522
+## Intercept     1.77      0.12     1.51     2.01 1.01      652     1154
+## Trt1         -0.27      0.16    -0.58     0.06 1.00      744     1310
+## Base          0.73      0.08     0.58     0.89 1.00      860     1310
+## Age           0.09      0.09    -0.09     0.25 1.00      746     1365
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -252,11 +252,11 @@
 <pre><code>## # A tibble: 5 × 3
 ##   .pred_lower .pred_upper .std_error
 ##         &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-## 1           0           8       2.06
-## 2           0           8       2.02
-## 3           0           7       1.81
+## 1           0           8       2.07
+## 2           0           8       2.06
+## 3           0           7       1.79
 ## 4           0           8       1.99
-## 5           6          23       4.20</code></pre>
+## 5           6          22       4.12</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
