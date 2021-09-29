@@ -65,7 +65,7 @@ function or update the information later on, via the `update` method. For
 example, if we didn't specify the family initially or set it to something else
 that we now wanted to change, we could use the `update` method as follows
 
-````{r}
+```{r}
 epi_model <- epi_model %>%
   update(family = poisson())
 ```

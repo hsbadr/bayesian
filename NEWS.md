@@ -1,5 +1,6 @@
 # bayesian 0.0.7
 
+- Fixed `GetStarted.Rmd` vignette build
 - Fixed class predictions for binary classification
 - Added threshold probability option for class predictions
 - Replaced deprecated `pull_workflow_fit()`
