@@ -12,7 +12,7 @@ Coverage](https://codecov.io/gh/hsbadr/bayesian/branch/main/graph/badge.svg)](ht
 [![Last
 commit](https://img.shields.io/github/last-commit/hsbadr/bayesian)](https://github.com/hsbadr/bayesian/commits/main)
 [![Commits since
-release](https://img.shields.io/github/commits-since/hsbadr/bayesian/latest.svg?color=green)](https://github.com/hsbadr/bayesian/commit/main/)
+release](https://img.shields.io/github/commits-since/hsbadr/bayesian/latest.svg?color=green)](https://github.com/hsbadr/bayesian/commit/main)
 [![R](https://github.com/hsbadr/bayesian/workflows/R/badge.svg)](https://github.com/hsbadr/bayesian/actions)
 
 [![CRAN
