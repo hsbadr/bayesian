@@ -253,7 +253,7 @@ linear <code>gaussian</code> model is applied. In multivariate models,
       <th>prior</th>
       <td><p>One or more <code>brmsprior</code> objects created by
 <code><a href='https://rdrr.io/pkg/brms/man/set_prior.html'>set_prior</a></code> or related functions and combined using the
-<code>c</code> method or the <code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code> operator. See also  <code><a href='https://rdrr.io/pkg/brms/man/get_prior.html'>get_prior</a></code>
+<code>c</code> method or the <code>+</code> operator. See also  <code><a href='https://rdrr.io/pkg/brms/man/get_prior.html'>get_prior</a></code>
 for more help.</p></td>
     </tr>
     <tr>
@@ -540,103 +540,110 @@ call. For this type of model, the template of the fit calls are:<div class="sour
 <code><a href='https://rdrr.io/r/stats/update.formula.html'>update.formula</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>bayesian</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Bayesian Model Specification (regression)
-#&gt; 
-#&gt; Computational engine: brms 
-#&gt; </div><div class='input'>
-<span class='fu'>show_model_info</span><span class='op'>(</span><span class='st'>"bayesian"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Information for `bayesian`
-#&gt;  modes: unknown, classification, regression 
-#&gt; 
-#&gt;  engines: 
-#&gt;    classification: brms
-#&gt;    regression:     brms
-#&gt; 
-#&gt;  arguments: 
-#&gt;    brms: 
-#&gt;       formula.override --&gt; formula.override
-#&gt;       family           --&gt; family
-#&gt;       prior            --&gt; prior
-#&gt;       sample_prior     --&gt; sample_prior
-#&gt;       knots            --&gt; knots
-#&gt;       stanvars         --&gt; stanvars
-#&gt;       fit              --&gt; fit
-#&gt;       inits            --&gt; inits
-#&gt;       chains           --&gt; chains
-#&gt;       iter             --&gt; iter
-#&gt;       warmup           --&gt; warmup
-#&gt;       thin             --&gt; thin
-#&gt;       cores            --&gt; cores
-#&gt;       threads          --&gt; threads
-#&gt;       algorithm        --&gt; algorithm
-#&gt;       backend          --&gt; backend
-#&gt;       stan_args        --&gt; stan_args
-#&gt;       control          --&gt; control
-#&gt;       save_pars        --&gt; save_pars
-#&gt;       save_model       --&gt; save_model
-#&gt;       file             --&gt; file
-#&gt;       file_refit       --&gt; file_refit
-#&gt;       normalize        --&gt; normalize
-#&gt;       future           --&gt; future
-#&gt;       seed             --&gt; seed
-#&gt;       silent           --&gt; silent
-#&gt; 
-#&gt;  fit modules:
-#&gt;  engine           mode
-#&gt;    brms classification
-#&gt;    brms     regression
-#&gt; 
-#&gt;  prediction modules:
-#&gt;              mode engine                                        methods
-#&gt;    classification   brms class, conf_int, pred_int, prob, quantile, raw
-#&gt;        regression   brms     conf_int, numeric, pred_int, quantile, raw
-#&gt; </div><div class='input'>
-<span class='fu'>bayesian</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"classification"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Bayesian Model Specification (classification)
-#&gt; 
-#&gt; Computational engine: brms 
-#&gt; </div><div class='input'><span class='fu'>bayesian</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Bayesian Model Specification (regression)
-#&gt; 
-#&gt; Computational engine: brms 
-#&gt; </div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>bayesian_mod</span> <span class='op'>&lt;-</span>
-  <span class='fu'>bayesian</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"brms"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>fit</span><span class='op'>(</span>
-    <span class='va'>rating</span> <span class='op'>~</span> <span class='va'>treat</span> <span class='op'>+</span> <span class='va'>period</span> <span class='op'>+</span> <span class='va'>carry</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>subject</span><span class='op'>)</span>,
-    data <span class='op'>=</span> <span class='va'>inhaler</span>
-  <span class='op'>)</span>
-
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>bayesian_mod</span><span class='op'>$</span><span class='va'>fit</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-
-<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>bayesian</span><span class='op'>(</span>inits <span class='op'>=</span> <span class='st'>"random"</span><span class='op'>)</span>
-<span class='va'>model</span>
-</div><div class='output co'>#&gt; Bayesian Model Specification (regression)
-#&gt; 
-#&gt; Main Arguments:
-#&gt;   inits = random
-#&gt; 
-#&gt; Computational engine: brms 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>model</span>, inits <span class='op'>=</span> <span class='st'>"0"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Bayesian Model Specification (regression)
-#&gt; 
-#&gt; Main Arguments:
-#&gt;   inits = 0
-#&gt; 
-#&gt; Computational engine: brms 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>model</span>, inits <span class='op'>=</span> <span class='st'>"0"</span>, fresh <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Bayesian Model Specification (regression)
-#&gt; 
-#&gt; Main Arguments:
-#&gt;   inits = 0
-#&gt; 
-#&gt; Computational engine: brms 
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'>bayesian</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Bayesian Model Specification (regression)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Computational engine: brms </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>show_model_info</span><span class='op'>(</span><span class='st'>"bayesian"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Information for `bayesian`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  modes: unknown, classification, regression </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  engines: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    classification: brms</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    regression:     brms</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  arguments: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    brms: </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       formula.override --&gt; formula.override</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       family           --&gt; family</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       prior            --&gt; prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       sample_prior     --&gt; sample_prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       knots            --&gt; knots</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       stanvars         --&gt; stanvars</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       fit              --&gt; fit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       inits            --&gt; inits</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       chains           --&gt; chains</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       iter             --&gt; iter</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       warmup           --&gt; warmup</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       thin             --&gt; thin</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       cores            --&gt; cores</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       threads          --&gt; threads</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       algorithm        --&gt; algorithm</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       backend          --&gt; backend</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       stan_args        --&gt; stan_args</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       control          --&gt; control</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       save_pars        --&gt; save_pars</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       save_model       --&gt; save_model</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       file             --&gt; file</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       file_refit       --&gt; file_refit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       normalize        --&gt; normalize</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       future           --&gt; future</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       seed             --&gt; seed</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       silent           --&gt; silent</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  fit modules:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  engine           mode</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    brms classification</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    brms     regression</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  prediction modules:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>              mode engine                                        methods</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    classification   brms class, conf_int, pred_int, prob, quantile, raw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        regression   brms     conf_int, numeric, pred_int, quantile, raw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>bayesian</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"classification"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Bayesian Model Specification (classification)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Computational engine: brms </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'>bayesian</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Bayesian Model Specification (regression)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Computational engine: brms </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>bayesian_mod</span> <span class='op'>&lt;-</span></span>
+<span class='r-in'>  <span class='fu'>bayesian</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span></span>
+<span class='r-in'>  <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"brms"</span><span class='op'>)</span> <span class='op'>%&gt;%</span></span>
+<span class='r-in'>  <span class='fu'>fit</span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='va'>rating</span> <span class='op'>~</span> <span class='va'>treat</span> <span class='op'>+</span> <span class='va'>period</span> <span class='op'>+</span> <span class='va'>carry</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>subject</span><span class='op'>)</span>,</span>
+<span class='r-in'>    data <span class='op'>=</span> <span class='va'>inhaler</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>bayesian_mod</span><span class='op'>$</span><span class='va'>fit</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>bayesian</span><span class='op'>(</span>inits <span class='op'>=</span> <span class='st'>"random"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>model</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Bayesian Model Specification (regression)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Main Arguments:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   inits = random</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Computational engine: brms </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>model</span>, inits <span class='op'>=</span> <span class='st'>"0"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Bayesian Model Specification (regression)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Main Arguments:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   inits = 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Computational engine: brms </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>model</span>, inits <span class='op'>=</span> <span class='st'>"0"</span>, fresh <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Bayesian Model Specification (regression)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Main Arguments:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   inits = 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Computational engine: brms </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
