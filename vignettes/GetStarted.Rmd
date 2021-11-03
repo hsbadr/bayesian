@@ -110,10 +110,11 @@ epi_fit <- epi_workflow_fit %>%
   extract_fit_parsnip()
 ```
 
-The `brmsfit` object is stored in the `fit` slot
+The `brmsfit` object can be extracted as follows
 
 ```{r eval = run_on_linux}
-epi_brmsfit <- epi_fit$fit
+epi_brmsfit <- epi_workflow_fit %>%
+  extract_fit_engine()
 ```
 
 ```{r eval = run_on_linux}
