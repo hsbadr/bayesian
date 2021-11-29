@@ -215,12 +215,7 @@ jobs:
 
       - name: Install R package dependencies
         run: |
-          options(
-            crayon.enabled = TRUE,
-            keep.source = TRUE,
-            keep.source.pkgs = TRUE,
-            repos = c(CRAN = "https://cran.microsoft.com")
-          )
+          options(crayon.enabled = TRUE)
           pak::local_install_dev_deps(upgrade = TRUE)
           pak::pkg_install("local::.", upgrade = TRUE)
           pak::pkg_install("covr")
