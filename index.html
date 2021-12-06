@@ -24,6 +24,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -36,18 +38,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">bayesian</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.7</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -72,7 +68,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/hsbadr/bayesian/">
+  <a href="https://github.com/hsbadr/bayesian/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -89,26 +85,26 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="bindings-for-bayesian-tidymodels-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#bindings-for-bayesian-tidymodels-" class="anchor"></a>Bindings for Bayesian TidyModels <a href="https://hsbadr.github.io/bayesian/"><img src="reference/figures/bayesian.png" align="right" width="160" alt="bayesian logo"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="bindings-for-bayesian-tidymodels-">Bindings for Bayesian TidyModels <a href="https://hsbadr.github.io/bayesian/" class="external-link"><img src="reference/figures/bayesian.png" align="right" width="160" alt="bayesian logo"></a>
+<a class="anchor" aria-label="anchor" href="#bindings-for-bayesian-tidymodels-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p><a href="https://CRAN.R-project.org/package=bayesian"><img src="https://www.r-pkg.org/badges/version/bayesian" alt="CRAN Status"></a> <a href="https://cran.r-project.org/package=bayesian"><img src="https://cranlogs.r-pkg.org/badges/grand-total/bayesian" alt="CRAN Downloads"></a> <a href="https://github.com/hsbadr/bayesian/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a> <a href="https://zenodo.org/badge/latestdoi/327419436"><img src="https://zenodo.org/badge/327419436.svg" alt="DOI"></a> <!-- badges: end --></p>
-<p><a href="https://hsbadr.github.io/bayesian/"><strong><code>bayesian</code></strong></a> supports Bayesian modeling using <a href="https://paul-buerkner.github.io/brms/"><code>brms</code></a>/<a href="https://mc-stan.org/"><code>Stan</code></a> with <a href="https://parsnip.tidymodels.org/"><code>parsnip</code></a>/<a href="https://www.tidymodels.org/"><code>tidymodels</code></a>.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>The stable version of <a href="https://hsbadr.github.io/bayesian/"><code>bayesian</code></a> can be installed from <a href="https://CRAN.R-project.org/package=bayesian">CRAN</a> using:</p>
+<p><a href="https://CRAN.R-project.org/package=bayesian" class="external-link"><img src="https://www.r-pkg.org/badges/version/bayesian" alt="CRAN Status"></a> <a href="https://cran.r-project.org/package=bayesian" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/bayesian" alt="CRAN Downloads"></a> <a href="https://github.com/hsbadr/bayesian/blob/main/LICENSE.md" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a> <a href="https://zenodo.org/badge/latestdoi/327419436" class="external-link"><img src="https://zenodo.org/badge/327419436.svg" alt="DOI"></a> <!-- badges: end --></p>
+<p><a href="https://hsbadr.github.io/bayesian/" class="external-link"><strong><code>bayesian</code></strong></a> supports Bayesian modeling using <a href="https://paul-buerkner.github.io/brms/" class="external-link"><code>brms</code></a>/<a href="https://mc-stan.org/" class="external-link"><code>Stan</code></a> with <a href="https://parsnip.tidymodels.org/" class="external-link"><code>parsnip</code></a>/<a href="https://www.tidymodels.org/" class="external-link"><code>tidymodels</code></a>.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>The stable version of <a href="https://hsbadr.github.io/bayesian/" class="external-link"><code>bayesian</code></a> can be installed from <a href="https://CRAN.R-project.org/package=bayesian" class="external-link">CRAN</a> using:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">"bayesian"</span>)</span></code></pre></div>
-<p>The development version of <a href="https://hsbadr.github.io/bayesian/"><code>bayesian</code></a> can be installed from <a href="https://github.com/hsbadr/bayesian">GitHub</a> using:</p>
+<p>The development version of <a href="https://hsbadr.github.io/bayesian/" class="external-link"><code>bayesian</code></a> can be installed from <a href="https://github.com/hsbadr/bayesian" class="external-link">GitHub</a> using:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">install.packages</span>(<span class="st">"pak"</span>, <span class="dt">repos =</span> <span class="st">"https://r-lib.github.io/p/pak/dev/"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>pak<span class="op">::</span><span class="kw">pkg_install</span>(<span class="st">"hsbadr/bayesian"</span>)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(bayesian)</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
 <span id="cb3-3"><a href="#cb3-3"></a>bayesian_mod &lt;-</span>
@@ -120,26 +116,26 @@
 <span id="cb3-9"><a href="#cb3-9"></a>  )</span>
 <span id="cb3-10"><a href="#cb3-10"></a></span>
 <span id="cb3-11"><a href="#cb3-11"></a><span class="kw">summary</span>(bayesian_mod<span class="op">$</span>fit)</span></code></pre></div>
-<p>For more details, <a href="https://hsbadr.github.io/bayesian/articles/GetStarted.html">get started with <code>bayesian</code></a>.</p>
+<p>For more details, <a href="https://hsbadr.github.io/bayesian/articles/GetStarted.html" class="external-link">get started with <code>bayesian</code></a>.</p>
 </div>
-<div id="citation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h2>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
 <p>To cite <code>bayesian</code> in publications, please use:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">citation</span>(<span class="st">"bayesian"</span>)</span></code></pre></div>
 <blockquote>
-<p>Hamada S. Badr and Paul C. Bürkner (2021): bayesian: Bindings for Bayesian TidyModels, <a href="https://cran.r-project.org/package=bayesian"><em>Comprehensive R Archive Network (CRAN)</em></a>. URL: <a href="https://hsbadr.github.io/bayesian/" class="uri">https://hsbadr.github.io/bayesian/</a>.</p>
+<p>Hamada S. Badr and Paul C. Bürkner (2021): bayesian: Bindings for Bayesian TidyModels, <a href="https://cran.r-project.org/package=bayesian" class="external-link"><em>Comprehensive R Archive Network (CRAN)</em></a>. URL: <a href="https://hsbadr.github.io/bayesian/" class="external-link uri">https://hsbadr.github.io/bayesian/</a>.</p>
 </blockquote>
 </div>
-<div id="contributing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>This project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>This project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 <ul>
-<li><p>For questions and discussions about tidymodels packages, modeling, and machine learning, please <a href="https://community.rstudio.com/">post on RStudio Community</a>.</p></li>
-<li><p>If you think you have encountered a bug, please <a href="https://github.com/hsbadr/bayesian/issues">submit an issue</a>.</p></li>
-<li><p>Either way, learn how to create and share a <a href="https://reprex.tidyverse.org">reprex</a> (a minimal, reproducible example), to clearly communicate about your code.</p></li>
-<li><p>Check out further details on <a href="https://www.tidymodels.org/contribute/">contributing guidelines for tidymodels packages</a> and <a href="https://www.tidymodels.org/help/">how to get help</a>.</p></li>
+<li><p>For questions and discussions about tidymodels packages, modeling, and machine learning, please <a href="https://community.rstudio.com/" class="external-link">post on RStudio Community</a>.</p></li>
+<li><p>If you think you have encountered a bug, please <a href="https://github.com/hsbadr/bayesian/issues" class="external-link">submit an issue</a>.</p></li>
+<li><p>Either way, learn how to create and share a <a href="https://reprex.tidyverse.org" class="external-link">reprex</a> (a minimal, reproducible example), to clearly communicate about your code.</p></li>
+<li><p>Check out further details on <a href="https://www.tidymodels.org/contribute/" class="external-link">contributing guidelines for tidymodels packages</a> and <a href="https://www.tidymodels.org/help/" class="external-link">how to get help</a>.</p></li>
 </ul>
 </div>
 </div>
@@ -147,64 +143,68 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=bayesian">https://​cloud.r-project.org/​package=bayesian</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/hsbadr/bayesian/">https://​github.com/​hsbadr/​bayesian/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/hsbadr/bayesian/issues">https://​github.com/​hsbadr/​bayesian/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=bayesian" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/hsbadr/bayesian/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/hsbadr/bayesian/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing bayesian</a></li>
+<li><a href="authors.html#citation">Citing bayesian</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Hamada S. Badr <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9808-2344" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Hamada S. Badr <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9808-2344" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Paul-Christian Bürkner <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/Lifecycle-Stable-green.svg" alt="Lifecycle: Stable"></a></li>
-<li><a href="https://codecov.io/gh/hsbadr/bayesian?branch=main"><img src="https://codecov.io/gh/hsbadr/bayesian/branch/main/graph/badge.svg" alt="Codecov Test Coverage"></a></li>
-<li><a href="https://github.com/hsbadr/bayesian/commits/main"><img src="https://img.shields.io/github/last-commit/hsbadr/bayesian" alt="Last commit"></a></li>
-<li><a href="https://github.com/hsbadr/bayesian/commit/main"><img src="https://img.shields.io/github/commits-since/hsbadr/bayesian/latest.svg?color=green" alt="Commits since release"></a></li>
-<li><a href="https://github.com/hsbadr/bayesian/actions"><img src="https://github.com/hsbadr/bayesian/workflows/R/badge.svg" alt="R"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/Lifecycle-Stable-green.svg" alt="Lifecycle: Stable"></a></li>
+<li><a href="https://codecov.io/gh/hsbadr/bayesian?branch=main" class="external-link"><img src="https://codecov.io/gh/hsbadr/bayesian/branch/main/graph/badge.svg" alt="Codecov Test Coverage"></a></li>
+<li><a href="https://github.com/hsbadr/bayesian/commits/main" class="external-link"><img src="https://img.shields.io/github/last-commit/hsbadr/bayesian" alt="Last commit"></a></li>
+<li><a href="https://github.com/hsbadr/bayesian/commit/main" class="external-link"><img src="https://img.shields.io/github/commits-since/hsbadr/bayesian/latest.svg?color=green" alt="Commits since release"></a></li>
+<li><a href="https://github.com/hsbadr/bayesian/actions" class="external-link"><img src="https://github.com/hsbadr/bayesian/workflows/R/badge.svg" alt="R"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Hamada S. Badr, Paul-Christian Bürkner.</p>
+  <p></p>
+<p>Developed by Hamada S. Badr, Paul-Christian Bürkner.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -212,6 +212,8 @@
 
   
 
+
+  
 
   </body>
 </html>
