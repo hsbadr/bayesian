@@ -105,15 +105,13 @@ jobs:
       fail-fast: true
       matrix:
         r:
+          - ${{ needs.initiate.outputs.r_devel }}
           - ${{ needs.initiate.outputs.r_release }}
           - ${{ needs.initiate.outputs.r_oldrel }}
         os:
           - ${{ needs.initiate.outputs.os_linux }}
           - ${{ needs.initiate.outputs.os_macos }}
           - ${{ needs.initiate.outputs.os_windows }}
-        include:
-          - r: ${{ needs.initiate.outputs.r_devel }}
-            os: ${{ needs.initiate.outputs.os_linux }}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -129,6 +127,15 @@ jobs:
         uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.r }}
+          rtools-version: ''
+          Ncpus: '1'
+          remove-openmp-macos: true
+          http-user-agent: 'default'
+          install-r: true
+          windows-path-include-mingw: true
+          update-rtools: true
+          use-public-rspm: true
+          extra-repositories: ''
 
       - name: Set up Pandoc
         uses: r-lib/actions/setup-pandoc@master
@@ -136,27 +143,28 @@ jobs:
       - name: Set up TinyTeX
         uses: r-lib/actions/setup-tinytex@master
 
-      - name: Query R package dependencies
+      - name: Set up system environment (Linux)
+        if: runner.os == 'Linux'
         run: |
-          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
-          pak::pak_install_extra(upgrade = TRUE)
-          saveRDS(pak::pkg_deps("local::.", dependencies = TRUE), ".github/r-depends.rds")
-        shell: Rscript {0}
+          set -x
+          sudo apt-get install -y clang-format || true
+          sudo apt-get install -y git || true
+          sudo apt-get install -y libarchive-dev || true
+          sudo apt-get install -y libcurl4-openssl-dev || true
+          sudo apt-get install -y libgit2-dev || true
+          sudo apt-get install -y libglpk-dev || true
+          sudo apt-get install -y libharfbuzz-dev libfribidi-dev || true
+          sudo apt-get install -y libicu-dev || true
+          sudo apt-get install -y libnetcdf-dev libnetcdff-dev || true
+          sudo apt-get install -y libpng-dev || true
+          sudo apt-get install -y libtiff-dev || true
+          sudo apt-get install -y libxml2-dev || true
+          sudo apt-get install -y make || true
+          sudo apt-get install -y openmpi-bin openmpi-common libopenmpi-dev || true
+          sudo apt-get install -y pandoc || true
+        shell: bash
 
-      - name: Restore R package cache
-        uses: actions/cache@main
-        env:
-          cache-name: cache-r-packages
-        with:
-          path: |
-            ${{ env.R_LIBS_USER }}/*
-            !${{ env.R_LIBS_USER }}/pak
-          key: |
-            R-${{ matrix.r }}_${{ matrix.os }}-${{ steps.install-r.outputs.installed-r-version }}-2-${{ hashFiles('.github/r-depends.rds') }}
-          restore-keys: |
-            R-${{ matrix.r }}_${{ matrix.os }}-${{ steps.install-r.outputs.installed-r-version }}-2-
-
-      - name: Set up system environment for macOS
+      - name: Set up system environment (macOS)
         if: runner.os == 'macOS'
         run: |
           set -x
@@ -178,7 +186,7 @@ jobs:
           brew reinstall --force --verbose --cask xquartz || true
         shell: bash
 
-      - name: Set up system environment for Windows
+      - name: Set up system environment (Windows)
         if: runner.os == 'Windows'
         run: |
           $ErrorActionPreference = 'SilentlyContinue'
@@ -190,45 +198,25 @@ jobs:
           Get-Command mingw32-make | Select-Object -ExpandProperty Definition
         shell: powershell
 
-      - name: Set up system environment for Linux
-        if: runner.os == 'Linux'
-        run: |
-          set -x
-          sudo apt-get install -y clang-format || true
-          sudo apt-get install -y git || true
-          sudo apt-get install -y libarchive-dev || true
-          sudo apt-get install -y libcurl4-openssl-dev || true
-          sudo apt-get install -y libgit2-dev || true
-          sudo apt-get install -y libglpk-dev || true
-          sudo apt-get install -y libharfbuzz-dev libfribidi-dev || true
-          sudo apt-get install -y libicu-dev || true
-          sudo apt-get install -y libnetcdf-dev libnetcdff-dev || true
-          sudo apt-get install -y libpng-dev || true
-          sudo apt-get install -y libtiff-dev || true
-          sudo apt-get install -y libxml2-dev || true
-          sudo apt-get install -y make || true
-          sudo apt-get install -y openmpi-bin openmpi-common libopenmpi-dev || true
-          sudo apt-get install -y pandoc || true
-          Rscript -e 'pak::local_system_requirements(execute = TRUE)' || true
-          Rscript -e 'pak::pkg_system_requirements("pkgdown", execute = TRUE)' || true
-        shell: bash
+      - name: Set up R dependencies
+        uses: r-lib/actions/setup-r-dependencies@master
+        with:
+          cache-version: 1
+          dependencies: '"all"'
+          extra-packages: covr, curl, devtools, htmltools, lintr, pkgdown, rcmdcheck, rmarkdown, roxygen2, sessioninfo, styler
+          needs: |
+            website
+            coverage
+          pak-version: 'devel'
+          working-directory: '.'
 
-      - name: Install R package dependencies
+      - name: Update R dependencies
         run: |
           options(crayon.enabled = TRUE)
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
+          pak::pak_install_extra(upgrade = TRUE)
           pak::local_install_dev_deps(upgrade = TRUE)
           pak::pkg_install("local::.", upgrade = TRUE)
-          pak::pkg_install("covr")
-          pak::pkg_install("curl")
-          pak::pkg_install("devtools")
-          pak::pkg_install("htmltools")
-          pak::pkg_install("lintr")
-          pak::pkg_install("pkgdown")
-          pak::pkg_install("rcmdcheck")
-          pak::pkg_install("rmarkdown")
-          pak::pkg_install("roxygen2")
-          pak::pkg_install("sessioninfo")
-          pak::pkg_install("styler")
         shell: Rscript {0}
 
       - name: Print R session information
@@ -240,15 +228,13 @@ jobs:
 
       - name: R CMD check
         if: success()
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-          _R_CHECK_DONTTEST_EXAMPLES_: false
-          _R_CHECK_FORCE_SUGGESTS_: false
-        run: |
-          options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
+        uses: r-lib/actions/check-r-package@master
+        with:
+          args: 'c("--no-manual", "--as-cran")'
+          build_args: 'c("--no-manual")'
+          error-on: '"warning"'
+          check-dir: '"check"'
+          working-directory: '.'
 
       - name: Show testthat output
         if: always()
