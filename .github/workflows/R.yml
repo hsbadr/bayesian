@@ -105,13 +105,15 @@ jobs:
       fail-fast: true
       matrix:
         r:
-          - ${{ needs.initiate.outputs.r_devel }}
           - ${{ needs.initiate.outputs.r_release }}
           - ${{ needs.initiate.outputs.r_oldrel }}
         os:
           - ${{ needs.initiate.outputs.os_linux }}
           - ${{ needs.initiate.outputs.os_macos }}
           - ${{ needs.initiate.outputs.os_windows }}
+        include:
+          - r: ${{ needs.initiate.outputs.r_devel }}
+            os: ${{ needs.initiate.outputs.os_linux }}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
