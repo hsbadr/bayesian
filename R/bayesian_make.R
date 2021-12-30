@@ -559,8 +559,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
         func = predfunc,
         args = list(
           object = rlang::expr(object$fit),
-          newdata = rlang::expr(new_data),
-          summary = FALSE
+          newdata = rlang::expr(new_data)
         )
       )
     )

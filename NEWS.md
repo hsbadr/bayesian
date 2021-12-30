@@ -2,6 +2,7 @@
 
 - Updated package dependencies
 - Handled `mvbrmsformula` class in `bayesian_formula` (#7)
+- Fixed `type = "raw"` predictions for multivariate non-linear models (#7)
 
 # bayesian 0.0.7
 
