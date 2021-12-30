@@ -1,6 +1,6 @@
 Package: bayesian
 Type: Package
-Version: 0.0.7
+Version: 0.0.8
 Title: Bindings for Bayesian TidyModels
 Authors@R:
     c(person(given = "Hamada S.",
@@ -23,7 +23,7 @@ URL: https://hsbadr.github.io/bayesian/,
      https://github.com/hsbadr/bayesian
 BugReports: https://github.com/hsbadr/bayesian/issues
 Depends:
-    brms (>= 2.16.1),
+    brms (>= 2.16.3),
     parsnip (>= 0.1.7),
     R (>= 3.5.0)
 Imports:
