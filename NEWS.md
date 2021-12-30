@@ -1,3 +1,8 @@
+# bayesian 0.0.8
+
+- Updated package dependencies
+- Handled `mvbrmsformula` class in `bayesian_formula` (#7)
+
 # bayesian 0.0.7
 
 - Fixed `GetStarted.Rmd` vignette build
