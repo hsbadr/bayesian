@@ -407,7 +407,9 @@ bayesian_fit <- function(formula, data, ...) {
 #' @rdname bayesian
 #' @export
 bayesian_formula <- function(formula, ...) {
-  formula <- brms::brmsformula(formula, ...)
+  if (!inherits(formula, "mvbrmsformula")) {
+    formula <- brms::brmsformula(formula, ...)
+  }
   class(formula) <- union(class(formula), "formula")
   return(formula)
 }
