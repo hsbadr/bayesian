@@ -129,7 +129,7 @@ jobs:
         uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.r }}
-          rtools-version: ''
+          rtools-version: '40'
           Ncpus: '1'
           remove-openmp-macos: true
           http-user-agent: 'default'
@@ -149,12 +149,15 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           set -x
+          sudo apt-get install -y automake || true
           sudo apt-get install -y clang-format || true
+          sudo apt-get install -y cmake || true
           sudo apt-get install -y git || true
           sudo apt-get install -y libarchive-dev || true
           sudo apt-get install -y libcurl4-openssl-dev || true
           sudo apt-get install -y libgit2-dev || true
           sudo apt-get install -y libglpk-dev || true
+          sudo apt-get install -y libgmp-dev || true
           sudo apt-get install -y libharfbuzz-dev libfribidi-dev || true
           sudo apt-get install -y libicu-dev || true
           sudo apt-get install -y libnetcdf-dev libnetcdff-dev || true
@@ -171,11 +174,14 @@ jobs:
         run: |
           set -x
           rm -f /usr/local/bin/gfortran || true
+          brew reinstall --force --verbose automake || true
+          brew reinstall --force --verbose cmake || true
           brew reinstall --force --verbose curl || true
           brew reinstall --force --verbose harfbuzz fribidi || true
           brew reinstall --force --verbose gcc@8 || true
           brew reinstall --force --verbose git || true
           brew reinstall --force --verbose glpk || true
+          brew reinstall --force --verbose gmp || true
           brew reinstall --force --verbose icu4c || true
           brew reinstall --force --verbose libarchive || true
           brew reinstall --force --verbose libgit2 || true
@@ -192,13 +198,37 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           $ErrorActionPreference = 'SilentlyContinue'
-          echo "C:/rtools40/usr/bin;C:/rtools40/mingw64/bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
-          pacman -Syu mingw-w64-x86_64-make --noconfirm
-          g++ --version
-          Get-Command g++ | Select-Object -ExpandProperty Definition
-          mingw32-make --version
-          Get-Command mingw32-make | Select-Object -ExpandProperty Definition
-        shell: powershell
+          pacman -Syu --noconfirm mingw-w64-i686-cmake
+          pacman -Syu --noconfirm mingw-w64-i686-curl
+          pacman -Syu --noconfirm mingw-w64-i686-glpk
+          pacman -Syu --noconfirm mingw-w64-i686-gmp
+          pacman -Syu --noconfirm mingw-w64-i686-libxml2
+          pacman -Syu --noconfirm mingw-w64-i686-libpng
+          pacman -Syu --noconfirm mingw-w64-i686-libuv
+          pacman -Syu --noconfirm mingw-w64-i686-make
+          pacman -Syu --noconfirm mingw-w64-i686-netcdf
+          pacman -Syu --noconfirm mingw-w64-i686-nlopt
+          pacman -Syu --noconfirm mingw-w64-x86_64-cmake
+          pacman -Syu --noconfirm mingw-w64-x86_64-curl
+          pacman -Syu --noconfirm mingw-w64-x86_64-glpk
+          pacman -Syu --noconfirm mingw-w64-x86_64-gmp
+          pacman -Syu --noconfirm mingw-w64-x86_64-libxml2
+          pacman -Syu --noconfirm mingw-w64-x86_64-libpng
+          pacman -Syu --noconfirm mingw-w64-x86_64-libuv
+          pacman -Syu --noconfirm mingw-w64-x86_64-make
+          pacman -Syu --noconfirm mingw-w64-x86_64-netcdf
+          pacman -Syu --noconfirm mingw-w64-x86_64-nlopt
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-cmake
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-curl
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-glpk
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-gmp
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-libxml2
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-libpng
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-libuv
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-make
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-netcdf
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-nlopt
+        shell: pwsh
 
       - name: Set up R dependencies
         uses: r-lib/actions/setup-r-dependencies@master
