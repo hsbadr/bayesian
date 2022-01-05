@@ -204,7 +204,6 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@master
         with:
           cache-version: 1
-          dependencies: '"all"'
           extra-packages: covr, curl, devtools, htmltools, lintr, pkgdown, rcmdcheck, rmarkdown, roxygen2, sessioninfo, styler
           needs: |
             website
