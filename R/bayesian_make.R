@@ -28,7 +28,11 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     # -------------------------------------------------------------------------
 
     for (pkg in dependpkgs) {
-      parsnip::set_dependency(model = model, eng = engine, pkg = pkg)
+      if ("mode" %in% names(formals(parsnip::set_dependency))) {
+        parsnip::set_dependency(model, engine, pkg = pkg, mode = mode)
+      } else {
+        parsnip::set_dependency(model, engine, pkg = pkg)
+      }
     }
 
     # -------------------------------------------------------------------------
