@@ -230,22 +230,22 @@ jobs:
           pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-nlopt
         shell: pwsh
 
-      - name: Set up R dependencies
-        uses: r-lib/actions/setup-r-dependencies@master
-        with:
-          cache-version: 1
-          extra-packages: covr, curl, devtools, htmltools, lintr, pkgdown, rcmdcheck, rmarkdown, roxygen2, sessioninfo, styler
-          needs: |
-            website
-            coverage
-          pak-version: 'devel'
-          working-directory: '.'
-
-      - name: Update R dependencies
+      - name: Install R dependencies
         run: |
           options(crayon.enabled = TRUE)
           install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
           pak::pak_install_extra(upgrade = TRUE)
+          pak::pkg_install("covr", upgrade = TRUE)
+          pak::pkg_install("curl", upgrade = TRUE)
+          pak::pkg_install("devtools", upgrade = TRUE)
+          pak::pkg_install("htmltools", upgrade = TRUE)
+          pak::pkg_install("lintr", upgrade = TRUE)
+          pak::pkg_install("pkgdown", upgrade = TRUE)
+          pak::pkg_install("rcmdcheck", upgrade = TRUE)
+          pak::pkg_install("rmarkdown", upgrade = TRUE)
+          pak::pkg_install("roxygen2", upgrade = TRUE)
+          pak::pkg_install("sessioninfo", upgrade = TRUE)
+          pak::pkg_install("styler", upgrade = TRUE)
           pak::local_install_dev_deps(upgrade = TRUE)
           pak::pkg_install("local::.", upgrade = TRUE)
         shell: Rscript {0}
