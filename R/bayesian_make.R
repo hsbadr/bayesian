@@ -321,7 +321,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
               }
               threshold <- getOption("class_pred.threshold", 0.5)
               if (is.numeric(threshold)) {
-                if (threshold < 0 & threshold > 1) {
+                if (!dplyr::between(threshold, 0, 1)) {
                   rlang::abort("Probability threshold is out of 0-1 range.")
                 }
               } else {

@@ -1,6 +1,6 @@
 #' @import brms
 #' @import parsnip
-#' @importFrom dplyr bind_cols
+#' @importFrom dplyr between bind_cols
 #' @importFrom purrr map_lgl
 #' @importFrom rlang !!! abort call2 enquo eval_tidy expr fn_fmls_names warn
 #' @importFrom stats sd update
