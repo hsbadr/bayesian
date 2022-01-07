@@ -4,6 +4,7 @@
 - Added preliminary support for multivariate non-linear models (#7)
 - Fixed `type = "raw"` predictions for multivariate non-linear models (#7)
 - Handled `mvbrmsformula` class in `bayesian_formula` (#7)
+- Fixed threshold probability check for class predictions
 - Set dependency by model's mode with `parsnip > 0.1.7`
 
 # bayesian 0.0.7
