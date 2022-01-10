@@ -85,7 +85,7 @@
 </h1>
                         <h4 data-toc-skip class="author">Paul-Christian Bürkner &amp; Hamada S. Badr</h4>
             
-            <h4 data-toc-skip class="date">2022-01-07</h4>
+            <h4 data-toc-skip class="date">2022-01-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/hsbadr/bayesian/blob/HEAD/vignettes/GetStarted.Rmd" class="external-link"><code>vignettes/GetStarted.Rmd</code></a></small>
       <div class="hidden name"><code>GetStarted.Rmd</code></div>
@@ -196,14 +196,14 @@
 <span class="co">## Group-Level Effects: </span>
 <span class="co">## ~patient (Number of levels: 59) </span>
 <span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.01      579     1307</span>
+<span class="co">## sd(Intercept)     0.57      0.07     0.46     0.72 1.00      958     1696</span>
 <span class="co">## </span>
 <span class="co">## Population-Level Effects: </span>
 <span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## Intercept     1.77      0.12     1.54     2.01 1.00      742     1046</span>
-<span class="co">## Trt1         -0.26      0.16    -0.59     0.05 1.01      678     1233</span>
-<span class="co">## Base          0.73      0.08     0.57     0.89 1.00      751     1468</span>
-<span class="co">## Age           0.09      0.08    -0.08     0.25 1.01      704     1399</span>
+<span class="co">## Intercept     1.77      0.12     1.54     2.01 1.00      623     1284</span>
+<span class="co">## Trt1         -0.27      0.16    -0.61     0.05 1.00      721     1270</span>
+<span class="co">## Base          0.73      0.08     0.57     0.89 1.00      822     1248</span>
+<span class="co">## Age           0.09      0.09    -0.08     0.25 1.01      570     1446</span>
 <span class="co">## </span>
 <span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span>
 <span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span>
@@ -236,7 +236,7 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>           0           8</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>           0           7</span>
 <span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          22</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           7          23</span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -249,11 +249,11 @@
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="co">##   .pred_lower .pred_upper .std_error</span>
 <span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.09</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.07</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.83</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.99</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.17</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.05</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.03</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.82</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       2.00</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.21</span></code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
