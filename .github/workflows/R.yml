@@ -329,10 +329,10 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           set -x
-          Rscript -e 'styler::style_pkg()'
-          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec sed -i -e 's/[ \t]*$//' {} \; || true
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec clang-format -style=Google --verbose -i {} \; || true
+          Rscript -e 'styler::style_pkg(exclude_files = list.files("./R", pattern = "^RcppExports.*"))'
+          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) ! -path "*/RcppExports.*" -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" -exec clang-format -style=Google --verbose -i {} \; || true
         shell: bash
 
       - name: Render documents
