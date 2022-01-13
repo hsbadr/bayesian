@@ -325,14 +325,26 @@ jobs:
           name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_R-${{ matrix.r }}_${{ matrix.os }}
           path: build
 
-      - name: Style and format R/C/C++ code
+      - name: Style and format R code
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           set -x
           Rscript -e 'styler::style_pkg(exclude_files = list.files("./R", pattern = "^RcppExports.*", full.names = TRUE))'
+        shell: bash
+
+      - name: Style and format C/C++ code
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
+        run: |
+          set -x
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" -exec clang-format -style=Google --verbose -i {} \; || true
+        shell: bash
+
+      - name: Cleanup R/C/C++ code (Remove whitespaces)
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
+        run: |
+          set -x
           find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) ! -path "*/RcppExports.*" -exec sed -i -e 's/[ \t]*$//' {} \; || true
           find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" -exec sed -i -e 's/[ \t]*$//' {} \; || true
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" -exec clang-format -style=Google --verbose -i {} \; || true
         shell: bash
 
       - name: Render documents
