@@ -392,6 +392,7 @@ jobs:
         uses: r-lib/actions/pr-push@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
 
       - name: Analyze R code
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
