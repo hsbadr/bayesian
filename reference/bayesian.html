@@ -359,22 +359,22 @@ to that class) containing data of all variables used in the model.</p></dd>
     <h2>Details</h2>
     <p>The arguments are converted to their specific names at the
 time that the model is fit. Other options and argument can be
-set using <code>set_engine()</code>. If left to their defaults
+set using <code><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine()</a></code>. If left to their defaults
 here (<code>NULL</code>), the values are taken from the underlying model
 functions. If parameters need to be modified, <code><a href="https://rdrr.io/r/stats/update.html" class="external-link">update()</a></code> can be
 used in lieu of recreating the object from scratch.</p>
 <p>The data given to the function are not saved and are only used
 to determine the <em>mode</em> of the model. For <code>bayesian()</code>, the
 possible modes are "regression" and "classification".</p>
-<p>The model can be created by the <code>fit()</code> function using the
+<p>The model can be created by the <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> function using the
 following <em>engines</em>:</p><ul><li><p><span class="pkg">brms</span>:  <code>"brms"</code></p></li>
 </ul></div>
     <div id="engine-details">
     <h2>Engine Details</h2>
     <p>Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:</p><div class="sourceCode r"><pre><code><span class="fu"><a href="../reference/bayesian.html">bayesian</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">set_engine</span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">translate</span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div><div class="sourceCode"><pre><code><span class="co">## Bayesian Model Specification (regression)</span>
+call. For this type of model, the template of the fit calls are:</p><div class="sourceCode r"><pre><code><span class="fu"><a href="../reference/bayesian.html">bayesian</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/translate.html" class="external-link">translate</a></span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div><div class="sourceCode"><pre><code><span class="co">## Bayesian Model Specification (regression)</span>
 <span class="co">## </span>
 <span class="co">## Computational engine: brms </span>
 <span class="co">## </span>
@@ -409,7 +409,7 @@ call. For this type of model, the template of the fit calls are:</p><div class="
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computational engine: brms </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">show_model_info</span><span class="op">(</span><span class="st">"bayesian"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_new_model.html" class="external-link">show_model_info</a></span><span class="op">(</span><span class="st">"bayesian"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Information for `bayesian`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  modes: unknown, classification, regression </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -469,9 +469,9 @@ call. For this type of model, the template of the fit calls are:</p><div class="
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">bayesian_mod</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu">bayesian</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">set_engine</span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">fit</span><span class="op">(</span></span>
+<span class="r-in">  <span class="fu">bayesian</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span class="r-in">  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span class="r-in">  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
 <span class="r-in">    <span class="va">rating</span> <span class="op">~</span> <span class="va">treat</span> <span class="op">+</span> <span class="va">period</span> <span class="op">+</span> <span class="va">carry</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">subject</span><span class="op">)</span>,</span>
 <span class="r-in">    data <span class="op">=</span> <span class="va">inhaler</span></span>
 <span class="r-in">  <span class="op">)</span></span>
