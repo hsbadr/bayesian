@@ -336,15 +336,15 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           set -x
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" -exec clang-format -style=Google --verbose -i {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" ! -path "./check/*" -exec clang-format -style=Google --verbose -i {} \; || true
         shell: bash
 
       - name: Cleanup R/C/C++ code (Remove whitespaces)
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           set -x
-          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) ! -path "*/RcppExports.*" -exec sed -i -e 's/[ \t]*$//' {} \; || true
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) ! -path "*/RcppExports.*" ! -path "./check/*" -exec sed -i -e 's/[ \t]*$//' {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" ! -path "./check/*" -exec sed -i -e 's/[ \t]*$//' {} \; || true
         shell: bash
 
       - name: Render documents
@@ -361,9 +361,9 @@ jobs:
           set -x
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          find -not -path "./check/*" . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) -exec git add {} \; || true
+          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) ! -path "*/RcppExports.*" ! -path "./check/*" -exec git add {} \; || true
           git commit -m 'Styling and formatting R code using `styler`' || echo 'No changes to commit'
-          find -not -path "./check/*" . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) -exec git add {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" ! -path "./check/*" -exec git add {} \; || true
           git commit -m 'Styling and formatting C/C++ code using `clang-format`' || echo 'No changes to commit'
           git add README.md NAMESPACE man/\* || true
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
