@@ -43,8 +43,8 @@ The development version of
 [`bayesian`](https://hsbadr.github.io/bayesian/) can be installed from
 [GitHub](https://github.com/hsbadr/bayesian) using:
 
-    install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
-    pak::pkg_install("hsbadr/bayesian")
+    install.packages("remotes")
+    remotes::install_github("hsbadr/bayesian")
 
 Example
 -------
