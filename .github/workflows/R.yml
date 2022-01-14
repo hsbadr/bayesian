@@ -125,6 +125,12 @@ jobs:
           fetch-depth: 1
           submodules: true
 
+      - name: Fetch pull request
+        if: github.event_name == 'pull_request' || github.event.issue.pull_request
+        uses: r-lib/actions/pr-fetch@master
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Set up R environment
         uses: r-lib/actions/setup-r@master
         with:
@@ -382,7 +388,7 @@ jobs:
         shell: bash
 
       - name: Push changes to pull request
-        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && github.event.issue.pull_request
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (github.event_name == 'pull_request' || github.event.issue.pull_request)
         uses: r-lib/actions/pr-push@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
