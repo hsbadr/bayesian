@@ -378,7 +378,7 @@ jobs:
         run: |
           options(crayon.enabled = TRUE)
           roxygen2::roxygenize()
-          if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
+          if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "github_document")
         shell: Rscript {0}
 
       - name: Commit changes
