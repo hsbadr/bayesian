@@ -232,7 +232,11 @@ jobs:
 
       - name: Install R dependencies
         run: |
-          options(crayon.enabled = TRUE)
+          options(
+            crayon.enabled = TRUE,
+            install.packages.check.source = "no",
+            pkgType = ifelse(grepl("linux", R.version$os), "source", "binary")
+          )
           install.packages("remotes")
           remotes::install_cran("covr")
           remotes::install_cran("curl")
