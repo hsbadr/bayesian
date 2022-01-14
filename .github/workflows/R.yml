@@ -416,7 +416,9 @@ jobs:
         shell: bash
 
       - name: Push changes to pull request
-        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (github.event_name == 'pull_request' || github.event.issue.pull_request)
+        if: ${{ success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel &&
+                ( github.event_name == 'pull_request' || github.event.issue.pull_request ) &&
+                ( github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER' ) }}
         uses: r-lib/actions/pr-push@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
