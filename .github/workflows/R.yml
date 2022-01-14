@@ -243,6 +243,7 @@ jobs:
           remotes::install_cran("devtools")
           remotes::install_cran("htmltools")
           remotes::install_cran("lintr")
+          remotes::install_cran("mgcv", type = "source")
           remotes::install_cran("pkgdown")
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("rmarkdown")
