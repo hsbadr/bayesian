@@ -365,12 +365,16 @@ jobs:
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) ! -path "*/RcppExports.*" ! -path "./check/*" ! -path "./build/*" -printf '%p\n' -exec git add {} \; || true
+          git diff --stat || true
           git commit -m 'Styling and formatting R code using `styler`' || echo 'No changes to commit'
           find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" ! -path "./check/*" ! -path "./build/*" -printf '%p\n' -exec git add {} \; || true
+          git diff --stat || true
           git commit -m 'Styling and formatting C/C++ code using `clang-format`' || echo 'No changes to commit'
           git add README.md NAMESPACE man/\* || true
+          git diff --stat || true
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
           git add revdep/\* || true
+          git diff --stat || true
           git commit -m 'Update revdep results' || echo 'No changes to commit'
           git push origin || echo "No changes to commit"
         shell: bash
