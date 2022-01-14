@@ -347,7 +347,7 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           set -x
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" ! -path "./check/*" ! -path "./build/*" -printf '%p\n' -exec clang-format -style=Google --verbose -i {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/RcppExports.*" ! -path "./check/*" ! -path "./build/*" -exec clang-format -style=Google --verbose -i {} \; || true
         shell: bash
 
       - name: Cleanup R/C/C++ code (Remove whitespaces)
