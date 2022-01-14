@@ -362,8 +362,8 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           options(crayon.enabled = TRUE)
-          if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
           roxygen2::roxygenize()
+          if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "md_document")
         shell: Rscript {0}
 
       - name: Commit changes
