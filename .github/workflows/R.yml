@@ -412,6 +412,7 @@ jobs:
           git add revdep/\* || true
           git diff --stat || true
           git commit -m 'Update revdep results' || echo 'No changes to commit'
+          git pull --ff-only || true
           git push origin || echo "No changes to commit"
         shell: bash
 
