@@ -292,33 +292,16 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.r }}-results
           path: check
 
-      - name: Install revdepcheck
-        if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
-        run: |
-          remotes::install_github("r-lib/revdepcheck")
-        shell: Rscript {0}
-
-      - name: Run revdepcheck
+      - name: Check R package reverse dependencies
         if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
         run: |
           options(crayon.enabled = TRUE)
+          remotes::install_github("r-lib/revdepcheck")
           revdepcheck::revdep_reset()
           revdepcheck::revdep_check(timeout = as.difftime(60, units = "mins"), num_workers = 1, bioc = TRUE)
           revdepcheck::revdep_reset()
+          unlink("revdep/library", recursive = TRUE)
         shell: Rscript {0}
-
-      - name: Remove revdep library
-        if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
-        run: |
-          rm -Rf revdep/library*
-        shell: bash
-
-      - name: Upload revdep results
-        if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
-        uses: actions/upload-artifact@v2
-        with:
-          name: revdep-results
-          path: revdep
 
       - name: Build packages
         if: success()
