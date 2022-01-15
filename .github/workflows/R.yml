@@ -58,7 +58,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@main
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
           submodules: true
@@ -120,7 +120,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@main
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
           submodules: true
@@ -287,7 +287,7 @@ jobs:
 
       - name: Upload check results
         if: failure()
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v2
         with:
           name: ${{ runner.os }}-r${{ matrix.r }}-results
           path: check
@@ -315,7 +315,7 @@ jobs:
 
       - name: Upload revdep results
         if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v2
         with:
           name: revdep-results
           path: revdep
@@ -331,7 +331,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Upload packages
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v2
         with:
           name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_R-${{ matrix.r }}_${{ matrix.os }}
           path: build
@@ -467,7 +467,7 @@ jobs:
       - name: Create release
         if: success()
         id: create_release
-        uses: actions/create-release@main
+        uses: actions/create-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -494,7 +494,7 @@ jobs:
 
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@main
+        uses: actions/download-artifact@v2
         with:
           path: ./
 
@@ -507,7 +507,7 @@ jobs:
         shell: bash
 
       - name: Upload source package
-        uses: actions/upload-release-asset@main
+        uses: actions/upload-release-asset@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -543,7 +543,7 @@ jobs:
 
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@main
+        uses: actions/download-artifact@v2
         with:
           path: ./
 
@@ -557,7 +557,7 @@ jobs:
         shell: bash
 
       - name: Upload release assets
-        uses: actions/upload-release-asset@main
+        uses: actions/upload-release-asset@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
