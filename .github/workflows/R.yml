@@ -5,7 +5,7 @@
 #     email: badr@jhu.edu
 #     institute: Johns Hopkins University
 #     correspondence: true
-# date: "14 January 2022"
+# date: "15 January 2022"
 
 # yamllint disable rule:line-length
 
@@ -236,7 +236,7 @@ jobs:
           pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-nlopt
         shell: pwsh
 
-      - name: Install R dependencies
+      - name: Set up R dependencies
         run: |
           options(
             crayon.enabled = TRUE,
