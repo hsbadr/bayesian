@@ -204,6 +204,7 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           $ErrorActionPreference = 'SilentlyContinue'
+          echo "TMPDIR=${{ runner.temp }}" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
           pacman -Syu --noconfirm mingw-w64-i686-cmake
           pacman -Syu --noconfirm mingw-w64-i686-curl
           pacman -Syu --noconfirm mingw-w64-i686-glpk
