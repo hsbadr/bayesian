@@ -268,7 +268,7 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
-      - name: R CMD check
+      - name: Check R package
         if: success()
         uses: r-lib/actions/check-r-package@v2
         with:
@@ -277,20 +277,6 @@ jobs:
           error-on: '"warning"'
           check-dir: '"check"'
           working-directory: '.'
-
-      - name: Show testthat output
-        if: always()
-        run: |
-          set -x
-          find . -name 'testthat.Rout*' -printf '%p\n' -exec cat '{}' \; || true
-        shell: bash
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ runner.os }}-r${{ matrix.r }}-results
-          path: check
 
       - name: Check R package reverse dependencies
         if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
