@@ -245,6 +245,7 @@ jobs:
             pkgType = ifelse(grepl("linux", R.version$os), "source", "binary")
           )
           install.packages("remotes")
+          remotes::install_cran("cffr")
           remotes::install_cran("covr")
           remotes::install_cran("curl")
           remotes::install_cran("devtools")
@@ -355,6 +356,13 @@ jobs:
           if (file.exists("README.Rmd")) rmarkdown::render("README.Rmd", output_format = "github_document")
         shell: Rscript {0}
 
+      - name: Generate CITATION.cff file
+        if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
+        run: |
+          options(crayon.enabled = TRUE)
+          cffr::cff_write(outfile = "CITATION.cff", keys = list())
+        shell: Rscript {0}
+
       - name: Commit changes
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
@@ -383,6 +391,8 @@ jobs:
             -printf '%p\n' -exec git add {} \; || true
           git diff --stat || true
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
+          git add CITATION.cff
+          git commit -m 'Generate `CITATION.cff` file' || echo "No changes to commit"
           git add revdep/\* || true
           git diff --stat || true
           git commit -m 'Update `revdep` results' || echo 'No changes to commit'
