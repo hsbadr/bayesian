@@ -1,0 +1,299 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.2.0
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "bayesian" in publications use:'
+type: software
+license: MIT
+title: 'bayesian: Bindings for Bayesian TidyModels'
+version: 0.0.8
+doi: 10.5281/zenodo.5539785
+abstract: Fit Bayesian models using 'brms'/'Stan' with 'parsnip'/'tidymodels' via
+  'bayesian' <doi:10.5281/zenodo.5539785>. 'tidymodels' is a collection of packages
+  for machine learning; see Kuhn and Wickham (2020) <https://www.tidymodels.org>).
+  The technical details of 'brms' and 'Stan' are described in Bürkner (2017) <doi:10.18637/jss.v080.i01>,
+  Bürkner (2018) <doi:10.32614/RJ-2018-017>, and Carpenter et al. (2017) <doi:10.18637/jss.v076.i01>.
+authors:
+- family-names: Badr
+  given-names: Hamada S.
+  email: badr@jhu.edu
+  orcid: https://orcid.org/0000-0002-9808-2344
+- family-names: Bürkner
+  given-names: Paul-Christian
+  email: paul.buerkner@gmail.com
+preferred-citation:
+  type: manual
+  title: 'bayesian: Bindings for Bayesian TidyModels'
+  authors:
+  - family-names: Badr
+    given-names: Hamada S.
+    email: badr@jhu.edu
+    orcid: https://orcid.org/0000-0002-9808-2344
+  - family-names: Bürkner
+    given-names: Paul C.
+    email: paul.buerkner@gmail.com
+  year: '2021'
+  journal: Comprehensive R Archive Network (CRAN)
+  url: https://hsbadr.github.io/bayesian/
+  doi: 10.5281/zenodo.5539785
+repository: https://CRAN.R-project.org/package=bayesian
+repository-code: https://github.com/hsbadr/bayesian
+url: https://hsbadr.github.io/bayesian/
+contact:
+- family-names: Badr
+  given-names: Hamada S.
+  email: badr@jhu.edu
+  orcid: https://orcid.org/0000-0002-9808-2344
+keywords:
+- bayesian
+- brms
+- stan
+- tidymodels
+references:
+- type: software
+  title: 'brms: Bayesian Regression Models using ''Stan'''
+  authors:
+  - family-names: Bürkner
+    given-names: Paul-Christian
+    email: paul.buerkner@gmail.com
+  year: '2022'
+  notes: Depends
+  version: '>= 2.16.3'
+- type: software
+  title: 'parsnip: A Common API to Modeling and Analysis Functions'
+  authors:
+  - family-names: Kuhn
+    given-names: Max
+    email: max@rstudio.com
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@rstudio.com
+  year: '2022'
+  notes: Depends
+  version: '>= 0.1.7'
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+  version: '>= 3.5.0'
+  notes: Depends
+- type: software
+  title: 'dplyr: A Grammar of Data Manipulation'
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Müller
+    given-names: Kirill
+    orcid: https://orcid.org/0000-0002-1416-3412
+  year: '2022'
+  notes: Imports
+- type: software
+  title: 'purrr: Functional Programming Tools'
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@rstudio.com
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  notes: Imports
+- type: software
+  title: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@rstudio.com
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  notes: Imports
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+  notes: Imports
+- type: software
+  title: 'tibble: Simple Data Frames'
+  authors:
+  - family-names: Müller
+    given-names: Kirill
+    email: krlmlr+r@mailbox.org
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  notes: Imports
+- type: software
+  title: 'covr: Test Coverage for Packages'
+  authors:
+  - family-names: Hester
+    given-names: Jim
+    email: james.f.hester@gmail.com
+  year: '2022'
+  notes: Suggests
+- type: software
+  title: 'devtools: Tools to Make Developing R Packages Easier'
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Chang
+    given-names: Winston
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@rstudio.com
+    orcid: https://orcid.org/0000-0002-6983-2759
+  year: '2022'
+  notes: Suggests
+- type: software
+  title: 'future: Unified Parallel and Distributed Processing in R for Everyone'
+  authors:
+  - family-names: Bengtsson
+    given-names: Henrik
+    email: henrikb@braju.com
+  year: '2022'
+  notes: Suggests
+- type: software
+  title: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2022'
+  notes: Suggests
+  url: https://yihui.org/knitr/
+- type: software
+  title: 'recipes: Preprocessing and Feature Engineering Steps for Modeling'
+  authors:
+  - family-names: Kuhn
+    given-names: Max
+    email: max@rstudio.com
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  notes: Suggests
+- type: software
+  title: 'rmarkdown: Dynamic Documents for R'
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@rstudio.com
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: McPherson
+    given-names: Jonathan
+    email: jonathan@rstudio.com
+  - family-names: Luraschi
+    given-names: Javier
+    email: javier@rstudio.com
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@rstudio.com
+  - family-names: Atkins
+    given-names: Aron
+    email: aron@rstudio.com
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@rstudio.com
+  - family-names: Chang
+    given-names: Winston
+    email: winston@rstudio.com
+  - family-names: Iannone
+    given-names: Richard
+    email: rich@rstudio.com
+    orcid: https://orcid.org/0000-0003-3925-190X
+  year: '2022'
+  notes: Suggests
+- type: software
+  title: 'roxygen2: In-Line Documentation for R'
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Danenberg
+    given-names: Peter
+    email: pcd@roxygen.org
+  - family-names: Csárdi
+    given-names: Gábor
+    email: csardi.gabor@gmail.com
+  - family-names: Eugster
+    given-names: Manuel
+  year: '2022'
+  notes: Suggests
+- type: software
+  title: 'rstan: R Interface to Stan'
+  authors:
+  - family-names: Guo
+    given-names: Jiqiang
+    email: guojq28@gmail.com
+  - family-names: Gabry
+    given-names: Jonah
+    email: jsg2201@columbia.edu
+  - family-names: Goodrich
+    given-names: Ben
+    email: benjamin.goodrich@columbia.edu
+  - family-names: Weber
+    given-names: Sebastian
+    email: sdw.post@waebers.de
+  year: '2022'
+  notes: Suggests
+- type: software
+  title: 'spelling: Tools for Spell Checking in R'
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  - family-names: Hester
+    given-names: Jim
+    email: james.hester@rstudio.com
+  year: '2022'
+  notes: Suggests
+- type: software
+  title: 'testthat: Unit Testing for R'
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  notes: Suggests
+- type: software
+  title: 'workflows: Modeling Workflows'
+  authors:
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@rstudio.com
+  year: '2022'
+  notes: Suggests
