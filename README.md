@@ -45,8 +45,8 @@ The development version of
 [GitHub](https://github.com/hsbadr/bayesian) using:
 
 ``` r
-install.packages("remotes")
-remotes::install_github("hsbadr/bayesian")
+install.packages("pak")
+pak::pkg_install("hsbadr/bayesian")
 ```
 
 ## Example
