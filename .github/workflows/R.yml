@@ -254,6 +254,7 @@ jobs:
             any::rmarkdown
             any::roxygen2
             any::styler
+            r-lib/revdepcheck
             local::.
           needs: |
             check
@@ -287,6 +288,7 @@ jobs:
           remotes::install_cran("sessioninfo")
           remotes::install_cran("styler")
           remotes::install_deps(dependencies = TRUE)
+          remotes::install_github("r-lib/revdepcheck")
           remotes::install_local(".")
           if (utils::packageVersion("sessioninfo") >= "1.2.1") {
             sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
@@ -310,7 +312,6 @@ jobs:
         if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
         run: |
           options(crayon.enabled = TRUE)
-          pak::pkg_install("r-lib/revdepcheck")
           revdepcheck::revdep_reset()
           revdepcheck::revdep_check(timeout = as.difftime(60, units = "mins"), num_workers = 1, bioc = TRUE)
           revdepcheck::revdep_reset()
