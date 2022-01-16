@@ -238,6 +238,7 @@ jobs:
         shell: pwsh
 
       - name: Set up R dependencies
+        id: r_dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache-version: 1
@@ -260,6 +261,40 @@ jobs:
             website
           pak-version: 'devel'
           working-directory: '.'
+        continue-on-error: true
+
+      - name: Set up R dependencies (fallback)
+        if: steps.r_dependencies.outcome != 'success'
+        run: |
+          options(
+            crayon.enabled = TRUE,
+            install.packages.check.source = "no",
+            pkgType = ifelse(grepl("linux", R.version$os), "source", "binary")
+          )
+          install.packages("remotes")
+          remotes::install_cran("cffr")
+          remotes::install_cran("covr")
+          remotes::install_cran("curl")
+          remotes::install_cran("devtools")
+          remotes::install_cran("htmltools")
+          remotes::install_cran("lintr")
+          remotes::install_cran("mgcv", type = "source")
+          remotes::install_cran("parsnip", type = "source")
+          remotes::install_cran("pkgdown")
+          remotes::install_cran("rcmdcheck")
+          remotes::install_cran("rmarkdown")
+          remotes::install_cran("roxygen2")
+          remotes::install_cran("sessioninfo")
+          remotes::install_cran("styler")
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_local(".")
+          if (utils::packageVersion("sessioninfo") >= "1.2.1") {
+            sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
+          } else {
+            options(width = 200)
+            sessioninfo::session_info(rownames(installed.packages()), include_base = TRUE)
+          }
+        shell: Rscript {0}
 
       - name: Check R package
         if: success()
