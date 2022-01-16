@@ -385,7 +385,7 @@ jobs:
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
           git add revdep/\* || true
           git diff --stat || true
-          git commit -m 'Update revdep results' || echo 'No changes to commit'
+          git commit -m 'Update `revdep` results' || echo 'No changes to commit'
           git pull --ff-only || true
           git push origin || echo "No changes to commit"
         shell: bash
