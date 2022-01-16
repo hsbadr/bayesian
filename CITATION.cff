@@ -252,6 +252,7 @@ references:
     given-names: Manuel
   year: '2022'
   notes: Suggests
+  url: https://CRAN.R-project.org/package=roxygen2
 - type: software
   title: 'rstan: R Interface to Stan'
   authors:
