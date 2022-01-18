@@ -1,5 +1,8 @@
 # bayesian 0.0.8
 
+- Updated package website
+- Updated package `CITATION`
+- Updated package `DESCRIPTION` and `README`
 - Updated package dependencies
 - Added preliminary support for multivariate non-linear models (#7)
 - Fixed `type = "raw"` predictions for multivariate non-linear models (#7)
@@ -54,7 +57,7 @@
 
 # bayesian 0.0.3
 
-- Added CITATION and updated package DESCRIPTION
+- Added `CITATION` and updated package `DESCRIPTION`
 - Added fit wrapper and other helper functions
 - Renamed the current engine from `stan` to `brms`
 - Updated manual, logo, `WORDLIST`, and `NEWS`
