@@ -1,0 +1,29 @@
+template:
+  bootstrap: 5
+
+development:
+  mode: auto
+
+authors:
+  Hamada S. Badr:
+    href: https://hsbadr.github.io
+
+navbar:
+  type: inverse
+  left:
+    - icon: fa-home
+      text: Home
+      href: index.html
+    - icon: fa-rss
+      text: News
+      href: news/index.html
+    - icon: fa-play-circle
+      text: Get Started
+      href: articles/GetStarted.html
+    - icon: fa-code
+      text: Functions
+      href: reference/bayesian.html
+  right:
+    - icon: fa-github
+      text: Source Code
+      href: https://github.com/hsbadr/bayesian
