@@ -198,14 +198,14 @@
 <span class="co">## Group-Level Effects: </span>
 <span class="co">## ~patient (Number of levels: 59) </span>
 <span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## sd(Intercept)     0.58      0.07     0.45     0.73 1.00      754     1519</span>
+<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      785     1260</span>
 <span class="co">## </span>
 <span class="co">## Population-Level Effects: </span>
 <span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## Intercept     1.77      0.12     1.55     2.00 1.00      766     1288</span>
-<span class="co">## Trt1         -0.26      0.17    -0.58     0.07 1.01      659     1190</span>
-<span class="co">## Base          0.73      0.08     0.57     0.90 1.00      757     1111</span>
-<span class="co">## Age           0.08      0.08    -0.07     0.24 1.00      945     1611</span>
+<span class="co">## Intercept     1.77      0.12     1.53     2.00 1.01      759     1242</span>
+<span class="co">## Trt1         -0.27      0.17    -0.60     0.06 1.01      622     1251</span>
+<span class="co">## Base          0.73      0.08     0.56     0.89 1.00      852     1339</span>
+<span class="co">## Age           0.08      0.09    -0.10     0.25 1.00      653      938</span>
 <span class="co">## </span>
 <span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span>
 <span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span>
@@ -238,7 +238,7 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>           0           8</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>           0           7</span>
 <span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          22</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23</span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -251,11 +251,11 @@
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="co">##   .pred_lower .pred_upper .std_error</span>
 <span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.04</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.11</span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.06</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.08</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.82</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       2.01</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           7          23       4.10</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       2.06</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.13</span></code></pre>
   </main>
 </div>
 
