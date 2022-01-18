@@ -1,3 +1,5 @@
+url: https://hsbadr.github.io/bayesian/
+
 template:
   bootstrap: 5
 
@@ -26,4 +28,7 @@ navbar:
   right:
     - icon: fa-github
       text: Source Code
-      href: https://github.com/hsbadr/bayesian
+      href: https://github.com/hsbadr/bayesian/
+
+search:
+  exclude: ['news/index.html']
