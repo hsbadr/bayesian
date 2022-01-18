@@ -80,7 +80,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/hsbadr/bayesian">
+  <a class="external-link nav-link" href="https://github.com/hsbadr/bayesian/">
     <span class="fa fa-github"></span>
      
     Source Code
@@ -94,20 +94,20 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="bindings-for-bayesian-tidymodels-">Bindings for Bayesian TidyModels <a href="https://hsbadr.github.io/bayesian/" class="external-link"><img src="reference/figures/bayesian.png" align="right" width="160" alt="bayesian logo"></a>
+<div class="page-header"><h1 id="bindings-for-bayesian-tidymodels-">Bindings for Bayesian TidyModels <a href="https://hsbadr.github.io/bayesian/"><img src="reference/figures/bayesian.png" align="right" width="160" alt="bayesian logo"></a>
 <a class="anchor" aria-label="anchor" href="#bindings-for-bayesian-tidymodels-"></a>
 </h1></div>
 <!-- badges: start -->
 
 <p><a href="https://CRAN.R-project.org/package=bayesian" class="external-link"><img src="https://www.r-pkg.org/badges/version/bayesian" alt="CRAN Status"></a> <a href="https://cran.r-project.org/package=bayesian" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/bayesian" alt="CRAN Downloads"></a> <a href="https://github.com/hsbadr/bayesian/blob/main/LICENSE.md" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a> <a href="https://zenodo.org/badge/latestdoi/327419436" class="external-link"><img src="https://zenodo.org/badge/327419436.svg" alt="DOI"></a> <!-- badges: end --></p>
-<p><a href="https://hsbadr.github.io/bayesian/" class="external-link"><strong><code>bayesian</code></strong></a> supports Bayesian modeling using <a href="https://paul-buerkner.github.io/brms/" class="external-link"><code>brms</code></a>/<a href="https://mc-stan.org/" class="external-link"><code>Stan</code></a> with <a href="https://parsnip.tidymodels.org/" class="external-link"><code>parsnip</code></a>/<a href="https://www.tidymodels.org/" class="external-link"><code>tidymodels</code></a>.</p>
+<p><a href="https://hsbadr.github.io/bayesian/"><strong><code>bayesian</code></strong></a> supports Bayesian modeling using <a href="https://paul-buerkner.github.io/brms/" class="external-link"><code>brms</code></a>/<a href="https://mc-stan.org/" class="external-link"><code>Stan</code></a> with <a href="https://parsnip.tidymodels.org/" class="external-link"><code>parsnip</code></a>/<a href="https://www.tidymodels.org/" class="external-link"><code>tidymodels</code></a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The stable version of <a href="https://hsbadr.github.io/bayesian/" class="external-link"><code>bayesian</code></a> can be installed from <a href="https://CRAN.R-project.org/package=bayesian" class="external-link">CRAN</a> using:</p>
+<p>The stable version of <a href="https://hsbadr.github.io/bayesian/"><code>bayesian</code></a> can be installed from <a href="https://CRAN.R-project.org/package=bayesian" class="external-link">CRAN</a> using:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"bayesian"</span><span class="op">)</span></code></pre></div>
-<p>The development version of <a href="https://hsbadr.github.io/bayesian/" class="external-link"><code>bayesian</code></a> can be installed from <a href="https://github.com/hsbadr/bayesian" class="external-link">GitHub</a> using:</p>
+<p>The development version of <a href="https://hsbadr.github.io/bayesian/"><code>bayesian</code></a> can be installed from <a href="https://github.com/hsbadr/bayesian" class="external-link">GitHub</a> using:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span>
 <span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"hsbadr/bayesian"</span><span class="op">)</span></code></pre></div>
@@ -116,7 +116,7 @@
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hsbadr.github.io/bayesian/" class="external-link">bayesian</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hsbadr.github.io/bayesian/">bayesian</a></span><span class="op">)</span>
 
 <span class="va">bayesian_mod</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="reference/bayesian.html">bayesian</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -127,7 +127,7 @@
   <span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">bayesian_mod</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
-<p>For more details, <a href="https://hsbadr.github.io/bayesian/articles/GetStarted.html" class="external-link">get started with <code>bayesian</code></a>.</p>
+<p>For more details, <a href="https://hsbadr.github.io/bayesian/articles/GetStarted.html">get started with <code>bayesian</code></a>.</p>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
@@ -136,7 +136,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"bayesian"</span><span class="op">)</span></code></pre></div>
 <blockquote>
-<p>Hamada S. Badr and Paul C. Bürkner (2021): bayesian: Bindings for Bayesian TidyModels, <a href="https://cran.r-project.org/package=bayesian" class="external-link"><em>Comprehensive R Archive Network (CRAN)</em></a>. URL: <a href="https://hsbadr.github.io/bayesian/" class="external-link uri">https://hsbadr.github.io/bayesian/</a>.</p>
+<p>Hamada S. Badr and Paul C. Bürkner (2021): bayesian: Bindings for Bayesian TidyModels, <a href="https://cran.r-project.org/package=bayesian" class="external-link"><em>Comprehensive R Archive Network (CRAN)</em></a>. URL: <a href="https://hsbadr.github.io/bayesian/" class="uri">https://hsbadr.github.io/bayesian/</a>.</p>
 </blockquote>
 </div>
 <div class="section level2">

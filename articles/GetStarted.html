@@ -70,7 +70,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/hsbadr/bayesian">
+  <a class="external-link nav-link" href="https://github.com/hsbadr/bayesian/">
     <span class="fa fa-github"></span>
      
     Source Code
@@ -97,7 +97,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hsbadr.github.io/bayesian/" class="external-link">bayesian</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hsbadr.github.io/bayesian/">bayesian</a></span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/recipes" class="external-link">recipes</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/workflows" class="external-link">workflows</a></span><span class="op">)</span></code></pre></div>
@@ -198,14 +198,14 @@
 <span class="co">## Group-Level Effects: </span>
 <span class="co">## ~patient (Number of levels: 59) </span>
 <span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      874     1636</span>
+<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.74 1.00      758     1350</span>
 <span class="co">## </span>
 <span class="co">## Population-Level Effects: </span>
 <span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## Intercept     1.77      0.12     1.55     2.01 1.00      680      942</span>
-<span class="co">## Trt1         -0.27      0.17    -0.59     0.06 1.01      650     1143</span>
-<span class="co">## Base          0.73      0.08     0.57     0.89 1.00      813     1199</span>
-<span class="co">## Age           0.09      0.09    -0.08     0.26 1.01      643      866</span>
+<span class="co">## Intercept     1.77      0.12     1.52     2.01 1.00      613     1114</span>
+<span class="co">## Trt1         -0.27      0.17    -0.60     0.07 1.00      709     1102</span>
+<span class="co">## Base          0.74      0.08     0.58     0.91 1.00      693      978</span>
+<span class="co">## Age           0.09      0.09    -0.08     0.26 1.00      720     1231</span>
 <span class="co">## </span>
 <span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span>
 <span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span>
@@ -238,7 +238,7 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>           0           8</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>           0           7</span>
 <span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           7          22</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23</span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -252,10 +252,10 @@
 <span class="co">##   .pred_lower .pred_upper .std_error</span>
 <span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.02</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.07</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.83</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.99</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.12</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.06</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.84</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       2.02</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          22       4.11</span></code></pre>
   </main>
 </div>
 
