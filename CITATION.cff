@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.0
+# CITATION file created with {cffr} R package, v0.2.1
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -53,16 +53,19 @@ keywords:
 - tidymodels
 references:
 - type: software
-  title: 'brms: Bayesian Regression Models using ''Stan'''
+  title: brms
+  abstract: 'brms: Bayesian Regression Models using ''Stan'''
+  notes: Depends
   authors:
   - family-names: Bürkner
     given-names: Paul-Christian
     email: paul.buerkner@gmail.com
   year: '2022'
-  notes: Depends
   version: '>= 2.16.3'
 - type: software
-  title: 'parsnip: A Common API to Modeling and Analysis Functions'
+  title: parsnip
+  abstract: 'parsnip: A Common API to Modeling and Analysis Functions'
+  notes: Depends
   authors:
   - family-names: Kuhn
     given-names: Max
@@ -71,10 +74,10 @@ references:
     given-names: Davis
     email: davis@rstudio.com
   year: '2022'
-  notes: Depends
   version: '>= 0.1.7'
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
   authors:
   - name: R Core Team
   location:
@@ -84,9 +87,10 @@ references:
   institution:
     name: R Foundation for Statistical Computing
   version: '>= 3.5.0'
-  notes: Depends
 - type: software
-  title: 'dplyr: A Grammar of Data Manipulation'
+  title: dplyr
+  abstract: 'dplyr: A Grammar of Data Manipulation'
+  notes: Imports
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -101,9 +105,10 @@ references:
     given-names: Kirill
     orcid: https://orcid.org/0000-0002-1416-3412
   year: '2022'
-  notes: Imports
 - type: software
-  title: 'purrr: Functional Programming Tools'
+  title: purrr
+  abstract: 'purrr: Functional Programming Tools'
+  notes: Imports
   authors:
   - family-names: Henry
     given-names: Lionel
@@ -112,9 +117,10 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  notes: Imports
 - type: software
-  title: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
+  title: rlang
+  abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
+  notes: Imports
   authors:
   - family-names: Henry
     given-names: Lionel
@@ -123,9 +129,10 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  notes: Imports
 - type: software
-  title: 'R: A Language and Environment for Statistical Computing'
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
   authors:
   - name: R Core Team
   location:
@@ -134,9 +141,10 @@ references:
   url: https://www.R-project.org/
   institution:
     name: R Foundation for Statistical Computing
-  notes: Imports
 - type: software
-  title: 'tibble: Simple Data Frames'
+  title: tibble
+  abstract: 'tibble: Simple Data Frames'
+  notes: Imports
   authors:
   - family-names: Müller
     given-names: Kirill
@@ -145,17 +153,31 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  notes: Imports
 - type: software
-  title: 'covr: Test Coverage for Packages'
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: covr
+  abstract: 'covr: Test Coverage for Packages'
+  notes: Suggests
   authors:
   - family-names: Hester
     given-names: Jim
     email: james.f.hester@gmail.com
   year: '2022'
-  notes: Suggests
 - type: software
-  title: 'devtools: Tools to Make Developing R Packages Easier'
+  title: devtools
+  abstract: 'devtools: Tools to Make Developing R Packages Easier'
+  notes: Suggests
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -168,27 +190,30 @@ references:
     email: jenny@rstudio.com
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2022'
-  notes: Suggests
 - type: software
-  title: 'future: Unified Parallel and Distributed Processing in R for Everyone'
+  title: future
+  abstract: 'future: Unified Parallel and Distributed Processing in R for Everyone'
+  notes: Suggests
   authors:
   - family-names: Bengtsson
     given-names: Henrik
     email: henrikb@braju.com
   year: '2022'
-  notes: Suggests
 - type: software
-  title: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
   authors:
   - family-names: Xie
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2022'
-  notes: Suggests
   url: https://yihui.org/knitr/
 - type: software
-  title: 'recipes: Preprocessing and Feature Engineering Steps for Modeling'
+  title: recipes
+  abstract: 'recipes: Preprocessing and Feature Engineering Steps for Modeling'
+  notes: Suggests
   authors:
   - family-names: Kuhn
     given-names: Max
@@ -197,9 +222,10 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  notes: Suggests
 - type: software
-  title: 'rmarkdown: Dynamic Documents for R'
+  title: rmarkdown
+  abstract: 'rmarkdown: Dynamic Documents for R'
+  notes: Suggests
   authors:
   - family-names: Allaire
     given-names: JJ
@@ -234,9 +260,10 @@ references:
     email: rich@rstudio.com
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2022'
-  notes: Suggests
 - type: software
-  title: 'roxygen2: In-Line Documentation for R'
+  title: roxygen2
+  abstract: 'roxygen2: In-Line Documentation for R'
+  notes: Suggests
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -251,10 +278,11 @@ references:
   - family-names: Eugster
     given-names: Manuel
   year: '2022'
-  notes: Suggests
   url: https://CRAN.R-project.org/package=roxygen2
 - type: software
-  title: 'rstan: R Interface to Stan'
+  title: rstan
+  abstract: 'rstan: R Interface to Stan'
+  notes: Suggests
   authors:
   - family-names: Guo
     given-names: Jiqiang
@@ -269,9 +297,10 @@ references:
     given-names: Sebastian
     email: sdw.post@waebers.de
   year: '2022'
-  notes: Suggests
 - type: software
-  title: 'spelling: Tools for Spell Checking in R'
+  title: spelling
+  abstract: 'spelling: Tools for Spell Checking in R'
+  notes: Suggests
   authors:
   - family-names: Ooms
     given-names: Jeroen
@@ -281,20 +310,21 @@ references:
     given-names: Jim
     email: james.hester@rstudio.com
   year: '2022'
-  notes: Suggests
 - type: software
-  title: 'testthat: Unit Testing for R'
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
   authors:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  notes: Suggests
 - type: software
-  title: 'workflows: Modeling Workflows'
+  title: workflows
+  abstract: 'workflows: Modeling Workflows'
+  notes: Suggests
   authors:
   - family-names: Vaughan
     given-names: Davis
     email: davis@rstudio.com
   year: '2022'
-  notes: Suggests
