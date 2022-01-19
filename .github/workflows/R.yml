@@ -345,7 +345,7 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           set -x
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
+          find . -type f -regex '.*\.\(h\|hpp\|c\|cc\|cpp\|cxx\)' \
             -not -path "./build/*" \
             -not -path "./check/*" \
             -not -path "./revdep/*" \
@@ -357,13 +357,13 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           set -x
-          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) \
+          find . -type f \( -name 'DESCRIPTION' -o -regex '.*\.\(R\|stan\)' \) \
             -not -path "./build/*" \
             -not -path "./check/*" \
             -not -path "./revdep/*" \
             -not -path "*/RcppExports.*" \
             -printf '%p\n' -exec sed -i -e 's/[ \t]*$//' {} \; || true
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
+          find . -type f -regex '.*\.\(h\|hpp\|c\|cc\|cpp\|cxx\)' \
             -not -path "./build/*" \
             -not -path "./check/*" \
             -not -path "./revdep/*" \
@@ -392,7 +392,7 @@ jobs:
           set -x
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name "*.stan" \) \
+          find . -type f \( -name 'DESCRIPTION' -o -regex '.*\.\(R\|stan\)' \) \
             -not -path "./build/*" \
             -not -path "./check/*" \
             -not -path "./revdep/*" \
@@ -400,14 +400,14 @@ jobs:
             -printf '%p\n' -exec git add {} \; || true
           git diff --stat || true
           git commit -m 'Styling and formatting R code using `styler`' || echo 'No changes to commit'
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
+          find . -type f -regex '.*\.\(h\|hpp\|c\|cc\|cpp\|cxx\)' \
             -not -path "./build/*" \
             -not -path "./check/*" \
             -not -path "*/RcppExports.*" \
             -printf '%p\n' -exec git add {} \; || true
           git diff --stat || true
           git commit -m 'Styling and formatting C/C++ code using `clang-format`' || echo 'No changes to commit'
-          find . \( -name "*.Rd" -o -name "*.Rmd" -o -name "*.md" -o -name 'NAMESPACE' -o -name 'RcppExports.*' \) \
+          find . \( -name 'NAMESPACE' -o -name 'RcppExports.*' -o -regex '.*\.\(Rd\|Rmd|\md\)' \) \
             -not -path "./build/*" \
             -not -path "./check/*" \
             -not -path "./revdep/*" \
