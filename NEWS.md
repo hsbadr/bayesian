@@ -5,6 +5,7 @@
 - Updated package `DESCRIPTION` and `README`
 - Updated package dependencies
 - Added preliminary support for multivariate non-linear models (#7)
+- Fixed possibly invalid URLs
 - Fixed `type = "raw"` predictions for multivariate non-linear models (#7)
 - Handled `mvbrmsformula` class in `bayesian_formula` (#7)
 - Fixed threshold probability check for class predictions

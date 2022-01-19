@@ -8,7 +8,7 @@
 [![Lifecycle:
 Stable](https://img.shields.io/badge/Lifecycle-Stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Codecov Test
-Coverage](https://codecov.io/gh/hsbadr/bayesian/branch/main/graph/badge.svg)](https://codecov.io/gh/hsbadr/bayesian?branch=main)
+Coverage](https://codecov.io/gh/hsbadr/bayesian/branch/main/graph/badge.svg)](https://app.codecov.io/gh/hsbadr/bayesian?branch=main)
 [![Last
 commit](https://img.shields.io/github/last-commit/hsbadr/bayesian)](https://github.com/hsbadr/bayesian/commits/main)
 [![Commits since
