@@ -33,7 +33,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../index.html">
@@ -82,6 +82,9 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 
 <div class="row">
   <main id="main"><div class="page-header">
@@ -198,14 +201,14 @@
 <span class="co">## Group-Level Effects: </span>
 <span class="co">## ~patient (Number of levels: 59) </span>
 <span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.01      792     1396</span>
+<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      868     1333</span>
 <span class="co">## </span>
 <span class="co">## Population-Level Effects: </span>
 <span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## Intercept     1.77      0.11     1.54     2.00 1.00      797     1481</span>
-<span class="co">## Trt1         -0.26      0.16    -0.59     0.05 1.01      772     1421</span>
-<span class="co">## Base          0.73      0.08     0.57     0.90 1.00      769     1035</span>
-<span class="co">## Age           0.09      0.08    -0.08     0.25 1.01      750     1379</span>
+<span class="co">## Intercept     1.77      0.12     1.53     2.00 1.00      648     1378</span>
+<span class="co">## Trt1         -0.27      0.16    -0.59     0.05 1.00      640     1211</span>
+<span class="co">## Base          0.73      0.08     0.57     0.89 1.01      679     1132</span>
+<span class="co">## Age           0.09      0.08    -0.07     0.26 1.01      732     1355</span>
 <span class="co">## </span>
 <span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span>
 <span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span>
@@ -238,7 +241,7 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>           0           8</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>           0           7</span>
 <span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          22</span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -252,10 +255,10 @@
 <span class="co">##   .pred_lower .pred_upper .std_error</span>
 <span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.08</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.02</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.84</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       2.00</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.18</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.10</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.80</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.97</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          22       4.03</span></code></pre>
   </main>
 </div>
 
@@ -268,7 +271,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer>
