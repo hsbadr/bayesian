@@ -15,7 +15,7 @@ citEntry(entry = "Manual",
   year         = "2021",
   journal      = "Comprehensive R Archive Network (CRAN)",
   url          = "https://hsbadr.github.io/bayesian/",
-  doi          = "10.5281/zenodo.5539785",
+  doi          = "10.5281/zenodo.5884879",
   language     = "English",
   key          = "bayesian-manual",
 
