@@ -89,8 +89,8 @@ jobs:
         run: |
           set -x
           echo "::set-output name=os_linux::Ubuntu-20.04"
-          echo "::set-output name=os_macos::macOS-10.15"
-          echo "::set-output name=os_windows::Windows-2019"
+          echo "::set-output name=os_macos::macOS-11"
+          echo "::set-output name=os_windows::Windows-2022"
         shell: bash
 
   check:
