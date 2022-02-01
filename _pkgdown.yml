@@ -27,7 +27,6 @@ navbar:
       href: reference/bayesian.html
   right:
     - icon: fa-github
-      text: Source Code
       href: https://github.com/hsbadr/bayesian/
 
 search:
