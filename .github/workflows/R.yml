@@ -260,7 +260,7 @@ jobs:
             check
             coverage
             website
-          pak-version: 'devel'
+          pak-version: 'stable'
           working-directory: '.'
         continue-on-error: true
 
