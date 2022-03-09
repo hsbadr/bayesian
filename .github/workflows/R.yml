@@ -5,7 +5,7 @@
 #     email: badr@jhu.edu
 #     institute: Johns Hopkins University
 #     correspondence: true
-# date: "15 January 2022"
+# date: "9 March 2022"
 
 # yamllint disable rule:line-length
 
@@ -307,6 +307,7 @@ jobs:
           error-on: '"warning"'
           check-dir: '"check"'
           working-directory: '.'
+          upload-snapshots: true
 
       - name: Check R package reverse dependencies
         if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
@@ -443,7 +444,7 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           options(crayon.enabled = TRUE)
-          covr::codecov(type = "all", line_exclusions = NULL, function_exclusions = NULL)
+          covr::codecov(quiet = FALSE)
         shell: Rscript {0}
 
       - name: Build package website
