@@ -90,7 +90,7 @@
       <img src="" class="logo" alt=""><h1>Get started with `bayesian`</h1>
                         <h4 data-toc-skip class="author">Paul-Christian Bürkner &amp; Hamada S. Badr</h4>
             
-            <h4 data-toc-skip class="date">2022-03-14</h4>
+            <h4 data-toc-skip class="date">2022-03-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/hsbadr/bayesian/blob/HEAD/vignettes/GetStarted.Rmd" class="external-link"><code>vignettes/GetStarted.Rmd</code></a></small>
       <div class="d-none name"><code>GetStarted.Rmd</code></div>
@@ -148,9 +148,9 @@
   <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span>family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">poisson</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Next, we define a workflow via the <code>workflows</code> package, by combining the above defined data processing recipe and the model plus the actual model formula to be passed to the <code>brms</code> engine.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">epi_workflow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://workflows.tidymodels.org//reference/workflow.html" class="external-link">workflow</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://workflows.tidymodels.org//reference/add_recipe.html" class="external-link">add_recipe</a></span><span class="op">(</span><span class="va">epi_recipe</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://workflows.tidymodels.org//reference/add_model.html" class="external-link">add_model</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">epi_workflow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://workflows.tidymodels.org/reference/workflow.html" class="external-link">workflow</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://workflows.tidymodels.org/reference/add_recipe.html" class="external-link">add_recipe</a></span><span class="op">(</span><span class="va">epi_recipe</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://workflows.tidymodels.org/reference/add_model.html" class="external-link">add_model</a></span><span class="op">(</span>
     spec <span class="op">=</span> <span class="va">epi_model</span>,
     formula <span class="op">=</span> <span class="va">count</span> <span class="op">~</span> <span class="va">Trt</span> <span class="op">+</span> <span class="va">Base</span> <span class="op">+</span> <span class="va">Age</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">patient</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
@@ -200,14 +200,14 @@
 <span class="co">## Group-Level Effects: </span>
 <span class="co">## ~patient (Number of levels: 59) </span>
 <span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.74 1.01      683     1335</span>
+<span class="co">## sd(Intercept)     0.57      0.07     0.45     0.73 1.00      786     1131</span>
 <span class="co">## </span>
 <span class="co">## Population-Level Effects: </span>
 <span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## Intercept     1.77      0.12     1.53     2.00 1.00      742     1108</span>
-<span class="co">## Trt1         -0.26      0.16    -0.58     0.07 1.00      772     1168</span>
-<span class="co">## Base          0.73      0.08     0.57     0.89 1.00      906     1439</span>
-<span class="co">## Age           0.08      0.09    -0.09     0.25 1.00      801     1451</span>
+<span class="co">## Intercept     1.78      0.11     1.55     2.00 1.00      720     1511</span>
+<span class="co">## Trt1         -0.27      0.16    -0.59     0.03 1.00      726     1447</span>
+<span class="co">## Base          0.73      0.08     0.58     0.89 1.01      737     1267</span>
+<span class="co">## Age           0.09      0.09    -0.09     0.25 1.00      651     1051</span>
 <span class="co">## </span>
 <span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span>
 <span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span>
@@ -240,7 +240,7 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>           0           8</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>           0           7</span>
 <span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           7          22</span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -253,11 +253,11 @@
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="co">##   .pred_lower .pred_upper .std_error</span>
 <span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>           0         8         2.02</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>           0         8         2.10</span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>           0         8         2.08</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>           0         8         2.04</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>           0         7         1.83</span>
 <span class="co">## <span style="color: #BCBCBC;">4</span>           0         8         2.04</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6        22.0       4.11</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6        22.0       4.13</span></code></pre>
   </main>
 </div>
 
