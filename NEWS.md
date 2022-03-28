@@ -1,3 +1,8 @@
+# bayesian 0.0.9
+
+- Updated package dependencies
+- Used `init` instead of the deprecated `inits` (`brms >= 2.16.9`)
+
 # bayesian 0.0.8
 
 - Updated package website
