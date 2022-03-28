@@ -8,7 +8,7 @@ message: 'To cite package "bayesian" in publications use:'
 type: software
 license: MIT
 title: 'bayesian: Bindings for Bayesian TidyModels'
-version: 0.0.8
+version: 0.0.9
 doi: 10.5281/zenodo.5884879
 abstract: Fit Bayesian models using 'brms'/'Stan' with 'parsnip'/'tidymodels' via
   'bayesian' <doi:10.5281/zenodo.5884879>. 'tidymodels' is a collection of packages
@@ -61,7 +61,7 @@ references:
     given-names: Paul-Christian
     email: paul.buerkner@gmail.com
   year: '2022'
-  version: '>= 2.16.3'
+  version: '>= 2.16.12'
 - type: software
   title: parsnip
   abstract: 'parsnip: A Common API to Modeling and Analysis Functions'
@@ -74,7 +74,7 @@ references:
     given-names: Davis
     email: davis@rstudio.com
   year: '2022'
-  version: '>= 0.2.0'
+  version: '>= 0.2.1'
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
@@ -209,7 +209,7 @@ references:
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2022'
-  url: https://CRAN.R-project.org/package=knitr
+  url: https://yihui.org/knitr/
 - type: software
   title: recipes
   abstract: 'recipes: Preprocessing and Feature Engineering Steps for Modeling'
