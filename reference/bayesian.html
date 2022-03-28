@@ -14,7 +14,7 @@ Stan via brms package in R."><!-- mathjax --><script src="https://cdnjs.cloudfla
     
     <a class="navbar-brand me-2" href="../index.html">bayesian</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,7 @@ before fitting and allows the model to be created using
   knots <span class="op">=</span> <span class="cn">NULL</span>,
   stanvars <span class="op">=</span> <span class="cn">NULL</span>,
   fit <span class="op">=</span> <span class="cn">NULL</span>,
-  inits <span class="op">=</span> <span class="cn">NULL</span>,
+  init <span class="op">=</span> <span class="cn">NULL</span>,
   chains <span class="op">=</span> <span class="cn">NULL</span>,
   iter <span class="op">=</span> <span class="cn">NULL</span>,
   warmup <span class="op">=</span> <span class="cn">NULL</span>,
@@ -121,7 +121,7 @@ before fitting and allows the model to be created using
   knots <span class="op">=</span> <span class="cn">NULL</span>,
   stanvars <span class="op">=</span> <span class="cn">NULL</span>,
   fit <span class="op">=</span> <span class="cn">NULL</span>,
-  inits <span class="op">=</span> <span class="cn">NULL</span>,
+  init <span class="op">=</span> <span class="cn">NULL</span>,
   chains <span class="op">=</span> <span class="cn">NULL</span>,
   iter <span class="op">=</span> <span class="cn">NULL</span>,
   warmup <span class="op">=</span> <span class="cn">NULL</span>,
@@ -215,21 +215,21 @@ compiled model associated with the fitted result is re-used and all
 arguments modifying the model code or data are ignored. It is not
 recommended to use this argument directly, but to call the
 <code><a href="https://rdrr.io/pkg/brms/man/update.brmsfit.html" class="external-link">update</a></code> method, instead.</p></dd>
-<dt>inits</dt>
-<dd><p>Either <code>"random"</code> or <code>"0"</code>. If inits is
-<code>"random"</code> (the default), Stan will randomly generate initial values
-for parameters. If it is <code>"0"</code>, all parameters are initialized to
-zero. This option is sometimes useful for certain families, as it happens
-that default (<code>"random"</code>) inits cause draws to be essentially
-constant. Generally, setting <code>inits = "0"</code> is worth a try, if chains
-do not behave well. Alternatively, <code>inits</code> can be a list of lists
-containing the initial values, or a function (or function name) generating
-initial values. The latter options are mainly implemented for internal
-testing but are available to users if necessary. If specifying initial 
-values using a list or a function then currently the parameter names must
-correspond to the names used in the generated Stan code (not the names
-used in <span style="R">R</span>). For more details on specifying initial values you can consult 
-the documentation of the selected <code>backend</code>.</p></dd>
+<dt>init</dt>
+<dd><p>Initial values for the sampler. If <code>NULL</code> (the default) or
+<code>"random"</code>, Stan will randomly generate initial values for parameters
+in a reasonable range. If <code>0</code>, all parameters are initialized to zero
+on the unconstrained space. This option is sometimes useful for certain
+families, as it happens that default random initial values cause draws to
+be essentially constant. Generally, setting <code>init = 0</code> is worth a try,
+if chains do not initialize or behave well. Alternatively, <code>init</code> can
+be a list of lists containing the initial values, or a function (or
+function name) generating initial values. The latter options are mainly
+implemented for internal testing but are available to users if necessary.
+If specifying initial values using a list or a function then currently the
+parameter names must correspond to the names used in the generated Stan
+code (not the names used in <span style="R">R</span>). For more details on specifying initial
+values you can consult the documentation of the selected <code>backend</code>.</p></dd>
 <dt>chains</dt>
 <dd><p>Number of Markov chains (defaults to 4).</p></dd>
 <dt>iter</dt>
@@ -256,7 +256,9 @@ more control over the threading process, <code>threads</code> may also be a
 <code>brmsthreads</code> object created by <code><a href="https://rdrr.io/pkg/brms/man/threading.html" class="external-link">threading</a></code>. Within-chain
 parallelization is experimental! We recommend its use only if you are
 experienced with Stan's <code>reduce_sum</code> function and have a slow running
-model that cannot be sped up by any other means.</p></dd>
+model that cannot be sped up by any other means. Can be set globally for
+the current <span style="R">R</span> session via the <code>"brms.threads"</code> option (see
+<code><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></code>).</p></dd>
 <dt>algorithm</dt>
 <dd><p>Character string naming the estimation approach to use.
 Options are <code>"sampling"</code> for MCMC (the default), <code>"meanfield"</code> for
@@ -273,7 +275,7 @@ fitting the Stan model. Options are <code>"rstan"</code> (the default) or
 <span class="pkg">rstan</span> and <span class="pkg">cmdstanr</span> packages are available at
 <a href="https://mc-stan.org/rstan/" class="external-link">https://mc-stan.org/rstan/</a> and <a href="https://mc-stan.org/cmdstanr/" class="external-link">https://mc-stan.org/cmdstanr/</a>,
 respectively. Additionally a <code>"mock"</code> backend is available to make
-testing <span class="pkg">brms</span> and packages that depend on it easier. 
+testing <span class="pkg">brms</span> and packages that depend on it easier.
 The <code>"mock"</code> backend does not actually do any fitting, it only checks
 the generated Stan code for correctness and then returns whatever is passed
 in an additional <code>mock_fit</code> argument as the result of the fit.</p></dd>
@@ -299,7 +301,7 @@ saved via <code><a href="https://rdrr.io/r/base/readRDS.html" class="external-li
 <dt>file_refit</dt>
 <dd><p>Modifies when the fit stored via the <code>file</code> parameter
 is re-used. Can be set globally for the current <span style="R">R</span> session via the
-<code>"brms.file_refit"</code> option (see <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></code>). 
+<code>"brms.file_refit"</code> option (see <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></code>).
 For <code>"never"</code> (default) the fit is always loaded if it
 exists and fitting is skipped. For <code>"always"</code> the model is always
 refitted. If set to <code>"on_change"</code>, brms will
@@ -317,7 +319,7 @@ parallelization is switched on/off.</p></dd>
 be included in the Stan code (defaults to <code>TRUE</code>). Setting it
 to <code>FALSE</code> requires Stan version &gt;= 2.25 to work. If <code>FALSE</code>,
 sampling efficiency may be increased but some post processing functions
-such as <code><a href="https://rdrr.io/pkg/brms/man/bridge_sampler.brmsfit.html" class="external-link">bridge_sampler</a></code> will not be available. Can be 
+such as <code><a href="https://rdrr.io/pkg/brms/man/bridge_sampler.brmsfit.html" class="external-link">bridge_sampler</a></code> will not be available. Can be
 controlled globally for the current <span style="R">R</span> session via the `brms.normalize`
 option.</p></dd>
 <dt>future</dt>
@@ -435,7 +437,7 @@ call. For this type of model, the template of the fit calls are:</p><div class="
 <span class="r-out co"><span class="r-pr">#&gt;</span>       knots            --&gt; knots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       stanvars         --&gt; stanvars</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       fit              --&gt; fit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       inits            --&gt; inits</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       init             --&gt; init</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       chains           --&gt; chains</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       iter             --&gt; iter</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       warmup           --&gt; warmup</span>
@@ -489,28 +491,28 @@ call. For this type of model, the template of the fit calls are:</p><div class="
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-in"></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">bayesian</span><span class="op">(</span>inits <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">bayesian</span><span class="op">(</span>init <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">model</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian Model Specification (regression)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Main Arguments:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   inits = random</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   init = random</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computational engine: brms </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">model</span>, inits <span class="op">=</span> <span class="st">"0"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">model</span>, init <span class="op">=</span> <span class="st">"0"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian Model Specification (regression)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Main Arguments:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   inits = 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   init = 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computational engine: brms </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">model</span>, inits <span class="op">=</span> <span class="st">"0"</span>, fresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">model</span>, init <span class="op">=</span> <span class="st">"0"</span>, fresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian Model Specification (regression)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Main Arguments:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   inits = 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   init = 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computational engine: brms </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

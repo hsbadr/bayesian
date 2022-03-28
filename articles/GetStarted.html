@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">bayesian</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -200,14 +200,14 @@
 <span class="co">## Group-Level Effects: </span>
 <span class="co">## ~patient (Number of levels: 59) </span>
 <span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.72 1.00      741     1515</span>
+<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      887     1452</span>
 <span class="co">## </span>
 <span class="co">## Population-Level Effects: </span>
 <span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## Intercept     1.77      0.12     1.54     1.99 1.00      740     1069</span>
-<span class="co">## Trt1         -0.26      0.17    -0.58     0.07 1.01      652      947</span>
-<span class="co">## Base          0.73      0.08     0.58     0.88 1.00      776     1483</span>
-<span class="co">## Age           0.09      0.08    -0.07     0.24 1.01      687     1425</span>
+<span class="co">## Intercept     1.78      0.12     1.54     2.00 1.00      685     1385</span>
+<span class="co">## Trt1         -0.27      0.16    -0.60     0.05 1.00      804     1352</span>
+<span class="co">## Base          0.73      0.08     0.57     0.88 1.01      651     1325</span>
+<span class="co">## Age           0.09      0.08    -0.07     0.25 1.00      925     1533</span>
 <span class="co">## </span>
 <span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span>
 <span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span>
@@ -240,7 +240,7 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span>           0           8</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>           0           7</span>
 <span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          22</span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -253,11 +253,11 @@
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="co">##   .pred_lower .pred_upper .std_error</span>
 <span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.04</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.04</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.80</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.96</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          22       4.13</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.09</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.10</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.81</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.99</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           7          22       4.06</span></code></pre>
   </main>
 </div>
 
