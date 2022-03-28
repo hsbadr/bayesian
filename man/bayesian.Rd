@@ -22,7 +22,7 @@ bayesian(
   knots = NULL,
   stanvars = NULL,
   fit = NULL,
-  inits = NULL,
+  init = NULL,
   chains = NULL,
   iter = NULL,
   warmup = NULL,
@@ -53,7 +53,7 @@ bayesian(
   knots = NULL,
   stanvars = NULL,
   fit = NULL,
-  inits = NULL,
+  init = NULL,
   chains = NULL,
   iter = NULL,
   warmup = NULL,
@@ -145,20 +145,20 @@ arguments modifying the model code or data are ignored. It is not
 recommended to use this argument directly, but to call the
 \code{\link[brms:update.brmsfit]{update}} method, instead.}
 
-\item{inits}{Either \code{"random"} or \code{"0"}. If inits is
-\code{"random"} (the default), Stan will randomly generate initial values
-for parameters. If it is \code{"0"}, all parameters are initialized to
-zero. This option is sometimes useful for certain families, as it happens
-that default (\code{"random"}) inits cause draws to be essentially
-constant. Generally, setting \code{inits = "0"} is worth a try, if chains
-do not behave well. Alternatively, \code{inits} can be a list of lists
-containing the initial values, or a function (or function name) generating
-initial values. The latter options are mainly implemented for internal
-testing but are available to users if necessary. If specifying initial 
-values using a list or a function then currently the parameter names must
-correspond to the names used in the generated Stan code (not the names
-used in \R). For more details on specifying initial values you can consult 
-the documentation of the selected \code{backend}.}
+\item{init}{Initial values for the sampler. If \code{NULL} (the default) or
+\code{"random"}, Stan will randomly generate initial values for parameters
+in a reasonable range. If \code{0}, all parameters are initialized to zero
+on the unconstrained space. This option is sometimes useful for certain
+families, as it happens that default random initial values cause draws to
+be essentially constant. Generally, setting \code{init = 0} is worth a try,
+if chains do not initialize or behave well. Alternatively, \code{init} can
+be a list of lists containing the initial values, or a function (or
+function name) generating initial values. The latter options are mainly
+implemented for internal testing but are available to users if necessary.
+If specifying initial values using a list or a function then currently the
+parameter names must correspond to the names used in the generated Stan
+code (not the names used in \R). For more details on specifying initial
+values you can consult the documentation of the selected \code{backend}.}
 
 \item{chains}{Number of Markov chains (defaults to 4).}
 
@@ -185,7 +185,9 @@ more control over the threading process, \code{threads} may also be a
 \code{brmsthreads} object created by \code{\link[brms]{threading}}. Within-chain
 parallelization is experimental! We recommend its use only if you are
 experienced with Stan's \code{reduce_sum} function and have a slow running
-model that cannot be sped up by any other means.}
+model that cannot be sped up by any other means. Can be set globally for
+the current \R session via the \code{"brms.threads"} option (see
+\code{\link{options}}).}
 
 \item{algorithm}{Character string naming the estimation approach to use.
 Options are \code{"sampling"} for MCMC (the default), \code{"meanfield"} for
@@ -202,7 +204,7 @@ fitting the Stan model. Options are \code{"rstan"} (the default) or
 \pkg{rstan} and \pkg{cmdstanr} packages are available at
 \url{https://mc-stan.org/rstan/} and \url{https://mc-stan.org/cmdstanr/},
 respectively. Additionally a \code{"mock"} backend is available to make
-testing \pkg{brms} and packages that depend on it easier. 
+testing \pkg{brms} and packages that depend on it easier.
 The \code{"mock"} backend does not actually do any fitting, it only checks
 the generated Stan code for correctness and then returns whatever is passed
 in an additional \code{mock_fit} argument as the result of the fit.}
@@ -228,7 +230,7 @@ saved via \code{\link{saveRDS}}.}
 
 \item{file_refit}{Modifies when the fit stored via the \code{file} parameter
 is re-used. Can be set globally for the current \R session via the
-\code{"brms.file_refit"} option (see \code{\link{options}}). 
+\code{"brms.file_refit"} option (see \code{\link{options}}).
 For \code{"never"} (default) the fit is always loaded if it
 exists and fitting is skipped. For \code{"always"} the model is always
 refitted. If set to \code{"on_change"}, brms will
@@ -246,7 +248,7 @@ parallelization is switched on/off.}
 be included in the Stan code (defaults to \code{TRUE}). Setting it
 to \code{FALSE} requires Stan version >= 2.25 to work. If \code{FALSE},
 sampling efficiency may be increased but some post processing functions
-such as \code{\link[brms]{bridge_sampler}} will not be available. Can be 
+such as \code{\link[brms]{bridge_sampler}} will not be available. Can be
 controlled globally for the current \R session via the `brms.normalize`
 option.}
 
@@ -350,10 +352,10 @@ summary(bayesian_mod$fit)
 }
 
 
-model <- bayesian(inits = "random")
+model <- bayesian(init = "random")
 model
-update(model, inits = "0")
-update(model, inits = "0", fresh = TRUE)
+update(model, init = "0")
+update(model, init = "0", fresh = TRUE)
 }
 \seealso{
 \code{\link[brms]{brm}},

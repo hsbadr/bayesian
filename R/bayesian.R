@@ -77,7 +77,7 @@ bayesian <-
            knots = NULL,
            stanvars = NULL,
            fit = NULL,
-           inits = NULL,
+           init = NULL,
            chains = NULL,
            iter = NULL,
            warmup = NULL,
@@ -104,7 +104,7 @@ bayesian <-
       knots = rlang::enquo(knots),
       stanvars = rlang::enquo(stanvars),
       fit = rlang::enquo(fit),
-      inits = rlang::enquo(inits),
+      init = rlang::enquo(init),
       chains = rlang::enquo(chains),
       iter = rlang::enquo(iter),
       warmup = rlang::enquo(warmup),
@@ -176,10 +176,10 @@ translate.bayesian <- function(x, engine = x$engine, ...) {
 #'
 #' @examples
 #'
-#' model <- bayesian(inits = "random")
+#' model <- bayesian(init = "random")
 #' model
-#' update(model, inits = "0")
-#' update(model, inits = "0", fresh = TRUE)
+#' update(model, init = "0")
+#' update(model, init = "0", fresh = TRUE)
 #' @method update bayesian
 #' @rdname bayesian
 #' @export
@@ -193,7 +193,7 @@ update.bayesian <-
            knots = NULL,
            stanvars = NULL,
            fit = NULL,
-           inits = NULL,
+           init = NULL,
            chains = NULL,
            iter = NULL,
            warmup = NULL,
@@ -228,7 +228,7 @@ update.bayesian <-
       knots = rlang::enquo(knots),
       stanvars = rlang::enquo(stanvars),
       fit = rlang::enquo(fit),
-      inits = rlang::enquo(inits),
+      init = rlang::enquo(init),
       chains = rlang::enquo(chains),
       iter = rlang::enquo(iter),
       warmup = rlang::enquo(warmup),

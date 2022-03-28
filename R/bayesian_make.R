@@ -103,8 +103,8 @@ bayesian_make <- function(modes = c("classification", "regression")) {
     parsnip::set_model_arg(
       model = model,
       eng = engine,
-      parsnip = "inits",
-      original = "inits",
+      parsnip = "init",
+      original = "init",
       func = fitfunc,
       has_submodel = FALSE
     )

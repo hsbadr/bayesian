@@ -23,7 +23,7 @@ URL: https://hsbadr.github.io/bayesian/,
      https://github.com/hsbadr/bayesian
 BugReports: https://github.com/hsbadr/bayesian/issues
 Depends:
-    brms (>= 2.16.3),
+    brms (>= 2.16.12),
     parsnip (>= 0.2.0),
     R (>= 3.5.0)
 Imports:
@@ -45,6 +45,8 @@ Suggests:
     spelling,
     testthat,
     workflows
+Remotes:
+    paul-buerkner/brms
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
