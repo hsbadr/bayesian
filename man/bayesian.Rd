@@ -222,7 +222,7 @@ which parameters should be saved in the model. The argument has no
 impact on the model fitting itself.}
 
 \item{save_model}{Either \code{NULL} or a character string. In the latter
-case, the model's Stan code is saved via \code{\link{cat}} in a text file
+case, the model's Stan code is saved via \code{\link[brms]{cat}} in a text file
 named after the string supplied in \code{save_model}.}
 
 \item{file}{A character string of the file path to \code{brmsfit} object
