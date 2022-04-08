@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.1
+# CITATION file created with {cffr} R package, v0.2.2
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -61,7 +61,7 @@ references:
     given-names: Paul-Christian
     email: paul.buerkner@gmail.com
   year: '2022'
-  version: '>= 2.16.12'
+  version: '>= 2.17.0'
 - type: software
   title: parsnip
   abstract: 'parsnip: A Common API to Modeling and Analysis Functions'
