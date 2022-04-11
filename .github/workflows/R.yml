@@ -243,6 +243,7 @@ jobs:
         with:
           cache-version: 1
           extra-packages: |
+            any::cffr
             any::covr
             any::curl
             any::devtools
@@ -253,7 +254,6 @@ jobs:
             any::rmarkdown
             any::roxygen2
             any::styler
-            ropensci/cffr
             r-lib/revdepcheck
             local::.
           needs: |
@@ -273,6 +273,7 @@ jobs:
             pkgType = ifelse(grepl("linux", R.version$os), "source", "binary")
           )
           install.packages("remotes")
+          remotes::install_cran("cffr")
           remotes::install_cran("covr")
           remotes::install_cran("curl")
           remotes::install_cran("devtools")
@@ -287,7 +288,6 @@ jobs:
           remotes::install_cran("sessioninfo")
           remotes::install_cran("styler")
           remotes::install_deps(dependencies = TRUE)
-          remotes::install_github("ropensci/cffr")
           remotes::install_github("r-lib/revdepcheck")
           remotes::install_local(".")
           if (utils::packageVersion("sessioninfo") >= "1.2.1") {
