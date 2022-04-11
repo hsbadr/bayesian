@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.2
+# CITATION file created with {cffr} R package, v0.2.1
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -74,7 +74,6 @@ references:
     given-names: Davis
     email: davis@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=parsnip
   version: '>= 0.2.1'
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
@@ -106,7 +105,6 @@ references:
     given-names: Kirill
     orcid: https://orcid.org/0000-0002-1416-3412
   year: '2022'
-  url: https://CRAN.R-project.org/package=dplyr
 - type: software
   title: purrr
   abstract: 'purrr: Functional Programming Tools'
@@ -119,7 +117,6 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=purrr
 - type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
@@ -132,7 +129,6 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=rlang
 - type: software
   title: stats
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -157,7 +153,6 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=tibble
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -179,7 +174,6 @@ references:
     given-names: Jim
     email: james.f.hester@gmail.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=covr
 - type: software
   title: devtools
   abstract: 'devtools: Tools to Make Developing R Packages Easier'
@@ -196,7 +190,6 @@ references:
     email: jenny@rstudio.com
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2022'
-  url: https://CRAN.R-project.org/package=devtools
 - type: software
   title: future
   abstract: 'future: Unified Parallel and Distributed Processing in R for Everyone'
@@ -216,7 +209,7 @@ references:
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2022'
-  url: https://CRAN.R-project.org/package=knitr
+  url: https://yihui.org/knitr/
 - type: software
   title: recipes
   abstract: 'recipes: Preprocessing and Feature Engineering Steps for Modeling'
@@ -267,7 +260,6 @@ references:
     email: rich@rstudio.com
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2022'
-  url: https://CRAN.R-project.org/package=rmarkdown
 - type: software
   title: roxygen2
   abstract: 'roxygen2: In-Line Documentation for R'
@@ -305,6 +297,7 @@ references:
     given-names: Sebastian
     email: sdw.post@waebers.de
   year: '2022'
+  url: https://CRAN.R-project.org/package=rstan
 - type: software
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
@@ -327,7 +320,6 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=testthat
 - type: software
   title: workflows
   abstract: 'workflows: Modeling Workflows'
