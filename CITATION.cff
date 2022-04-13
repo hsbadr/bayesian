@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.1
+# CITATION file created with {cffr} R package, v0.2.2
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -61,6 +61,7 @@ references:
     given-names: Paul-Christian
     email: paul.buerkner@gmail.com
   year: '2022'
+  url: https://CRAN.R-project.org/package=brms
   version: '>= 2.17.0'
 - type: software
   title: parsnip
@@ -297,7 +298,6 @@ references:
     given-names: Sebastian
     email: sdw.post@waebers.de
   year: '2022'
-  url: https://CRAN.R-project.org/package=rstan
 - type: software
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
