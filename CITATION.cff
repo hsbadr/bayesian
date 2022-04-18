@@ -61,7 +61,6 @@ references:
     given-names: Paul-Christian
     email: paul.buerkner@gmail.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=brms
   version: '>= 2.17.0'
 - type: software
   title: parsnip
