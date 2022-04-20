@@ -19,6 +19,7 @@ LineEndingConversion: Posix
 
 BuildType: Package
 PackageUseDevtools: Yes
+PackageCleanBeforeInstall: Yes
 PackageInstallArgs: --no-multiarch --with-keep.source --install-tests
 PackageCheckArgs: --run-donttest
 PackageRoxygenize: rd,collate,namespace
