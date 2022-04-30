@@ -365,6 +365,9 @@ bayesian_make <- function(modes = c("classification", "regression")) {
             }
 
             if (length(object$lvl) == 2) {
+              if (is.array(results)) {
+                results <- as.vector(results)
+              }
               results <- tibble::tibble(
                 v1 = 1 - results[, 1],
                 v2 = results[, 1]

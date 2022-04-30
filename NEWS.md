@@ -1,5 +1,6 @@
 # bayesian 0.0.9
 
+- Fixed inconsistent probability (`type = "prob"`) predictions for two-class models
 - Updated package dependencies
 - Used `init` instead of the deprecated `inits` (`brms >= 2.16.9`)
 
