@@ -1,5 +1,6 @@
 # bayesian 0.0.9
 
+- Using `parsnip::update_spec()` if exists.
 - Fixed inconsistent probability (`type = "prob"`) predictions for two-class models
 - Updated package dependencies
 - Used `init` instead of the deprecated `inits` (`brms >= 2.16.9`)

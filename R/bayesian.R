@@ -214,10 +214,12 @@ update.bayesian <-
            silent = NULL,
            fresh = FALSE,
            ...) {
-    parsnip::update_dot_check(...)
+    if (!exists("update_spec", where = "package:parsnip", mode = "function")) {
+      parsnip::update_dot_check(...)
 
-    if (!is.null(parameters)) {
-      parameters <- parsnip::check_final_param(parameters)
+      if (!is.null(parameters)) {
+        parameters <- parsnip::check_final_param(parameters)
+      }
     }
 
     args <- list(
@@ -249,34 +251,46 @@ update.bayesian <-
       silent = rlang::enquo(silent)
     )
 
-    args <- parsnip::update_main_parameters(args, parameters)
-
-    eng_args <- parsnip::update_engine_parameters(object$eng_args, ...)
-
-    if (fresh) {
-      object$args <- args
-      object$eng_args <- eng_args
+    if (exists("update_spec", where = "package:parsnip", mode = "function")) {
+      update_spec <- utils::getFromNamespace("update_spec", "parsnip")
+      update_spec(
+        object = object,
+        parameters = parameters,
+        args_enquo_list = args,
+        fresh = fresh,
+        cls = "bayesian",
+        ...
+      )
     } else {
-      null_args <- purrr::map_lgl(args, parsnip::null_value)
-      if (any(null_args)) {
-        args <- args[!null_args]
-      }
-      if (length(args) > 0) {
-        object$args[names(args)] <- args
-      }
-      if (length(eng_args) > 0) {
-        object$eng_args[names(eng_args)] <- eng_args
-      }
-    }
+      args <- parsnip::update_main_parameters(args, parameters)
 
-    parsnip::new_model_spec(
-      "bayesian",
-      args = object$args,
-      eng_args = object$eng_args,
-      mode = object$mode,
-      method = NULL,
-      engine = object$engine
-    )
+      eng_args <- parsnip::update_engine_parameters(object$eng_args, ...)
+
+      if (fresh) {
+        object$args <- args
+        object$eng_args <- eng_args
+      } else {
+        null_args <- purrr::map_lgl(args, parsnip::null_value)
+        if (any(null_args)) {
+          args <- args[!null_args]
+        }
+        if (length(args) > 0) {
+          object$args[names(args)] <- args
+        }
+        if (length(eng_args) > 0) {
+          object$eng_args[names(eng_args)] <- eng_args
+        }
+      }
+
+      parsnip::new_model_spec(
+        "bayesian",
+        args = object$args,
+        eng_args = object$eng_args,
+        mode = object$mode,
+        method = NULL,
+        engine = object$engine
+      )
+    }
   }
 
 # -------------------------------------------------------------------------
