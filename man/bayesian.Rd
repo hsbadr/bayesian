@@ -319,16 +319,20 @@ following \emph{engines}:
 }
 \section{Engine Details}{
 Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="sourceCode r">}}\preformatted{bayesian() \%>\%
+call. For this type of model, the template of the fit calls are:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{bayesian() \%>\%
   set_engine("brms") \%>\%
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Bayesian Model Specification (regression)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Bayesian Model Specification (regression)
 ## 
 ## Computational engine: brms 
 ## 
 ## Model fit template:
 ## bayesian::bayesian_fit(formula = missing_arg(), data = missing_arg())
-}
+}\if{html}{\out{</div>}}
 }
 
 \examples{
