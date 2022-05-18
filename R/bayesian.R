@@ -56,8 +56,8 @@
 #' bayesian(mode = "regression")
 #' \dontrun{
 #' bayesian_mod <-
-#'   bayesian() %>%
-#'   set_engine("brms") %>%
+#'   bayesian() |>
+#'   set_engine("brms") |>
 #'   fit(
 #'     rating ~ treat + period + carry + (1 | subject),
 #'     data = inhaler

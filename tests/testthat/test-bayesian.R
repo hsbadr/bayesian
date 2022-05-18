@@ -23,8 +23,8 @@ test_that("bayesian execution", {
             iter = 500,
             seed = 2020,
             stan_args = list(refresh = 0)
-          ) %>%
-          set_engine("brms") %>%
+          ) |>
+          set_engine("brms") |>
           fit(
             rating ~ treat + period + carry + (1 | subject),
             data = inhaler

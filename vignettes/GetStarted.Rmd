@@ -31,11 +31,11 @@ for) the `epilepsy` data. This data set is shipped with the `brms` package,
 which is automatically loaded by `bayesian`.
 
 ```{r}
-epi_recipe <- epilepsy %>%
-  recipe() %>%
-  update_role(count, new_role = "outcome") %>%
-  update_role(Trt, Age, Base, patient, new_role = "predictor") %>%
-  add_role(patient, new_role = "group") %>%
+epi_recipe <- epilepsy |>
+  recipe() |>
+  update_role(count, new_role = "outcome") |>
+  update_role(Trt, Age, Base, patient, new_role = "predictor") |>
+  add_role(patient, new_role = "group") |>
   step_normalize(Age, Base)
 ```
 
@@ -50,8 +50,8 @@ on. In the next step, we use `bayesian` to set up a basic model structure.
 ```{r}
 epi_model <- bayesian(
     family = poisson()
-  ) %>%
-  set_engine("brms") %>%
+  ) |>
+  set_engine("brms") |>
   set_mode("regression")
 ```
 
@@ -66,7 +66,7 @@ example, if we didn't specify the family initially or set it to something else
 that we now wanted to change, we could use the `update` method as follows
 
 ```{r}
-epi_model <- epi_model %>%
+epi_model <- epi_model |>
   update(family = poisson())
 ```
 
@@ -75,8 +75,8 @@ defined data processing recipe and the model plus the actual model formula to be
 passed to the `brms` engine.
 
 ```{r}
-epi_workflow <- workflow() %>%
-  add_recipe(epi_recipe) %>%
+epi_workflow <- workflow() |>
+  add_recipe(epi_recipe) |>
   add_model(
     spec = epi_model,
     formula = count ~ Trt + Base + Age + (1 | patient)
@@ -95,7 +95,7 @@ run_on_linux <- grepl("linux", R.Version()$os, ignore.case = TRUE)
 ```
 
 ```{r results='hide', eval = run_on_linux}
-epi_workflow_fit <- epi_workflow %>%
+epi_workflow_fit <- epi_workflow |>
   fit(data = epilepsy)
 ```
 
@@ -106,14 +106,14 @@ print(epi_workflow_fit)
 To extract the parsnip model fit from the workflow
 
 ```{r eval = run_on_linux}
-epi_fit <- epi_workflow_fit %>%
+epi_fit <- epi_workflow_fit |>
   extract_fit_parsnip()
 ```
 
 The `brmsfit` object can be extracted as follows
 
 ```{r eval = run_on_linux}
-epi_brmsfit <- epi_workflow_fit %>%
+epi_brmsfit <- epi_workflow_fit |>
   extract_fit_engine()
 ```
 
@@ -131,7 +131,7 @@ newdata <- epilepsy[1:5, ]
 ```
 
 ```{r eval = run_on_linux}
-epi_workflow_fit %>%
+epi_workflow_fit |>
   predict(
     new_data = newdata,
     type = "conf_int",
@@ -142,7 +142,7 @@ epi_workflow_fit %>%
 To add the standard errors on the scale of the linear predictors
 
 ```{r eval = run_on_linux}
-epi_workflow_fit %>%
+epi_workflow_fit |>
   predict(
     new_data = newdata,
     type = "conf_int",

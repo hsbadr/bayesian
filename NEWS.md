@@ -1,5 +1,6 @@
 # bayesian 0.0.9
 
+- Using base R pipe and depends on R >= 4.1.0
 - Using `parsnip::update_spec()` if exists.
 - Fixed inconsistent probability (`type = "prob"`) predictions for two-class models
 - Updated package dependencies

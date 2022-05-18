@@ -1,4 +1,3 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # Bindings for Bayesian TidyModels [<img src="man/figures/bayesian.png" align="right" width="160" alt="bayesian logo" />](https://hsbadr.github.io/bayesian/)
@@ -36,34 +35,28 @@ The stable version of [`bayesian`](https://hsbadr.github.io/bayesian/)
 can be installed from
 [CRAN](https://CRAN.R-project.org/package=bayesian) using:
 
-``` r
-install.packages("bayesian")
-```
+    install.packages("bayesian")
 
 The development version of
 [`bayesian`](https://hsbadr.github.io/bayesian/) can be installed from
 [GitHub](https://github.com/hsbadr/bayesian) using:
 
-``` r
-install.packages("pak")
-pak::pkg_install("hsbadr/bayesian")
-```
+    install.packages("pak")
+    pak::pkg_install("hsbadr/bayesian")
 
 ## Example
 
-``` r
-library(bayesian)
+    library(bayesian)
 
-bayesian_mod <-
-  bayesian() %>%
-  set_engine("brms") %>%
-  fit(
-    rating ~ treat + period + carry + (1 | subject),
-    data = inhaler
-  )
+    bayesian_mod <-
+      bayesian() |>
+      set_engine("brms") |>
+      fit(
+        rating ~ treat + period + carry + (1 | subject),
+        data = inhaler
+      )
 
-summary(bayesian_mod$fit)
-```
+    summary(bayesian_mod$fit)
 
 For more details, [get started with
 `bayesian`](https://hsbadr.github.io/bayesian/articles/GetStarted.html).
@@ -72,9 +65,7 @@ For more details, [get started with
 
 To cite `bayesian` in publications, please use:
 
-``` r
-citation("bayesian")
-```
+    citation("bayesian")
 
 > Hamada S. Badr and Paul C. Bürkner (2021): bayesian: Bindings for
 > Bayesian TidyModels, [*Comprehensive R Archive Network

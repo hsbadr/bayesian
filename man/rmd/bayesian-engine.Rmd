@@ -9,8 +9,8 @@ Engines may have pre-set default arguments when executing the model fit call. Fo
 \pkg{brms}
 
 ```{r brms}
-bayesian() %>%
-  set_engine("brms") %>%
+bayesian() |>
+  set_engine("brms") |>
   translate()
 ```
 

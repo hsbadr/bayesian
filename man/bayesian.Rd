@@ -321,8 +321,8 @@ following \emph{engines}:
 Engines may have pre-set default arguments when executing the model fit
 call. For this type of model, the template of the fit calls are:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{bayesian() \%>\%
-  set_engine("brms") \%>\%
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{bayesian() |>
+  set_engine("brms") |>
   translate()
 }\if{html}{\out{</div>}}
 
@@ -345,8 +345,8 @@ bayesian(mode = "classification")
 bayesian(mode = "regression")
 \dontrun{
 bayesian_mod <-
-  bayesian() \%>\%
-  set_engine("brms") \%>\%
+  bayesian() |>
+  set_engine("brms") |>
   fit(
     rating ~ treat + period + carry + (1 | subject),
     data = inhaler
