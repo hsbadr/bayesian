@@ -86,7 +86,7 @@ references:
   url: https://www.R-project.org/
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 3.5.0'
+  version: '>= 4.1.0'
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
