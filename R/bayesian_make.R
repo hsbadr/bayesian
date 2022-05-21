@@ -279,7 +279,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
       mode = mode,
       value = list(
         interface = "formula",
-        protect = c("formula", "data"),
+        protect = c("formula", "data", "weights"),
         func = fitfunc,
         defaults = list()
       )
