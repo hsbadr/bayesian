@@ -331,7 +331,8 @@ call. For this type of model, the template of the fit calls are:
 ## Computational engine: brms 
 ## 
 ## Model fit template:
-## bayesian::bayesian_fit(formula = missing_arg(), data = missing_arg())
+## bayesian::bayesian_fit(formula = missing_arg(), data = missing_arg(), 
+##     weights = missing_arg())
 }\if{html}{\out{</div>}}
 }
 
