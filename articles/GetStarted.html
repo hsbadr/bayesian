@@ -200,14 +200,14 @@
 <span class="co">## Group-Level Effects: </span>
 <span class="co">## ~patient (Number of levels: 59) </span>
 <span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## sd(Intercept)     0.57      0.07     0.46     0.71 1.00      698     1691</span>
+<span class="co">## sd(Intercept)     0.58      0.07     0.46     0.72 1.00      822     1798</span>
 <span class="co">## </span>
 <span class="co">## Population-Level Effects: </span>
 <span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span>
-<span class="co">## Intercept     1.77      0.12     1.55     1.99 1.01      594     1365</span>
-<span class="co">## Trt1         -0.27      0.17    -0.59     0.06 1.00      631     1219</span>
-<span class="co">## Base          0.73      0.08     0.57     0.89 1.01      796     1292</span>
-<span class="co">## Age           0.09      0.09    -0.08     0.25 1.00      564      998</span>
+<span class="co">## Intercept     1.77      0.12     1.53     1.99 1.01      606     1162</span>
+<span class="co">## Trt1         -0.26      0.17    -0.59     0.07 1.01      620     1375</span>
+<span class="co">## Base          0.73      0.08     0.57     0.89 1.00      691      927</span>
+<span class="co">## Age           0.09      0.08    -0.08     0.25 1.00      754     1133</span>
 <span class="co">## </span>
 <span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span>
 <span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span>
@@ -236,11 +236,11 @@
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5 × 2</span></span>
 <span class="co">##   .pred_lower .pred_upper</span>
 <span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>        0              8</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>        0              8</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>        0              7</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>        0              8</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>        6.98          22</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">1</span>           0           8</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23</span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">epi_workflow_fit</span> |&gt;
@@ -253,11 +253,11 @@
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="co">##   .pred_lower .pred_upper .std_error</span>
 <span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.07</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.06</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.84</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.96</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.13</span></code></pre>
+<span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.05</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.07</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.85</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.98</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.14</span></code></pre>
   </main>
 </div>
 
