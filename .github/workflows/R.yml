@@ -58,7 +58,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 1
           submodules: true
@@ -120,7 +120,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 1
           submodules: true
@@ -331,7 +331,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Upload packages
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_R-${{ matrix.r }}_${{ matrix.os }}
           path: build
@@ -558,7 +558,7 @@ jobs:
 
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           path: ./
 
