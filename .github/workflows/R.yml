@@ -311,7 +311,7 @@ jobs:
           upload-snapshots: true
 
       - name: Check R package reverse dependencies
-        if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || github.event.inputs.revdep == 'true')
+        if: matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel && (contains(github.event.head_commit.message, '[revdep]') || inputs.revdep == 'true')
         run: |
           options(crayon.enabled = TRUE)
           revdepcheck::revdep_reset()
@@ -464,7 +464,7 @@ jobs:
 
   release:
     name: Create release
-    if: contains(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
+    if: contains(github.event.head_commit.message, '[release]') || inputs.release == 'true'
     runs-on: ${{ needs.initiate.outputs.os_linux }}
     timeout-minutes: 360
     outputs:
@@ -495,7 +495,7 @@ jobs:
 
   upload-src:
     name: Upload source package
-    if: contains(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
+    if: contains(github.event.head_commit.message, '[release]') || inputs.release == 'true'
     runs-on: ${{ needs.initiate.outputs.os_linux }}
     timeout-minutes: 360
 
@@ -533,7 +533,7 @@ jobs:
 
   upload-bin:
     name: Upload R-${{ matrix.r }} | ${{ matrix.os }}
-    if: contains(github.event.head_commit.message, '[release]') || github.event.inputs.release == 'true'
+    if: contains(github.event.head_commit.message, '[release]') || inputs.release == 'true'
     runs-on: ${{ needs.initiate.outputs.os_linux }}
     timeout-minutes: 360
 
