@@ -305,7 +305,7 @@ jobs:
         with:
           args: 'c("--no-manual", "--as-cran")'
           build_args: 'c("--no-manual")'
-          error-on: '"warning"'
+          error-on: '"error"'
           check-dir: '"check"'
           working-directory: '.'
           upload-snapshots: true
