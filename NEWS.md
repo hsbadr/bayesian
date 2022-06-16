@@ -1,7 +1,7 @@
 # bayesian 0.0.9
 
+- Depends on `parsnip >= 1.0.0`
 - Using base R pipe and depends on R >= 4.1.0
-- Using `parsnip::update_spec()` if exists
 - Supported the use of case weights
 - Supported threshold (inverse probability weights) for multi-class predictions
 - Fixed inconsistent probability (`type = "prob"`) predictions for two-class models
