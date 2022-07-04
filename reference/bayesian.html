@@ -79,84 +79,84 @@ before fitting and allows the model to be created using
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">bayesian</span><span class="op">(</span>
-  mode <span class="op">=</span> <span class="st">"regression"</span>,
-  engine <span class="op">=</span> <span class="st">"brms"</span>,
-  formula.override <span class="op">=</span> <span class="cn">NULL</span>,
-  family <span class="op">=</span> <span class="cn">NULL</span>,
-  prior <span class="op">=</span> <span class="cn">NULL</span>,
-  sample_prior <span class="op">=</span> <span class="cn">NULL</span>,
-  knots <span class="op">=</span> <span class="cn">NULL</span>,
-  stanvars <span class="op">=</span> <span class="cn">NULL</span>,
-  fit <span class="op">=</span> <span class="cn">NULL</span>,
-  init <span class="op">=</span> <span class="cn">NULL</span>,
-  chains <span class="op">=</span> <span class="cn">NULL</span>,
-  iter <span class="op">=</span> <span class="cn">NULL</span>,
-  warmup <span class="op">=</span> <span class="cn">NULL</span>,
-  thin <span class="op">=</span> <span class="cn">NULL</span>,
-  cores <span class="op">=</span> <span class="cn">NULL</span>,
-  threads <span class="op">=</span> <span class="cn">NULL</span>,
-  algorithm <span class="op">=</span> <span class="cn">NULL</span>,
-  backend <span class="op">=</span> <span class="cn">NULL</span>,
-  stan_args <span class="op">=</span> <span class="cn">NULL</span>,
-  control <span class="op">=</span> <span class="cn">NULL</span>,
-  save_pars <span class="op">=</span> <span class="cn">NULL</span>,
-  save_model <span class="op">=</span> <span class="cn">NULL</span>,
-  file <span class="op">=</span> <span class="cn">NULL</span>,
-  file_refit <span class="op">=</span> <span class="cn">NULL</span>,
-  normalize <span class="op">=</span> <span class="cn">NULL</span>,
-  future <span class="op">=</span> <span class="cn">NULL</span>,
-  seed <span class="op">=</span> <span class="cn">NULL</span>,
-  silent <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for bayesian</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span>
-  <span class="va">object</span>,
-  parameters <span class="op">=</span> <span class="cn">NULL</span>,
-  formula.override <span class="op">=</span> <span class="cn">NULL</span>,
-  family <span class="op">=</span> <span class="cn">NULL</span>,
-  prior <span class="op">=</span> <span class="cn">NULL</span>,
-  sample_prior <span class="op">=</span> <span class="cn">NULL</span>,
-  knots <span class="op">=</span> <span class="cn">NULL</span>,
-  stanvars <span class="op">=</span> <span class="cn">NULL</span>,
-  fit <span class="op">=</span> <span class="cn">NULL</span>,
-  init <span class="op">=</span> <span class="cn">NULL</span>,
-  chains <span class="op">=</span> <span class="cn">NULL</span>,
-  iter <span class="op">=</span> <span class="cn">NULL</span>,
-  warmup <span class="op">=</span> <span class="cn">NULL</span>,
-  thin <span class="op">=</span> <span class="cn">NULL</span>,
-  cores <span class="op">=</span> <span class="cn">NULL</span>,
-  threads <span class="op">=</span> <span class="cn">NULL</span>,
-  algorithm <span class="op">=</span> <span class="cn">NULL</span>,
-  backend <span class="op">=</span> <span class="cn">NULL</span>,
-  stan_args <span class="op">=</span> <span class="cn">NULL</span>,
-  control <span class="op">=</span> <span class="cn">NULL</span>,
-  save_pars <span class="op">=</span> <span class="cn">NULL</span>,
-  save_model <span class="op">=</span> <span class="cn">NULL</span>,
-  file <span class="op">=</span> <span class="cn">NULL</span>,
-  file_refit <span class="op">=</span> <span class="cn">NULL</span>,
-  normalize <span class="op">=</span> <span class="cn">NULL</span>,
-  future <span class="op">=</span> <span class="cn">NULL</span>,
-  seed <span class="op">=</span> <span class="cn">NULL</span>,
-  silent <span class="op">=</span> <span class="cn">NULL</span>,
-  fresh <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">bayesian_fit</span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">bayesian_formula</span><span class="op">(</span><span class="va">formula</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">bayesian_terms</span><span class="op">(</span><span class="va">formula</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">bayesian_family</span><span class="op">(</span><span class="va">family</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">bayesian_predict</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">bayesian_write</span><span class="op">(</span><span class="va">object</span>, <span class="va">file</span><span class="op">)</span>
-
-<span class="fu">bayesian_read</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bayesian</span><span class="op">(</span></span>
+<span>  mode <span class="op">=</span> <span class="st">"regression"</span>,</span>
+<span>  engine <span class="op">=</span> <span class="st">"brms"</span>,</span>
+<span>  formula.override <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  family <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  prior <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sample_prior <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  knots <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stanvars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  init <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  chains <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  iter <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  warmup <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  thin <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  threads <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  algorithm <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  backend <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stan_args <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  save_pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  save_model <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  file <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  file_refit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  normalize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  future <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for bayesian</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  parameters <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  formula.override <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  family <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  prior <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sample_prior <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  knots <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stanvars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  init <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  chains <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  iter <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  warmup <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  thin <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cores <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  threads <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  algorithm <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  backend <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stan_args <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  save_pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  save_model <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  file <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  file_refit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  normalize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  future <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  silent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fresh <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bayesian_fit</span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bayesian_formula</span><span class="op">(</span><span class="va">formula</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bayesian_terms</span><span class="op">(</span><span class="va">formula</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bayesian_family</span><span class="op">(</span><span class="va">family</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bayesian_predict</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bayesian_write</span><span class="op">(</span><span class="va">object</span>, <span class="va">file</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bayesian_read</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -367,7 +367,7 @@ parallelization is switched on/off.</p></dd>
 be included in the Stan code (defaults to <code>TRUE</code>). Setting it
 to <code>FALSE</code> requires Stan version &gt;= 2.25 to work. If <code>FALSE</code>,
 sampling efficiency may be increased but some post processing functions
-such as <code><a href="https://rdrr.io/pkg/brms/man/bridge_sampler.brmsfit.html" class="external-link">bridge_sampler</a></code> will not be available. Can be
+such as <code><a href="https://rdrr.io/pkg/bridgesampling/man/bridge_sampler.html" class="external-link">bridge_sampler</a></code> will not be available. Can be
 controlled globally for the current <span style="R">R</span> session via the `brms.normalize`
 option.</p></dd>
 
@@ -453,9 +453,9 @@ following <em>engines</em>:</p><ul><li><p><span class="pkg">brms</span>:  <code>
     <h2 id="engine-details">Engine Details<a class="anchor" aria-label="anchor" href="#engine-details"></a></h2>
     <p>Engines may have pre-set default arguments when executing the model fit
 call. For this type of model, the template of the fit calls are:</p>
-<p></p><div class="sourceCode r"><pre><code><span class="fu"><a href="../reference/bayesian.html">bayesian</a></span><span class="op">(</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/translate.html" class="external-link">translate</a></span><span class="op">(</span><span class="op">)</span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/bayesian.html">bayesian</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/translate.html" class="external-link">translate</a></span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Bayesian Model Specification (regression)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Computational engine: brms </span></span>
@@ -484,14 +484,14 @@ call. For this type of model, the template of the fit calls are:</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu">bayesian</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">bayesian</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian Model Specification (regression)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computational engine: brms </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_new_model.html" class="external-link">show_model_info</a></span><span class="op">(</span><span class="st">"bayesian"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_new_model.html" class="external-link">show_model_info</a></span><span class="op">(</span><span class="st">"bayesian"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Information for `bayesian`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  modes: unknown, classification, regression </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -540,32 +540,32 @@ call. For this type of model, the template of the fit calls are:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    classification   brms class, conf_int, pred_int, prob, quantile, raw</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        regression   brms     conf_int, numeric, pred_int, quantile, raw</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">bayesian</span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"classification"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">bayesian</span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"classification"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian Model Specification (classification)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computational engine: brms </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">bayesian</span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"regression"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">bayesian</span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"regression"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian Model Specification (regression)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computational engine: brms </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">bayesian_mod</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu">bayesian</span><span class="op">(</span><span class="op">)</span> |&gt;</span>
-<span class="r-in">  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span> |&gt;</span>
-<span class="r-in">  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="va">rating</span> <span class="op">~</span> <span class="va">treat</span> <span class="op">+</span> <span class="va">period</span> <span class="op">+</span> <span class="va">carry</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">subject</span><span class="op">)</span>,</span>
-<span class="r-in">    data <span class="op">=</span> <span class="va">inhaler</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">bayesian_mod</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">bayesian</span><span class="op">(</span>init <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">model</span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">bayesian_mod</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">bayesian</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">rating</span> <span class="op">~</span> <span class="va">treat</span> <span class="op">+</span> <span class="va">period</span> <span class="op">+</span> <span class="va">carry</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">subject</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    data <span class="op">=</span> <span class="va">inhaler</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">bayesian_mod</span><span class="op">$</span><span class="va">fit</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">bayesian</span><span class="op">(</span>init <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">model</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian Model Specification (regression)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Main Arguments:</span>
@@ -573,7 +573,7 @@ call. For this type of model, the template of the fit calls are:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computational engine: brms </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">model</span>, init <span class="op">=</span> <span class="st">"0"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">model</span>, init <span class="op">=</span> <span class="st">"0"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian Model Specification (regression)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Main Arguments:</span>
@@ -581,7 +581,7 @@ call. For this type of model, the template of the fit calls are:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computational engine: brms </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">model</span>, init <span class="op">=</span> <span class="st">"0"</span>, fresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">model</span>, init <span class="op">=</span> <span class="st">"0"</span>, fresh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian Model Specification (regression)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Main Arguments:</span>
