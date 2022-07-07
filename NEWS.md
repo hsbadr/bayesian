@@ -2,6 +2,8 @@
 
 - Fixed handling of `extended.family` class
 - Fixed multi-class probability (`type = "prob"`) predictions
+- Fixed multi-class confidence-intervals (`type = "conf_int"`) predictions
+- Fixed multi-class prediction-intervals (`type = "pred_int"`) predictions
 
 # bayesian 0.0.9
 

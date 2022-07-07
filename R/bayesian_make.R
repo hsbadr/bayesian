@@ -331,7 +331,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
                 object$lvl[1]
               )
             } else if (
-              length(object$lvl) > 2 &
+              length(object$lvl) > 2 &&
                 length(object$lvl) == ncol(results)
             ) {
               if (length(threshold) == ncol(results)) {
@@ -375,8 +375,8 @@ bayesian_make <- function(modes = c("classification", "regression")) {
               )
               colnames(results) <- object$lvl
             } else if (
-              length(object$lvl) > 2 &
-                length(object$lvl) == ncol(results)
+              length(object$lvl) > 2 &&
+                length(object$lvl) == wncol(results)
             ) {
               colnames(results) <- object$lvl
               results <- tibble::as_tibble(results)
@@ -407,27 +407,59 @@ bayesian_make <- function(modes = c("classification", "regression")) {
               return(results)
             }
 
-            res_2 <-
-              tibble::tibble(
-                lo = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$conf_int$extras$level
-                ),
-                hi = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$conf_int$extras$level,
-                  lower = FALSE
-                ),
-              )
-            res_1 <- res_2
-            res_1$lo <- 1 - res_2$hi
-            res_1$hi <- 1 - res_2$lo
-            res <- dplyr::bind_cols(res_1, res_2)
             lo_nms <- paste0(".pred_lower_", object$lvl)
             hi_nms <- paste0(".pred_upper_", object$lvl)
-            colnames(res) <- c(lo_nms[1], hi_nms[1], lo_nms[2], hi_nms[2])
-            if (object$spec$method$pred$conf_int$extras$std_error) {
-              res$.std_error <- apply(results, 2, stats::sd, na.rm = TRUE)
+            se_nms <- paste0(".std_error_", object$lvl)
+            if (length(object$lvl) == 2) {
+              res_2 <-
+                tibble::tibble(
+                  lo = parsnip::convert_stan_interval(
+                    results,
+                    level = object$spec$method$pred$conf_int$extras$level
+                  ),
+                  hi = parsnip::convert_stan_interval(
+                    results,
+                    level = object$spec$method$pred$conf_int$extras$level,
+                    lower = FALSE
+                  )
+                )
+              res_1 <- res_2
+              res_1$lo <- 1 - res_2$hi
+              res_1$hi <- 1 - res_2$lo
+              colnames(res_1) <- c(lo_nms[1], hi_nms[1])
+              colnames(res_2) <- c(lo_nms[2], hi_nms[2])
+              res <- dplyr::bind_cols(res_1, res_2)
+
+              if (object$spec$method$pred$conf_int$extras$std_error) {
+                res$.std_error <- apply(results, 2, stats::sd, na.rm = TRUE)
+              }
+            } else if (
+              length(object$lvl) > 2 &&
+                length(object$lvl) == ncol(results)
+            ) {
+              lo <- parsnip::convert_stan_interval(
+                results,
+                level = object$spec$method$pred$conf_int$extras$level
+              )
+              colnames(lo) <- lo_nms
+              lo <- tibble::as_tibble(lo)
+              hi <- parsnip::convert_stan_interval(
+                results,
+                level = object$spec$method$pred$conf_int$extras$level,
+                lower = FALSE
+              )
+              colnames(hi) <- hi_nms
+              hi <- tibble::as_tibble(hi)
+              if (object$spec$method$pred$conf_int$extras$std_error) {
+                se <- apply(results, 2, stats::sd, na.rm = TRUE)
+                colnames(se) <- se_nms
+                se <- tibble::as_tibble(se)
+              } else {
+                se <- tibble()
+              }
+              res <- dplyr::bind_cols(lo, hi, se)
+            } else {
+              rlang::abort("Unexpected model predictions!")
             }
             res
           },
@@ -453,28 +485,59 @@ bayesian_make <- function(modes = c("classification", "regression")) {
               return(results)
             }
 
-            res_2 <-
-              tibble::tibble(
-                lo = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$pred_int$extras$level
-                ),
-                hi = parsnip::convert_stan_interval(
-                  results,
-                  level = object$spec$method$pred$pred_int$extras$level,
-                  lower = FALSE
-                ),
-              )
-            res_1 <- res_2
-            res_1$lo <- 1 - res_2$hi
-            res_1$hi <- 1 - res_2$lo
-            res <- dplyr::bind_cols(res_1, res_2)
             lo_nms <- paste0(".pred_lower_", object$lvl)
             hi_nms <- paste0(".pred_upper_", object$lvl)
-            colnames(res) <- c(lo_nms[1], hi_nms[1], lo_nms[2], hi_nms[2])
+            se_nms <- paste0(".std_error_", object$lvl)
+            if (length(object$lvl) == 2) {
+              res_2 <-
+                tibble::tibble(
+                  lo = parsnip::convert_stan_interval(
+                    results,
+                    level = object$spec$method$pred$pred_int$extras$level
+                  ),
+                  hi = parsnip::convert_stan_interval(
+                    results,
+                    level = object$spec$method$pred$pred_int$extras$level,
+                    lower = FALSE
+                  )
+                )
+              res_1 <- res_2
+              res_1$lo <- 1 - res_2$hi
+              res_1$hi <- 1 - res_2$lo
+              colnames(res_1) <- c(lo_nms[1], hi_nms[1])
+              colnames(res_2) <- c(lo_nms[2], hi_nms[2])
+              res <- dplyr::bind_cols(res_1, res_2)
 
-            if (object$spec$method$pred$pred_int$extras$std_error) {
-              res$.std_error <- apply(results, 2, stats::sd, na.rm = TRUE)
+              if (object$spec$method$pred$pred_int$extras$std_error) {
+                res$.std_error <- results$se.fit
+              }
+            } else if (
+              length(object$lvl) > 2 &&
+                length(object$lvl) == ncol(results)
+            ) {
+              lo <- parsnip::convert_stan_interval(
+                results,
+                level = object$spec$method$pred$pred_int$extras$level
+              )
+              colnames(lo) <- lo_nms
+              lo <- tibble::as_tibble(lo)
+              hi <- parsnip::convert_stan_interval(
+                results,
+                level = object$spec$method$pred$pred_int$extras$level,
+                lower = FALSE
+              )
+              colnames(hi) <- hi_nms
+              hi <- tibble::as_tibble(hi)
+              if (object$spec$method$pred$pred_int$extras$std_error) {
+                se <- results$se.fit
+                colnames(se) <- se_nms
+                se <- tibble::as_tibble(se)
+              } else {
+                se <- tibble()
+              }
+              res <- dplyr::bind_cols(lo, hi, se)
+            } else {
+              rlang::abort("Unexpected model predictions!")
             }
             res
           },
