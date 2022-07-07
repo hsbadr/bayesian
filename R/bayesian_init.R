@@ -2,7 +2,7 @@
 #' @import parsnip
 #' @importFrom dplyr between bind_cols
 #' @importFrom purrr map_lgl
-#' @importFrom rlang !!! abort call2 enquo eval_tidy expr fn_fmls_names warn
+#' @importFrom rlang !!! abort call2 enquo eval_tidy expr warn
 #' @importFrom stats sd update
 #' @importFrom tibble as_tibble tibble
 #' @importFrom utils globalVariables getFromNamespace
