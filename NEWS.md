@@ -1,6 +1,7 @@
 # bayesian 0.0.9
 
 - Fixed handling of `extended.family` class
+- Fixed multi-class probability (`type = "prob"`) predictions
 
 # bayesian 0.0.9
 
