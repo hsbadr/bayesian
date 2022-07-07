@@ -178,10 +178,7 @@
 <span>  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">epilepsy</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Compiling Stan program...</span></span></code></pre>
 <pre><code><span><span class="co">## Start sampling</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span></span>
-<span><span class="co">## Running the chains for more iterations may help. See</span></span>
-<span><span class="co">## https://mc-stan.org/misc/warnings.html#bulk-ess</span></span></code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">epi_workflow_fit</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ══ Workflow [trained] ══════════════════════════════════════════════════════════</span></span>
 <span><span class="co">## <span style="font-style: italic;">Preprocessor:</span> Recipe</span></span>
@@ -203,33 +200,33 @@
 <span><span class="co">## Group-Level Effects: </span></span>
 <span><span class="co">## ~patient (Number of levels: 59) </span></span>
 <span><span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span></span>
-<span><span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      872     1455</span></span>
+<span><span class="co">## sd(Intercept)     0.58      0.07     0.46     0.74 1.01      590     1752</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Population-Level Effects: </span></span>
 <span><span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span></span>
-<span><span class="co">## Intercept     1.78      0.11     1.55     2.00 1.00      512     1476</span></span>
-<span><span class="co">## Trt1         -0.27      0.16    -0.60     0.04 1.02      364     1155</span></span>
-<span><span class="co">## Base          0.73      0.08     0.57     0.89 1.00      635     1014</span></span>
-<span><span class="co">## Age           0.09      0.08    -0.08     0.25 1.01      718     1395</span></span>
+<span><span class="co">## Intercept     1.77      0.12     1.52     2.00 1.00      680     1305</span></span>
+<span><span class="co">## Trt1         -0.25      0.17    -0.58     0.07 1.00      692     1325</span></span>
+<span><span class="co">## Base          0.73      0.08     0.58     0.90 1.00      726     1092</span></span>
+<span><span class="co">## Age           0.08      0.08    -0.08     0.25 1.00      670     1157</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span></span>
 <span><span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span></span>
 <span><span class="co">## scale reduction factor on split chains (at convergence, Rhat = 1).</span></span></code></pre>
 <p>To extract the parsnip model fit from the workflow</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epi_fit</span> <span class="op">&lt;-</span> <span class="va">epi_workflow_fit</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://hardhat.tidymodels.org/reference/hardhat-extract.html" class="external-link">extract_fit_parsnip</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>brmsfit</code> object can be extracted as follows</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epi_brmsfit</span> <span class="op">&lt;-</span> <span class="va">epi_workflow_fit</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://hardhat.tidymodels.org/reference/hardhat-extract.html" class="external-link">extract_fit_engine</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">epi_brmsfit</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "brmsfit"</span></span></code></pre>
 <p>We can use the trained workflow, which includes the fitted model, to conveniently <code>predict</code> using new data without having to worry about all the data reprocessing, which is automatically applied using the workflow preprocessor (recipe).</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">newdata</span> <span class="op">&lt;-</span> <span class="va">epilepsy</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epi_workflow_fit</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
 <span>    new_data <span class="op">=</span> <span class="va">newdata</span>,</span>
@@ -245,7 +242,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">5</span>           6          22</span></span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epi_workflow_fit</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
 <span>    new_data <span class="op">=</span> <span class="va">newdata</span>,</span>
@@ -256,11 +253,11 @@
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
 <span><span class="co">##   .pred_lower .pred_upper .std_error</span></span>
 <span><span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.08</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.09</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.04</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.06</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.82</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.98</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span>           6          22       4.09</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.97</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span>           7          22       4.00</span></span></code></pre>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
