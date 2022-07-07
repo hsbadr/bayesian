@@ -1,5 +1,9 @@
 # bayesian 0.0.9
 
+- Fixed handling of `extended.family` class
+
+# bayesian 0.0.9
+
 - Depends on `parsnip >= 1.0.0`
 - Using base R pipe and depends on R >= 4.1.0
 - Supported the use of case weights
