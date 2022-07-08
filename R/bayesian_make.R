@@ -467,6 +467,8 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           args = list(
             object = rlang::expr(object$fit),
             newdata = rlang::expr(new_data),
+            interval = "confidence",
+            level = rlang::expr(level),
             summary = FALSE
           )
         )
@@ -545,6 +547,8 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           args = list(
             object = rlang::expr(object$fit),
             newdata = rlang::expr(new_data),
+            interval = "prediction",
+            level = rlang::expr(level),
             summary = FALSE
           )
         )
@@ -609,6 +613,8 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           args = list(
             object = rlang::expr(object$fit),
             newdata = rlang::expr(new_data),
+            interval = "confidence",
+            level = rlang::expr(level),
             summary = FALSE
           )
         )
@@ -649,6 +655,8 @@ bayesian_make <- function(modes = c("classification", "regression")) {
           args = list(
             object = rlang::expr(object$fit),
             newdata = rlang::expr(new_data),
+            interval = "prediction",
+            level = rlang::expr(level),
             summary = FALSE
           )
         )
