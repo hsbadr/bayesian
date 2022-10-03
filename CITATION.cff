@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.3
+# CITATION file created with {cffr} R package, v0.3.0
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -327,4 +327,8 @@ references:
   - family-names: Vaughan
     given-names: Davis
     email: davis@rstudio.com
+  - family-names: Couch
+    given-names: Simon
+    email: simonpatrickcouch@gmail.com
+    orcid: https://orcid.org/0000-0001-5676-5107
   year: '2022'
