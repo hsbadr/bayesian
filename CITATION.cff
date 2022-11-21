@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.3.0
+# CITATION file created with {cffr} R package, v0.4.0
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -56,6 +56,8 @@ references:
   title: brms
   abstract: 'brms: Bayesian Regression Models using ''Stan'''
   notes: Depends
+  url: https://discourse.mc-stan.org/
+  repository: https://CRAN.R-project.org/package=brms
   authors:
   - family-names: Bürkner
     given-names: Paul-Christian
@@ -66,6 +68,8 @@ references:
   title: parsnip
   abstract: 'parsnip: A Common API to Modeling and Analysis Functions'
   notes: Depends
+  url: https://parsnip.tidymodels.org/
+  repository: https://CRAN.R-project.org/package=parsnip
   authors:
   - family-names: Kuhn
     given-names: Max
@@ -78,12 +82,12 @@ references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
+  url: https://www.R-project.org/
   authors:
   - name: R Core Team
   location:
     name: Vienna, Austria
   year: '2022'
-  url: https://www.R-project.org/
   institution:
     name: R Foundation for Statistical Computing
   version: '>= 4.1.0'
@@ -91,6 +95,8 @@ references:
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
   notes: Imports
+  url: https://dplyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=dplyr
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -109,6 +115,8 @@ references:
   title: purrr
   abstract: 'purrr: Functional Programming Tools'
   notes: Imports
+  url: https://purrr.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=purrr
   authors:
   - family-names: Henry
     given-names: Lionel
@@ -121,6 +129,8 @@ references:
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
   notes: Imports
+  url: https://rlang.r-lib.org
+  repository: https://CRAN.R-project.org/package=rlang
   authors:
   - family-names: Henry
     given-names: Lionel
@@ -138,13 +148,14 @@ references:
   location:
     name: Vienna, Austria
   year: '2022'
-  url: https://www.R-project.org/
   institution:
     name: R Foundation for Statistical Computing
 - type: software
   title: tibble
   abstract: 'tibble: Simple Data Frames'
   notes: Imports
+  url: https://tibble.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=tibble
   authors:
   - family-names: Müller
     given-names: Kirill
@@ -162,13 +173,14 @@ references:
   location:
     name: Vienna, Austria
   year: '2022'
-  url: https://www.R-project.org/
   institution:
     name: R Foundation for Statistical Computing
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
   notes: Suggests
+  url: https://covr.r-lib.org
+  repository: https://CRAN.R-project.org/package=covr
   authors:
   - family-names: Hester
     given-names: Jim
@@ -178,6 +190,8 @@ references:
   title: devtools
   abstract: 'devtools: Tools to Make Developing R Packages Easier'
   notes: Suggests
+  url: https://devtools.r-lib.org/
+  repository: https://CRAN.R-project.org/package=devtools
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -194,6 +208,8 @@ references:
   title: future
   abstract: 'future: Unified Parallel and Distributed Processing in R for Everyone'
   notes: Suggests
+  url: https://future.futureverse.org
+  repository: https://CRAN.R-project.org/package=future
   authors:
   - family-names: Bengtsson
     given-names: Henrik
@@ -203,17 +219,20 @@ references:
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
   notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
   authors:
   - family-names: Xie
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2022'
-  url: https://yihui.org/knitr/
 - type: software
   title: recipes
   abstract: 'recipes: Preprocessing and Feature Engineering Steps for Modeling'
   notes: Suggests
+  url: https://recipes.tidymodels.org/
+  repository: https://CRAN.R-project.org/package=recipes
   authors:
   - family-names: Kuhn
     given-names: Max
@@ -226,6 +245,8 @@ references:
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
   notes: Suggests
+  url: https://pkgs.rstudio.com/rmarkdown/
+  repository: https://CRAN.R-project.org/package=rmarkdown
   authors:
   - family-names: Allaire
     given-names: JJ
@@ -264,6 +285,8 @@ references:
   title: roxygen2
   abstract: 'roxygen2: In-Line Documentation for R'
   notes: Suggests
+  url: https://roxygen2.r-lib.org/
+  repository: https://CRAN.R-project.org/package=roxygen2
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -278,11 +301,12 @@ references:
   - family-names: Eugster
     given-names: Manuel
   year: '2022'
-  url: https://CRAN.R-project.org/package=roxygen2
 - type: software
   title: rstan
   abstract: 'rstan: R Interface to Stan'
   notes: Suggests
+  url: https://mc-stan.org/rstan/
+  repository: https://CRAN.R-project.org/package=rstan
   authors:
   - family-names: Guo
     given-names: Jiqiang
@@ -301,6 +325,8 @@ references:
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
   notes: Suggests
+  url: https://docs.ropensci.org/spelling/
+  repository: https://CRAN.R-project.org/package=spelling
   authors:
   - family-names: Ooms
     given-names: Jeroen
@@ -314,6 +340,8 @@ references:
   title: testthat
   abstract: 'testthat: Unit Testing for R'
   notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -323,6 +351,8 @@ references:
   title: workflows
   abstract: 'workflows: Modeling Workflows'
   notes: Suggests
+  url: https://workflows.tidymodels.org
+  repository: https://CRAN.R-project.org/package=workflows
   authors:
   - family-names: Vaughan
     given-names: Davis
