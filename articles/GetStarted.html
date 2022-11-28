@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">Paul-Christian
 Bürkner &amp; Hamada S. Badr</h4>
             
-            <h4 data-toc-skip class="date">2022-11-21</h4>
+            <h4 data-toc-skip class="date">2022-11-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/hsbadr/bayesian/blob/HEAD/vignettes/GetStarted.Rmd" class="external-link"><code>vignettes/GetStarted.Rmd</code></a></small>
       <div class="d-none name"><code>GetStarted.Rmd</code></div>
@@ -225,14 +225,14 @@ method with the data set we want to train the model on.</p>
 <span><span class="co">## Group-Level Effects: </span></span>
 <span><span class="co">## ~patient (Number of levels: 59) </span></span>
 <span><span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span></span>
-<span><span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      816     1264</span></span>
+<span><span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.00      707     1309</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Population-Level Effects: </span></span>
 <span><span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span></span>
-<span><span class="co">## Intercept     1.76      0.12     1.53     1.99 1.01      698     1174</span></span>
-<span><span class="co">## Trt1         -0.26      0.16    -0.59     0.07 1.01      704     1244</span></span>
-<span><span class="co">## Base          0.73      0.08     0.57     0.88 1.00      905     1630</span></span>
-<span><span class="co">## Age           0.09      0.09    -0.08     0.25 1.01      686      998</span></span>
+<span><span class="co">## Intercept     1.77      0.12     1.53     1.99 1.00      476     1118</span></span>
+<span><span class="co">## Trt1         -0.26      0.17    -0.59     0.07 1.00      542      985</span></span>
+<span><span class="co">## Base          0.73      0.08     0.58     0.88 1.01      764     1197</span></span>
+<span><span class="co">## Age           0.09      0.09    -0.08     0.25 1.01      658     1302</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span></span>
 <span><span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span></span>
@@ -264,11 +264,11 @@ the workflow preprocessor (recipe).</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 2</span></span></span>
 <span><span class="co">##   .pred_lower .pred_upper</span></span>
 <span><span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>           0           8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>           0           7</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span>           6          22</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>           0         8  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0         8  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>           0         7  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0         8  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span>           7        22.0</span></span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epi_workflow_fit</span> <span class="op">|&gt;</span></span>
@@ -282,10 +282,10 @@ the workflow preprocessor (recipe).</p>
 <span><span class="co">##   .pred_lower .pred_upper .std_error</span></span>
 <span><span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.06</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.06</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.87</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.97</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span>           6          22       4.14</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.08</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.81</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.98</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span>           6          22       4.13</span></span></code></pre>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
