@@ -70,27 +70,27 @@ jobs:
           export PKG_NAME="$(grep '^Package' DESCRIPTION | sed 's/^[^:]*://g' | xargs)"
           export PKG_VERSION="$(grep '^Version' DESCRIPTION | sed 's/^[^:]*://g' | xargs)"
           export PKG_SHA="$(git rev-parse --short HEAD | sed 's/^[^:]*://g' | xargs)"
-          echo "::set-output name=pkg_name::$PKG_NAME"
-          echo "::set-output name=pkg_version::$PKG_VERSION"
-          echo "::set-output name=pkg_sha::$PKG_SHA"
+          echo "pkg_name=$PKG_NAME" >> $GITHUB_OUTPUT
+          echo "pkg_version=$PKG_VERSION" >> $GITHUB_OUTPUT
+          echo "pkg_sha=$PKG_SHA" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Set up R information
         id: r_info
         run: |
           set -x
-          echo "::set-output name=r_devel::devel"
-          echo "::set-output name=r_release::release"
-          echo "::set-output name=r_oldrel::oldrel"
+          echo "r_devel=devel" >> $GITHUB_OUTPUT
+          echo "r_release=release" >> $GITHUB_OUTPUT
+          echo "r_oldrel=oldrel" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Set up OS information
         id: mat_info
         run: |
           set -x
-          echo "::set-output name=os_linux::Ubuntu-20.04"
-          echo "::set-output name=os_macos::macOS-11"
-          echo "::set-output name=os_windows::Windows-2022"
+          echo "os_linux=Ubuntu-20.04" >> $GITHUB_OUTPUT
+          echo "os_macos=macOS-11" >> $GITHUB_OUTPUT
+          echo "os_windows=Windows-2022" >> $GITHUB_OUTPUT
         shell: bash
 
   check:
@@ -518,7 +518,7 @@ jobs:
         run: |
           ls -R
           export ARTIFACT_PATH="${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_R-${{ needs.initiate.outputs.r_devel }}_${{ needs.initiate.outputs.os_linux }}"
-          echo "::set-output name=artifact_path::$ARTIFACT_PATH"
+          echo "artifact_path=$ARTIFACT_PATH" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Upload source package
@@ -568,7 +568,7 @@ jobs:
           ls -R
           export ARTIFACT_PATH="${{ needs.initiate.outputs.pkg_name }}_${{ needs.initiate.outputs.pkg_version }}_R-${{ matrix.r }}_${{ matrix.os }}"
           zip -rj $ARTIFACT_PATH.zip $ARTIFACT_PATH/*
-          echo "::set-output name=artifact_path::$ARTIFACT_PATH"
+          echo "artifact_path=$ARTIFACT_PATH" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Upload release assets
