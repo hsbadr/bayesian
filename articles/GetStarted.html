@@ -225,14 +225,14 @@ method with the data set we want to train the model on.</p>
 <span><span class="co">## Group-Level Effects: </span></span>
 <span><span class="co">## ~patient (Number of levels: 59) </span></span>
 <span><span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span></span>
-<span><span class="co">## sd(Intercept)     0.58      0.07     0.46     0.72 1.00      868     1396</span></span>
+<span><span class="co">## sd(Intercept)     0.57      0.07     0.46     0.73 1.00      715     1668</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Population-Level Effects: </span></span>
 <span><span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span></span>
-<span><span class="co">## Intercept     1.78      0.12     1.54     2.00 1.00      736     1496</span></span>
-<span><span class="co">## Trt1         -0.27      0.17    -0.59     0.07 1.00      696     1348</span></span>
-<span><span class="co">## Base          0.73      0.08     0.57     0.90 1.01      583     1232</span></span>
-<span><span class="co">## Age           0.09      0.09    -0.08     0.26 1.01      724     1302</span></span>
+<span><span class="co">## Intercept     1.77      0.12     1.53     2.01 1.00      579     1052</span></span>
+<span><span class="co">## Trt1         -0.26      0.17    -0.59     0.07 1.01      597     1243</span></span>
+<span><span class="co">## Base          0.73      0.08     0.57     0.90 1.01      646     1294</span></span>
+<span><span class="co">## Age           0.09      0.08    -0.08     0.24 1.01      708     1441</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span></span>
 <span><span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span></span>
@@ -268,7 +268,7 @@ the workflow preprocessor (recipe).</p>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">3</span>           0           7</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span>           7          23</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span>           6          22</span></span></code></pre>
 <p>To add the standard errors on the scale of the linear predictors</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epi_workflow_fit</span> <span class="op">|&gt;</span></span>
@@ -281,11 +281,11 @@ the workflow preprocessor (recipe).</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
 <span><span class="co">##   .pred_lower .pred_upper .std_error</span></span>
 <span><span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.08</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.06</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.80</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.97</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.17</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.06</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.03</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.88</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       1.99</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span>           7          22       4.05</span></span></code></pre>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
