@@ -376,7 +376,7 @@ bayesian_make <- function(modes = c("classification", "regression")) {
               colnames(results) <- object$lvl
             } else if (
               length(object$lvl) > 2 &&
-                length(object$lvl) == wncol(results)
+                length(object$lvl) == ncol(results)
             ) {
               colnames(results) <- object$lvl
               results <- tibble::as_tibble(results)
