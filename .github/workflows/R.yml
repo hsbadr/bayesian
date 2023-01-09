@@ -244,7 +244,6 @@ jobs:
           cache: true
           cache-version: 1
           extra-packages: |
-            any::cffr
             any::covr
             any::curl
             any::devtools
@@ -274,7 +273,6 @@ jobs:
             pkgType = ifelse(grepl("linux", R.version$os), "source", "binary")
           )
           install.packages("remotes")
-          remotes::install_cran("cffr")
           remotes::install_cran("covr")
           remotes::install_cran("curl")
           remotes::install_cran("devtools")
@@ -385,7 +383,8 @@ jobs:
         if: success() && matrix.os == needs.initiate.outputs.os_linux && matrix.r == needs.initiate.outputs.r_devel
         run: |
           options(crayon.enabled = TRUE)
-          cffr::cff_write(outfile = "CITATION.cff", keys = list())
+          try(remotes::install_cran("cffr"))
+          if (require("cffr")) cffr::cff_write(outfile = "CITATION.cff", keys = list())
         shell: Rscript {0}
 
       - name: Commit changes
