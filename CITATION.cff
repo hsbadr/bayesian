@@ -237,10 +237,10 @@ references:
   authors:
   - family-names: Kuhn
     given-names: Max
-    email: max@rstudio.com
+    email: max@posit.co
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   year: '2023'
 - type: software
   title: rmarkdown
