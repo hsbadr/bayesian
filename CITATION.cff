@@ -73,10 +73,10 @@ references:
   authors:
   - family-names: Kuhn
     given-names: Max
-    email: max@rstudio.com
+    email: max@posit.co
   - family-names: Vaughan
     given-names: Davis
-    email: davis@rstudio.com
+    email: davis@posit.co
   year: '2023'
   version: '>= 1.0.0'
 - type: software
