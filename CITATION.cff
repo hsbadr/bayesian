@@ -246,6 +246,9 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
+  - family-names: Hvitfeldt
+    given-names: Emil
+    email: emil.hvitfeldt@posit.co
   year: '2023'
 - type: software
   title: rmarkdown
