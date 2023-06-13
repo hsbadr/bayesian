@@ -157,6 +157,7 @@ jobs:
         run: |
           set -x
           sudo apt-get install -y automake || true
+          sudo apt-get install -y libboost-all-dev || true
           sudo apt-get install -y clang-format || true
           sudo apt-get install -y cmake || true
           sudo apt-get install -y git || true
@@ -182,6 +183,7 @@ jobs:
           set -x
           rm -f /usr/local/bin/gfortran || true
           brew reinstall --force --verbose automake || true
+          brew reinstall --force --verbose boost || true
           brew reinstall --force --verbose cmake || true
           brew reinstall --force --verbose curl || true
           brew reinstall --force --verbose harfbuzz fribidi || true
@@ -206,6 +208,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'SilentlyContinue'
           echo "TMPDIR=${{ runner.temp }}" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
+          pacman -Syu --noconfirm mingw-w64-i686-boost
           pacman -Syu --noconfirm mingw-w64-i686-cmake
           pacman -Syu --noconfirm mingw-w64-i686-curl
           pacman -Syu --noconfirm mingw-w64-i686-glpk
@@ -216,6 +219,7 @@ jobs:
           pacman -Syu --noconfirm mingw-w64-i686-make
           pacman -Syu --noconfirm mingw-w64-i686-netcdf
           pacman -Syu --noconfirm mingw-w64-i686-nlopt
+          pacman -Syu --noconfirm mingw-w64-x86_64-boost
           pacman -Syu --noconfirm mingw-w64-x86_64-cmake
           pacman -Syu --noconfirm mingw-w64-x86_64-curl
           pacman -Syu --noconfirm mingw-w64-x86_64-glpk
@@ -226,6 +230,7 @@ jobs:
           pacman -Syu --noconfirm mingw-w64-x86_64-make
           pacman -Syu --noconfirm mingw-w64-x86_64-netcdf
           pacman -Syu --noconfirm mingw-w64-x86_64-nlopt
+          pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-boost
           pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-cmake
           pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-curl
           pacman -Syu --noconfirm mingw-w64-ucrt-x86_64-glpk
@@ -245,6 +250,7 @@ jobs:
           cache: true
           cache-version: 1
           extra-packages: |
+            any::BH
             any::covr
             any::curl
             any::devtools
@@ -274,6 +280,7 @@ jobs:
             pkgType = ifelse(grepl("linux", R.version$os), "source", "binary")
           )
           install.packages("remotes")
+          remotes::install_cran("BH")
           remotes::install_cran("covr")
           remotes::install_cran("curl")
           remotes::install_cran("devtools")
