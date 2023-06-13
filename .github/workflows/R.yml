@@ -258,6 +258,9 @@ jobs:
             any::lintr
             any::pkgdown
             any::rcmdcheck
+            any::Rcpp
+            any::RcppEigen
+            any::RcppParallel
             any::rmarkdown
             any::roxygen2
             any::styler
@@ -289,6 +292,9 @@ jobs:
           remotes::install_cran("mgcv", type = "source")
           remotes::install_cran("parsnip", type = "source")
           remotes::install_cran("pkgdown")
+          remotes::install_cran("Rcpp")
+          remotes::install_cran("RcppEigen")
+          remotes::install_cran("RcppParallel")
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("rmarkdown")
           remotes::install_cran("roxygen2")
