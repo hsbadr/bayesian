@@ -348,6 +348,9 @@ references:
     given-names: Jim
     email: james.hester@rstudio.com
   year: '2023'
+  identifiers:
+  - type: url
+    value: https://github.com/ropensci/spelling
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
