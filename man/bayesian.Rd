@@ -228,7 +228,7 @@ named after the string supplied in \code{save_model}.}
 \item{file}{A character string of the file path to \code{brmsfit} object
 saved via \code{\link{saveRDS}}.}
 
-\item{file_refit}{Modifies when the fit stored via the \code{file} parameter
+\item{file_refit}{Modifies when the fit stored via the \code{file} argument
 is re-used. Can be set globally for the current \R session via the
 \code{"brms.file_refit"} option (see \code{\link{options}}).
 For \code{"never"} (default) the fit is always loaded if it
