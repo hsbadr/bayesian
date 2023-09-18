@@ -329,6 +329,9 @@ references:
   - family-names: Goodrich
     given-names: Ben
     email: benjamin.goodrich@columbia.edu
+  - family-names: Johnson
+    given-names: Andrew
+    email: andrew.johnson@arjohnsonau.com
   - family-names: Weber
     given-names: Sebastian
     email: sdw.post@waebers.de
