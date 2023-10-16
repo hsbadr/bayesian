@@ -335,6 +335,10 @@ references:
   - family-names: Weber
     given-names: Sebastian
     email: sdw.post@waebers.de
+  - family-names: Badr
+    given-names: Hamada S.
+    email: badr@jhu.edu
+    orcid: https://orcid.org/0000-0002-9808-2344
   year: '2023'
 - type: software
   title: spelling
