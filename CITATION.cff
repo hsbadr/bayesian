@@ -379,9 +379,9 @@ references:
   authors:
   - family-names: Vaughan
     given-names: Davis
-    email: davis@rstudio.com
+    email: davis@posit.co
   - family-names: Couch
     given-names: Simon
-    email: simonpatrickcouch@gmail.com
+    email: simon.couch@posit.co
     orcid: https://orcid.org/0000-0001-5676-5107
   year: '2024'
