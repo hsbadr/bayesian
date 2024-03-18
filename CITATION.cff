@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.5.0
+# CITATION file created with {cffr} R package, v1.0.0
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -11,10 +11,11 @@ title: 'bayesian: Bindings for Bayesian TidyModels'
 version: 1.0.0
 doi: 10.5281/zenodo.6654386
 abstract: Fit Bayesian models using 'brms'/'Stan' with 'parsnip'/'tidymodels' via
-  'bayesian' <doi:10.5281/zenodo.6654386>. 'tidymodels' is a collection of packages
-  for machine learning; see Kuhn and Wickham (2020) <https://www.tidymodels.org>).
-  The technical details of 'brms' and 'Stan' are described in Bürkner (2017) <doi:10.18637/jss.v080.i01>,
-  Bürkner (2018) <doi:10.32614/RJ-2018-017>, and Carpenter et al. (2017) <doi:10.18637/jss.v076.i01>.
+  'bayesian' <https://doi.org/10.5281/zenodo.6654386>. 'tidymodels' is a collection
+  of packages for machine learning; see Kuhn and Wickham (2020) <https://www.tidymodels.org>).
+  The technical details of 'brms' and 'Stan' are described in Bürkner (2017) <https://doi.org/10.18637/jss.v080.i01>,
+  Bürkner (2018) <https://doi.org/10.32614/RJ-2018-017>, and Carpenter et al. (2017)
+  <https://doi.org/10.18637/jss.v076.i01>.
 authors:
 - family-names: Badr
   given-names: Hamada S.
@@ -85,11 +86,10 @@ references:
   url: https://www.R-project.org/
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
   version: '>= 4.1.0'
 - type: software
   title: dplyr
@@ -150,11 +150,10 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: tibble
   abstract: 'tibble: Simple Data Frames'
@@ -176,11 +175,10 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
