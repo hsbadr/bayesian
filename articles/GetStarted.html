@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">Paul-Christian
 Bürkner &amp; Hamada S. Badr</h4>
             
-            <h4 data-toc-skip class="date">2024-03-18</h4>
+            <h4 data-toc-skip class="date">2024-03-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/hsbadr/bayesian/blob/HEAD/vignettes/GetStarted.Rmd" class="external-link"><code>vignettes/GetStarted.Rmd</code></a></small>
       <div class="d-none name"><code>GetStarted.Rmd</code></div>
@@ -220,17 +220,17 @@ method with the data set we want to train the model on.</p>
 <span><span class="co">##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;</span></span>
 <span><span class="co">##          total post-warmup draws = 4000</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Group-Level Effects: </span></span>
+<span><span class="co">## Multilevel Hyperparameters:</span></span>
 <span><span class="co">## ~patient (Number of levels: 59) </span></span>
 <span><span class="co">##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span></span>
-<span><span class="co">## sd(Intercept)     0.57      0.07     0.45     0.72 1.00      656     1103</span></span>
+<span><span class="co">## sd(Intercept)     0.58      0.07     0.46     0.73 1.01      656     1001</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Population-Level Effects: </span></span>
+<span><span class="co">## Regression Coefficients:</span></span>
 <span><span class="co">##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span></span>
-<span><span class="co">## Intercept     1.77      0.12     1.54     2.00 1.01      661     1320</span></span>
-<span><span class="co">## Trt1         -0.26      0.17    -0.58     0.07 1.01      634     1106</span></span>
-<span><span class="co">## Base          0.73      0.08     0.57     0.89 1.01      803     1202</span></span>
-<span><span class="co">## Age           0.08      0.09    -0.09     0.25 1.01      510     1091</span></span>
+<span><span class="co">## Intercept     1.77      0.13     1.52     2.01 1.00      670      851</span></span>
+<span><span class="co">## Trt1         -0.27      0.17    -0.59     0.05 1.01      589      867</span></span>
+<span><span class="co">## Base          0.73      0.08     0.57     0.88 1.00      845     1435</span></span>
+<span><span class="co">## Age           0.09      0.08    -0.07     0.25 1.01      701     1115</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span></span>
 <span><span class="co">## and Tail_ESS are effective sample size measures, and Rhat is the potential</span></span>
@@ -279,11 +279,11 @@ the workflow preprocessor (recipe).</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
 <span><span class="co">##   .pred_lower .pred_upper .std_error</span></span>
 <span><span class="co">##         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.07</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.06</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.83</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       2.00</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.16</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>           0           8       2.08</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>           0           8       2.03</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>           0           7       1.86</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span>           0           8       2.04</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span>           6          23       4.20</span></span></code></pre>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
