@@ -188,7 +188,7 @@ jobs:
           brew reinstall --force --verbose cmake || true
           brew reinstall --force --verbose curl || true
           brew reinstall --force --verbose harfbuzz fribidi || true
-          brew reinstall --force --verbose gcc@8 || true
+          brew reinstall --force --verbose gcc || true
           brew reinstall --force --verbose git || true
           brew reinstall --force --verbose glpk || true
           brew reinstall --force --verbose gmp || true
