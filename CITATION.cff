@@ -1,7 +1,7 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v1.0.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "bayesian" in publications use:'
@@ -354,9 +354,6 @@ references:
     given-names: Jim
     email: james.hester@rstudio.com
   year: '2024'
-  identifiers:
-  - type: url
-    value: https://docs.ropensci.org/spelling/
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -383,3 +380,4 @@ references:
     email: simon.couch@posit.co
     orcid: https://orcid.org/0000-0001-5676-5107
   year: '2024'
+
