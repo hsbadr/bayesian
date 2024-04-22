@@ -325,8 +325,13 @@ bayesian_make <- function(modes = c("classification", "regression")) {
               } else {
                 rlang::abort("Probability threshold should be numeric.")
               }
+              if (length(dim(results)) < 2) {
+                res <- results
+              } else {
+                res <- results[, 1]
+              }
               results <- ifelse(
-                results[, 1] >= threshold,
+                res >= threshold,
                 object$lvl[2],
                 object$lvl[1]
               )
@@ -369,9 +374,14 @@ bayesian_make <- function(modes = c("classification", "regression")) {
               if (is.array(results)) {
                 results <- as.vector(results)
               }
+              if (length(dim(results)) < 2) {
+                res <- results
+              } else {
+                res <- results[, 1]
+              }
               results <- tibble::tibble(
-                v1 = 1 - results[, 1],
-                v2 = results[, 1]
+                v1 = 1 - res,
+                v2 = res
               )
               colnames(results) <- object$lvl
             } else if (
@@ -567,7 +577,13 @@ bayesian_make <- function(modes = c("classification", "regression")) {
               return(results)
             }
 
-            tibble::tibble(.pred = results[, 1])
+            if (length(dim(results)) < 2) {
+              res <- results
+            } else {
+              res <- results[, 1]
+            }
+
+            tibble::tibble(.pred = res)
           },
           func = predfunc,
           args = list(
