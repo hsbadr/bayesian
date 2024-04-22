@@ -64,7 +64,7 @@ references:
     given-names: Paul-Christian
     email: paul.buerkner@gmail.com
   year: '2024'
-  version: '>= 2.17.0'
+  version: '>= 2.21.0'
 - type: software
   title: parsnip
   abstract: 'parsnip: A Common API to Modeling and Analysis Functions'
@@ -79,7 +79,7 @@ references:
     given-names: Davis
     email: davis@posit.co
   year: '2024'
-  version: '>= 1.0.0'
+  version: '>= 1.2.1'
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
