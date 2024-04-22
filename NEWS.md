@@ -1,3 +1,7 @@
+# bayesian 1.0.0
+
+- Fixed predictions with intercept-only models (#17)
+
 # bayesian 0.0.9
 
 - Fixed handling of `extended.family` class
