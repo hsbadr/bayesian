@@ -136,14 +136,15 @@ jobs:
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.r }}
-          rtools-version: '42'
+          rtools-version: ''
           Ncpus: '1'
           remove-openmp-macos: true
           http-user-agent: 'default'
           install-r: true
+          windows-path-include-rtools: true
           windows-path-include-mingw: true
-          update-rtools: true
-          use-public-rspm: true
+          update-rtools: false
+          use-public-rspm: false
           extra-repositories: ''
 
       - name: Set up Pandoc
