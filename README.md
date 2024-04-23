@@ -20,7 +20,7 @@ Status](https://www.r-pkg.org/badges/version/bayesian)](https://CRAN.R-project.o
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/bayesian)](https://cran.r-project.org/package=bayesian)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/hsbadr/bayesian/blob/main/LICENSE.md)
-[![DOI](https://zenodo.org/badge/327419436.svg)](https://zenodo.org/badge/latestdoi/327419436)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4426836.svg)](https://zenodo.org/doi/10.5281/zenodo.4426836)
 <!-- badges: end -->
 
 [**`bayesian`**](https://hsbadr.github.io/bayesian/) supports Bayesian

@@ -9,9 +9,9 @@ type: software
 license: MIT
 title: 'bayesian: Bindings for Bayesian TidyModels'
 version: 1.0.0
-doi: 10.5281/zenodo.6654386
+doi: 10.5281/zenodo.4426836
 abstract: Fit Bayesian models using 'brms'/'Stan' with 'parsnip'/'tidymodels' via
-  'bayesian' <https://doi.org/10.5281/zenodo.6654386>. 'tidymodels' is a collection
+  'bayesian' <https://doi.org/10.5281/zenodo.4426836>. 'tidymodels' is a collection
   of packages for machine learning; see Kuhn and Wickham (2020) <https://www.tidymodels.org>).
   The technical details of 'brms' and 'Stan' are described in Bürkner (2017) <https://doi.org/10.18637/jss.v080.i01>,
   Bürkner (2018) <https://doi.org/10.32614/RJ-2018-017>, and Carpenter et al. (2017)
@@ -38,7 +38,7 @@ preferred-citation:
   year: '2021'
   journal: Comprehensive R Archive Network (CRAN)
   url: https://hsbadr.github.io/bayesian/
-  doi: 10.5281/zenodo.6654386
+  doi: 10.5281/zenodo.4426836
 repository: https://CRAN.R-project.org/package=bayesian
 repository-code: https://github.com/hsbadr/bayesian
 url: https://hsbadr.github.io/bayesian/
