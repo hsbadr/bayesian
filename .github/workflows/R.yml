@@ -5,7 +5,7 @@
 #     email: badr@jhu.edu
 #     institute: Johns Hopkins University
 #     correspondence: true
-# date: "9 March 2022"
+# date: "23 April 2024"
 
 # yamllint disable rule:line-length
 
@@ -523,7 +523,7 @@ jobs:
 
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           path: ./
 
