@@ -2,7 +2,7 @@
 
 |field    |value                                                  |
 |:--------|:------------------------------------------------------|
-|version  |R Under development (unstable) (2024-04-21 r86458)     |
+|version  |R Under development (unstable) (2024-04-22 r86468)     |
 |os       |Ubuntu 22.04.4 LTS                                     |
 |system   |x86_64, linux-gnu                                      |
 |ui       |X11                                                    |
