@@ -89,7 +89,7 @@ jobs:
         run: |
           set -x
           echo "os_linux=Ubuntu-22.04" >> $GITHUB_OUTPUT
-          echo "os_macos=macOS-12" >> $GITHUB_OUTPUT
+          echo "os_macos=macOS-14" >> $GITHUB_OUTPUT
           echo "os_windows=Windows-2022" >> $GITHUB_OUTPUT
         shell: bash
 
