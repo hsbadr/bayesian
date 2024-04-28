@@ -2,7 +2,7 @@
 
 |field    |value                                                  |
 |:--------|:------------------------------------------------------|
-|version  |R Under development (unstable) (2024-04-22 r86468)     |
+|version  |R Under development (unstable) (2024-04-24 r86484)     |
 |os       |Ubuntu 22.04.4 LTS                                     |
 |system   |x86_64, linux-gnu                                      |
 |ui       |X11                                                    |
@@ -10,14 +10,14 @@
 |collate  |C.UTF-8                                                |
 |ctype    |C.UTF-8                                                |
 |tz       |UTC                                                    |
-|date     |2024-04-23                                             |
+|date     |2024-04-28                                             |
 |pandoc   |3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/pandoc |
 
 # Dependencies
 
 |package        |old        |new        |Δ  |
 |:--------------|:----------|:----------|:--|
-|bayesian       |0.0.9      |1.0.0      |*  |
+|bayesian       |0.0.9      |1.0.1      |*  |
 |abind          |1.4-5      |1.4-5      |   |
 |backports      |1.4.1      |1.4.1      |   |
 |bayesplot      |1.11.1     |1.11.1     |   |
@@ -82,7 +82,7 @@
 |rstan          |2.32.6     |2.32.6     |   |
 |rstantools     |2.4.0      |2.4.0      |   |
 |scales         |1.3.0      |1.3.0      |   |
-|StanHeaders    |2.32.6     |2.32.6     |   |
+|StanHeaders    |2.32.7     |2.32.7     |   |
 |stringi        |1.8.3      |1.8.3      |   |
 |stringr        |1.5.1      |1.5.1      |   |
 |tensorA        |0.36.2.1   |0.36.2.1   |   |
