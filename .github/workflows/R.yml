@@ -337,8 +337,8 @@ jobs:
         if: success()
         run: |
           options(crayon.enabled = TRUE)
-          src <- pkgbuild::build(".", dest_path = tempdir(), vignettes = FALSE, manual = FALSE, binary = FALSE)
-          bin <- pkgbuild::build(".", dest_path = tempdir(), vignettes = FALSE, manual = FALSE, binary = TRUE)
+          src <- pkgbuild::build(".", dest_path = tempdir(), vignettes = TRUE, manual = FALSE, binary = FALSE)
+          bin <- pkgbuild::build(".", dest_path = tempdir(), vignettes = TRUE, manual = FALSE, binary = TRUE)
           dir.create("build")
           file.copy(c(src, bin), "build")
         shell: Rscript {0}
