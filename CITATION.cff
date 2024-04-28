@@ -35,7 +35,7 @@ preferred-citation:
   - family-names: Bürkner
     given-names: Paul C.
     email: paul.buerkner@gmail.com
-  year: '2021'
+  year: '2024'
   journal: Comprehensive R Archive Network (CRAN)
   url: https://hsbadr.github.io/bayesian/
   doi: 10.5281/zenodo.4426836
