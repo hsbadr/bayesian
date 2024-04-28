@@ -1,6 +1,7 @@
 citHeader("To cite bayesian in publications, please use:")
 
-citEntry(entry = "Manual",
+bibentry(
+  bibtype      = "Manual",
   title        = "bayesian: Bindings for Bayesian TidyModels",
   author       = c(
                  person(given = "Hamada S.",
@@ -12,7 +13,7 @@ citEntry(entry = "Manual",
                         family = "Bürkner",
                         email = "paul.buerkner@gmail.com",
                         role = c("aut"))),
-  year         = "2021",
+  year         = "2024",
   journal      = "Comprehensive R Archive Network (CRAN)",
   url          = "https://hsbadr.github.io/bayesian/",
   doi          = "10.5281/zenodo.4426836",
@@ -20,7 +21,7 @@ citEntry(entry = "Manual",
   key          = "bayesian-manual",
 
   textVersion  =
-  paste("Hamada S. Badr and Paul C. Bürkner (2021):",
+  paste("Hamada S. Badr and Paul C. Bürkner (2024):",
         "bayesian: Bindings for Bayesian TidyModels,",
         "_Comprehensive R Archive Network (CRAN)_.",
         "URL: https://hsbadr.github.io/bayesian/")
