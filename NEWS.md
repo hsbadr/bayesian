@@ -1,3 +1,9 @@
+# bayesian 1.0.1
+
+- Built vignettes to fix CRAN warnings
+- Replaced `citEntry()` with `bibentry()`
+- Updated citation and invalid URLs
+
 # bayesian 1.0.0
 
 - Fixed predictions with intercept-only models (#17)
