@@ -162,7 +162,6 @@ references:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
   year: '2024'
-  doi: 10.32614/CRAN.package.stats
 - type: software
   title: tibble
   abstract: 'tibble: Simple Data Frames'
@@ -189,7 +188,6 @@ references:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
   year: '2024'
-  doi: 10.32614/CRAN.package.utils
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
