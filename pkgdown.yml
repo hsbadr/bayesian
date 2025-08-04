@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   BugReports: BugReports.html
   GetStarted: GetStarted.html
-last_built: 2025-07-28T12:15Z
+last_built: 2025-08-04T12:14Z
 urls:
   reference: https://hsbadr.github.io/bayesian/reference
   article: https://hsbadr.github.io/bayesian/articles
