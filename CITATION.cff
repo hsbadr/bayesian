@@ -254,7 +254,7 @@ references:
   abstract: 'recipes: Preprocessing and Feature Engineering Steps for Modeling'
   notes: Suggests
   url: https://recipes.tidymodels.org/
-  repository: https://CRAN.R-project.org/package=recipes
+  repository: https://bioconductor.org/
   authors:
   - family-names: Kuhn
     given-names: Max
