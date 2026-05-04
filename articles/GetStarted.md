@@ -1,10 +1,12 @@
 # Get started with \`bayesian\`
 
 ``` r
+
 library(bayesian)
 ```
 
 ``` r
+
 library(recipes)
 library(workflows)
 ```
@@ -21,6 +23,7 @@ prepare (a recipe for) the `epilepsy` data. This data set is shipped
 with the `brms` package, which is automatically loaded by `bayesian`.
 
 ``` r
+
 epi_recipe <- epilepsy |>
   recipe() |>
   update_role(count, new_role = "outcome") |>
@@ -30,6 +33,7 @@ epi_recipe <- epilepsy |>
 ```
 
 ``` r
+
 print(epi_recipe)
 ```
 
@@ -60,6 +64,7 @@ later on. In the next step, we use `bayesian` to set up a basic model
 structure.
 
 ``` r
+
 epi_model <- bayesian(
     family = poisson()
   ) |>
@@ -68,6 +73,7 @@ epi_model <- bayesian(
 ```
 
 ``` r
+
 print(epi_model)
 ```
 
@@ -86,6 +92,7 @@ or set it to something else that we now wanted to change, we could use
 the `update` method as follows
 
 ``` r
+
 epi_model <- epi_model |>
   update(family = poisson())
 ```
@@ -95,6 +102,7 @@ above defined data processing recipe and the model plus the actual model
 formula to be passed to the `brms` engine.
 
 ``` r
+
 epi_workflow <- workflow() |>
   add_recipe(epi_recipe) |>
   add_model(
@@ -104,6 +112,7 @@ epi_workflow <- workflow() |>
 ```
 
 ``` r
+
 print(epi_workflow)
 ```
 
@@ -128,6 +137,7 @@ We are now ready to fit the model by calling the `fit` method with the
 data set we want to train the model on.
 
 ``` r
+
 epi_workflow_fit <- epi_workflow |>
   fit(data = epilepsy)
 ```
@@ -137,6 +147,7 @@ epi_workflow_fit <- epi_workflow |>
     ## Start sampling
 
 ``` r
+
 print(epi_workflow_fit)
 ```
 
@@ -176,6 +187,7 @@ print(epi_workflow_fit)
 To extract the parsnip model fit from the workflow
 
 ``` r
+
 epi_fit <- epi_workflow_fit |>
   extract_fit_parsnip()
 ```
@@ -183,11 +195,13 @@ epi_fit <- epi_workflow_fit |>
 The `brmsfit` object can be extracted as follows
 
 ``` r
+
 epi_brmsfit <- epi_workflow_fit |>
   extract_fit_engine()
 ```
 
 ``` r
+
 class(epi_brmsfit)
 ```
 
@@ -199,10 +213,12 @@ the data reprocessing, which is automatically applied using the workflow
 preprocessor (recipe).
 
 ``` r
+
 newdata <- epilepsy[1:5, ]
 ```
 
 ``` r
+
 epi_workflow_fit |>
   predict(
     new_data = newdata,
@@ -223,6 +239,7 @@ epi_workflow_fit |>
 To add the standard errors on the scale of the linear predictors
 
 ``` r
+
 epi_workflow_fit |>
   predict(
     new_data = newdata,

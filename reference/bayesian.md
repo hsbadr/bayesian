@@ -437,6 +437,7 @@ call. For this type of model, the template of the fit calls are:
 ## Examples
 
 ``` r
+
 bayesian()
 #> Bayesian Model Specification (regression)
 #> 

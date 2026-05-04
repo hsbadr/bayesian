@@ -21,6 +21,7 @@ can be installed from
 [CRAN](https://CRAN.R-project.org/package=bayesian) using:
 
 ``` r
+
 install.packages("bayesian")
 ```
 
@@ -29,6 +30,7 @@ The development version of
 [GitHub](https://github.com/hsbadr/bayesian) using:
 
 ``` r
+
 install.packages("pak")
 pak::pkg_install("hsbadr/bayesian")
 ```
@@ -36,6 +38,7 @@ pak::pkg_install("hsbadr/bayesian")
 ## Example
 
 ``` r
+
 library(bayesian)
 
 bayesian_mod <-
@@ -57,6 +60,7 @@ For more details, [get started with
 To cite `bayesian` in publications, please use:
 
 ``` r
+
 citation("bayesian")
 ```
 
